@@ -69,7 +69,7 @@ function ADI2Dc!(T, κ, Δx, Δy, Δt, ρ, cp, NC, BC)
         end        
     end
 
-    rhs[:]  .=   B * T.T0[:] .+ T.Q[:]./ρ./cp
+    rhs[:]  .=   B * T.T[:] .+ T.Q[:]./ρ./cp
     
     # Update rhs from the boundary conditions ---
     for i = 1:NC.x, j = 1:NC.y

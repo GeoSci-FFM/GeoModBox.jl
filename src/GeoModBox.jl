@@ -3,7 +3,7 @@ module GeoModBox
     using Statistics: mean
     using ExtendableSparse, LinearAlgebra
 
-    module HeatEquation        
+    module HeatEquation            
 
         module TwoD
             # Handle analytical solution for 2D Diffusion2D_Gaussian ---
@@ -30,6 +30,7 @@ module GeoModBox
             # Alternate Direct Implicit Method ---
             include("./HeatEquation/ADI.jl")
             export ADI2Dc!
+
         end
 
         module OneD

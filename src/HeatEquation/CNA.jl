@@ -55,7 +55,7 @@ for i = 1:NC.x, j = 1:NC.y
 end
 # ------------------------------------------------------------------- #
 # Berechnung der rechten Seite -------------------------------------- #
-rhs     .=   K2 * reshape(D.T0,NC.x*NC.y) .+ reshape(D.Q,NC.x*NC.y)./ρ./cp
+rhs     .=   K2 * reshape(D.T,NC.x*NC.y) .+ reshape(D.Q,NC.x*NC.y)./ρ./cp
 # ------------------------------------------------------------------- #        
 # Aenderung der rechten Seite durch die Randbedingungen ------------- #    
 for i = 1:NC.x, j = 1:NC.y     

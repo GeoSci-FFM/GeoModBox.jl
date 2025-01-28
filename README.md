@@ -15,7 +15,7 @@
 &emsp; The conservation of energy is a fundamental principle in physics and defines that the loss and generation of energy needs to be equal. In terms of a geodynamical problem, energy can be described by temperature, which is transported mainly through *conductive* and *convective* processes, such that a general energy equation is defined as followed (assuming only radioactive heat sources):
 
 $$
-(\frac{\partial E}{\partial t} + \overrightarrow{v} \cdot \nabla E) + \frac{\partial q_{i}}{\partial x_{i}} = \rho H, \tag{}
+(\frac{\partial E}{\partial t} + \overrightarrow{v} \cdot \nabla E) + \frac{\partial q_{i}}{\partial x_{i}} = \rho H, \tag{1}
 $$
 
 where the energy is described as $E=c_{p} \rho T$, and *c<sub>p</sub>* is the specific heat capacity [J/kg/K], *ρ* is a reference density [kg/m<sup>3</sup>], *T* is the temperature [K], *t* is the time [s], $\overrightarrow{v}$ is the velocity vector [m/s], *q<sub>i</sub>* is the heat flux in direction of *i*  [W/m<sup>2</sup>], *∂/∂xi* is a directional derivative in direction of *i*, and *H* the heat production rate per mass [W/kg]. The repeated index means a summation of derivatives. This conservation law contains the variation of the heat flux in a certain direction, where the heat flux is defined by the Fourier’s law as followed: 

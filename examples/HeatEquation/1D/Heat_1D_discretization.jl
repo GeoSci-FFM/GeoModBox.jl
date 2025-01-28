@@ -73,7 +73,7 @@ K2          =   ExtendableSparseMatrix(ndof,ndof)
 path        =   string("./examples/HeatEquation/1D/Results/")
 anim        =   Plots.Animation(path, String[] )
 filename    =   string("1D_comparison")
-save_fig    =   0
+save_fig    =   1
 # ----------------------------------------------------------------------- #
 # Plot initial condition ------------------------------------------------ #
 p = plot(xc, explicit.T, label="explicit", 

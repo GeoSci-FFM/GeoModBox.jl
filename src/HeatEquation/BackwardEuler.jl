@@ -68,7 +68,7 @@ a   =   κ / Δx^2
 b   =   κ / Δy^2
 c   =   1 / Δt
 # Multiply rhs with 1/Δt and add Q/ρ/cp ---    
-rhs  .= reshape(D.T0,NC.x*NC.y).*c .+ reshape(D.Q,NC.x*NC.y)./ρ./cp
+rhs  .= reshape(D.T,NC.x*NC.y).*c .+ reshape(D.Q,NC.x*NC.y)./ρ./cp
 
 # Loop over the grid points ---
 for i = 1:NC.x, j = 1:NC.y

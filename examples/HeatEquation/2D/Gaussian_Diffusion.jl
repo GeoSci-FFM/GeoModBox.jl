@@ -7,7 +7,7 @@ Schema  =   ["explicit","implicit","CNA","ADI","dc"]
 ns      =   size(Schema,1)
 nrnxny  =   10
 
-# Physical Parameters --------------------------------------------------- #
+# Physical Parameters ------------------------------------------------ #
 P       = ( 
     L       =   200e3,          #   Length [ m ]
     H       =   200e3,          #   Height [ m ]
@@ -25,8 +25,8 @@ P1      = (
     Zc      =   0.0             #   y-Coordinate of the Anomalycenter
 )
 P       =   merge(P,P1)
-# ----------------------------------------------------------------------- #
-# Statistical Parameter ------------------------------------------------- #
+# -------------------------------------------------------------------- #
+# Statistical Parameter ---------------------------------------------- #
 St      = (
     ε           =   zeros(size(Schema,1),nrnxny),    
     nxny        =   zeros(size(Schema,1),nrnxny),
@@ -35,13 +35,13 @@ St      = (
     Tanamax     =   [0.0],
     Tanamean    =   [0.0]
 )
-# ------------------------------------------------------------------------ #
-# Loop over different discretization schemes ----------------------------- #
+# -------------------------------------------------------------------- #
+# Loop over different discretization schemes ------------------------- #
 for m = 1:ns
     FDSchema = Schema[m]
     display(FDSchema)
     for l = 1:nrnxny
-        # Numerical Parameters ------------------------------------------ #
+        # Numerical Parameters --------------------------------------- #
         NC  = (
             x       =   l*20,       #   Number of Centroids in x
             y       =   l*20        #   Number of Centroids in y
@@ -51,23 +51,23 @@ for m = 1:ns
             y       =   P.H/NC.y    #   Grid Spacing in y
         )
         display(string("nx = ",NC.x,", ny = ",NC.y))
-        # --------------------------------------------------------------- #
-        # Animationssettings -------------------------------------------- #
+        # ------------------------------------------------------------ #
+        # Animationssettings ----------------------------------------- #
         path        =   string("./examples/HeatEquation/2D/Results/")
         anim        =   Plots.Animation(path, String[] )
         filename    =   string("Gaussian_Diffusion_",FDSchema,
                             "_nx_",NC.x,"_ny_",NC.y)
         save_fig    =   -1
-        # --------------------------------------------------------------- #        
-        # Grid coordinates ---------------------------------------------- #
+        # ------------------------------------------------------------ #        
+        # Grid coordinates ------------------------------------------- #
         x       = (
             c       =   LinRange(-P.L/2+ Δ.x/2.0, P.L/2 - Δ.x/2.0, NC.x),
         )
         y       = (
             c       =   LinRange(-P.H/2 + Δ.y/2.0, P.H/2 - Δ.y/2.0, NC.y),
         )
-        # --------------------------------------------------------------- #
-        # Time Parameters ----------------------------------------------- #
+        # ------------------------------------------------------------ #
+        # Time Parameters -------------------------------------------- #
         T       = (
             year        =   365.25*3600*24,     #   Seconds per year
             Δfac        =   1.0,                #   Factor for Explicit Stability Criterion
@@ -81,8 +81,8 @@ for m = 1:ns
         
         nt      =   ceil(Int,T.tmax/T.Δ[1])     #   Number of Time Steps
         time    =   zeros(1,nt)
-        # --------------------------------------------------------------- #
-        # Initial Conditions  ------------------------------------------- #        
+        # ------------------------------------------------------------ #
+        # Initial Conditions  ---------------------------------------- #
         D       = (
             Q           =   zeros(NC...),
             T           =   zeros(NC...),
@@ -101,8 +101,9 @@ for m = 1:ns
         )
         # Initial conditions
         AnalyticalSolution2D!(D.T, x.c, y.c, time[1], (T0=P.Tamp,K=P.κ,σ=P.σ))
-        @. D.Tana       =   D.T
-        @. D.T0         =   D.T
+        @. D.Tana                   =   D.T
+        @. D.T0                     =   D.T
+        D.T_ex[2:end-1,2:end-1]     .=  D.T
     
         D.Tprofile[:,1]     .=  (D.T[convert(Int,NC.x/2),:] + 
                                     D.T[convert(Int,NC.x/2)+1,:]) / 2
@@ -150,21 +151,21 @@ for m = 1:ns
         if save_fig == 0
             display(p)
         end
-        # Boundary Conditions ------------------------------------------- #
+        # Boundary Conditions ---------------------------------------- #
         BC     = (type    = (W=:Dirichlet, E=:Dirichlet, 
                                 N=:Dirichlet, S=:Dirichlet),
                     val     = (W=D.Tana[1,:],E=D.Tana[end,:],
                                 N=D.Tana[:,end],S=D.Tana[:,1]))
-        # --------------------------------------------------------------- #
+        # ------------------------------------------------------------ #
         if FDSchema == "implicit"
-            # Linear System of Equations -------------------------------- #
+            # Linear System of Equations ----------------------------- #
             Num     =   (T=reshape(1:NC.x*NC.y, NC.x, NC.y),)
             ndof    =   maximum(Num.T)
             K       =   ExtendableSparseMatrix(ndof,ndof)
             rhs     =   zeros(ndof)
         end
         if FDSchema == "CNA"
-            # Linear System of Equations -------------------------------- #
+            # Linear System of Equations ----------------------------- #
             Num     =   (T=reshape(1:NC.x*NC.y, NC.x, NC.y),)
             ndof    =   maximum(Num.T)
             K1      =   ExtendableSparseMatrix(ndof,ndof)
@@ -186,14 +187,14 @@ for m = 1:ns
             ∂T          =   (∂x=zeros(NC.x+1, NC.x), ∂y=zeros(NC.x, NC.x+1))
             q           =   (x=zeros(NC.x+1, NC.x), y=zeros(NC.x, NC.x+1))
         end
-        # Time Loop ----------------------------------------------------- #
+        # Time Loop -------------------------------------------------- #
         for n = 1:nt
             if n>1
                 if FDSchema == "explicit"
                     ForwardEuler2Dc!(D, P.κ, Δ.x, Δ.y, T.Δ[1], P.ρ, P.cp, NC, BC)
                 elseif FDSchema == "implicit"
                     BackwardEuler2Dc!(D, P.κ, Δ.x, Δ.y, T.Δ[1], P.ρ, P.cp, NC, BC, rhs, K, Num)
-                    D.T0 .= D.T
+                    # D.T0 .= D.T
                 elseif FDSchema == "CNA"
                     CNA2Dc!(D, P.κ, Δ.x, Δ.y, T.Δ[1], P.ρ, P.cp, NC, BC, rhs, K1, K2, Num)
                     D.T0 .= D.T
@@ -297,7 +298,7 @@ for m = 1:ns
             display(plot(p))
         end
         foreach(rm, filter(startswith(string(path,"00")), readdir(path,join=true)))
-        # --------------------------------------------------------------- #
+        # ------------------------------------------------------------ #
         # Statistical Values for Each Scheme and Resolution ---
         St.ε[m,l]       =   maximum(D.RMS[:])
         St.nxny[m,l]    =   1/NC.x/NC.y
@@ -305,10 +306,10 @@ for m = 1:ns
         St.Tmean[m,l]   =   D.Tmean[nt]
         St.Tanamax[1]   =   maximum(D.Tana)
         St.Tmean[1]     =   mean(D.Tana)
-        # --------------------------------------------------------------- #
+        # ------------------------------------------------------------ #
     end
 end
-# Visualize Statistical Values ------------------------------------------ #
+# Visualize Statistical Values --------------------------------------- #
 q   =   plot(0,0,layout=(1,3))
 for m = 1:ns
 #    subplot(1,3,1)
@@ -332,10 +333,10 @@ for m = 1:ns
                 subplot=3)
     display(q)
 end
-# ------------------------------------------------------------------------ #
-# Save Final Figure ------------------------------------------------------ #
+# --------------------------------------------------------------------- #
+# Save Final Figure --------------------------------------------------- #
 savefig(q,"./examples/HeatEquation/2D/Results/Gaussian_ResTest.png")
-# ------------------------------------------------------------------------ #
+# --------------------------------------------------------------------- #
 end
 
 Gaussian_Diffusion()

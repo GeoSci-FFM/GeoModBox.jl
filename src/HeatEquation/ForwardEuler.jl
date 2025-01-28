@@ -7,7 +7,7 @@ function ForwardEuler2Dc!(D, κ, Δx, Δy, Δt, ρ, cp, NC, BC)
     sx      = κ * Δt / Δx^2
     sz      = κ * Δt / Δy^2
 
-    D.T_ex[2:end-1,2:end-1]     .=  D.T
+    # D.T_ex[2:end-1,2:end-1]     .=  D.T
 
     # Temperature at the ghost nodes ------------------------------------ #
     # West boundary ---
@@ -23,7 +23,6 @@ function ForwardEuler2Dc!(D, κ, Δx, Δy, Δt, ρ, cp, NC, BC)
     D.T_ex[2:end-1,end] .= (BC.type.N==:Dirichlet) .* (2 .* BC.val.N .- D.T_ex[2:end-1,end-1]) + 
                             (BC.type.N==:Neumann) .* (D.T_ex[2:end-1,end-1] .+ BC.val.N .* Δy)
     # ------------------------------------------------------------------- #
-    
     # Loop over internal nodes ------------------------------------------ #
     for i = 1:NC.x, j = 1:NC.y
         i1 = i+1
@@ -34,5 +33,8 @@ function ForwardEuler2Dc!(D, κ, Δx, Δy, Δt, ρ, cp, NC, BC)
             D.Q[i,j] * Δt / ρ / cp
     end
     # ------------------------------------------------------------------- #
+    # Update extended temperature --------------------------------------- #
+    D.T_ex[2:end-1,2:end-1]     .=  D.T
+    # ------------------------------------------------------------------- #
     
-    end
+end
