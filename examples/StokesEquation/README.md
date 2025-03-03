@@ -1,6 +1,120 @@
 # Momentum Conservation Equation
 
-<!-- -->
+## General Information
+
+&emsp;On geological time scales, Earth’s mantle and lithosphere do behave like a fluid and move and deform. A fluid does generally move due to forces acting on it whereas the forces must be in balance. In general, there are three major forces one might consider, i.e., inertia, surface, and volumetric forces. A common equation to describes such motion is given by: 
+
+$$ 
+\begin{equation}
+\rho \frac{D \overrightarrow{v}}{Dt} = \nabla \cdot \boldsymbol{\sigma} + \rho \boldsymbol{g},
+\end{equation}
+$$
+
+where $\rho$ is the density [kg/m<sup>3</sup>], $\overrightarrow{v}$ is the velocity vector [m/s], $\boldsymbol{\sigma}$ is the *Cauchy stress tensor* [Pa], $\boldsymbol{g}$ is the gravitational acceleration [m/s<sup>2</sup>], and the term on the left-hand side is the Lagrangian time derivative which is in Eulerian form $\frac{D}{Dt} = \frac{\partial{}}{\partial{t}} + \overrightarrow{v} \cdot \nabla$. 
+
+The *Cauchy stress tensor* is given by: 
+
+$$
+\begin{equation}
+\boldsymbol{\sigma} = -\nabla{P} + \nabla \cdot \boldsymbol{\tau},
+\end{equation}
+$$
+
+where *P* is the total pressure (*P = P<sub>dynamic</sub> + P<sub>hydrostatic</sub>*) and $\boldsymbol{\tau}$ the *deviatoric stress tensor*. 
+
+In Eulerian form, equation $(1)$ is given by (**Navier-Stokes equation**):
+
+$$
+\begin{equation}
+\rho \left(\frac{\partial{v_{i}}}{\partial{t}} + v_{j}\frac{v_{i}}{\partial{x_{j}}}\right) = -\frac{\partial{P}}{\partial{x_{i}}} + \frac{\tau_{ij}}{\partial{x_j}} + \rho g_{i},
+\end{equation}
+$$
+
+where summation over repeated indices is implied.
+
+### Constitutive Relation
+
+&emsp;To solve equation $(3)$, one needs to define a rheology which, for a purely viscous medium, can be given by a constitutive relationship between stress and strain rate in the form of, e.g.:
+
+$$
+\begin{equation}
+\tau_{ij} = 2 \eta \cdot \dot{\varepsilon}_{ij},
+\end{equation}
+$$
+
+where $\eta$ is the dynamic viscosity in [Pa s] and $\dot{\varepsilon}_{ij}$ the *strain rate tensor* in [1/s] and given by: 
+
+$$
+\begin{equation}
+\dot{\varepsilon}_{ij} = \frac{1}{2} \left(\frac{\partial{v_i}}{\partial{x_j}} + \frac{\partial{v_j}}{\partial{x_i}}\right),
+\end{equation}
+$$
+
+### Stokes Equation
+
+&emsp;Assuming that the inertia forces are negligible in comparison to the gravitational forces, one can further simplify equation $(3)$ to:
+
+$$
+\begin{equation}
+0 = -\frac{\partial{P}}{\partial{x_{i}}} + \frac{\tau_{ij}}{\partial{x_j}} + \rho g_{i},
+\end{equation}
+$$
+
+or in the form of the unknowns *v<sub>x</sub>*, *v<sub>z</sub>*, and *P*:
+
+$$
+\begin{equation}
+0 = -\frac{\partial{P}}{\partial{x_{i}}} + \frac{\partial}{\partial{x_j}} \eta \left(\frac{\partial{v_i}}{\partial{x_j}} + \frac{\partial{v_j}}{\partial{x_i}}\right) + \rho g_{i}.
+\end{equation}
+$$
+
+Assuming constant viscosity equation $(7)$ simplifies further to (Stokes equation): 
+
+$$
+\begin{equation}
+0 = -\frac{\partial{P}}{\partial{x_{i}}} + \eta \left(\frac{\partial^2{v_i}}{\partial{x_j^2}} + \frac{\partial^2{v_j}}{\partial{x_i^2}}\right) + \rho g_{i}.
+\end{equation}
+$$
+
+### Continuum Equation
+
+&emsp;Equation $(8)$ provides us two equations for our three unknowns. Thus, one needs to also consider the mass conservation equation (i.e., we do work with a continuum), where one can further simplify the problem by assuming an incompressible fluid (i.e., Boussinesq-approximation):
+
+$$
+\begin{equation}
+\frac{\partial{v_i}}{\partial{x_i}} = 0.
+\end{equation}
+$$
+
+Equations $(8)$ and $(9)$ enable us to solve for the three unknowns *v<sub>x</sub>*, *v<sub>z</sub>*, and *P*. 
+
+## Discretization 
+
+&emsp;The conservation equations of *momentum* and *mass* are solved properly in two dimensions (*x* and *y*) using a staggered finite difference grid, where the horizontal and vertical velocity are defined in between the regular grid points, and the pressure within a finite difference cell (Figure 1). A staggered grid enables the conservation of the stress between adjacent grid points and one can solve equations (8) and (9) for the unknows.  
+
+<img src="./Figures/MomentumGrid.png" alt="drawing" width="600"/> <br>
+**Figure 1. Staggered finite difference grid.** Discretization of the conservation equations of momemtum and mass. The horizontal and vertical velocities are defined in between the vertices (cyan and orange lines, respectively), and the pressure is defined on the centroids. The horizontal and vertical velocities require *ghost nodes* at the north and south and east and west boundary, respectively. 
+
+<!-- 
+- Discretized equations
+- Solving the equations 
+-->
+
+### Equation of State
+
+&emsp;The buoyance term on the right-hand side of equation $(7)$, that is the density term which is temperature dependent (and pressure, but I do neglect this effect here so far), can be approximated with the so-called *equation of state* for the density. Here, its is a linear approximation of the change of density due to temperature variations and can be defined as:
+
+$$
+\begin{equation}
+\rho = \rho_0 (1-\alpha T),
+\end{equation}
+$$
+
+where *ρ<sub>0</sub>* is the reference density and *α* the thermal expansion coefficient [1/K]. 
+
+<!--
+- Scaling 
+ -->
 
 ------------------
 ------------------
