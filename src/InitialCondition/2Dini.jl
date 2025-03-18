@@ -150,3 +150,50 @@ end
     end
     return D
 end
+
+@doc raw"""
+    IniPhase!
+"""
+@views function IniPhase!(type,D,M,x,y,NC;phase=0)
+
+    if type==:block
+        # Bereich der Anomalie ---
+        xL      =   2/5 * (M.xmax-M.xmin)
+        xR      =   3/5 * (M.xmax-M.xmin)
+        yO      =   0.1 * (M.ymin-M.ymax)
+        yU      =   0.3 * (M.ymin-M.ymax)        
+        
+        # Density ---
+        for i = 1:NC.x
+            for j = 1:NC.y
+                if y.c[j]>=yU && y.c[j] <= yO && x.c[i]>=xL && x.c[i]<=xR
+                    D.p[i,j]    =   phase[2]    #   anomaly 
+                else
+                    D.p[i,j]    =   phase[1]    #   background
+                end
+            end
+        end
+        D.p_ex[2:end-1,2:end-1]     .=  D.p
+        D.p_ex[1,:]     .=   D.p_ex[2,:]
+        D.p_ex[end,:]   .=   D.p_ex[end-1,:]
+        D.p_ex[:,1]     .=   D.p_ex[:,2]
+        D.p_ex[:,end]   .=   D.p_ex[:,end-1]
+        # # Viscosity ---
+        # if size(η,1)==2
+        #     for i = 1:NC.x
+        #         for j = 1:NC.y
+        #             if y.c[j]>=yU && y.c[j] <= yO && x.c[i]>=xL && x.c[i]<=xR
+        #                 D.ηs.v[i,j] =   η[2]
+        #             else
+        #                 D.ηs.v[i,j] =   η[1]
+        #             end
+        #         end
+        #     end 
+        #     @. D.ηs.c = 0.25*(D.ηs.v[1:end-1,1:end-1] + 
+        #                     D.ηs.v[2:end-0,1:end-1] + 
+        #                     D.ηs.v[1:end-1,2:end-0] + 
+        #                     D.ηs.v[2:end-0,2:end-0])
+        # end
+    end
+    return D
+end

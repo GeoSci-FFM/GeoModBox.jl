@@ -17,7 +17,7 @@ end
 @doc raw"""
     IniTracer2D(nmx,nmy,Δ,M,NC,noise)
 """
-@views function IniTracer2D(Aparam,nmx,nmy,Δ,M,NC,noise)
+@views function IniTracer2D(Aparam,nmx,nmy,Δ,M,NC,noise,ini,phase)
     
     nmark   =   nmx*nmy*NC.x*NC.y
 
@@ -41,6 +41,23 @@ end
         @threads for k=1:nmark
             Ma.x[k] += (rand()-0.5)*Δxm
             Ma.y[k] += (rand()-0.5)*Δym
+        end
+    end
+
+    if ini==:block
+        # Geometry of the block anomaly ---
+        xL      =   2/5 * (M.xmax-M.xmin)
+        xR      =   3/5 * (M.xmax-M.xmin)
+        yO      =   0.1 * (M.ymin-M.ymax)
+        yU      =   0.3 * (M.ymin-M.ymax)        
+        
+        # phase ---
+        for k = 1:nmark
+            if ymi[k]>=yU && ymi[k]<=yO && xmi[k]>=xL && xmi[k]<=xR
+                Ma.phase[k]     =   phase[2]    #   anomaly 
+            else
+                Ma.phase[k]     =   phase[1]    #   background
+            end
         end
     end
     return Ma
@@ -285,36 +302,61 @@ end
 @doc raw"""
     Markers2Cells(Ma,nmark,PG,weight,x,y,Δ,param)
 """
-@views function Markers2Cells(Ma,nmark,PG_th,PG,weight_th,weight,x,y,Δ,param)
+@views function Markers2Cells(Ma,nmark,PG_th,PG,weight_th,weight,x,y,Δ,param,param2)
     PG      .*=     0.0
     weight  .*=     0.0
     if param==:thermal
         PM  =       copy(Ma.T)
-    end
-    chunks = Iterators.partition(1:nmark, nmark ÷ nthreads())
-    @sync for chunk in chunks
-        @spawn begin
-            tid = threadid()
-            fill!(PG_th[tid], 0)
-            fill!(weight_th[tid], 0)
-            for k in chunk
-                # Get the column:
-                dstx = Ma.x[k] - x.c[1]
-                i = ceil(Int, dstx / Δ.x + 0.5)
-                # Get the line:
-                dsty = Ma.y[k] - y.c[1]
-                j = ceil(Int, dsty /  Δ.y + 0.5)
-                # Relative distances
-                Δxm = 2.0 * abs(x.c[i] - Ma.x[k])
-                Δym = 2.0 * abs(y.c[j] - Ma.y[k])
-                # Increment cell counts
-                area = (1.0 - Δxm / Δ.x) * (1.0 - Δym / Δ.y)
-                PG_th[tid][i, j] += PM[k] * area
-                weight_th[tid][i, j] += area
+        chunks = Iterators.partition(1:nmark, nmark ÷ nthreads())
+        @sync for chunk in chunks
+            @spawn begin
+                tid = threadid()
+                fill!(PG_th[tid], 0)
+                fill!(weight_th[tid], 0)
+                for k in chunk
+                    # Get the column:
+                    dstx = Ma.x[k] - x.c[1]
+                    i = ceil(Int, dstx / Δ.x + 0.5)
+                    # Get the line:
+                    dsty = Ma.y[k] - y.c[1]
+                    j = ceil(Int, dsty /  Δ.y + 0.5)
+                    # Relative distances
+                    Δxm = 2.0 * abs(x.c[i] - Ma.x[k])
+                    Δym = 2.0 * abs(y.c[j] - Ma.y[k])
+                    # Increment cell counts
+                    area = (1.0 - Δxm / Δ.x) * (1.0 - Δym / Δ.y)
+                    PG_th[tid][i, j] += PM[k] * area
+                    weight_th[tid][i, j] += area
+                end
+            end
+        end
+    elseif param==:phase
+        PM  =       copy(Ma.phase)
+        chunks = Iterators.partition(1:nmark, nmark ÷ nthreads())
+        @sync for chunk in chunks
+            @spawn begin
+                tid = threadid()
+                fill!(PG_th[tid], 0)
+                fill!(weight_th[tid], 0)
+                for k in chunk
+                    # Get the column:
+                    dstx = Ma.x[k] - x.c[1]
+                    i = ceil(Int, dstx / Δ.x + 0.5)
+                    # Get the line:
+                    dsty = Ma.y[k] - y.c[1]
+                    j = ceil(Int, dsty /  Δ.y + 0.5)
+                    # Relative distances
+                    Δxm = 2.0 * abs(x.c[i] - Ma.x[k])
+                    Δym = 2.0 * abs(y.c[j] - Ma.y[k])
+                    # Increment cell counts
+                    area = (1.0 - Δxm / Δ.x) * (1.0 - Δym / Δ.y)
+                    PG_th[tid][i, j] += param2[PM[k]+1] * area
+                    weight_th[tid][i, j] += area
+                end
             end
         end
     end
-
+    
     PG      .= reduce(+, PG_th)
     #phase  .= reduce(+, phase_th)
     weight  .= reduce(+, weight_th)

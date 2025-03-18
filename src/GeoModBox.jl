@@ -61,7 +61,7 @@ module GeoModBox
 
         # Initial Conditions ---
         include("./InitialCondition/2Dini.jl")        
-        export IniVelocity!, IniTemperature!
+        export IniVelocity!, IniTemperature!, IniPhase!
     end
 
     module Tracers
@@ -76,6 +76,20 @@ module GeoModBox
             export TMarkers, Markers, IniTracer2D, 
                     VxFromVxNodes, VyFromVyNodes, VxVyFromPrNodes,
                     FromCtoM, CountMPC, Markers2Cells, AdvectTracer2D
+        end
+    end
+
+    module MomentumEquation
+        
+        module OneD
+            include("./MomentumEquation/1Dsolvers.jl")
+            export Stokes_1D_direct, ComputeStokesResiduals1D!, 
+                    AssembleStokesMatrix1D
+        end
+
+        module TwoD
+            include("./MomentumEquation/2Dsolvers.jl")
+            export Assemblyc, updaterhsc
         end
     end
 end 

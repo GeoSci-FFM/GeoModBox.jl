@@ -1,5 +1,7 @@
 using GeoModBox.HeatEquation.TwoD, ExtendableSparse, Plots
 
+function Poisson_variable_k()
+
 # Physikalischer Parameter ---------------------------------------------- #
 P       =   (
     L           =   4e3,      #   [m]
@@ -106,6 +108,9 @@ display(q)
 savefig(p,"./examples/DiffusionEquation/2D/Results/Poisson_variable_k_01.png")
 savefig(q,"./examples/DiffusionEquation/2D/Results/Poisson_variable_k_02.png")
 # ----------------------------------------------------------------------- #
+end
+
+Poisson_variable_k()
 
 
 

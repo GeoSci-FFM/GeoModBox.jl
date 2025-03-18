@@ -111,7 +111,7 @@ where
 
 $$
 \begin{equation}
-\left. c_{W} = \frac{\partial{T}}{\partial{x}} \right\vert_{W},\ and \ \left. c_{E} = \frac{\partial{T}}{\partial{x}} \right\vert_{E}, 
+\left. c_{W} = \frac{\partial{T}}{\partial{x}} \right\vert_{W},\ \textrm{and}\ \left. c_{E} = \frac{\partial{T}}{\partial{x}} \right\vert_{E}, 
 \end{equation}
 $$
 
@@ -186,7 +186,7 @@ $$
 \end{equation}
 $$
 
-### Defection Correction Method
+### Defect Correction Method
 
 &emsp; The defection correction method is an iterative solution, in which the residual of the conductive part of the *temperature equation* for an initial temperature condition is reduced by a correction term. In case, the system is linear, one iteration is sufficient enough to optain the exact solution. 
 
@@ -256,7 +256,7 @@ where
 
 $$
 \begin{equation}
-a = \frac{\kappa}{\Delta{x}^2},\ and \ b = \frac{1}{\Delta{t}}. 
+a = \frac{\kappa}{\Delta{x}^2},\ \textrm{and} \ b = \frac{1}{\Delta{t}}. 
 \end{equation}
 $$
 
@@ -377,7 +377,7 @@ where $\rho, c_{p}, T, t, k, H,$ and $y$ are the density [kg/m<sup>3</sup>], the
 &emsp;A proper conservative finite difference scheme means that the 1-D vertical heat flux and the thermal conductivity *k* are defined on the vertices and *q* is defined as:
 
 $$\begin{equation}
-\left. q_{y,m} = -k_m \frac{\partial T}{\partial y}\right\vert_{m},\ for\ m = 1:nv, 
+\left. q_{y,m} = -k_m \frac{\partial T}{\partial y}\right\vert_{m},\ \textrm{for}\ m = 1:nv, 
 \end{equation}
 $$
 
@@ -388,7 +388,7 @@ where $nv$ is the number of vertices.
 &emsp;Following the discretization as described above, one needs to solve the following equation for each centroid (in an [explicit finite difference formulation](../../../src/HeatEquation/1Dsolvers.jl)):
 
 $$\begin{equation}
-\rho_j c_{p,j} \frac{T_{j}^{n+1} - T_{j}^{n}}{\Delta{t}} = -\frac{q_{y,j+1}^{n} - q_{y,j}^{n} }{\Delta{y}} + \rho_j H_j,\ for\ j = 1:nc, 
+\rho_j c_{p,j} \frac{T_{j}^{n+1} - T_{j}^{n}}{\Delta{t}} = -\frac{q_{y,j+1}^{n} - q_{y,j}^{n} }{\Delta{y}} + \rho_j H_j,\ \textrm{for}\ j = 1:nc, 
 \end{equation}
 $$
 

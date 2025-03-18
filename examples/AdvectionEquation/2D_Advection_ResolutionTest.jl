@@ -222,11 +222,11 @@ for m = 1:ns # Loop over advection schemes
             #@printf("Time step: #%04d\n ",i) 
 
             if FD.Method.Adv == "upwind"
-                upwindc2D!(D,NC,T,Δ)
+                upwindc2D!(D.T,D.T_ex,D.vxc,D.vyc,NC,T.Δ[1],Δ.x,Δ.y)
             elseif FD.Method.Adv == "slf"
-                slfc2D!(D,NC,T,Δ)   
+                slfc2D!(D.T,D.T_ex,D.T_exo,D.vxc,D.vyc,NC,T.Δ[1],Δ.x,Δ.y)
             elseif FD.Method.Adv == "semilag"
-                semilagc2D!(D,[],[],x,y,T)
+                semilagc2D!(D.T,D.T_ex,D.vxc,D.vyc,[],[],x,y,T.Δ[1])
             elseif FD.Method.Adv == "tracers"
                 # Advect tracers ---
                 AdvectTracer2D(Ma,nmark,D,x,y,T.Δ[1],Δ,NC,rkw,rkv,1)

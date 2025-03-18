@@ -6,11 +6,11 @@
 
 $$ 
 \begin{equation}
-\rho \frac{D \overrightarrow{v}}{Dt} = \nabla \cdot \boldsymbol{\sigma} + \rho \boldsymbol{g},
+\rho \frac{D \overrightharpoon{v}}{Dt} = \nabla \cdot \boldsymbol{\sigma} + \rho \boldsymbol{g},
 \end{equation}
 $$
 
-where $\rho$ is the density [kg/m<sup>3</sup>], $\overrightarrow{v}$ is the velocity vector [m/s], $\boldsymbol{\sigma}$ is the *Cauchy stress tensor* [Pa], $\boldsymbol{g}$ is the gravitational acceleration [m/s<sup>2</sup>], and the term on the left-hand side is the Lagrangian time derivative which is in Eulerian form $\frac{D}{Dt} = \frac{\partial{}}{\partial{t}} + \overrightarrow{v} \cdot \nabla$. 
+where $\rho$ is the density [kg/m<sup>3</sup>], $\overrightharpoon{v}$ is the velocity vector [m/s], $\boldsymbol{\sigma}$ is the *Cauchy stress tensor* [Pa], $\boldsymbol{g}$ is the gravitational acceleration [m/s<sup>2</sup>], and the term on the left-hand side is the Lagrangian time derivative which is in Eulerian form $\frac{D}{Dt} = \frac{\partial{}}{\partial{t}} + \overrightharpoon{v} \cdot \nabla$. 
 
 The *Cauchy stress tensor* is given by: 
 
@@ -60,7 +60,7 @@ $$
 \end{equation}
 $$
 
-or in the form of the unknowns *v<sub>x</sub>*, *v<sub>z</sub>*, and *P*:
+or in the form of the unknowns $v_x$, $v_y$, and $P$:
 
 $$
 \begin{equation}
@@ -68,7 +68,7 @@ $$
 \end{equation}
 $$
 
-Assuming constant viscosity equation $(7)$ simplifies further to (Stokes equation): 
+Assuming a constant viscosity further simplifies equation $(7)$ to: 
 
 $$
 \begin{equation}
@@ -78,7 +78,7 @@ $$
 
 ### Continuum Equation
 
-&emsp;Equation $(8)$ provides us two equations for our three unknowns. Thus, one needs to also consider the mass conservation equation (i.e., we do work with a continuum), where one can further simplify the problem by assuming an incompressible fluid (i.e., Boussinesq-approximation):
+&emsp;Equation $(8)$ provides us two equations for our three unknowns. Thus, one needs to also consider the mass conservation equation (we do work with a continuum), where one can further simplify the problem by assuming an incompressible fluid (i.e., Boussinesq-approximation):
 
 $$
 \begin{equation}
@@ -86,19 +86,7 @@ $$
 \end{equation}
 $$
 
-Equations $(8)$ and $(9)$ enable us to solve for the three unknowns *v<sub>x</sub>*, *v<sub>z</sub>*, and *P*. 
-
-## Discretization 
-
-&emsp;The conservation equations of *momentum* and *mass* are solved properly in two dimensions (*x* and *y*) using a staggered finite difference grid, where the horizontal and vertical velocity are defined in between the regular grid points, and the pressure within a finite difference cell (Figure 1). A staggered grid enables the conservation of the stress between adjacent grid points and one can solve equations (8) and (9) for the unknows.  
-
-<img src="./Figures/MomentumGrid.png" alt="drawing" width="600"/> <br>
-**Figure 1. Staggered finite difference grid.** Discretization of the conservation equations of momemtum and mass. The horizontal and vertical velocities are defined in between the vertices (cyan and orange lines, respectively), and the pressure is defined on the centroids. The horizontal and vertical velocities require *ghost nodes* at the north and south and east and west boundary, respectively. 
-
-<!-- 
-- Discretized equations
-- Solving the equations 
--->
+Equations $(8)$ and $(9)$ enable us to solve for the three unknowns $v_x$, $v_y$, and $P$. 
 
 ### Equation of State
 

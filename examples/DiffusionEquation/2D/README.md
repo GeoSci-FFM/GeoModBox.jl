@@ -281,7 +281,7 @@ $$
 \begin{equation}
 a = \frac{\kappa}{\Delta{x}^2},\  
 b = \frac{\kappa}{\Delta{y}^2},\ 
-\ and \ c = \frac{1}{\Delta{t}}, 
+\ \textrm{and} \ c = \frac{1}{\Delta{t}}, 
 \end{equation}
 $$
 
@@ -554,7 +554,7 @@ where
 
 $$ 
 a = \frac{1}{\Delta{x^2}},
-b = \frac{1}{\Delta{y^2}}, \ and \ 
+b = \frac{1}{\Delta{y^2}}, \textrm{and} \ 
 c = -a\left(k_{x;i+1,j}+k_{x;i,j}\right) - b\left(k_{y;i,j+1}+k_{y;i,j}\right).
 $$
 
