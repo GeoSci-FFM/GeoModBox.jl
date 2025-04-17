@@ -82,43 +82,43 @@ R,
 a = \frac{\kappa}{\Delta{x}^2},\  
 b = \frac{\kappa}{\Delta{y}^2},\ 
 \ \textrm{and} \ c = \frac{1}{\Delta{t}}, 
-\end{equation}\]</p><p>For more details on the theory of the defect correction see the <a href="../DiffOneD/">1-D example</a> and on how this is implemented, see the <a href="https://github.com/GeoSci-FFM/GeoModBox.jl/blob/main/src/HeatEquation/2Dsolvers.jl">source code</a>.</p><h3 id="Cranck-Nicolson-Approach-(CNA)"><a class="docs-heading-anchor" href="#Cranck-Nicolson-Approach-(CNA)">Cranck-Nicolson Approach (CNA)</a><a id="Cranck-Nicolson-Approach-(CNA)-1"></a><a class="docs-heading-anchor-permalink" href="#Cranck-Nicolson-Approach-(CNA)" title="Permalink"></a></h3><p>In 2-D, equation <span>$(3)$</span> is described in a finite difference form as: </p><p class="math-container">\[\begin{equation}
-\frac{T_{i,j}^{n+1} - T_{i,j}^{n}}{\Delta t} = 
-\frac{\kappa}{2}\frac{(T_{i-1,j}^{n+1}-2T_{i,j}^{n+1}+T_{i+1,j}^{n+1})+(T_{i-1,j}^{n}-2T_{i,j}^{n}+T_{i+1,j}^{n})}{\Delta x^2} + 
+\end{equation}\]</p><p>For more details on the theory of the defect correction see the <a href="../DiffOneD/">1-D example</a> and on how this is implemented, see the <a href="https://github.com/GeoSci-FFM/GeoModBox.jl/blob/main/src/HeatEquation/2Dsolvers.jl">source code</a>.</p><h3 id="Cranck-Nicolson-Approach-(CNA)"><a class="docs-heading-anchor" href="#Cranck-Nicolson-Approach-(CNA)">Cranck-Nicolson Approach (CNA)</a><a id="Cranck-Nicolson-Approach-(CNA)-1"></a><a class="docs-heading-anchor-permalink" href="#Cranck-Nicolson-Approach-(CNA)" title="Permalink"></a></h3><p>In 2-D, equation <span>$(3)$</span> is described in a finite difference form as: </p><p class="math-container">\[\begin{equation}\begin{gather*}
+&amp; \frac{T_{i,j}^{n+1} - T_{i,j}^{n}}{\Delta t} = \\ &amp;
+\frac{\kappa}{2}\frac{(T_{i-1,j}^{n+1}-2T_{i,j}^{n+1}+T_{i+1,j}^{n+1})+(T_{i-1,j}^{n}-2T_{i,j}^{n}+T_{i+1,j}^{n})}{\Delta x^2} + \\ &amp;
 \frac{\kappa}{2}\frac{(T_{i,j-1}^{n+1}-2T_{i,j}^{n+1}+T_{i,j+1}^{n+1})+(T_{i,j-1}^{n}-2T_{i,j}^{n}+T_{i,j+1}^{n})}{\Delta y^2}
-\end{equation}\]</p><p>Rearranging equation <span>$(30)$</span> into known and unknown variables, one obtains a linear system of equations in the form of: </p><p class="math-container">\[\begin{equation}
--b T_{i,j-1}^{n+1} -aT_{i-1,j}^{n+1}+\left(2a + 2b + c\right)T_{i,j}^{n+1} -aT_{i+1,j}^{n+1} -b T_{i,j+1}^{n+1} = b T_{i,j-1}^{n} +aT_{i-1,j}^{n}-\left(2a + 2b - c\right)T_{i,j}^{n} +aT_{i+1,j}^{n} +b T_{i,j+1}^{n}
-\end{equation}\]</p><p>Similar to the implicit method, we need to modify the coefficients and the right-hand side using different boundary conditions to obtain a symmetric coefficient matrix. Thus, the equations for the <em>centroids</em> adjacent to the boundaries are defined as: </p><p><strong>Dirichlet</strong></p><p><em>West</em> (<span>$i=1$</span>)</p><p class="math-container">\[\begin{equation}
--b T_{1,j-1}^{n+1} +
+\end{gather*}\end{equation}\]</p><p>Rearranging equation <span>$(30)$</span> into known and unknown variables, one obtains a linear system of equations in the form of: </p><p class="math-container">\[\begin{equation}\begin{gather*}
+&amp; -b T_{i,j-1}^{n+1} -aT_{i-1,j}^{n+1}+\left(2a + 2b + c\right)T_{i,j}^{n+1} -aT_{i+1,j}^{n+1} -b T_{i,j+1}^{n+1} = \\ &amp;b T_{i,j-1}^{n} +aT_{i-1,j}^{n}-\left(2a + 2b - c\right)T_{i,j}^{n} +aT_{i+1,j}^{n} +b T_{i,j+1}^{n}
+\end{gather*}\end{equation}\]</p><p>Similar to the implicit method, we need to modify the coefficients and the right-hand side using different boundary conditions to obtain a symmetric coefficient matrix. Thus, the equations for the <em>centroids</em> adjacent to the boundaries are defined as: </p><p><strong>Dirichlet</strong></p><p><em>West</em> (<span>$i=1$</span>)</p><p class="math-container">\[\begin{equation}\begin{gather*}
+&amp; -b T_{1,j-1}^{n+1} +
 \left(3a + 2b + c \right) T_{1,j}^{n+1} 
--a T_{2,j}^{n+1} - b T_{1,j+1}^{n+1} = 
+-a T_{2,j}^{n+1} - b T_{1,j+1}^{n+1} = \\ &amp;
 b T_{1,j-1}^{n} - \left( 3a + 2b - c \right) T_{1,j}^{n} + a T_{2,j}^{n} + b T_{1,j+1}^{n} + 4 a T_{BC,W},
-\end{equation}\]</p><p><em>East</em> (<span>$i = ncx$</span>)</p><p class="math-container">\[\begin{equation}
--b T_{ncx,j-1}^{n+1} - a T_{ncx-1,j}^{n+1} +
+\end{gather*}\end{equation}\]</p><p><em>East</em> (<span>$i = ncx$</span>)</p><p class="math-container">\[\begin{equation}\begin{gather*}
+&amp; -b T_{ncx,j-1}^{n+1} - a T_{ncx-1,j}^{n+1} +
 \left(3a + 2b + c \right) T_{ncx,j}^{n+1} 
--b T_{ncx,j+1}^{n+1} = 
+-b T_{ncx,j+1}^{n+1} = \\ &amp; 
 b T_{ncx,j-1}^{n} + a T_{ncx-1,j}^{n} -
 \left( 3a + 2b - c \right) T_{ncx,j}^{n} + b T_{ncx,j+1}^{n} + 4 a T_{BC,E},
-\end{equation}\]</p><p><em>South</em> (<span>$j = 1$</span>)</p><p class="math-container">\[\begin{equation}
--a T_{i-1,1}^{n+1} +
-\left(2a + 3b + c \right) T_{i,1}^{n+1} - a T_{i+1,1}^{n+1} - b T_{i,2}^{n+1} = 
+\end{gather*}\end{equation}\]</p><p><em>South</em> (<span>$j = 1$</span>)</p><p class="math-container">\[\begin{equation}\begin{gather*}
+&amp; -a T_{i-1,1}^{n+1} +
+\left(2a + 3b + c \right) T_{i,1}^{n+1} - a T_{i+1,1}^{n+1} - b T_{i,2}^{n+1} = \\ &amp; 
 a T_{i-1,1}^{n} - \left( 2a + 3b - c \right) T_{i,1}^{n} + a T_{i+1,1}^{n} + b T_{i,2}^{n} + 4 b T_{BC,S},
-\end{equation}\]</p><p><em>North</em> (<span>$j = ncy$</span>)</p><p class="math-container">\[\begin{equation}
--b T_{i,ncy-1}^{n+1} + a T_{i-1,ncy}^{n+1} + \left(2a + 3b + c \right) T_{i,ncy}^{n+1} - a T_{i+1,ncy}^{n+1} = 
+\end{gather*}\end{equation}\]</p><p><em>North</em> (<span>$j = ncy$</span>)</p><p class="math-container">\[\begin{equation}\begin{gather*}
+&amp; -b T_{i,ncy-1}^{n+1} + a T_{i-1,ncy}^{n+1} + \left(2a + 3b + c \right) T_{i,ncy}^{n+1} - a T_{i+1,ncy}^{n+1} = \\ &amp;
 b T_{i,ncy-1}^{n} + a T_{i-1,ncy}^{n} - \left( 2a + 3b - c \right) T_{i,ncy}^{n} + a T_{i+1,ncy}^{n} + 4 b T_{BC,N}.
-\end{equation}\]</p><p><strong>Neumann</strong></p><p><em>West</em> (<span>$i=1$</span>)</p><p class="math-container">\[\begin{equation}
--b T_{1,j-1}^{n+1} + \left(a + 2b + c \right) T_{1,j}^{n+1} - a T_{2,j}^{n+1} - b T_{1,j+1}^{n+1} = 
+\end{gather*}\end{equation}\]</p><p><strong>Neumann</strong></p><p><em>West</em> (<span>$i=1$</span>)</p><p class="math-container">\[\begin{equation}\begin{gather*}
+&amp; -b T_{1,j-1}^{n+1} + \left(a + 2b + c \right) T_{1,j}^{n+1} - a T_{2,j}^{n+1} - b T_{1,j+1}^{n+1} = \\ &amp;
 b T_{1,j-1}^{n} - \left( a + 2b - c \right) T_{1,j}^{n} + a T_{2,j}^{n} + b T_{1,j+1}^{n} - 2 a c_W \Delta{x},
-\end{equation}\]</p><p><em>East</em> (<span>$i = ncx$</span>)</p><p class="math-container">\[\begin{equation}
--b T_{ncx,j-1}^{n+1} - a T_{ncx-1,j}^{n+1} + \left(a + 2b + c \right) T_{ncx,j}^{n+1} - b T_{ncx,j+1}^{n+1} = 
+\end{gather*}\end{equation}\]</p><p><em>East</em> (<span>$i = ncx$</span>)</p><p class="math-container">\[\begin{equation}\begin{gather*}
+&amp; -b T_{ncx,j-1}^{n+1} - a T_{ncx-1,j}^{n+1} + \left(a + 2b + c \right) T_{ncx,j}^{n+1} - b T_{ncx,j+1}^{n+1} = \\ &amp;
 b T_{ncx,j-1}^{n} + a T_{ncx-1,j}^{n} - \left( a + 2b - c \right) T_{ncx,j}^{n} + b T_{ncx,j+1}^{n} + 2 a c_E \Delta{x},
-\end{equation}\]</p><p><em>South</em> (<span>$j = 1$</span>)</p><p class="math-container">\[\begin{equation}
--a T_{i-1,1}^{n+1} + \left(2a + b + c \right) T_{i,1}^{n+1} - a T_{i+1,1}^{n+1} - b T_{i,2}^{n+1} = 
+\end{gather*}\end{equation}\]</p><p><em>South</em> (<span>$j = 1$</span>)</p><p class="math-container">\[\begin{equation}\begin{gather*}
+&amp; -a T_{i-1,1}^{n+1} + \left(2a + b + c \right) T_{i,1}^{n+1} - a T_{i+1,1}^{n+1} - b T_{i,2}^{n+1} = \\ &amp;
 a T_{i-1,1}^{n} - \left( 2a + b - c \right) T_{i,1}^{n} + a T_{i+1,1}^{n} + b T_{i,2}^{n} - 2 b c_S \Delta{y}
-\end{equation}\]</p><p><em>North</em> (<span>$j = ncy$</span>)</p><p class="math-container">\[\begin{equation}
--b T_{i,ncy-1}^{n+1} + a T_{i-1,ncy}^{n+1} + \left(2a + b + c \right) T_{i,ncy}^{n+1} - a T_{i+1,ncy}^{n+1} = 
+\end{gather*}\end{equation}\]</p><p><em>North</em> (<span>$j = ncy$</span>)</p><p class="math-container">\[\begin{equation}\begin{gather*}
+&amp; -b T_{i,ncy-1}^{n+1} + a T_{i-1,ncy}^{n+1} + \left(2a + b + c \right) T_{i,ncy}^{n+1} - a T_{i+1,ncy}^{n+1} = \\ &amp;
 b T_{i,ncy-1}^{n} + a T_{i-1,ncy}^{n} - \left( 2a + b - c \right) T_{i,ncy}^{n} + a T_{i+1,ncy}^{n} + 2 b c_N \Delta{y}
-\end{equation}\]</p><p>For more details on how this is implemented, see the <a href="https://github.com/GeoSci-FFM/GeoModBox.jl/blob/main/src/HeatEquation/2Dsolvers.jl">source code</a>.</p><h3 id="Alternating-Direction-Implicit"><a class="docs-heading-anchor" href="#Alternating-Direction-Implicit">Alternating-Direction Implicit</a><a id="Alternating-Direction-Implicit-1"></a><a class="docs-heading-anchor-permalink" href="#Alternating-Direction-Implicit" title="Permalink"></a></h3><p>In 2-D, equation <span>$(3)$</span> for the ADI approach for each half-step in time is given as: </p><p class="math-container">\[\begin{equation}
+\end{gather*}\end{equation}\]</p><p>For more details on how this is implemented, see the <a href="https://github.com/GeoSci-FFM/GeoModBox.jl/blob/main/src/HeatEquation/2Dsolvers.jl">source code</a>.</p><h3 id="Alternating-Direction-Implicit"><a class="docs-heading-anchor" href="#Alternating-Direction-Implicit">Alternating-Direction Implicit</a><a id="Alternating-Direction-Implicit-1"></a><a class="docs-heading-anchor-permalink" href="#Alternating-Direction-Implicit" title="Permalink"></a></h3><p>In 2-D, equation <span>$(3)$</span> for the ADI approach for each half-step in time is given as: </p><p class="math-container">\[\begin{equation}
 \frac{T_{i,j}^{n+1/2}-T_{i,j}^n}{\Delta t/2} = 
 \kappa 
     \left( 
@@ -165,4 +165,4 @@ aT_{i-1,ncy} + bT_{i,ncy-1} - (2a + b)T_{1,ncy} + aT_{i+1,ncy} = -\frac{Q_{i,j}}
 b k_{y;i,j} T_{i,j-1} + a k_{x;i,j} T_{i-1,j} + c T_{i,j} + a k_{x;i+1,j} T_{i+1,j} + b k_{y;i,j+1} T_{i,j+1} + Q_{i,j} = 0,  
 \end{equation}\]</p><p>where </p><p class="math-container">\[a = \frac{1}{\Delta{x^2}},
 b = \frac{1}{\Delta{y^2}}, \textrm{and} \ 
-c = -a\left(k_{x;i+1,j}+k_{x;i,j}\right) - b\left(k_{y;i,j+1}+k_{y;i,j}\right).\]</p><p>For more details on how this is implemented see the <a href="https://github.com/GeoSci-FFM/GeoModBox.jl/blob/main/src/HeatEquation/2Dsolvers.jl">source code</a>.</p></article><nav class="docs-footer"><a class="docs-footer-prevpage" href="../DiffOneD/">« 1D</a><a class="docs-footer-nextpage" href="../MomentumMain/">General »</a><div class="flexbox-break"></div><p class="footer-message">Powered by <a href="https://github.com/JuliaDocs/Documenter.jl">Documenter.jl</a> and the <a href="https://julialang.org/">Julia Programming Language</a>.</p></nav></div><div class="modal" id="documenter-settings"><div class="modal-background"></div><div class="modal-card"><header class="modal-card-head"><p class="modal-card-title">Settings</p><button class="delete"></button></header><section class="modal-card-body"><p><label class="label">Theme</label><div class="select"><select id="documenter-themepicker"><option value="auto">Automatic (OS)</option><option value="documenter-light">documenter-light</option><option value="documenter-dark">documenter-dark</option><option value="catppuccin-latte">catppuccin-latte</option><option value="catppuccin-frappe">catppuccin-frappe</option><option value="catppuccin-macchiato">catppuccin-macchiato</option><option value="catppuccin-mocha">catppuccin-mocha</option></select></div></p><hr/><p>This document was generated with <a href="https://github.com/JuliaDocs/Documenter.jl">Documenter.jl</a> version 1.10.1 on <span class="colophon-date" title="Tuesday 15 April 2025 19:38">Tuesday 15 April 2025</span>. Using Julia version 1.11.5.</p></section><footer class="modal-card-foot"></footer></div></div></div></body></html>
+c = -a\left(k_{x;i+1,j}+k_{x;i,j}\right) - b\left(k_{y;i,j+1}+k_{y;i,j}\right).\]</p><p>For more details on how this is implemented see the <a href="https://github.com/GeoSci-FFM/GeoModBox.jl/blob/main/src/HeatEquation/2Dsolvers.jl">source code</a>.</p></article><nav class="docs-footer"><a class="docs-footer-prevpage" href="../DiffOneD/">« 1D</a><a class="docs-footer-nextpage" href="../MomentumMain/">General »</a><div class="flexbox-break"></div><p class="footer-message">Powered by <a href="https://github.com/JuliaDocs/Documenter.jl">Documenter.jl</a> and the <a href="https://julialang.org/">Julia Programming Language</a>.</p></nav></div><div class="modal" id="documenter-settings"><div class="modal-background"></div><div class="modal-card"><header class="modal-card-head"><p class="modal-card-title">Settings</p><button class="delete"></button></header><section class="modal-card-body"><p><label class="label">Theme</label><div class="select"><select id="documenter-themepicker"><option value="auto">Automatic (OS)</option><option value="documenter-light">documenter-light</option><option value="documenter-dark">documenter-dark</option><option value="catppuccin-latte">catppuccin-latte</option><option value="catppuccin-frappe">catppuccin-frappe</option><option value="catppuccin-macchiato">catppuccin-macchiato</option><option value="catppuccin-mocha">catppuccin-mocha</option></select></div></p><hr/><p>This document was generated with <a href="https://github.com/JuliaDocs/Documenter.jl">Documenter.jl</a> version 1.10.1 on <span class="colophon-date" title="Thursday 17 April 2025 14:48">Thursday 17 April 2025</span>. Using Julia version 1.11.5.</p></section><footer class="modal-card-foot"></footer></div></div></div></body></html>
