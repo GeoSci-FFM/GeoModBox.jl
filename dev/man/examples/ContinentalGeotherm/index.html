@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/><title>Continental Geotherm (1D) · GeoModBox.jl</title><meta name="title" content="Continental Geotherm (1D) · GeoModBox.jl"/><meta property="og:title" content="Continental Geotherm (1D) · GeoModBox.jl"/><meta property="twitter:title" content="Continental Geotherm (1D) · GeoModBox.jl"/><meta name="description" content="Documentation for GeoModBox.jl."/><meta property="og:description" content="Documentation for GeoModBox.jl."/><meta property="twitter:description" content="Documentation for GeoModBox.jl."/><script data-outdated-warner src="../../../assets/warner.js"></script><link href="https://cdnjs.cloudflare.com/ajax/libs/lato-font/3.0.0/css/lato-font.min.css" rel="stylesheet" type="text/css"/><link href="https://cdnjs.cloudflare.com/ajax/libs/juliamono/0.050/juliamono.min.css" rel="stylesheet" type="text/css"/><link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/fontawesome.min.css" rel="stylesheet" type="text/css"/><link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/solid.min.css" rel="stylesheet" type="text/css"/><link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/brands.min.css" rel="stylesheet" type="text/css"/><link href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.8/katex.min.css" rel="stylesheet" type="text/css"/><script>documenterBaseURL="../../.."</script><script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js" data-main="../../../assets/documenter.js"></script><script src="../../../search_index.js"></script><script src="../../../siteinfo.js"></script><script src="../../../../versions.js"></script><link class="docs-theme-link" rel="stylesheet" type="text/css" href="../../../assets/themes/catppuccin-mocha.css" data-theme-name="catppuccin-mocha"/><link class="docs-theme-link" rel="stylesheet" type="text/css" href="../../../assets/themes/catppuccin-macchiato.css" data-theme-name="catppuccin-macchiato"/><link class="docs-theme-link" rel="stylesheet" type="text/css" href="../../../assets/themes/catppuccin-frappe.css" data-theme-name="catppuccin-frappe"/><link class="docs-theme-link" rel="stylesheet" type="text/css" href="../../../assets/themes/catppuccin-latte.css" data-theme-name="catppuccin-latte"/><link class="docs-theme-link" rel="stylesheet" type="text/css" href="../../../assets/themes/documenter-dark.css" data-theme-name="documenter-dark" data-theme-primary-dark/><link class="docs-theme-link" rel="stylesheet" type="text/css" href="../../../assets/themes/documenter-light.css" data-theme-name="documenter-light" data-theme-primary/><script src="../../../assets/themeswap.js"></script></head><body><div id="documenter"><nav class="docs-sidebar"><div class="docs-package-name"><span class="docs-autofit"><a href="../../../">GeoModBox.jl</a></span></div><button class="docs-search-query input is-rounded is-small is-clickable my-2 mx-auto py-1 px-2" id="documenter-search-query">Search docs (Ctrl + /)</button><ul class="docs-menu"><li><a class="tocitem" href="../../../">Home</a></li><li><span class="tocitem">Governing Equation</span><ul><li><input class="collapse-toggle" id="menuitem-2-1" type="checkbox"/><label class="tocitem" for="menuitem-2-1"><span class="docs-label">Solution</span><i class="docs-chevron"></i></label><ul class="collapsed"><li><a class="tocitem" href="../../GESolution/">General</a></li></ul></li><li><input class="collapse-toggle" id="menuitem-2-2" type="checkbox"/><label class="tocitem" for="menuitem-2-2"><span class="docs-label">Heat Diffusion Equation</span><i class="docs-chevron"></i></label><ul class="collapsed"><li><a class="tocitem" href="../../DiffMain/">General</a></li><li><a class="tocitem" href="../../DiffOneD/">1D</a></li><li><a class="tocitem" href="../../DiffTwoD/">2D</a></li></ul></li><li><input class="collapse-toggle" id="menuitem-2-3" type="checkbox"/><label class="tocitem" for="menuitem-2-3"><span class="docs-label">Momentum Equation</span><i class="docs-chevron"></i></label><ul class="collapsed"><li><a class="tocitem" href="../../MomentumMain/">General</a></li><li><a class="tocitem" href="../../MomentumOneD/">1D</a></li><li><a class="tocitem" href="../../MomentumTwoD/">2D</a></li></ul></li></ul></li><li><span class="tocitem">Examples</span><ul><li><input class="collapse-toggle" id="menuitem-3-1" type="checkbox" checked/><label class="tocitem" for="menuitem-3-1"><span class="docs-label">Diffusion Equation</span><i class="docs-chevron"></i></label><ul class="collapsed"><li><a class="tocitem" href="../OceanicGeotherm/">Oceanic Geotherm (1D)</a></li><li class="is-active"><a class="tocitem" href>Continental Geotherm (1D)</a></li><li><a class="tocitem" href="../GaussianDiffusion1D/">Gaussian Diffusion (1D)</a></li><li><a class="tocitem" href="../GaussianDiffusion2D/">Gaussian Diffusion (2D)</a></li><li><a class="tocitem" href="../PoissonRestest/">Poisson Problem (2D)</a></li><li><a class="tocitem" href="../PoissonVariablek/">Poisson Problem; variable k (2D)</a></li></ul></li><li><input class="collapse-toggle" id="menuitem-3-2" type="checkbox"/><label class="tocitem" for="menuitem-3-2"><span class="docs-label">Advection Equtaion</span><i class="docs-chevron"></i></label><ul class="collapsed"><li><a class="tocitem" href="../Advection2D/">Advection (2D)</a></li><li><a class="tocitem" href="../AdvectionRestest2D/">Advection Resolution Test (2D)</a></li></ul></li><li><input class="collapse-toggle" id="menuitem-3-3" type="checkbox"/><label class="tocitem" for="menuitem-3-3"><span class="docs-label">Stokes Equation</span><i class="docs-chevron"></i></label><ul class="collapsed"><li><a class="tocitem" href="../ChannelFlow1D/">Channel Flow (1D)</a></li><li><a class="tocitem" href="../FallingBlockBenchmark/">Falling Block Benchmark</a></li><li><a class="tocitem" href="../FallingBlockDC/">Falling Block</a></li><li><a class="tocitem" href="../RTI/">Rayleigh Taylor Instability</a></li><li><a class="tocitem" href="../ViscousInclusion/">Viscous Inclusion</a></li></ul></li><li><input class="collapse-toggle" id="menuitem-3-4" type="checkbox"/><label class="tocitem" for="menuitem-3-4"><span class="docs-label">Mixed Thermal Convection</span><i class="docs-chevron"></i></label><ul class="collapsed"><li><a class="tocitem" href="../BottomHeatedConvection/">Bottom Heated</a></li><li><a class="tocitem" href="../InternallyHeatedConvection/">Internally Heated</a></li><li><a class="tocitem" href="../MixedHeatedConvection/">Mixed Heated</a></li></ul></li></ul></li><li><a class="tocitem" href="../../listoffunctions/">List of functions</a></li></ul><div class="docs-version-selector field has-addons"><div class="control"><span class="docs-label button is-static is-size-7">Version</span></div><div class="docs-selector control is-expanded"><div class="select is-fullwidth is-size-7"><select id="documenter-version-selector"></select></div></div></div></nav><div class="docs-main"><header class="docs-navbar"><a class="docs-sidebar-button docs-navbar-link fa-solid fa-bars is-hidden-desktop" id="documenter-sidebar-button" href="#"></a><nav class="breadcrumb"><ul class="is-hidden-mobile"><li><a class="is-disabled">Examples</a></li><li><a class="is-disabled">Diffusion Equation</a></li><li class="is-active"><a href>Continental Geotherm (1D)</a></li></ul><ul class="is-hidden-tablet"><li class="is-active"><a href>Continental Geotherm (1D)</a></li></ul></nav><div class="docs-right"><a class="docs-navbar-link" href="https://github.com/GeoSci-FFM/GeoModBox.jl" title="View the repository on GitHub"><span class="docs-icon fa-brands"></span><span class="docs-label is-hidden-touch">GitHub</span></a><a class="docs-navbar-link" href="https://github.com/GeoSci-FFM/GeoModBox.jl/blob/main/docs/src/man/examples/ContinentalGeotherm.md" title="Edit source on GitHub"><span class="docs-icon fa-solid"></span></a><a class="docs-settings-button docs-navbar-link fa-solid fa-gear" id="documenter-settings-button" href="#" title="Settings"></a><a class="docs-article-toggle-button fa-solid fa-chevron-up" id="documenter-article-toggle-button" href="javascript:;" title="Collapse all docstrings"></a></div></header><article class="content" id="documenter-page"><h1 id="[Continental-Geotherm](https://github.com/GeoSci-FFM/GeoModBox.jl/blob/main/examples/DiffusionEquation/1D/ContinentalGeotherm_1D.jl)"><a class="docs-heading-anchor" href="#[Continental-Geotherm](https://github.com/GeoSci-FFM/GeoModBox.jl/blob/main/examples/DiffusionEquation/1D/ContinentalGeotherm_1D.jl)"><a href="https://github.com/GeoSci-FFM/GeoModBox.jl/blob/main/examples/DiffusionEquation/1D/ContinentalGeotherm_1D.jl">Continental Geotherm</a></a><a id="[Continental-Geotherm](https://github.com/GeoSci-FFM/GeoModBox.jl/blob/main/examples/DiffusionEquation/1D/ContinentalGeotherm_1D.jl)-1"></a><a class="docs-heading-anchor-permalink" href="#[Continental-Geotherm](https://github.com/GeoSci-FFM/GeoModBox.jl/blob/main/examples/DiffusionEquation/1D/ContinentalGeotherm_1D.jl)" title="Permalink"></a></h1><p>The 1-D temperature profile of a continental geotherm can be calculated by solving the conductive part of the 1-D <em>temperature equation</em> using variable thermal parameters with a proper conserving finite difference scheme (so far only including a radiogenic heat source). We use the 1-D solver for variable thermal parameters, since the thermal conductivity varies within each lithospheric layer. </p><p>A proper conservative finite difference scheme in 1-D means that the temperature is defined on the <em>centroids</em> and the vertical heat flux and the thermal conductivity <span>$k$</span> on the <em>vertices</em>.</p><p>The 1-D temperature equation is given by: </p><p class="math-container">\[\begin{equation}
+\rho c_{p} \frac{\partial{T}}{\partial{t}} = \frac{\partial{q_y}}{\partial{y}} + \rho H,
+\end{equation}\]</p><p>where the heat flux <span>$q_y$</span> is defined as:</p><p class="math-container">\[\begin{equation}
+\left. q_{y,m} = -k_m \frac{\partial T}{\partial y}\right\vert_{m},\ \textrm{for}\ m = 1:nv, 
+\end{equation}\]</p><p>with <span>$\rho, c_{p}, T, t, k, H, y$</span> and <span>$nv$</span> are the density [kg/m³], the specific heat capacity [J/kg/K], the temperature [K], the time [s], the thermal conductivity [W/m/K], the heat generation rate per mass [W/kg], the depth [m], and the number of vertices, respectively. </p><p>For more details on how to discretize the equation using an explicit, forward Euler finite difference scheme see the <a href="../../DiffOneD/">documentation</a>.</p><hr/><p>Let&#39;s start with the definition of the geometrical, numerical, and physical constants: </p><pre><code class="language-Julia hljs"># Constants --------------------------------------------------------- #
+H           =   200e3               #   Hight of the model [ m ]
+yUC         =   10e3                #   Depth of the upper crust [ m ]
+yLC         =   35e3                #   Depth of the lower crust [ m ]
+        
+nc          =   200                 #   Number of grid points
+Δy          =   H/nc                #   Grid resolution
+
+# Depth [m] ---
+yc          =   LinRange(-H + Δy/2.0,0.0 - Δy/2.0,nc)     
+yv          =   LinRange(-H,0,nc+1)
+        
+Py  =   (
+    # Mantle properties ---
+    ρM      =   3000,               #   Density [ kg/m^3 ]
+    cpM     =   1000,               #   Heat capacity [ J/kg/K ]
+    kM      =   2.3,                #   Conductivity [ W/m/K ]
+    HM      =   2.3e-12,            #   Heat generation rate [W/kg]; Q = ρ*H;2.3e-12
+        
+    # Upper crust properties ---
+    ρUC     =   2700,               #   [ kg/m^3 ]
+    kUC     =   3.0,                #   [ W/m/K ]
+    HUC     =   617e-12,            #   [ W/kg ]
+    cpUC    =   1000,
+        
+    # Lower crust properties ---
+    ρLC     =   2900,               #   [ kg/m^3 ]
+    kLC     =   2.0,                #   [ W/m/K ]
+    HLC     =   43e-12,             #   [ W/kg ]
+    cpLC    =   1000,
+)                
+# ------------------------------------------------------------------- #</code></pre><p>In the following, one needs to define the initial and boundary condition: </p><ol><li>Temperature at the surface and bottom.</li><li>Linear increasing temperature profile assuming a certain adiabatic gradient and potential mantle temperature.</li></ol><pre><code class="language-Julia hljs"># Initial Condition ------------------------------------------------- #
+T   =   (
+    Tpot    =   1315 + 273.15,      #   Potential temperautre [ K ]
+    ΔTadi   =   0.5,                #   Adiabatic temperature gradient [ K/km ]
+    Ttop    =   273.15,             #   Surface temperature [ K ]
+    T_ex    =   zeros(nc+2,1),    
+)
+T1  =   (
+    Tbot    =   T.Tpot + T.ΔTadi*abs(H/1e3),    # Bottom temperature [ K ]
+    T       =   T.Tpot .+ abs.(yc./1e3).*T.ΔTadi,   # Initial T-profile [ K ]
+)
+T   =   merge(T,T1)
+
+Tini                =   zeros(nc,1)
+Tini                .=   T.T
+T.T_ex[2:end-1]     .=  T.T
+# ------------------------------------------------------------------- #</code></pre><p>One can choose between <em>Dirichlet</em> or <em>Neumann</em> thermal boundary conditions at the surface and bottom. </p><pre><code class="language-Julia hljs"># Boundary conditions ----------------------------------------------- #
+BC      =   (
+    type    = (N=:Dirichlet, S=:Dirichlet),
+    val     = (N=T.Ttop,S=T.Tbot)
+)
+# If Neumann boundary conditions are choosen, the following values result in the given heatflux for the given thermal conductivity k. 
+# S      =   -0.03;          # c     =   -k/q -&gt; 90 mW/m^2
+# N      =   -0.0033;        # c     =   -k/q -&gt; 10 mW/m^2
+# ------------------------------------------------------------------- #</code></pre><p>Now, one needs to define the multiplication factor <code>fac</code> of the <em>diffusion stability criterion</em> for the explicit thermal solver. This factor controls the stability criterion. If it is larger then 1 the solver becomes instable.  </p><pre><code class="language-Julia hljs"># Time stability criterion ------------------------------------------ #
+fac     =   0.9                 #   Courant criterion
+tmax    =   1000                 #   Lithosphere age [ Ma ]
+tsca    =   60*60*24*365.25     #   Seconds per year
+
+age     =   tmax*1e6*tsca        #   Age in seconds    
+# ------------------------------------------------------------------- #</code></pre><p>Let&#39;s check that the initial and boundary conditions are properly defined by plotting the temperature profile. </p><pre><code class="language-Julia hljs"># Plot Initial condition -------------------------------------------- #
+p = plot(T.T,yc./1e3, 
+    label=&quot;&quot;, 
+    xlabel=&quot;T [ K ]&quot;, ylabel=&quot;z [ km ]&quot;, 
+    title=&quot;Initial Temperature&quot;,
+    xlim=(T.Ttop,T.Tbot),ylim=(-H/1e3,0))
+display(p)
+# ------------------------------------------------------------------- #</code></pre><p><img src="../../../assets/CG1D_iniT.svg" alt="CG1D_ini"/></p><p><strong>Figure 1. Initial temperature profile.</strong></p><p>Now one needs to define the fields for the thermal paramter and assign the corresponding values of each lithospheric layer (upper and lower crust, and lithospheric mantle) to them. Additionally, the thermal diffusivity <span>$\kappa$</span> and initialize the vertical heat flux <code>q</code> need to be defined. </p><pre><code class="language-Julia hljs"># Setup fields ------------------------------------------------------ #
+Py1     =   (
+    k            =   zeros(nc+1,1),
+    ρ            =   zeros(nc,1),
+    cp           =   zeros(nc,1),
+    H            =   zeros(nc,1),
+    )
+Py  = merge(Py,Py1)
+    
+# Upper Crust ---
+Py.k[yv.&gt;=-yUC]     .=   Py.kUC
+Py.ρ[yc.&gt;=-yUC]     .=   Py.ρUC
+Py.cp[yc.&gt;=-yUC]    .=   Py.cpUC
+Py.H[yc.&gt;=-yUC]     .=   Py.HUC    
+# Lower Crust ---
+Py.k[yv.&gt;=-yLC .&amp;&amp; yv.&lt;-yUC]     .=   Py.kLC
+Py.ρ[yc.&gt;=-yLC .&amp;&amp; yc.&lt;-yUC]     .=   Py.ρLC
+Py.cp[yc.&gt;=-yLC .&amp;&amp; yc.&lt;-yUC]    .=   Py.cpLC
+Py.H[yc.&gt;=-yLC .&amp;&amp; yc.&lt;-yUC]     .=   Py.HLC   
+# Mantle ---
+Py.k[yv.&lt;-yLC]  .=   Py.kM
+Py.ρ[yc.&lt;-yLC]  .=   Py.ρM
+Py.cp[yc.&lt;-yLC] .=   Py.cpM
+Py.H[yc.&lt;-yLC]  .=   Py.HM
+
+Py2     =   (
+    # Thermal diffusivity [ m^2/s ] 
+    κ       =  maximum(Py.k)/minimum(Py.ρ)/minimum(Py.cp),     
+    )
+Py  =   merge(Py,Py2)
+T2  =   (
+    q   =   zeros(nc+1,1),
+    )
+T   =   merge(T,T2)  
+# ------------------------------------------------------------------- #</code></pre><p>Now, one can calculate the time stability criterion. </p><pre><code class="language-Julia hljs"># Time stability criterion ------------------------------------------ #
+Δtexp   =   Δy^2/2/Py.κ             #   Stability criterion for explicit
+Δt      =   fac*Δtexp               #   total time step
+
+nit     =   ceil(Int64,age/Δt)      #   Number of iterations    
+
+time    =   zeros(1,nit)            #   Time array
+# ------------------------------------------------------------------- #</code></pre><p>Now all required parameter and constants are defined to solve the 1-D temperature equation for each time step in a <code>for</code> loop. </p><p>The temperature conservation equation is solved via the function <code>ForwardEuler1D!()</code>, which updates the temperature profile <code>T.T</code> for each time step using the extended temperautre field <code>T.T_ex</code>, which include the ghost nodes. The temperature profile is plotted for a certain time.  </p><pre><code class="language-Julia hljs"># Time Loop --------------------------------------------------------- #
+count   =   1
+for i = 1:nit
+    if i &gt; 1
+        time[i]     =   time[i-1] + Δt
+    elseif time[i] &gt; age
+        Δt          =   age - time[i-1]
+        time[i]     =   time[i-1] + Δt
+    end
+    ForwardEuler1D!(T,Py,Δt,Δy,nc,BC)
+    if i == nit || abs(time[i]/1e6/tsca - count*100.0) &lt; Δt/1e6/tsca        
+        println(string(&quot;i = &quot;,i,&quot;, time = &quot;, time[i]/1e6/tsca))                    
+        p = plot!(T.T.-T.Ttop,yc./1e3, 
+            label=string(&quot;t = &quot;,ceil(time[i]/1e6/tsca),&quot;[Ma]&quot;), 
+            xlabel=&quot;T [°C]&quot;, ylabel=&quot;z [m]&quot;, 
+            title=&quot;Continental Geotherm&quot;,
+            xlim=(0,T.Tbot-T.Ttop),ylim=(-H/1e3,0))
+        display(p)
+        count = count + 1
+    end
+end
+# ------------------------------------------------------------------- #</code></pre><p><img src="../../../assets/CG1D_evolve.svg" alt="CG1D_evolve"/></p><p><strong>Figure 2. Evolution of the temperature profile with depth in 5 Ma steps.</strong></p><p>For the final time step, a depth profile for the vertical heat flux is calculated. Therefore, one needs to update the temperature at the ghost nodes to calculate the heat flux at the boundary. </p><pre><code class="language-Julia hljs"># Calculate heaf flow ----------------------------------------------- #
+# South ---
+T.T_ex[1]   =   (BC.type.S==:Dirichlet) * (2 * BC.val.S - T.T_ex[2]) + 
+                (BC.type.S==:Neumann) * (T.T_ex[2] - BC.val.S*Δy)
+# North ---
+T.T_ex[end] =   (BC.type.N==:Dirichlet) * (2 * BC.val.N - T.T_ex[nc+1]) +
+                (BC.type.N==:Neumann) * (T.T_ex[nc+1] + BC.val.N*Δy)
+if size(Py.k,1)==1
+    for j=1:nc+1
+        T.q[j]  =   -Py.k * 
+            (T.T_ex[j+1] - T.T_ex[j])/Δy
+    end    
+else
+    for j=1:nc+1
+        T.q[j]  =   -Py.k[j] * 
+            (T.T_ex[j+1] - T.T_ex[j])/Δy
+    end
+end
+# ------------------------------------------------------------------- #</code></pre><p>Finally, one can caluclate the temperature profile for an oceanic geotherm using the analytical expression of an infinite half-space cooling model for a certain age. The analytical solution is plotted in the final figure, together with the final numerical temperature profile and the heat flux profile. </p><pre><code class="language-Julia hljs"># Plot profile if requested ----------------------------------------- #
+q = plot(T.T.-T.Ttop,yc./1e3, 
+        label=string(&quot;t = &quot;,ceil(maximum(time)/1e6/tsca),&quot;[Ma]&quot;), 
+        xlabel=&quot;T [°C]&quot;, ylabel=&quot;z [m]&quot;,
+        title=&quot;Continental Geotherm&quot;,
+        xlim=(0,T.Tbot-T.Ttop),ylim=(-H/1e3,0),
+        layout=(1,3),subplot=1)    
+q = plot!(T.q.*1e3,yv./1e3, 
+        label=&quot;&quot;, 
+        xlabel=&quot;q [ mW ]&quot;, ylabel=&quot;z [m]&quot;, 
+        title=&quot;Heat Flux&quot;,
+        ylim=(-H/1e3,0),
+        subplot=2) 
+q = plot!(Py.k,yv./1e3,label=&quot;k [W/m/K]&quot;,
+        xlabel=&quot;k,ρ,cp,Q&quot;, ylabel=&quot;z [km]&quot;,
+        title=&quot;Thermal parameters&quot;,
+        subplot=3)       
+q = plot!(Py.cp./1e3,yc./1e3,label=&quot;cp [kJ/kg/K]&quot;,
+        subplot=3)
+q = plot!(Py.ρ,yc./1e3,label=&quot;ρ [kg/m³]&quot;,                
+        subplot=3)
+q = plot!(Py.H.*(Py.ρ./1e3),yc./1e3,label=&quot;Q [mW/m³]&quot;,
+        subplot=3)
+display(q)
+# Save figures ---
+savefig(q,&quot;./examples/DiffusionEquation/1D/Results/ContinentalGeotherm_1D.png&quot;)
+savefig(p,&quot;./examples/DiffusionEquation/1D/Results/ContinentalGeotherm_1D_evolve.png&quot;)
+# ======================================================================= #</code></pre><p><img src="../../../assets/CG1D_final.svg" alt="CG1D_final"/></p><p><strong>Figure 3. Final temperature, heat flux, and thermal parameter depth profiles.</strong></p></article><nav class="docs-footer"><a class="docs-footer-prevpage" href="../OceanicGeotherm/">« Oceanic Geotherm (1D)</a><a class="docs-footer-nextpage" href="../GaussianDiffusion1D/">Gaussian Diffusion (1D) »</a><div class="flexbox-break"></div><p class="footer-message">Powered by <a href="https://github.com/JuliaDocs/Documenter.jl">Documenter.jl</a> and the <a href="https://julialang.org/">Julia Programming Language</a>.</p></nav></div><div class="modal" id="documenter-settings"><div class="modal-background"></div><div class="modal-card"><header class="modal-card-head"><p class="modal-card-title">Settings</p><button class="delete"></button></header><section class="modal-card-body"><p><label class="label">Theme</label><div class="select"><select id="documenter-themepicker"><option value="auto">Automatic (OS)</option><option value="documenter-light">documenter-light</option><option value="documenter-dark">documenter-dark</option><option value="catppuccin-latte">catppuccin-latte</option><option value="catppuccin-frappe">catppuccin-frappe</option><option value="catppuccin-macchiato">catppuccin-macchiato</option><option value="catppuccin-mocha">catppuccin-mocha</option></select></div></p><hr/><p>This document was generated with <a href="https://github.com/JuliaDocs/Documenter.jl">Documenter.jl</a> version 1.11.4 on <span class="colophon-date" title="Monday 2 June 2025 11:59">Monday 2 June 2025</span>. Using Julia version 1.11.5.</p></section><footer class="modal-card-foot"></footer></div></div></div></body></html>
