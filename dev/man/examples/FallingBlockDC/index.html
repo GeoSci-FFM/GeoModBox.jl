@@ -1,2 +1,467 @@
 <!DOCTYPE html>
-<html lang="en"><head><meta charset="UTF-8"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/><title>Falling Block; Defect Correction · GeoModBox.jl</title><meta name="title" content="Falling Block; Defect Correction · GeoModBox.jl"/><meta property="og:title" content="Falling Block; Defect Correction · GeoModBox.jl"/><meta property="twitter:title" content="Falling Block; Defect Correction · GeoModBox.jl"/><meta name="description" content="Documentation for GeoModBox.jl."/><meta property="og:description" content="Documentation for GeoModBox.jl."/><meta property="twitter:description" content="Documentation for GeoModBox.jl."/><script data-outdated-warner src="../../../assets/warner.js"></script><link href="https://cdnjs.cloudflare.com/ajax/libs/lato-font/3.0.0/css/lato-font.min.css" rel="stylesheet" type="text/css"/><link href="https://cdnjs.cloudflare.com/ajax/libs/juliamono/0.050/juliamono.min.css" rel="stylesheet" type="text/css"/><link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/fontawesome.min.css" rel="stylesheet" type="text/css"/><link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/solid.min.css" rel="stylesheet" type="text/css"/><link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/brands.min.css" rel="stylesheet" type="text/css"/><link href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.8/katex.min.css" rel="stylesheet" type="text/css"/><script>documenterBaseURL="../../.."</script><script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js" data-main="../../../assets/documenter.js"></script><script src="../../../search_index.js"></script><script src="../../../siteinfo.js"></script><script src="../../../../versions.js"></script><link class="docs-theme-link" rel="stylesheet" type="text/css" href="../../../assets/themes/catppuccin-mocha.css" data-theme-name="catppuccin-mocha"/><link class="docs-theme-link" rel="stylesheet" type="text/css" href="../../../assets/themes/catppuccin-macchiato.css" data-theme-name="catppuccin-macchiato"/><link class="docs-theme-link" rel="stylesheet" type="text/css" href="../../../assets/themes/catppuccin-frappe.css" data-theme-name="catppuccin-frappe"/><link class="docs-theme-link" rel="stylesheet" type="text/css" href="../../../assets/themes/catppuccin-latte.css" data-theme-name="catppuccin-latte"/><link class="docs-theme-link" rel="stylesheet" type="text/css" href="../../../assets/themes/documenter-dark.css" data-theme-name="documenter-dark" data-theme-primary-dark/><link class="docs-theme-link" rel="stylesheet" type="text/css" href="../../../assets/themes/documenter-light.css" data-theme-name="documenter-light" data-theme-primary/><script src="../../../assets/themeswap.js"></script></head><body><div id="documenter"><nav class="docs-sidebar"><div class="docs-package-name"><span class="docs-autofit"><a href="../../../">GeoModBox.jl</a></span></div><button class="docs-search-query input is-rounded is-small is-clickable my-2 mx-auto py-1 px-2" id="documenter-search-query">Search docs (Ctrl + /)</button><ul class="docs-menu"><li><a class="tocitem" href="../../../">Home</a></li><li><span class="tocitem">Governing Equation</span><ul><li><input class="collapse-toggle" id="menuitem-2-1" type="checkbox"/><label class="tocitem" for="menuitem-2-1"><span class="docs-label">Solution</span><i class="docs-chevron"></i></label><ul class="collapsed"><li><a class="tocitem" href="../../GESolution/">General</a></li><li><a class="tocitem" href="../../Ini/">Initial Condition</a></li></ul></li><li><input class="collapse-toggle" id="menuitem-2-2" type="checkbox"/><label class="tocitem" for="menuitem-2-2"><span class="docs-label">Heat Diffusion Equation</span><i class="docs-chevron"></i></label><ul class="collapsed"><li><a class="tocitem" href="../../DiffMain/">General</a></li><li><a class="tocitem" href="../../DiffOneD/">1D</a></li><li><a class="tocitem" href="../../DiffTwoD/">2D</a></li></ul></li><li><input class="collapse-toggle" id="menuitem-2-3" type="checkbox"/><label class="tocitem" for="menuitem-2-3"><span class="docs-label">Advection Equation</span><i class="docs-chevron"></i></label><ul class="collapsed"><li><a class="tocitem" href="../../AdvectMain/">General</a></li><li><a class="tocitem" href="../../AdvOneD/">1D</a></li><li><a class="tocitem" href="../../AdvTwoD/">2D</a></li></ul></li><li><input class="collapse-toggle" id="menuitem-2-4" type="checkbox"/><label class="tocitem" for="menuitem-2-4"><span class="docs-label">Momentum Equation</span><i class="docs-chevron"></i></label><ul class="collapsed"><li><a class="tocitem" href="../../MomentumMain/">General</a></li><li><a class="tocitem" href="../../MomentumOneD/">1D</a></li><li><a class="tocitem" href="../../MomentumTwoD/">2D</a></li></ul></li></ul></li><li><span class="tocitem">Examples</span><ul><li><a class="tocitem" href="../../Examples/">General</a></li><li><input class="collapse-toggle" id="menuitem-3-2" type="checkbox"/><label class="tocitem" for="menuitem-3-2"><span class="docs-label">Diffusion Equation</span><i class="docs-chevron"></i></label><ul class="collapsed"><li><a class="tocitem" href="../OceanicGeotherm/">Oceanic Geotherm (1D)</a></li><li><a class="tocitem" href="../ContinentalGeotherm/">Continental Geotherm (1D)</a></li><li><a class="tocitem" href="../GaussianDiffusion1D/">Gaussian Diffusion (1D)</a></li><li><a class="tocitem" href="../BackwardEuler_DC/">Backward Euler (2D)</a></li><li><a class="tocitem" href="../ForwardEuler_DC/">Forward Euler (2D)</a></li><li><a class="tocitem" href="../GaussianDiffusion2D/">Gaussian Diffusion (2D)</a></li><li><a class="tocitem" href="../PoissonRestest/">Poisson Problem (2D)</a></li><li><a class="tocitem" href="../PoissonVariablek/">Poisson Problem; variable k (2D)</a></li></ul></li><li><input class="collapse-toggle" id="menuitem-3-3" type="checkbox"/><label class="tocitem" for="menuitem-3-3"><span class="docs-label">Advection Equtaion</span><i class="docs-chevron"></i></label><ul class="collapsed"><li><a class="tocitem" href="../Advection2D/">Advection (2D)</a></li><li><a class="tocitem" href="../AdvectionRestest2D/">Advection Resolution Test (2D)</a></li></ul></li></ul></li><li><a class="tocitem" href="../../listoffunctions/">List of functions</a></li></ul><div class="docs-version-selector field has-addons"><div class="control"><span class="docs-label button is-static is-size-7">Version</span></div><div class="docs-selector control is-expanded"><div class="select is-fullwidth is-size-7"><select id="documenter-version-selector"></select></div></div></div></nav><div class="docs-main"><header class="docs-navbar"><a class="docs-sidebar-button docs-navbar-link fa-solid fa-bars is-hidden-desktop" id="documenter-sidebar-button" href="#"></a><nav class="breadcrumb"><ul class="is-hidden-mobile"><li class="is-active"><a href>Falling Block; Defect Correction</a></li></ul><ul class="is-hidden-tablet"><li class="is-active"><a href>Falling Block; Defect Correction</a></li></ul></nav><div class="docs-right"><a class="docs-navbar-link" href="https://github.com/GeoSci-FFM/GeoModBox.jl" title="View the repository on GitHub"><span class="docs-icon fa-brands"></span><span class="docs-label is-hidden-touch">GitHub</span></a><a class="docs-navbar-link" href="https://github.com/GeoSci-FFM/GeoModBox.jl/blob/main/docs/src/man/examples/FallingBlockDC.md" title="Edit source on GitHub"><span class="docs-icon fa-solid"></span></a><a class="docs-settings-button docs-navbar-link fa-solid fa-gear" id="documenter-settings-button" href="#" title="Settings"></a><a class="docs-article-toggle-button fa-solid fa-chevron-up" id="documenter-article-toggle-button" href="javascript:;" title="Collapse all docstrings"></a></div></header><article class="content" id="documenter-page"><h1 id="[Falling-Block;-Defect-Correction](https://github.com/GeoSci-FFM/GeoModBox.jl/blob/main/examples/StokesEquation/2D/FallingBlockConstEta_Dc.jl)"><a class="docs-heading-anchor" href="#[Falling-Block;-Defect-Correction](https://github.com/GeoSci-FFM/GeoModBox.jl/blob/main/examples/StokesEquation/2D/FallingBlockConstEta_Dc.jl)"><a href="https://github.com/GeoSci-FFM/GeoModBox.jl/blob/main/examples/StokesEquation/2D/FallingBlockConstEta_Dc.jl">Falling Block; Defect Correction</a></a><a id="[Falling-Block;-Defect-Correction](https://github.com/GeoSci-FFM/GeoModBox.jl/blob/main/examples/StokesEquation/2D/FallingBlockConstEta_Dc.jl)-1"></a><a class="docs-heading-anchor-permalink" href="#[Falling-Block;-Defect-Correction](https://github.com/GeoSci-FFM/GeoModBox.jl/blob/main/examples/StokesEquation/2D/FallingBlockConstEta_Dc.jl)" title="Permalink"></a></h1><p>-&gt; A sript, solving the falling block problem assuming a constant viscosity and using the defect correction method.</p><hr/><h1 id="[Falling-Block;-Defect-Correction](https://github.com/GeoSci-FFM/GeoModBox.jl/blob/main/examples/StokesEquation/2D/FallingBlockVarEta_DC.jl)"><a class="docs-heading-anchor" href="#[Falling-Block;-Defect-Correction](https://github.com/GeoSci-FFM/GeoModBox.jl/blob/main/examples/StokesEquation/2D/FallingBlockVarEta_DC.jl)"><a href="https://github.com/GeoSci-FFM/GeoModBox.jl/blob/main/examples/StokesEquation/2D/FallingBlockVarEta_DC.jl">Falling Block; Defect Correction</a></a><a id="[Falling-Block;-Defect-Correction](https://github.com/GeoSci-FFM/GeoModBox.jl/blob/main/examples/StokesEquation/2D/FallingBlockVarEta_DC.jl)-1"></a><a class="docs-heading-anchor-permalink" href="#[Falling-Block;-Defect-Correction](https://github.com/GeoSci-FFM/GeoModBox.jl/blob/main/examples/StokesEquation/2D/FallingBlockVarEta_DC.jl)" title="Permalink"></a></h1><p>-&gt; A sript, solving the falling block problem assuming a variable viscosity and using the defect correction method. The advection is only provided with tracers</p></article><nav class="docs-footer"><p class="footer-message">Powered by <a href="https://github.com/JuliaDocs/Documenter.jl">Documenter.jl</a> and the <a href="https://julialang.org/">Julia Programming Language</a>.</p></nav></div><div class="modal" id="documenter-settings"><div class="modal-background"></div><div class="modal-card"><header class="modal-card-head"><p class="modal-card-title">Settings</p><button class="delete"></button></header><section class="modal-card-body"><p><label class="label">Theme</label><div class="select"><select id="documenter-themepicker"><option value="auto">Automatic (OS)</option><option value="documenter-light">documenter-light</option><option value="documenter-dark">documenter-dark</option><option value="catppuccin-latte">catppuccin-latte</option><option value="catppuccin-frappe">catppuccin-frappe</option><option value="catppuccin-macchiato">catppuccin-macchiato</option><option value="catppuccin-mocha">catppuccin-mocha</option></select></div></p><hr/><p>This document was generated with <a href="https://github.com/JuliaDocs/Documenter.jl">Documenter.jl</a> version 1.13.0 on <span class="colophon-date" title="Monday 23 June 2025 12:22">Monday 23 June 2025</span>. Using Julia version 1.11.5.</p></section><footer class="modal-card-foot"></footer></div></div></div></body></html>
+<html lang="en"><head><meta charset="UTF-8"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/><title>Falling Block · GeoModBox.jl</title><meta name="title" content="Falling Block · GeoModBox.jl"/><meta property="og:title" content="Falling Block · GeoModBox.jl"/><meta property="twitter:title" content="Falling Block · GeoModBox.jl"/><meta name="description" content="Documentation for GeoModBox.jl."/><meta property="og:description" content="Documentation for GeoModBox.jl."/><meta property="twitter:description" content="Documentation for GeoModBox.jl."/><script data-outdated-warner src="../../../assets/warner.js"></script><link href="https://cdnjs.cloudflare.com/ajax/libs/lato-font/3.0.0/css/lato-font.min.css" rel="stylesheet" type="text/css"/><link href="https://cdnjs.cloudflare.com/ajax/libs/juliamono/0.050/juliamono.min.css" rel="stylesheet" type="text/css"/><link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/fontawesome.min.css" rel="stylesheet" type="text/css"/><link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/solid.min.css" rel="stylesheet" type="text/css"/><link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/brands.min.css" rel="stylesheet" type="text/css"/><link href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.8/katex.min.css" rel="stylesheet" type="text/css"/><script>documenterBaseURL="../../.."</script><script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js" data-main="../../../assets/documenter.js"></script><script src="../../../search_index.js"></script><script src="../../../siteinfo.js"></script><script src="../../../../versions.js"></script><link class="docs-theme-link" rel="stylesheet" type="text/css" href="../../../assets/themes/catppuccin-mocha.css" data-theme-name="catppuccin-mocha"/><link class="docs-theme-link" rel="stylesheet" type="text/css" href="../../../assets/themes/catppuccin-macchiato.css" data-theme-name="catppuccin-macchiato"/><link class="docs-theme-link" rel="stylesheet" type="text/css" href="../../../assets/themes/catppuccin-frappe.css" data-theme-name="catppuccin-frappe"/><link class="docs-theme-link" rel="stylesheet" type="text/css" href="../../../assets/themes/catppuccin-latte.css" data-theme-name="catppuccin-latte"/><link class="docs-theme-link" rel="stylesheet" type="text/css" href="../../../assets/themes/documenter-dark.css" data-theme-name="documenter-dark" data-theme-primary-dark/><link class="docs-theme-link" rel="stylesheet" type="text/css" href="../../../assets/themes/documenter-light.css" data-theme-name="documenter-light" data-theme-primary/><script src="../../../assets/themeswap.js"></script></head><body><div id="documenter"><nav class="docs-sidebar"><div class="docs-package-name"><span class="docs-autofit"><a href="../../../">GeoModBox.jl</a></span></div><button class="docs-search-query input is-rounded is-small is-clickable my-2 mx-auto py-1 px-2" id="documenter-search-query">Search docs (Ctrl + /)</button><ul class="docs-menu"><li><a class="tocitem" href="../../../">Home</a></li><li><span class="tocitem">Governing Equation</span><ul><li><input class="collapse-toggle" id="menuitem-2-1" type="checkbox"/><label class="tocitem" for="menuitem-2-1"><span class="docs-label">Solution</span><i class="docs-chevron"></i></label><ul class="collapsed"><li><a class="tocitem" href="../../GESolution/">General</a></li><li><a class="tocitem" href="../../Ini/">Initial Condition</a></li></ul></li><li><input class="collapse-toggle" id="menuitem-2-2" type="checkbox"/><label class="tocitem" for="menuitem-2-2"><span class="docs-label">Heat Diffusion Equation</span><i class="docs-chevron"></i></label><ul class="collapsed"><li><a class="tocitem" href="../../DiffMain/">General</a></li><li><a class="tocitem" href="../../DiffOneD/">1D</a></li><li><a class="tocitem" href="../../DiffTwoD/">2D</a></li></ul></li><li><input class="collapse-toggle" id="menuitem-2-3" type="checkbox"/><label class="tocitem" for="menuitem-2-3"><span class="docs-label">Advection Equation</span><i class="docs-chevron"></i></label><ul class="collapsed"><li><a class="tocitem" href="../../AdvectMain/">General</a></li><li><a class="tocitem" href="../../AdvOneD/">1D</a></li><li><a class="tocitem" href="../../AdvTwoD/">2D</a></li></ul></li><li><input class="collapse-toggle" id="menuitem-2-4" type="checkbox"/><label class="tocitem" for="menuitem-2-4"><span class="docs-label">Momentum Equation</span><i class="docs-chevron"></i></label><ul class="collapsed"><li><a class="tocitem" href="../../MomentumMain/">General</a></li><li><a class="tocitem" href="../../MomentumOneD/">1D</a></li><li><a class="tocitem" href="../../MomentumTwoD/">2D</a></li></ul></li></ul></li><li><span class="tocitem">Examples</span><ul><li><a class="tocitem" href="../../Examples/">General</a></li><li><input class="collapse-toggle" id="menuitem-3-2" type="checkbox"/><label class="tocitem" for="menuitem-3-2"><span class="docs-label">Diffusion Equation</span><i class="docs-chevron"></i></label><ul class="collapsed"><li><a class="tocitem" href="../OceanicGeotherm/">Oceanic Geotherm (1D)</a></li><li><a class="tocitem" href="../ContinentalGeotherm/">Continental Geotherm (1D)</a></li><li><a class="tocitem" href="../GaussianDiffusion1D/">Gaussian Diffusion (1D)</a></li><li><a class="tocitem" href="../BackwardEuler_DC/">Backward Euler (2D)</a></li><li><a class="tocitem" href="../ForwardEuler_DC/">Forward Euler (2D)</a></li><li><a class="tocitem" href="../GaussianDiffusion2D/">Gaussian Diffusion (2D)</a></li><li><a class="tocitem" href="../PoissonRestest/">Poisson Problem (2D)</a></li><li><a class="tocitem" href="../PoissonVariablek/">Poisson Problem; variable k (2D)</a></li></ul></li><li><input class="collapse-toggle" id="menuitem-3-3" type="checkbox"/><label class="tocitem" for="menuitem-3-3"><span class="docs-label">Advection Equtaion</span><i class="docs-chevron"></i></label><ul class="collapsed"><li><a class="tocitem" href="../Advection2D/">Advection (2D)</a></li><li><a class="tocitem" href="../AdvectionRestest2D/">Advection Resolution Test (2D)</a></li></ul></li><li><input class="collapse-toggle" id="menuitem-3-4" type="checkbox" checked/><label class="tocitem" for="menuitem-3-4"><span class="docs-label">Stokes Equation</span><i class="docs-chevron"></i></label><ul class="collapsed"><li><a class="tocitem" href="../ChannelFlow1D/">Channel Flow (1D)</a></li><li><a class="tocitem" href="../FallingBlockBenchmark/">Falling Block Benchmark</a></li><li class="is-active"><a class="tocitem" href>Falling Block</a><ul class="internal"><li class="toplevel"><a class="tocitem" href="#[Falling-Block-constant-\\eta](https://github.com/GeoSci-FFM/GeoModBox.jl/blob/main/examples/StokesEquation/2D/FallingBlockConstEta_Dc.jl)"><span>Falling Block - constant <span>$\eta$</span></span></a></li><li class="toplevel"><a class="tocitem" href="#[Falling-Block-variable-\\eta](https://github.com/GeoSci-FFM/GeoModBox.jl/blob/main/examples/StokesEquation/2D/FallingBlockVarEta_DC.jl)"><span>Falling Block-variable <span>$\eta$</span></span></a></li></ul></li></ul></li></ul></li><li><a class="tocitem" href="../../listoffunctions/">List of functions</a></li></ul><div class="docs-version-selector field has-addons"><div class="control"><span class="docs-label button is-static is-size-7">Version</span></div><div class="docs-selector control is-expanded"><div class="select is-fullwidth is-size-7"><select id="documenter-version-selector"></select></div></div></div></nav><div class="docs-main"><header class="docs-navbar"><a class="docs-sidebar-button docs-navbar-link fa-solid fa-bars is-hidden-desktop" id="documenter-sidebar-button" href="#"></a><nav class="breadcrumb"><ul class="is-hidden-mobile"><li><a class="is-disabled">Examples</a></li><li><a class="is-disabled">Stokes Equation</a></li><li class="is-active"><a href>Falling Block</a></li></ul><ul class="is-hidden-tablet"><li class="is-active"><a href>Falling Block</a></li></ul></nav><div class="docs-right"><a class="docs-navbar-link" href="https://github.com/GeoSci-FFM/GeoModBox.jl" title="View the repository on GitHub"><span class="docs-icon fa-brands"></span><span class="docs-label is-hidden-touch">GitHub</span></a><a class="docs-navbar-link" href="https://github.com/GeoSci-FFM/GeoModBox.jl/blob/main/docs/src/man/examples/FallingBlockDC.md" title="Edit source on GitHub"><span class="docs-icon fa-solid"></span></a><a class="docs-settings-button docs-navbar-link fa-solid fa-gear" id="documenter-settings-button" href="#" title="Settings"></a><a class="docs-article-toggle-button fa-solid fa-chevron-up" id="documenter-article-toggle-button" href="javascript:;" title="Collapse all docstrings"></a></div></header><article class="content" id="documenter-page"><h1 id="Falling-Block;-Defect-Correction"><a class="docs-heading-anchor" href="#Falling-Block;-Defect-Correction">Falling Block; Defect Correction</a><a id="Falling-Block;-Defect-Correction-1"></a><a class="docs-heading-anchor-permalink" href="#Falling-Block;-Defect-Correction" title="Permalink"></a></h1><p>This documentation presents two examples illustrating the use of the defect correction method to solve the momentum equation, assuming either constant or variable viscosity, in combination with tracer-based advection. For more details on the falling block benchmark setup, please refer to the <a href="../FallingBlockBenchmark/">documentation</a>. </p><p>For more details on the defect correction method, please refer to the <a href="../../MomentumMain/">momentum equation documentation</a>. </p><p>For more details on the tracer advection method, please refer to the <a href="../../AdvectMain/">advection scheme documentation</a>. </p><p>For more details on initializing the model using tracers, please refer to the <a href="../../Ini/">initialization documentation</a>. </p><hr/><h1 id="[Falling-Block-constant-\\eta](https://github.com/GeoSci-FFM/GeoModBox.jl/blob/main/examples/StokesEquation/2D/FallingBlockConstEta_Dc.jl)"><a class="docs-heading-anchor" href="#[Falling-Block-constant-\\eta](https://github.com/GeoSci-FFM/GeoModBox.jl/blob/main/examples/StokesEquation/2D/FallingBlockConstEta_Dc.jl)"><a href="https://github.com/GeoSci-FFM/GeoModBox.jl/blob/main/examples/StokesEquation/2D/FallingBlockConstEta_Dc.jl">Falling Block - constant <span>$\eta$</span></a></a><a id="[Falling-Block-constant-\\eta](https://github.com/GeoSci-FFM/GeoModBox.jl/blob/main/examples/StokesEquation/2D/FallingBlockConstEta_Dc.jl)-1"></a><a class="docs-heading-anchor-permalink" href="#[Falling-Block-constant-\\eta](https://github.com/GeoSci-FFM/GeoModBox.jl/blob/main/examples/StokesEquation/2D/FallingBlockConstEta_Dc.jl)" title="Permalink"></a></h1><p>This is an example to solve the instantenous falling block problem assuming a constant viscosity and using the defect correction method.</p><hr/><p>First, one needs to load the corresponding modules. </p><pre><code class="language-Julia hljs">using Plots
+using ExtendableSparse
+using GeoModBox.InitialCondition, GeoModBox.MomentumEquation.TwoD</code></pre><p>Now one can define the parameters to setup the model and some plotting parameters.</p><pre><code class="language-Julia hljs"># Define Initial Condition ========================================== #
+# Density --- 
+#   1) block
+Ini         =   (p=:block,) 
+# ------------------------------------------------------------------- #
+# Plot Settings ===================================================== #
+Pl  =   (
+    qinc    =   5,
+    qsc     =   100*(60*60*24*365.25)*5e1
+)
+# ------------------------------------------------------------------- #</code></pre><p>In the following, one needs to define the model geometry and the numerical grid parameters. </p><pre><code class="language-Julia hljs"># Geometry ========================================================== #
+M       =   (
+    xmin    =   0.0,
+    xmax    =   500.0e3,    # [ m ]
+    ymin    =   -500.0e3,   # [ m ]
+    ymax    =   0.0,
+)
+# -------------------------------------------------------------------- #
+# Grid =============================================================== #
+NC      =   (
+    x   =   50, 
+    y   =   50,
+)
+NV      =   (
+    x   =   NC.x + 1,
+    y   =   NC.y + 1,
+)
+Δ       =   (
+    x   =   (M.xmax - M.xmin)/NC.x,
+    y   =   (M.ymax - M.ymin)/NC.y,
+)
+x       =   (
+    c   =   LinRange(M.xmin+Δ.x/2,M.xmax-Δ.x/2,NC.x),
+    ce  =   LinRange(M.xmin - Δ.x/2.0, M.xmax + Δ.x/2.0, NC.x+2),
+    v   =   LinRange(M.xmin,M.xmax,NV.x),
+)
+y       =   (
+    c   =   LinRange(M.ymin+Δ.y/2,M.ymax-Δ.y/2,NC.y),
+    ce  =   LinRange(M.ymin - Δ.x/2.0, M.ymax + Δ.x/2.0, NC.y+2),
+    v   =   LinRange(M.ymin,M.ymax,NV.y),
+)
+x1      =   (
+    c2d     =   x.c .+ 0*y.c&#39;,
+    v2d     =   x.v .+ 0*y.v&#39;, 
+    vx2d    =   x.v .+ 0*y.ce&#39;,
+    vy2d    =   x.ce .+ 0*y.v&#39;,
+)
+x   =   merge(x,x1)
+y1      =   (
+    c2d     =   0*x.c .+ y.c&#39;,
+    v2d     =   0*x.v .+ y.v&#39;,
+    vx2d    =   0*x.v .+ y.ce&#39;,
+    vy2d    =   0*x.ce .+ y.v&#39;,
+)
+y   =   merge(y,y1)
+# -------------------------------------------------------------------- #</code></pre><p>Next, define the physical parameters of the problem and initialize the required data arrays. </p><pre><code class="language-Julia hljs"># Physics ============================================================ #
+g       =   9.81            #   Gravitational acceleration
+
+η₀      =   1.0e21          #   Reference Viscosity
+
+ρ₀      =   3200.0          #   Background density
+ρ₁      =   3300.0          #   Block density
+ρ       =   [ρ₀,ρ₁] 
+
+phase   =   [0,1]
+# ------------------------------------------------------------------- #
+# Allocation ======================================================== #
+D   =   (
+    vx      =   zeros(Float64,NV.x,NC.y+2),
+    vy      =   zeros(Float64,NC.x+2,NV.y),
+    Pt      =   zeros(Float64,NC...),
+    p       =   zeros(Int64,NC...),
+    p_ex    =   zeros(Int64,NC.x+2,NC.y+2),
+    ρ       =   zeros(Float64,NC...),
+    vxc     =   zeros(Float64,NC...),
+    vyc     =   zeros(Float64,NC...),
+    vc      =   zeros(Float64,NC...),
+)
+# Needed for the defect correction solution ---
+divV        =   zeros(Float64,NC...)
+ε           =   (
+    xx      =   zeros(Float64,NC...), 
+    yy      =   zeros(Float64,NC...), 
+    xy      =   zeros(Float64,NV...),
+)
+τ           =   (
+    xx      =   zeros(Float64,NC...), 
+    yy      =   zeros(Float64,NC...), 
+    xy      =   zeros(Float64,NV...),
+)
+# Residuals ---
+Fm     =    (
+    x       =   zeros(Float64,NV.x, NC.y), 
+    y       =   zeros(Float64,NC.x, NV.y)
+)
+FPt         =   zeros(Float64,NC...)
+# ------------------------------------------------------------------- #</code></pre><p>The velocity boundary conditions and the initial condition are set in the following. As this example computes only the instanteneous solution, tracers are not required, and the field is initialized using a predefined phase distribution function. </p><pre><code class="language-Julia hljs"># Boundary Conditions =============================================== #
+VBC     =   (
+    type    =   (E=:freeslip,W=:freeslip,S=:freeslip,N=:freeslip),
+    val     =   (E=zeros(NV.y),W=zeros(NV.y),S=zeros(NV.x),N=zeros(NV.x)),
+)
+# ------------------------------------------------------------------- #
+# Initial Condition ================================================= #
+IniPhase!(Ini.p,D,M,x,y,NC;phase)
+for i in eachindex(phase)
+    D.ρ[D.p.==phase[i]] .= ρ[i]
+end
+# ------------------------------------------------------------------- #</code></pre><p>To solve the system of equations using the defect correction method, one needs to define the numbering of the nodes, the residual and correction vector. </p><pre><code class="language-Julia hljs"># System of Equations =============================================== #
+# Numbering, without ghost nodes! ---
+off    = [  NV.x*NC.y,                          # vx
+            NV.x*NC.y + NC.x*NV.y,              # vy
+            NV.x*NC.y + NC.x*NV.y + NC.x*NC.y]  # Pt
+
+Num    =    (
+    Vx  =   reshape(1:NV.x*NC.y, NV.x, NC.y), 
+    Vy  =   reshape(off[1]+1:off[1]+NC.x*NV.y, NC.x, NV.y), 
+    Pt  =   reshape(off[2]+1:off[2]+NC.x*NC.y,NC...),
+            )
+F       =   zeros(maximum(Num.Pt))
+δx      =   zeros(maximum(Num.Pt))
+# ------------------------------------------------------------------- #</code></pre><p>Now, one can solve the system of equations for the initial residuals. </p><pre><code class="language-Julia hljs"># Initial Residual -------------------------------------------------- #
+Residuals2Dc!(D,VBC,ε,τ,divV,Δ,η₀,g,Fm,FPt)
+F[Num.Vx]   =   Fm.x[:]
+F[Num.Vy]   =   Fm.y[:]
+F[Num.Pt]   =   FPt[:]
+# ------------------------------------------------------------------- #</code></pre><p>In the following, the coefficients for the coefficient matrix are collected and the correction term is calculated. The correction term is used to update the initial velocity and pressure guess. The final residual quantifies the accuracy of the numerical solution. </p><pre><code class="language-Julia hljs"># Assemble Coefficients ============================================= #
+K       =   Assemblyc(NC, NV, Δ, η₀, VBC, Num)
+# ------------------------------------------------------------------- #
+# Solution of the linear system ===================================== #
+δx      =   - K \ F
+# ------------------------------------------------------------------- #
+# Update Unknown Variables ========================================== #
+D.vx[:,2:end-1]     .+=  δx[Num.Vx]
+D.vy[2:end-1,:]     .+=  δx[Num.Vy]
+D.Pt                .+=  δx[Num.Pt]
+# Final Residual ==================================================== #
+Residuals2Dc!(D,VBC,ε,τ,divV,Δ,η₀,g,Fm,FPt)
+# ------------------------------------------------------------------- #</code></pre><p>For visualization purposes, the centroid velocity is calculated. Subsequently, the density, velocity components, and pressure fields of the instantaneous solution are plotted. The final figure is stored in the results directory. </p><pre><code class="language-Julia hljs"># ------------------------------------------------------------------- #
+# Get the velocity on the centroids ---
+for i = 1:NC.x
+    for j = 1:NC.y
+        D.vxc[i,j]  = (D.vx[i,j+1] + D.vx[i+1,j+1])/2
+        D.vyc[i,j]  = (D.vy[i+1,j] + D.vy[i+1,j+1])/2
+    end
+end
+@. D.vc        = sqrt(D.vxc^2 + D.vyc^2)
+# ---
+@show(minimum(D.vc))
+@show(maximum(D.vc))
+# ---
+p = heatmap(x.c./1e3,y.c./1e3,D.ρ&#39;,color=:inferno,
+        xlabel=&quot;x[km]&quot;,ylabel=&quot;y[km]&quot;,colorbar=false,
+        title=&quot;Density&quot;,
+        aspect_ratio=:equal,xlims=(M.xmin/1e3, M.xmax/1e3), 
+        ylims=(M.ymin/1e3, M.ymax/1e3),
+        layout=(2,2),subplot=1)
+quiver!(p,x.c2d[1:Pl.qinc:end,1:Pl.qinc:end]./1e3,
+        y.c2d[1:Pl.qinc:end,1:Pl.qinc:end]./1e3,
+        quiver=(D.vx[1:Pl.qinc:end,1:Pl.qinc:end].*Pl.qsc,
+        D.vyc[1:Pl.qinc:end,1:Pl.qinc:end].*Pl.qsc), 
+        la=0.5,
+        color=&quot;white&quot;,layout=(2,2),subplot=1)
+heatmap!(p,x.c./1e3,y.c./1e3,D.vxc&#39;,
+        xlabel=&quot;x[km]&quot;,ylabel=&quot;y[km]&quot;,colorbar=false,
+        title=&quot;V_x&quot;,color=cgrad(:batlow),
+        aspect_ratio=:equal,xlims=(M.xmin/1e3, M.xmax/1e3),
+        ylims=(M.ymin/1e3, M.ymax/1e3),
+        layout=(2,2),subplot=3)
+heatmap!(p,x.c./1e3,y.c./1e3,D.vyc&#39;,
+        xlabel=&quot;x[km]&quot;,ylabel=&quot;y[km]&quot;,colorbar=false,
+        title=&quot;V_y&quot;,color=cgrad(:batlow),
+        aspect_ratio=:equal,xlims=(M.xmin/1e3, M.xmax/1e3),
+        ylims=(M.ymin/1e3, M.ymax/1e3),
+        layout=(2,2),subplot=4)
+heatmap!(p,x.c./1e3,y.c./1e3,D.Pt&#39;,
+        xlabel=&quot;x[km]&quot;,ylabel=&quot;y[km]&quot;,colorbar=false,
+        title=&quot;P_t&quot;,color=cgrad(:lipari),
+        aspect_ratio=:equal,xlims=(M.xmin/1e3, M.xmax/1e3),
+        ylims=(M.ymin/1e3, M.ymax/1e3),
+        layout=(2,2),subplot=2)
+display(p)
+
+savefig(p,string(&quot;./examples/StokesEquation/2D/Results/FallingBlockConstEta_Instanteneous_DC.png&quot;))</code></pre><p><img src="../../../assets/Falling_Block_const_inst.svg" alt="FBIsoInst"/></p><p><strong>Figure 1. Instanteneous solution of an isoviscous falling block problem.</strong> </p><hr/><hr/><h1 id="[Falling-Block-variable-\\eta](https://github.com/GeoSci-FFM/GeoModBox.jl/blob/main/examples/StokesEquation/2D/FallingBlockVarEta_DC.jl)"><a class="docs-heading-anchor" href="#[Falling-Block-variable-\\eta](https://github.com/GeoSci-FFM/GeoModBox.jl/blob/main/examples/StokesEquation/2D/FallingBlockVarEta_DC.jl)"><a href="https://github.com/GeoSci-FFM/GeoModBox.jl/blob/main/examples/StokesEquation/2D/FallingBlockVarEta_DC.jl">Falling Block-variable <span>$\eta$</span></a></a><a id="[Falling-Block-variable-\\eta](https://github.com/GeoSci-FFM/GeoModBox.jl/blob/main/examples/StokesEquation/2D/FallingBlockVarEta_DC.jl)-1"></a><a class="docs-heading-anchor-permalink" href="#[Falling-Block-variable-\\eta](https://github.com/GeoSci-FFM/GeoModBox.jl/blob/main/examples/StokesEquation/2D/FallingBlockVarEta_DC.jl)" title="Permalink"></a></h1><p>This is an example to solve the falling block problem assuming a variable viscosity and using the defect correction method. The advection is done using tracers</p><hr/><p>Let&#39;s load the necessary modules first. </p><pre><code class="language-Julia hljs">using Plots
+using ExtendableSparse
+using GeoModBox.InitialCondition, GeoModBox.MomentumEquation.TwoD
+using GeoModBox.AdvectionEquation.TwoD
+using GeoModBox.Tracers.TwoD
+using Base.Threads
+using Printf</code></pre><p>As in the previous example, one needs to define the initial configuration, some plotting parameters, the model geometry, and the numerical grid at first. </p><pre><code class="language-Julia hljs"># Define Initial Condition ========================================== #
+#   1) block
+Ini         =   (p=:block,) 
+# ------------------------------------------------------------------- #
+# Plot Settings ===================================================== #
+Pl  =   (
+    qinc    =   4,
+    mainc   =   2,
+    qsc     =   100*(60*60*24*365.25)*5e1
+)
+# ------------------------------------------------------------------- #
+# Geometry ========================================================== #
+M       =   (
+    xmin    =   0.0,
+    xmax    =   500.0e3,    # [ m ]
+    ymin    =   -500.0e3,   # [ m ]
+    ymax    =   0.0,
+)
+# -------------------------------------------------------------------- #
+# Grid =============================================================== #
+NC      =   (
+    x   =   50, 
+    y   =   50,
+)
+NV      =   (
+    x   =   NC.x + 1,
+    y   =   NC.y + 1,
+)
+Δ       =   (
+    x   =   (M.xmax - M.xmin)/NC.x,
+    y   =   (M.ymax - M.ymin)/NC.y,
+)
+x       =   (
+    c   =   LinRange(M.xmin+Δ.x/2,M.xmax-Δ.x/2,NC.x),
+    ce  =   LinRange(M.xmin - Δ.x/2.0, M.xmax + Δ.x/2.0, NC.x+2),
+    v   =   LinRange(M.xmin,M.xmax,NV.x),
+)
+y       =   (
+    c   =   LinRange(M.ymin+Δ.y/2,M.ymax-Δ.y/2,NC.y),
+    ce  =   LinRange(M.ymin - Δ.x/2.0, M.ymax + Δ.x/2.0, NC.y+2),
+    v   =   LinRange(M.ymin,M.ymax,NV.y),
+)
+x1      =   (
+    c2d     =   x.c .+ 0*y.c&#39;,
+    v2d     =   x.v .+ 0*y.v&#39;, 
+    vx2d    =   x.v .+ 0*y.ce&#39;,
+    vy2d    =   x.ce .+ 0*y.v&#39;,
+)
+x   =   merge(x,x1)
+y1      =   (
+    c2d     =   0*x.c .+ y.c&#39;,
+    v2d     =   0*x.v .+ y.v&#39;,
+    vx2d    =   0*x.v .+ y.ce&#39;,
+    vy2d    =   0*x.ce .+ y.v&#39;,
+)
+y   =   merge(y,y1)
+# -------------------------------------------------------------------- #</code></pre><p>Given that variable viscosity is assumed, the properties of both the block and surrounding matrix must be defined, along with other relevant physical parameters. The viscosity, density, and phase arrays are used to initialize the model using tracers. For more information, please refer to the <a href="../../Ini/">documentation</a>.</p><pre><code class="language-Julia hljs"># Physics ============================================================ #
+g       =   9.81            #   Gravitational acceleration
+
+η₀      =   1.0e21          #   Reference Viscosity
+η₁      =   1.0e27          #   Block Viscosity
+ηᵣ      =   log10(η₁/η₀)
+η       =   [η₀,η₁]         #   Viscosity for phases
+
+ρ₀      =   3200.0          #   Background density
+ρ₁      =   3300.0          #   Block density
+ρ       =   [ρ₀,ρ₁] 
+
+phase   =   [0,1]
+# ------------------------------------------------------------------- #</code></pre><p>Next, define the output filename for the animation and initialize the data arrays. </p><pre><code class="language-Julia hljs"># Animation and Plot Settings ======================================= #
+path        =   string(&quot;./examples/StokesEquation/2D/Results/&quot;)
+save_fig    =   1
+anim        =   Plots.Animation(path, String[] )
+filename    =   string(&quot;Falling_&quot;,Ini.p,&quot;_ηr_&quot;,round(ηᵣ),
+                        &quot;_tracers_DC&quot;)
+# ------------------------------------------------------------------- #
+# Allocation ======================================================== #
+D   =   (
+    vx      =   zeros(Float64,NV.x,NC.y+2),
+    vy      =   zeros(Float64,NC.x+2,NV.y),
+    Pt      =   zeros(Float64,NC...),
+    p       =   zeros(Float64,NC...),
+    ρ       =   zeros(Float64,NC...),
+    vxc     =   zeros(Float64,NC...),
+    vyc     =   zeros(Float64,NC...),
+    vc      =   zeros(Float64,NC...),
+    wt      =   zeros(Float64,(NC.x,NC.y)),
+    wtv     =   zeros(Float64,(NV.x,NV.y)),
+    ηc      =   zeros(Float64,NC...),
+    ηv      =   zeros(Float64,NV...),
+)
+# Needed for the defect correction solution ---
+divV        =   zeros(Float64,NC...)
+ε           =   (
+    xx      =   zeros(Float64,NC...), 
+    yy      =   zeros(Float64,NC...), 
+    xy      =   zeros(Float64,NV...),
+)
+τ           =   (
+    xx      =   zeros(Float64,NC...), 
+    yy      =   zeros(Float64,NC...), 
+    xy      =   zeros(Float64,NV...),
+)
+# ------------------------------------------------------------------- #</code></pre><p>The velocity boundary conditions and time integration parameters are set in the following block. </p><pre><code class="language-Julia hljs"># Boundary Conditions =============================================== #
+VBC     =   (
+    type    =   (E=:freeslip,W=:freeslip,S=:freeslip,N=:freeslip),
+    val     =   (E=zeros(NV.y),W=zeros(NV.y),S=zeros(NV.x),N=zeros(NV.x)),
+)
+# ------------------------------------------------------------------- #
+# Time ============================================================== #
+T   =   ( 
+    tmax    =   [0.0],  
+    Δfac    =   1.0,    # Courant time factor, i.e. dtfac*dt_courant
+    Δ       =   [0.0],
+    time    =   [0.0,0.0],
+)
+T.tmax[1]   =   20.589 * 1e6 * (60*60*24*365.25)   # [ s ]
+nt          =   9999
+# ------------------------------------------------------------------- #</code></pre><p>To advect the properties using tracers, one needs to initialize the tracers in the following. This defines the initial position of the tracers within the model domain and assigns the phases to the corresponding tracers (<code>IniTracer2D()</code>). </p><blockquote><p><strong>Note:</strong> Currently, the initial phase attribution to the tracers is only possible for a rectangular block (see <a href="https://github.com/GeoSci-FFM/GeoModBox.jl/blob/main/src/Tracers/2Dsolvers.jl">source code</a> for more details). However, additional configurations can be implemented and activated via the <code>Ini.p</code> variable. </p></blockquote><p>Following the initialization of the tracers, the necessary information (density and viscosity) to solve the governing equations is interpolate from the tracers onto the required nodes (centroids or vertices). </p><pre><code class="language-Julia hljs"># Tracer Advection ================================================== #
+nmx,nmy     =   3,3
+noise       =   0
+nmark       =   nmx*nmy*NC.x*NC.y
+Aparam      =   :phase
+MPC         =   (
+    c       =   zeros(Float64,(NC.x,NC.y)),
+    v       =   zeros(Float64,(NV.x,NV.y)),
+    th      =   zeros(Float64,(nthreads(),NC.x,NC.y)),
+    thv     =   zeros(Float64,(nthreads(),NV.x,NV.y)),
+)
+MPC1        = (
+    PG_th   =   [similar(D.ρ) for _ = 1:nthreads()],    # per thread
+    PV_th   =   [similar(D.ηv) for _ = 1:nthreads()],   # per thread
+    wt_th   =   [similar(D.wt) for _ = 1:nthreads()],   # per thread
+    wtv_th  =   [similar(D.wtv) for _ = 1:nthreads()],  # per thread
+)
+MPC     =   merge(MPC,MPC1)
+Ma      =   IniTracer2D(Aparam,nmx,nmy,Δ,M,NC,noise,Ini.p,phase)
+# RK4 weights ---
+rkw     =   1.0/6.0*[1.0 2.0 2.0 1.0]   # for averaging
+rkv     =   1.0/2.0*[1.0 1.0 2.0 2.0]   # for time stepping
+# Count marker per cell ---
+CountMPC(Ma,nmark,MPC,M,x,y,Δ,NC,NV,1)
+# Interpolate from markers to cell ---
+Markers2Cells(Ma,nmark,MPC.PG_th,D.ρ,MPC.wt_th,D.wt,x,y,Δ,Aparam,ρ)
+Markers2Cells(Ma,nmark,MPC.PG_th,D.p,MPC.wt_th,D.wt,x,y,Δ,Aparam,phase)
+Markers2Vertices(Ma,nmark,MPC.PV_th,D.ηv,MPC.wtv_th,D.wtv,x,y,Δ,Aparam,η)
+@. D.ηc     =   0.25 * (D.ηv[1:end-1,1:end-1] + 
+                        D.ηv[2:end-0,1:end-1] + 
+                        D.ηv[1:end-1,2:end-0] + 
+                        D.ηv[2:end-0,2:end-0])
+# System of Equations =============================================== #</code></pre><p>To solve the linear system of equations, one needs to initialize the correspondig arrays as well. </p><pre><code class="language-Julia hljs"># Numbering, without ghost nodes! ---
+off    = [  NV.x*NC.y,                          # vx
+            NV.x*NC.y + NC.x*NV.y,              # vy
+            NV.x*NC.y + NC.x*NV.y + NC.x*NC.y]  # Pt
+
+Num    =    (
+    Vx  =   reshape(1:NV.x*NC.y, NV.x, NC.y), 
+    Vy  =   reshape(off[1]+1:off[1]+NC.x*NV.y, NC.x, NV.y), 
+    Pt  =   reshape(off[2]+1:off[2]+NC.x*NC.y,NC...),
+            )
+δx      =   zeros(maximum(Num.Pt))          # Correction term
+F       =   zeros(maximum(Num.Pt))          # Full residual (v and P)
+# Residuals ---
+Fm     =    (
+    x       =   zeros(Float64,NV.x, NC.y), 
+    y       =   zeros(Float64,NC.x, NV.y)
+)
+FPt     =   zeros(Float64,NC...)      
+# ------------------------------------------------------------------- #</code></pre><p>Now, one can start the time loop. </p><pre><code class="language-Julia hljs"># Time Loop ========================================================= #
+for it = 1:nt
+    # Update Time ---
+    T.time[1]   =   T.time[2] 
+    @printf(&quot;Time step: #%04d, Time [Myr]: %04e\n &quot;,it,
+                T.time[1]/(60*60*24*365.25)/1.0e6)</code></pre><p>First the momentum equation is solved. </p><pre><code class="language-Julia hljs">    # Momentum Equation ===
+    # Initial Residual ---------------------------------------------- #
+    D.vx    .=  0.0
+    D.vy    .=  0.0
+    D.Pt    .=  0.0
+    Residuals2D!(D,VBC,ε,τ,divV,Δ,D.ηc,D.ηv,g,Fm,FPt)
+    F[Num.Vx]   =   Fm.x[:]
+    F[Num.Vy]   =   Fm.y[:]
+    F[Num.Pt]   =   FPt[:]
+    # Assemble Coefficients ========================================= #
+    K       =   Assembly(NC, NV, Δ, D.ηc, D.ηv, VBC, Num)
+    # --------------------------------------------------------------- #
+    # Solution of the linear system ================================= #
+    δx      =   - K \ F
+    # --------------------------------------------------------------- #
+    # Update Unknown Variables ====================================== #
+    D.vx[:,2:end-1]     .+=  δx[Num.Vx]
+    D.vy[2:end-1,:]     .+=  δx[Num.Vy]
+    D.Pt                .+=  δx[Num.Pt]
+    # Final Residual ================================================ #
+    Residuals2D!(D,VBC,ε,τ,divV,Δ,D.ηc,D.ηv,g,Fm,FPt)
+    # --------------------------------------------------------------- #</code></pre><p>For visualization purposes, the centroid velocities are calculated. </p><pre><code class="language-Julia hljs">    # --------------------------------------------------------------- #
+    # Get the velocity on the centroids ---
+    for i = 1:NC.x
+        for j = 1:NC.y
+            D.vxc[i,j]  = (D.vx[i,j+1] + D.vx[i+1,j+1])/2
+            D.vyc[i,j]  = (D.vy[i+1,j] + D.vy[i+1,j+1])/2
+        end
+    end
+    @. D.vc        = sqrt(D.vxc^2 + D.vyc^2)
+    # ---
+    @show(minimum(D.vc))
+    @show(maximum(D.vc))
+    # ---
+    if T.time[2] &gt;= T.tmax[1]
+        it = nt
+    end
+    # ---</code></pre><p>At selected time steps, the density, tracer distribution, viscosity, and absolute velocity are visualized in a single figure. These plots are used for the animation. </p><pre><code class="language-Julia hljs">    if mod(it,2) == 0 || it == nt || it == 1
+        p = heatmap(x.c./1e3,y.c./1e3,D.ρ&#39;,color=:inferno,
+                    xlabel=&quot;x[km]&quot;,ylabel=&quot;y[km]&quot;,colorbar=false,
+                    title=&quot;ρ&quot;,
+                    aspect_ratio=:equal,xlims=(M.xmin/1e3, M.xmax/1e3),                             ylims=(M.ymin/1e3, M.ymax/1e3),
+                    layout=(2,2),subplot=1)
+        scatter!(p,Ma.x[1:Pl.mainc:end]./1e3,Ma.y[1:Pl.mainc:end]./1e3,
+                    ms=1,ma=0.5,mc=Ma.phase[1:Pl.mainc:end],markerstrokewidth=0.0,
+                    xlabel=&quot;x[km]&quot;,ylabel=&quot;y[km]&quot;,colorbar=false,
+                    title=&quot;tracers&quot;,label=&quot;&quot;,
+                    aspect_ratio=:equal,xlims=(M.xmin/1e3, M.xmax/1e3), 
+                    ylims=(M.ymin/1e3, M.ymax/1e3),
+                    layout=(2,2),subplot=2)
+        heatmap!(p,x.c./1e3,y.c./1e3,D.vc&#39;,
+                    xlabel=&quot;x[km]&quot;,ylabel=&quot;y[km]&quot;,colorbar=false,
+                    title=&quot;V_c&quot;,color=cgrad(:batlow),
+                    aspect_ratio=:equal,xlims=(M.xmin/1e3, M.xmax/1e3),
+                    ylims=(M.ymin/1e3, M.ymax/1e3),
+                    layout=(2,2),subplot=4)
+        quiver!(p,x.c2d[1:Pl.qinc:end,1:Pl.qinc:end]./1e3,
+                    y.c2d[1:Pl.qinc:end,1:Pl.qinc:end]./1e3,
+                    quiver=(D.vxc[1:Pl.qinc:end,1:Pl.qinc:end].*Pl.qsc,
+                            D.vyc[1:Pl.qinc:end,1:Pl.qinc:end].*Pl.qsc),        
+                    la=0.5,color=&quot;white&quot;,layout=(2,2),subplot=4)
+        heatmap!(p,x.c./1e3,y.c./1e3,log10.(D.ηc&#39;),color=reverse(cgrad(:roma)),
+                    xlabel=&quot;x[km]&quot;,ylabel=&quot;y[km]&quot;,title=&quot;η_c&quot;,
+                    clims=(15,27),
+                    aspect_ratio=:equal,xlims=(M.xmin/1e3, M.xmax/1e3), 
+                    ylims=(M.ymin/1e3, M.ymax/1e3),colorbar=true,
+                    layout=(2,2),subplot=3)
+        if save_fig == 1
+            Plots.frame(anim)
+        elseif save_fig == 0
+            display(p)
+        end
+    end
+    if T.time[2] &gt;= T.tmax[1]
+        break
+    end</code></pre><p>Now, one needs to calculate the time stepping for the advection. </p><pre><code class="language-Julia hljs">    # Calculate Time Stepping ---
+    T.Δ[1]      =   T.Δfac * minimum((Δ.x,Δ.y)) / 
+                        (sqrt(maximum(abs.(D.vx))^2 + maximum(abs.(D.vy))^2))
+    @printf(&quot;\n&quot;)
+    # Calculate Time ---
+    T.time[2]   =   T.time[1] + T.Δ[1]
+    if T.time[2] &gt; T.tmax[1] 
+        T.Δ[1]      =   T.tmax[1] - T.time[1]
+        T.time[2]   =   T.time[1] + T.Δ[1]
+    end</code></pre><p>Finally the tracers are advected and the information on the numerical grid is updated. </p><pre><code class="language-Julia hljs">    # Advection ===
+    # Advect tracers ---
+    @printf(&quot;Running on %d thread(s)\n&quot;, nthreads())  
+    AdvectTracer2D(Ma,nmark,D,x,y,T.Δ[1],Δ,NC,rkw,rkv,1)
+    CountMPC(Ma,nmark,MPC,M,x,y,Δ,NC,NV,it)
+    # Interpolate phase from tracers to grid ---
+    Markers2Cells(Ma,nmark,MPC.PG_th,D.ρ,MPC.wt_th,D.wt,x,y,Δ,Aparam,ρ)
+    Markers2Cells(Ma,nmark,MPC.PG_th,D.p,MPC.wt_th,D.wt,x,y,Δ,Aparam,phase)
+    Markers2Vertices(Ma,nmark,MPC.PV_th,D.ηv,MPC.wtv_th,D.wtv,x,y,Δ,Aparam,η)
+    @. D.ηc     =   0.25 * (D.ηv[1:end-1,1:end-1] + 
+                        D.ηv[2:end-0,1:end-1] + 
+                        D.ηv[1:end-1,2:end-0] + 
+                        D.ηv[2:end-0,2:end-0])
+end # End Time Loop</code></pre><p>The animation is saved in the corresponding gif file. </p><pre><code class="language-Julia hljs"># Save Animation ---
+if save_fig == 1
+    # Write the frames to a GIF file
+    Plots.gif(anim, string( path, filename, &quot;.gif&quot; ), fps = 15)
+    foreach(rm, filter(startswith(string(path,&quot;00&quot;)), readdir(path,join=true)))
+end</code></pre><p><img src="../../../assets/Falling_block_ηr_6.0_tracers_DC.gif" alt="FBvarytd"/></p><p><strong>Figure 2. Time-dependent solution of the falling block problem assuming a viscosity contrast of 6 orders of magnitude</strong></p></article><nav class="docs-footer"><a class="docs-footer-prevpage" href="../FallingBlockBenchmark/">« Falling Block Benchmark</a><a class="docs-footer-nextpage" href="../../listoffunctions/">List of functions »</a><div class="flexbox-break"></div><p class="footer-message">Powered by <a href="https://github.com/JuliaDocs/Documenter.jl">Documenter.jl</a> and the <a href="https://julialang.org/">Julia Programming Language</a>.</p></nav></div><div class="modal" id="documenter-settings"><div class="modal-background"></div><div class="modal-card"><header class="modal-card-head"><p class="modal-card-title">Settings</p><button class="delete"></button></header><section class="modal-card-body"><p><label class="label">Theme</label><div class="select"><select id="documenter-themepicker"><option value="auto">Automatic (OS)</option><option value="documenter-light">documenter-light</option><option value="documenter-dark">documenter-dark</option><option value="catppuccin-latte">catppuccin-latte</option><option value="catppuccin-frappe">catppuccin-frappe</option><option value="catppuccin-macchiato">catppuccin-macchiato</option><option value="catppuccin-mocha">catppuccin-mocha</option></select></div></p><hr/><p>This document was generated with <a href="https://github.com/JuliaDocs/Documenter.jl">Documenter.jl</a> version 1.13.0 on <span class="colophon-date" title="Thursday 26 June 2025 12:14">Thursday 26 June 2025</span>. Using Julia version 1.11.5.</p></section><footer class="modal-card-foot"></footer></div></div></div></body></html>
