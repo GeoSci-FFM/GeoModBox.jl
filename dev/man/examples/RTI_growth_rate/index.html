@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/><title>RTI - Growth Rate · GeoModBox.jl</title><meta name="title" content="RTI - Growth Rate · GeoModBox.jl"/><meta property="og:title" content="RTI - Growth Rate · GeoModBox.jl"/><meta property="twitter:title" content="RTI - Growth Rate · GeoModBox.jl"/><meta name="description" content="Documentation for GeoModBox.jl."/><meta property="og:description" content="Documentation for GeoModBox.jl."/><meta property="twitter:description" content="Documentation for GeoModBox.jl."/><script data-outdated-warner src="../../../assets/warner.js"></script><link href="https://cdnjs.cloudflare.com/ajax/libs/lato-font/3.0.0/css/lato-font.min.css" rel="stylesheet" type="text/css"/><link href="https://cdnjs.cloudflare.com/ajax/libs/juliamono/0.050/juliamono.min.css" rel="stylesheet" type="text/css"/><link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/fontawesome.min.css" rel="stylesheet" type="text/css"/><link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/solid.min.css" rel="stylesheet" type="text/css"/><link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/brands.min.css" rel="stylesheet" type="text/css"/><link href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.8/katex.min.css" rel="stylesheet" type="text/css"/><script>documenterBaseURL="../../.."</script><script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js" data-main="../../../assets/documenter.js"></script><script src="../../../search_index.js"></script><script src="../../../siteinfo.js"></script><script src="../../../../versions.js"></script><link class="docs-theme-link" rel="stylesheet" type="text/css" href="../../../assets/themes/catppuccin-mocha.css" data-theme-name="catppuccin-mocha"/><link class="docs-theme-link" rel="stylesheet" type="text/css" href="../../../assets/themes/catppuccin-macchiato.css" data-theme-name="catppuccin-macchiato"/><link class="docs-theme-link" rel="stylesheet" type="text/css" href="../../../assets/themes/catppuccin-frappe.css" data-theme-name="catppuccin-frappe"/><link class="docs-theme-link" rel="stylesheet" type="text/css" href="../../../assets/themes/catppuccin-latte.css" data-theme-name="catppuccin-latte"/><link class="docs-theme-link" rel="stylesheet" type="text/css" href="../../../assets/themes/documenter-dark.css" data-theme-name="documenter-dark" data-theme-primary-dark/><link class="docs-theme-link" rel="stylesheet" type="text/css" href="../../../assets/themes/documenter-light.css" data-theme-name="documenter-light" data-theme-primary/><script src="../../../assets/themeswap.js"></script></head><body><div id="documenter"><nav class="docs-sidebar"><div class="docs-package-name"><span class="docs-autofit"><a href="../../../">GeoModBox.jl</a></span></div><button class="docs-search-query input is-rounded is-small is-clickable my-2 mx-auto py-1 px-2" id="documenter-search-query">Search docs (Ctrl + /)</button><ul class="docs-menu"><li><a class="tocitem" href="../../../">Home</a></li><li><span class="tocitem">Governing Equation</span><ul><li><input class="collapse-toggle" id="menuitem-2-1" type="checkbox"/><label class="tocitem" for="menuitem-2-1"><span class="docs-label">Solution</span><i class="docs-chevron"></i></label><ul class="collapsed"><li><a class="tocitem" href="../../GESolution/">General</a></li><li><a class="tocitem" href="../../Ini/">Initial Condition</a></li></ul></li><li><input class="collapse-toggle" id="menuitem-2-2" type="checkbox"/><label class="tocitem" for="menuitem-2-2"><span class="docs-label">Heat Diffusion Equation</span><i class="docs-chevron"></i></label><ul class="collapsed"><li><a class="tocitem" href="../../DiffMain/">General</a></li><li><a class="tocitem" href="../../DiffOneD/">1D</a></li><li><a class="tocitem" href="../../DiffTwoD/">2D</a></li></ul></li><li><input class="collapse-toggle" id="menuitem-2-3" type="checkbox"/><label class="tocitem" for="menuitem-2-3"><span class="docs-label">Advection Equation</span><i class="docs-chevron"></i></label><ul class="collapsed"><li><a class="tocitem" href="../../AdvectMain/">General</a></li><li><a class="tocitem" href="../../AdvOneD/">1D</a></li><li><a class="tocitem" href="../../AdvTwoD/">2D</a></li></ul></li><li><input class="collapse-toggle" id="menuitem-2-4" type="checkbox"/><label class="tocitem" for="menuitem-2-4"><span class="docs-label">Momentum Equation</span><i class="docs-chevron"></i></label><ul class="collapsed"><li><a class="tocitem" href="../../MomentumMain/">General</a></li><li><a class="tocitem" href="../../MomentumOneD/">1D</a></li><li><a class="tocitem" href="../../MomentumTwoD/">2D</a></li></ul></li></ul></li><li><span class="tocitem">Examples</span><ul><li><a class="tocitem" href="../../Examples/">General</a></li><li><input class="collapse-toggle" id="menuitem-3-2" type="checkbox"/><label class="tocitem" for="menuitem-3-2"><span class="docs-label">Diffusion Equation</span><i class="docs-chevron"></i></label><ul class="collapsed"><li><a class="tocitem" href="../OceanicGeotherm/">Oceanic Geotherm (1D)</a></li><li><a class="tocitem" href="../ContinentalGeotherm/">Continental Geotherm (1D)</a></li><li><a class="tocitem" href="../GaussianDiffusion1D/">Gaussian Diffusion (1D)</a></li><li><a class="tocitem" href="../BackwardEuler_DC/">Backward Euler (2D)</a></li><li><a class="tocitem" href="../ForwardEuler_DC/">Forward Euler (2D)</a></li><li><a class="tocitem" href="../GaussianDiffusion2D/">Gaussian Diffusion (2D)</a></li><li><a class="tocitem" href="../PoissonRestest/">Poisson Problem (2D)</a></li><li><a class="tocitem" href="../PoissonVariablek/">Poisson Problem; variable k (2D)</a></li></ul></li><li><input class="collapse-toggle" id="menuitem-3-3" type="checkbox"/><label class="tocitem" for="menuitem-3-3"><span class="docs-label">Advection Equtaion</span><i class="docs-chevron"></i></label><ul class="collapsed"><li><a class="tocitem" href="../Advection2D/">Advection (2D)</a></li><li><a class="tocitem" href="../AdvectionRestest2D/">Advection Resolution Test (2D)</a></li></ul></li><li><input class="collapse-toggle" id="menuitem-3-4" type="checkbox" checked/><label class="tocitem" for="menuitem-3-4"><span class="docs-label">Stokes Equation</span><i class="docs-chevron"></i></label><ul class="collapsed"><li><a class="tocitem" href="../ChannelFlow1D/">Channel Flow (1D)</a></li><li><a class="tocitem" href="../FallingBlockBenchmark/">Falling Block Benchmark</a></li><li><a class="tocitem" href="../FallingBlockDC/">Falling Block</a></li><li><a class="tocitem" href="../RTI/">Rayleigh Taylor Instability (RTI)</a></li><li class="is-active"><a class="tocitem" href>RTI - Growth Rate</a></li></ul></li></ul></li><li><a class="tocitem" href="../../listoffunctions/">List of functions</a></li></ul><div class="docs-version-selector field has-addons"><div class="control"><span class="docs-label button is-static is-size-7">Version</span></div><div class="docs-selector control is-expanded"><div class="select is-fullwidth is-size-7"><select id="documenter-version-selector"></select></div></div></div></nav><div class="docs-main"><header class="docs-navbar"><a class="docs-sidebar-button docs-navbar-link fa-solid fa-bars is-hidden-desktop" id="documenter-sidebar-button" href="#"></a><nav class="breadcrumb"><ul class="is-hidden-mobile"><li><a class="is-disabled">Examples</a></li><li><a class="is-disabled">Stokes Equation</a></li><li class="is-active"><a href>RTI - Growth Rate</a></li></ul><ul class="is-hidden-tablet"><li class="is-active"><a href>RTI - Growth Rate</a></li></ul></nav><div class="docs-right"><a class="docs-navbar-link" href="https://github.com/GeoSci-FFM/GeoModBox.jl" title="View the repository on GitHub"><span class="docs-icon fa-brands"></span><span class="docs-label is-hidden-touch">GitHub</span></a><a class="docs-navbar-link" href="https://github.com/GeoSci-FFM/GeoModBox.jl/blob/main/docs/src/man/examples/RTI_growth_rate.md" title="Edit source on GitHub"><span class="docs-icon fa-solid"></span></a><a class="docs-settings-button docs-navbar-link fa-solid fa-gear" id="documenter-settings-button" href="#" title="Settings"></a><a class="docs-article-toggle-button fa-solid fa-chevron-up" id="documenter-article-toggle-button" href="javascript:;" title="Collapse all docstrings"></a></div></header><article class="content" id="documenter-page"><h1 id="[RTI-Growth-Rate-Benchmark](https://github.com/GeoSci-FFM/GeoModBox.jl/blob/main/examples/StokesEquation/2D/RTI_GrowthRate.jl)"><a class="docs-heading-anchor" href="#[RTI-Growth-Rate-Benchmark](https://github.com/GeoSci-FFM/GeoModBox.jl/blob/main/examples/StokesEquation/2D/RTI_GrowthRate.jl)"><a href="https://github.com/GeoSci-FFM/GeoModBox.jl/blob/main/examples/StokesEquation/2D/RTI_GrowthRate.jl">RTI - Growth Rate Benchmark</a></a><a id="[RTI-Growth-Rate-Benchmark](https://github.com/GeoSci-FFM/GeoModBox.jl/blob/main/examples/StokesEquation/2D/RTI_GrowthRate.jl)-1"></a><a class="docs-heading-anchor-permalink" href="#[RTI-Growth-Rate-Benchmark](https://github.com/GeoSci-FFM/GeoModBox.jl/blob/main/examples/StokesEquation/2D/RTI_GrowthRate.jl)" title="Permalink"></a></h1><p>This script performs a benchmark for the growth rate of a Rayleigh–Taylor instability, following Gerya (2009). The benchmark is based on the analytical solution by Ramberg (1968) and is used to assess the accuracy of the velocity field in a purely gravity-driven flow. </p><p>Although small-amplitude perturbations can be analyzed in theory—enabled by the use of tracers and bilinear interpolation of density onto centroids—a relatively large perturbation amplitude is used here for practical implementation. </p><hr/><p>Let&#39;s load the required modules first. </p><pre><code class="language-Julia hljs">using Plots
+using ExtendableSparse
+using GeoModBox
+using GeoModBox.InitialCondition, GeoModBox.MomentumEquation.TwoD
+using GeoModBox.AdvectionEquation.TwoD
+using GeoModBox.Tracers.TwoD
+using Base.Threads
+using Printf, LinearAlgebra</code></pre><p>In the following some parameters regarding the visualization can be edited. </p><pre><code class="language-Julia hljs"># Plot fields for each individual model - yes or no
+plot_fields     =:no
+# Save final figure
+save_fig        = 1
+
+Pl  =   (
+    qinc    =   5, 
+    qsc     =   100*(60*60*24*365.25)*5e1,
+)</code></pre><p>Let&#39;s set the parameter for an initial cosinusoidal tracer perturbation for a two-layered model. For the benchmark analysis, the range of wavelenghts is defined as well. </p><pre><code class="language-Julia hljs"># Define Initial Condition ========================================== #
+Ini         =   (p=:RTI,) 
+# Perturbation wavelength [ m ]
+λᵣ          =   [1 3 4 5 6 8 10 12 14]*1e3
+# ------------------------------------------------------------------- #</code></pre><p>Now, one can set the physical parameters. Here, the range of the viscosity ration between the two layers is also defined. </p><pre><code class="language-Julia hljs"># Physics =========================================================== #
+g           =   9.81                    #   Gravitational acceleration [ m/s^2 ]
+# Lower layer ---
+ρ₁          =   2900.0                  #   Density composition 1 [ kg/m^3 ]
+η₁          =   1e19                    #   Viscosity composition 1 [ Pa s]
+# Upper layer --- 
+ρ₀          =   3000.0                  #   Density composition 0 [ kg/m^3 ]
+# ---
+ρ           =   [ρ₀,ρ₁]                 #   Density for phases
+ηᵣ          =   [1e-6 1 10 100 500]     #   Viscosity ratio
+phase       =   [0,1]
+# ------------------------------------------------------------------- #</code></pre><p>In the following, the parameters for the analytical solution are initialized, some scaling parameters (b1 and b2) for the visualization, and the divisional factor for the perturbation wavelength (<code>delfac</code>)</p><pre><code class="language-Julia hljs"># Plotting factors following Gerya (2009) --------------------------- #
+b1          =   [0.5 1 5 50 250]
+b2          =   [0.2 0.15 0.1 0.05 0]
+# Divisional factor of the amplitude following Gerya (2009) --------- #
+delfac      =   15 #[15 150] # [150 1500] # 1500 15
+ms          =   zeros(3)
+ms          =   [6,4,2]
+# Analytical Solution ----------------------------------------------- #
+λₐ          =   collect(LinRange(0.5,18,51)).*1e3        # [ m ]
+ϕ₁          =   zeros(length(λₐ))
+ϕ₂          =   copy(ϕ₁)
+c11         =   copy(ϕ₁)
+d12         =   copy(ϕ₁)
+i21         =   copy(ϕ₁)
+j22         =   copy(ϕ₁)
+# Arrays ---
+PP  =   (
+    ϕ       =   [0.0],
+    K       =   [0.0],
+    Q       =   [0.0],
+    ϕₐ      =   zeros(length(λₐ)),
+    Kₐ      =   zeros(length(λₐ),length(ηᵣ)),
+)
+# ------------------------------------------------------------------- #
+# Plot Settings ===================================================== #
+q   =   plot()
+# ------------------------------------------------------------------- #</code></pre><p>Define the geometry of the model domain. </p><pre><code class="language-Julia hljs"># Geometry ========================================================== #
+M       =   Geometry(
+    ymin    =   -3.0e3,     # [ m ]
+    ymax    =   0.0,
+    xmin    =   0.0,
+)
+# ------------------------------------------------------------------- #</code></pre><p>If multiple perturbation amplitudes are specified, a loop is initiated over them. For each amplitude, a nested loop iterates over different viscosity contrasts. Within that loop the viscosity for the upper layer is calculated. </p><pre><code class="language-Julia hljs">for k in eachindex(delfac)
+    for i in eachindex(ηᵣ)
+        # Physics =================================================== #
+        # 0 - upper layer; 1 - lower layer
+        η₀      =   η₁*ηᵣ[i]        #   Viscosity composition 0 [ Pa s ]
+        η       =   [η₀,η₁]         #   Viscosity for phases 
+        # ----------------------------------------------------------- #</code></pre><p>The variables required for the analytical solution are calculated for each model configuration. </p><pre><code class="language-Julia hljs">        @. ϕ₁      =   (2*π*((M.ymax-M.ymin)/2))/λₐ
+        @. ϕ₂      =   (2*π*((M.ymax-M.ymin)/2))/λₐ
+        @. c11     =   (η₀*2*ϕ₁^2)/
+                        (η₁*(cosh(2*ϕ₁) - 1 - 2*ϕ₁^2)) - 
+                        (2*ϕ₂^2)/
+                        (cosh(2*ϕ₂) - 1 - 2*ϕ₂^2)
+        @. d12     =   (η₀*(sinh(2*ϕ₁) - 2*ϕ₁))/
+                        (η₁*(cosh(2*ϕ₁) - 1 - 2*ϕ₁^2)) + 
+                        (sinh(2*ϕ₂) - 2*ϕ₂)/
+                        (cosh(2*ϕ₂) - 1 - 2*ϕ₂^2)
+        @. i21     =   (η₀*ϕ₂*(sinh(2*ϕ₁) + 2*ϕ₁))/
+                        (η₁*(cosh(2*ϕ₁) - 1 - 2*ϕ₁^2)) + 
+                        (ϕ₂*(sinh(2*ϕ₂) + 2*ϕ₂))/
+                        (cosh(2*ϕ₂) - 1 - 2*ϕ₂^2)
+        @. j22     =   (η₀*2*ϕ₁^2*ϕ₂)/
+                        (η₁*(cosh(2*ϕ₁) - 1 - 2*ϕ₁^2)) - 
+                        (2*ϕ₂^3)/
+                        (cosh(2*ϕ₂) - 1 - 2*ϕ₂^2)
+        
+        @. PP.Kₐ[:,i]   =   -d12/(c11*j22 - d12*i21)
+        @. PP.ϕₐ        =   ϕ₁</code></pre><p>Since the analytical solution is independent of the perturbation amplitude, the loop over different amplitudes can be performed subsequently. Within that loop, the model domain needs to be first setup as well as the perturbation amplitude. </p><pre><code class="language-Julia hljs">        for j in eachindex(λᵣ)
+            # Perturbation properties ---
+            λ           =   λᵣ[j]                           #   [ m ]
+            δA          =   -(M.ymax-M.ymin)/2/delfac[k]    #   Amplitude [ m ]
+            # ---
+            ar          =   Int64(round(2 * λ / (M.ymax-M.ymin)))  #   aspect ratio
+            M.xmax      =   (M.ymax-M.ymin)*ar
+            # ------------------------------------------------------- #
+            # Grid ================================================== # 
+            NC  =   (
+                x   =   50*ar,
+                y   =   50,
+            )
+            NV  =   (
+                x   =   NC.x + 1,
+                y   =   NC.y + 1,
+            )
+            Δ       =   GridSpacing(
+                x   =   (M.xmax - M.xmin)/NC.x,
+                y   =   (M.ymax - M.ymin)/NC.y,
+            )
+            x       =   (
+                c   =   LinRange(M.xmin+Δ.x/2,M.xmax-Δ.x/2,NC.x),
+                ce  =   LinRange(M.xmin - Δ.x/2.0, M.xmax + Δ.x/2.0, NC.x+2),
+                v   =   LinRange(M.xmin,M.xmax,NV.x),
+            )
+            y       =   (
+                c   =   LinRange(M.ymin+Δ.y/2,M.ymax-Δ.y/2,NC.y),
+                ce  =   LinRange(M.ymin - Δ.x/2.0, M.ymax + Δ.x/2.0, NC.y+2),
+                v   =   LinRange(M.ymin,M.ymax,NV.y),
+            )
+            x1      =   (
+                c2d     =   x.c .+ 0*y.c&#39;,
+                v2d     =   x.v .+ 0*y.v&#39;, 
+                vx2d    =   x.v .+ 0*y.ce&#39;,
+                vy2d    =   x.ce .+ 0*y.v&#39;,
+            )
+            x   =   merge(x,x1)
+            y1      =   (
+                c2d     =   0*x.c .+ y.c&#39;,
+                v2d     =   0*x.v .+ y.v&#39;,
+                vx2d    =   0*x.v .+ y.ce&#39;,
+                vy2d    =   0*x.ce .+ y.v&#39;,
+            )
+            y   =   merge(y,y1)
+            # ------------------------------------------------------- #</code></pre><p>Let&#39;s initialize all the required data array in the following. </p><pre><code class="language-Julia hljs">            # Allocation ============================================ #
+            D       =   (
+                ρ       =   zeros(Float64,(NC...)),
+                p       =   zeros(Float64,(NC...)),
+                cp      =   zeros(Float64,(NC...)),
+                vx      =   zeros(Float64,(NV.x,NV.y+1)),
+                vy      =   zeros(Float64,(NV.x+1,NV.y)),    
+                Pt      =   zeros(Float64,(NC...)),
+                vxc     =   zeros(Float64,(NC...)),
+                vyc     =   zeros(Float64,(NC...)),
+                vc      =   zeros(Float64,(NC...)),
+                wt      =   zeros(Float64,(NC.x,NC.y)),
+                wtv     =   zeros(Float64,(NV.x,NV.y)),
+                ηc      =   zeros(Float64,NC...),
+                ηv      =   zeros(Float64,NV...),
+            )
+            # ------------------------------------------------------- #
+            # Needed for the defect correction solution ---
+            divV        =   zeros(Float64,NC...)
+            ε           =   (
+                xx      =   zeros(Float64,NC...), 
+                yy      =   zeros(Float64,NC...), 
+                xy      =   zeros(Float64,NV...),
+            )
+            τ           =   (
+                xx      =   zeros(Float64,NC...), 
+                yy      =   zeros(Float64,NC...), 
+                xy      =   zeros(Float64,NV...),
+            )
+            # ------------------------------------------------------- #</code></pre><p>Also one needs to set the velocity boudnary conditions. </p><pre><code class="language-Julia hljs">            # Boundary Conditions =================================== #
+            VBC     =   (
+                type    =   (E=:freeslip,W=:freeslip,S=:noslip,N=:noslip),
+                val     =   (E=zeros(NV.y),W=zeros(NV.y),S=zeros(NV.x),N=zeros(NV.x)),
+            )
+            # ------------------------------------------------------- #</code></pre><p>To setup the perturbation, the markers are initialized in the following. </p><pre><code class="language-Julia hljs">            # Tracer Advection ====================================== #
+            nmx,nmy     =   5,5
+            noise       =   0
+            nmark       =   nmx*nmy*NC.x*NC.y
+            Aparam      =   :phase
+            MPC         =   (
+                c       =   zeros(Float64,(NC.x,NC.y)),
+                v       =   zeros(Float64,(NV.x,NV.y)),
+                th      =   zeros(Float64,(nthreads(),NC.x,NC.y)),
+                thv     =   zeros(Float64,(nthreads(),NV.x,NV.y)),
+            )
+            MPC1        = (
+                PG_th   =   [similar(D.ρ) for _ = 1:nthreads()],    # per thread
+                PV_th   =   [similar(D.ηv) for _ = 1:nthreads()],   # per thread
+                wt_th   =   [similar(D.wt) for _ = 1:nthreads()],   # per thread
+                wtv_th  =   [similar(D.wtv) for _ = 1:nthreads()],  # per thread
+            )
+            MPC     =   merge(MPC,MPC1)
+            Ma      =   IniTracer2D(Aparam,nmx,nmy,Δ,M,NC,noise,Ini.p,phase;λ,δA)
+            # RK4 weights ---
+            rkw     =   1.0/6.0*[1.0 2.0 2.0 1.0]   # for averaging
+            rkv     =   1.0/2.0*[1.0 1.0 2.0 2.0]   # for time stepπng
+            # Count marker per cell ---
+            CountMPC(Ma,nmark,MPC,M,x,y,Δ,NC,NV,1)
+            # Interpolate from markers to cell ---
+            Markers2Cells(Ma,nmark,MPC.PG_th,D.ρ,MPC.wt_th,D.wt,x,y,Δ,Aparam,ρ)
+            Markers2Cells(Ma,nmark,MPC.PG_th,D.p,MPC.wt_th,D.wt,x,y,Δ,Aparam,phase)
+            Markers2Vertices(Ma,nmark,MPC.PV_th,D.ηv,MPC.wtv_th,D.wtv,x,y,Δ,Aparam,η)
+            @. D.ηc     =   0.25 * (D.ηv[1:end-1,1:end-1] + 
+                                    D.ηv[2:end-0,1:end-1] + 
+                                    D.ηv[1:end-1,2:end-0] + 
+                                    D.ηv[2:end-0,2:end-0])
+            # ------------------------------------------------------- #</code></pre><p>Now, one needs to define the parameters to solve the linear system of equations using the defec correction method. </p><pre><code class="language-Julia hljs">            # System of Equations =================================== #
+            # Iterations
+            niter       =   10
+            ϵ           =   1e-10
+            # Numbering, without ghost nodes! ---
+            off    = [  NV.x*NC.y,                          # vx
+                        NV.x*NC.y + NC.x*NV.y,              # vy
+                        NV.x*NC.y + NC.x*NV.y + NC.x*NC.y]  # Pt
+
+            Num    =    (
+                Vx  =   reshape(1:NV.x*NC.y, NV.x, NC.y), 
+                Vy  =   reshape(off[1]+1:off[1]+NC.x*NV.y, NC.x, NV.y), 
+                Pt  =   reshape(off[2]+1:off[2]+NC.x*NC.y,NC...),
+                        )
+            δx      =   zeros(maximum(Num.Pt))
+            F       =   zeros(maximum(Num.Pt))
+            # Residuals ---
+            Fm     =    (
+                x       =   zeros(Float64,NV.x, NC.y), 
+                y       =   zeros(Float64,NC.x, NV.y)
+            )
+            FPt     =   zeros(Float64,NC...)      
+            # ------------------------------------------------------- #</code></pre><p>Now,pne can solve the momentum and mass conservation equations. </p><pre><code class="language-Julia hljs">            # Momentum Equation ===
+            D.vx    .=  0.0
+            D.vy    .=  0.0
+            D.Pt    .=  0.0
+            for iter=1:niter
+                # Initial Residual -------------------------------------- #
+                Residuals2D!(D,VBC,ε,τ,divV,Δ,D.ηc,D.ηv,g,Fm,FPt)
+                F[Num.Vx]   =   Fm.x[:]
+                F[Num.Vy]   =   Fm.y[:]
+                F[Num.Pt]   =   FPt[:]
+                @printf(&quot;||R|| = %1.4e\n&quot;, norm(F)/length(F))
+                norm(F)/length(F) &lt; ϵ ? break : nothing
+                # Assemble Coefficients ================================= #
+                K       =   Assembly(NC, NV, Δ, D.ηc, D.ηv, VBC, Num)
+                # ------------------------------------------------------- #
+                # Solution of the linear system ========================= #
+                δx      =   - K \ F
+                # ------------------------------------------------------- #
+                # Update Unknown Variables ============================== #
+                D.vx[:,2:end-1]     .+=  δx[Num.Vx]
+                D.vy[2:end-1,:]     .+=  δx[Num.Vy]
+                D.Pt                .+=  δx[Num.Pt]
+            end</code></pre><p>For visualization purposes, the centroid velocities are computed.</p><pre><code class="language-Julia hljs">            # ------------------------------------------------------- #
+            # Get the velocity on the centroids ---
+            for i = 1:NC.x
+                for j = 1:NC.y
+                    D.vxc[i,j]  = (D.vx[i,j+1] + D.vx[i+1,j+1])/2
+                    D.vyc[i,j]  = (D.vy[i+1,j] + D.vy[i+1,j+1])/2
+                end
+            end
+            @. D.vc        = sqrt(D.vxc^2 + D.vyc^2)
+            # ---</code></pre><p>In the following, one defines the parameters to calculate the rising velocity at the tip of the perturbation in the center of the model domain. The vertical velocity at the perturbation tip is calculated using bilinear interpolation from surrounding velocity grid points. </p><pre><code class="language-Julia hljs">            xwave       =   (M.xmax-M.xmin)/2   # [ m ]
+            ywave       =   (M.ymax-M.ymin)/2 + δA
+            
+            xn          =   Int64(floor((xwave+Δ.x/2)/Δ.x))
+            yn          =   Int64(floor(((M.ymax-M.ymin)-ywave)/Δ.y)) + 1
+
+            dx          =   (xwave+Δ.x/2)/Δ.x - xn
+            dy          =   abs(((M.ymax-M.ymin)-ywave)/Δ.y - yn)
+
+            wvy     =   (1.0-dx)*(1.0-dy) * D.vy[xn+1,yn] + 
+                            dx*(1.0-dy) * D.vy[xn+1+2,yn] + 
+                            (1.0-dx)*dy * D.vy[xn+1,yn-1] + 
+                            dx*dy * D.vy[xn+2,yn-1]
+            
+            PP.Q[1] =   (ρ₀-ρ₁)*(M.ymax-M.ymin)/2.0*g/2.0/η₁
+            PP.K[1] =   abs(wvy)/abs(δA)/PP.Q[1]
+            PP.ϕ[1] =   2*π*(M.ymax-M.ymin)/2/λ</code></pre><p>If wanted, the density, tracer, and viscosity fields are plotted. To verify the position of the perturbation tip used for velocity interpolation, the tip (black circle) and surrounding vertical velocity grid points (red circles) are plotted over the tracer field. The plot is zoomed in for better visualization. </p><pre><code class="language-Julia hljs">            if plot_fields==:yes
+                p = heatmap(x.c./1e3,y.c./1e3,D.ρ&#39;,color=:inferno,
+                            xlabel=&quot;x[km]&quot;,ylabel=&quot;y[km]&quot;,colorbar=true,
+                            title=&quot;ρ&quot;,
+                            aspect_ratio=:equal,xlims=(M.xmin/1e3, M.xmax/1e3),                             
+                            ylims=(M.ymin/1e3, M.ymax/1e3),
+                            layout=(3,1),subplot=1)
+                quiver!(p,x.c2d[1:Pl.qinc:end,1:Pl.qinc:end]./1e3,
+                    y.c2d[1:Pl.qinc:end,1:Pl.qinc:end]./1e3,
+                    quiver=(D.vxc[1:Pl.qinc:end,1:Pl.qinc:end].*Pl.qsc,
+                            D.vyc[1:Pl.qinc:end,1:Pl.qinc:end].*Pl.qsc),        
+                    la=0.5,color=&quot;white&quot;,layout=(3,1),subplot=1)
+                scatter!(p,Ma.x[1:end]./1e3,Ma.y[1:end]./1e3,
+                    ms=3,ma=0.5,mc=Ma.phase[1:end],markerstrokewidth=0.0,
+                    xlabel=&quot;x[km]&quot;,ylabel=&quot;y[km]&quot;,colorbar=true,
+                    title=&quot;tracers&quot;,label=&quot;&quot;,
+                    xlims=(xwave/1e3-Δ.x/1e3*1.1, xwave/1e3+Δ.x/1e3*1.1), 
+                    ylims=(-ywave/1e3-Δ.y/1e3*1.1, -ywave/1e3+Δ.y/1e3*1.1),
+                    layout=(3,1),subplot=3)
+                heatmap!(p,x.c./1e3,y.c./1e3,log10.(abs.(D.ηc)&#39;),
+                            color=reverse(cgrad(:roma)),
+                            xlabel=&quot;x[km]&quot;,ylabel=&quot;y[km]&quot;,title=&quot;η_c&quot;,
+                            clims=(15,27),
+                            aspect_ratio=:equal,xlims=(M.xmin/1e3, M.xmax/1e3),                             
+                            ylims=(M.ymin/1e3, M.ymax/1e3),colorbar=true,
+                            layout=(2,1),subplot=2)
+                scatter!(p,(xwave/1.0e3,-ywave/1.0e3),
+                        markersize=3,label=&quot;&quot;,color=:black,
+                        layout=(3,1),subplot=3)
+                scatter!(p,(x1.vy2d[xn+1,yn]/1e3,y1.vy2d[xn+1,yn]/1e3),
+                        markersize=3,label=&quot;&quot;,color=:red,
+                        layout=(3,1),subplot=3)
+                scatter!(p,(x1.vy2d[xn+2,yn]/1e3,y1.vy2d[xn+2,yn]/1e3),
+                        markersize=3,label=&quot;&quot;,color=:red,
+                        layout=(3,1),subplot=3)
+                scatter!(p,(x1.vy2d[xn+1,yn+1]/1e3,y1.vy2d[xn+1,yn+1]/1e3),
+                        markersize=3,label=&quot;&quot;,color=:red,
+                        layout=(3,1),subplot=3)
+                scatter!(p,(x1.vy2d[xn+2,yn+1]/1e3,y1.vy2d[xn+2,yn+1]/1e3),
+                        markersize=3,label=&quot;&quot;,color=:red,
+                        layout=(3,1),subplot=3)
+                display(p)
+            end
+            scatter!(q,(PP.ϕ[1],b1[i]*PP.K[1] + b2[i]),
+                ms=ms[k],markershape=:circle,label=&quot;&quot;,
+                color=:black)
+        end # Loop λ - j</code></pre><p><img src="../../../assets/RTI_GR_example.svg" alt="Growth_Rate_Example"/></p><p><strong>Figure 1. Example of a RTI model.</strong> Top: Centroid velocity arrows on top of the density field. Middle: Centroid viscosity. Bottom: Zoom of the tracer field on the tip of the perturbation at the center of the model domain. The black tracer marks the tip, and the red tracer mark the vertical velocity nodes from which the vertical velocity is interpolated onto the tip. The example is a model with a perturbation of <span>$A=h_{1}/15$</span> and a wavelength of 12 km. The number of centroids in the vertical direction is 50. The number of horizontal centroids is related to the wavelength and aspect ratio of the model such that the resoluton is always the same in the horizontal and vertical direction for each model of the benchmark. </p><p>Finally, the rising velocity is plotted over the analytical solution for the given range of viscosity contrasts. </p><pre><code class="language-Julia hljs">        if k == 1
+            plot!(q,PP.ϕₐ,b1[i].*PP.Kₐ[:,i] .+ b2[i],color=:black,
+                        xlabel=&quot;ϕ₁ = 2πh₁/λ&quot;,
+                        ylabel=&quot;b₁K + b₂&quot;, 
+                        title=&quot;&quot;,
+                        xlims=(0.5,4),ylims=(0.05,0.4),
+                        label=&quot;&quot;)
+        end
+    end # Loop ηᵣ - i 
+end # Loop delfac - k </code></pre><p>The final figure is stored in the given directory. </p><pre><code class="language-Julia hljs">if save_fig == 1
+    savefig(q,string(&quot;./examples/StokesEquation/2D/Results/RTI_Growth_Rate.png&quot;))
+else
+    display(q)
+end</code></pre><p><img src="../../../assets/RTI_Growth_Rate.png" alt="RTI_GrowthRate"/></p></article><nav class="docs-footer"><a class="docs-footer-prevpage" href="../RTI/">« Rayleigh Taylor Instability (RTI)</a><a class="docs-footer-nextpage" href="../../listoffunctions/">List of functions »</a><div class="flexbox-break"></div><p class="footer-message">Powered by <a href="https://github.com/JuliaDocs/Documenter.jl">Documenter.jl</a> and the <a href="https://julialang.org/">Julia Programming Language</a>.</p></nav></div><div class="modal" id="documenter-settings"><div class="modal-background"></div><div class="modal-card"><header class="modal-card-head"><p class="modal-card-title">Settings</p><button class="delete"></button></header><section class="modal-card-body"><p><label class="label">Theme</label><div class="select"><select id="documenter-themepicker"><option value="auto">Automatic (OS)</option><option value="documenter-light">documenter-light</option><option value="documenter-dark">documenter-dark</option><option value="catppuccin-latte">catppuccin-latte</option><option value="catppuccin-frappe">catppuccin-frappe</option><option value="catppuccin-macchiato">catppuccin-macchiato</option><option value="catppuccin-mocha">catppuccin-mocha</option></select></div></p><hr/><p>This document was generated with <a href="https://github.com/JuliaDocs/Documenter.jl">Documenter.jl</a> version 1.13.0 on <span class="colophon-date" title="Friday 4 July 2025 14:21">Friday 4 July 2025</span>. Using Julia version 1.11.5.</p></section><footer class="modal-card-foot"></footer></div></div></div></body></html>
