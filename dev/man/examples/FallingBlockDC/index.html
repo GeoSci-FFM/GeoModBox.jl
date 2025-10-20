@@ -271,13 +271,17 @@ D   =   (
     vy      =   zeros(Float64,NC.x+2,NV.y),
     Pt      =   zeros(Float64,NC...),
     p       =   zeros(Float64,NC...),
+    p_ex    =   zeros(Float64,(NC.x+2,NC.y+2)),
     ρ       =   zeros(Float64,NC...),
+    ρ_ex    =   zeros(Float64,(NC.x+2,NC.y+2)),
     vxc     =   zeros(Float64,NC...),
     vyc     =   zeros(Float64,NC...),
     vc      =   zeros(Float64,NC...),
     wt      =   zeros(Float64,(NC.x,NC.y)),
+    wte     =   zeros(Float64,(NC.x+2,NC.y+2)),
     wtv     =   zeros(Float64,(NV.x,NV.y)),
     ηc      =   zeros(Float64,NC...),
+    η_ex    =   zeros(Float64,(NC.x+2,NC.y+2)),
     ηv      =   zeros(Float64,NV...),
 )
 # Needed for the defect correction solution ---
@@ -313,18 +317,18 @@ noise       =   0
 nmark       =   nmx*nmy*NC.x*NC.y
 Aparam      =   :phase
 MPC         =   (
-    c       =   zeros(Float64,(NC.x,NC.y)),
-    v       =   zeros(Float64,(NV.x,NV.y)),
-    th      =   zeros(Float64,(nthreads(),NC.x,NC.y)),
-    thv     =   zeros(Float64,(nthreads(),NV.x,NV.y)),
+        c       =   zeros(Float64,(NC.x,NC.y)),
+        v       =   zeros(Float64,(NV.x,NV.y)),
+        th      =   zeros(Float64,(nthreads(),NC.x,NC.y)),
+        thv     =   zeros(Float64,(nthreads(),NV.x,NV.y)),
 )
-MPC1        = (
-    PG_th   =   [similar(D.ρ) for _ = 1:nthreads()],    # per thread
-    PV_th   =   [similar(D.ηv) for _ = 1:nthreads()],   # per thread
-    wt_th   =   [similar(D.wt) for _ = 1:nthreads()],   # per thread
-    wtv_th  =   [similar(D.wtv) for _ = 1:nthreads()],  # per thread
+MAVG        = (
+        PC_th   =   [similar(D.wte) for _ = 1:nthreads()],  # per thread
+        PV_th   =   [similar(D.ηv) for _ = 1:nthreads()],   # per thread
+        wte_th  =   [similar(D.wte) for _ = 1:nthreads()],  # per thread
+        wtv_th  =   [similar(D.wtv) for _ = 1:nthreads()],  # per thread
 )
-MPC     =   merge(MPC,MPC1)
+# MPC     =   merge(MPC,MPC1)
 Ma      =   IniTracer2D(Aparam,nmx,nmy,Δ,M,NC,noise,Ini.p,phase)
 # RK4 weights ---
 rkw     =   1.0/6.0*[1.0 2.0 2.0 1.0]   # for averaging
@@ -332,14 +336,18 @@ rkv     =   1.0/2.0*[1.0 1.0 2.0 2.0]   # for time stepping
 # Count marker per cell ---
 CountMPC(Ma,nmark,MPC,M,x,y,Δ,NC,NV,1)
 # Interpolate from markers to cell ---
-Markers2Cells(Ma,nmark,MPC.PG_th,D.ρ,MPC.wt_th,D.wt,x,y,Δ,Aparam,ρ)
-Markers2Cells(Ma,nmark,MPC.PG_th,D.p,MPC.wt_th,D.wt,x,y,Δ,Aparam,phase)
-Markers2Vertices(Ma,nmark,MPC.PV_th,D.ηv,MPC.wtv_th,D.wtv,x,y,Δ,Aparam,η)
-@. D.ηc     =   0.25 * (D.ηv[1:end-1,1:end-1] + 
-                        D.ηv[2:end-0,1:end-1] + 
-                        D.ηv[1:end-1,2:end-0] + 
-                        D.ηv[2:end-0,2:end-0])
-# System of Equations =============================================== #</code></pre><p>To solve the linear system of equations, one needs to initialize the correspondig arrays as well. </p><pre><code class="language-Julia hljs"># Numbering, without ghost nodes! ---
+Markers2Cells(Ma,nmark,MAVG.PC_th,D.ρ_ex,MAVG.wte_th,D.wte,x,y,Δ,Aparam,ρ)
+D.ρ     .=  D.ρ_ex[2:end-1,2:end-1]  
+Markers2Cells(Ma,nmark,MAVG.PC_th,D.p_ex,MAVG.wte_th,D.wte,x,y,Δ,Aparam,phase)
+D.p     .=  D.p_ex[2:end-1,2:end-1]
+Markers2Cells(Ma,nmark,MAVG.PC_th,D.η_ex,MAVG.wte_th,D.wte,x,y,Δ,Aparam,η)
+D.ηc    .=  D.η_ex[2:end-1,2:end-1]
+Markers2Vertices(Ma,nmark,MAVG.PV_th,D.ηv,MAVG.wtv_th,D.wtv,x,y,Δ,Aparam,η)
+# System of Equations =============================================== #</code></pre><p>To solve the linear system of equations, one needs to initialize the correspondig arrays as well. </p><pre><code class="language-Julia hljs"># System of Equations =============================================== #
+# Iterations --- 
+niter       =   50
+ϵ           =   1e-8
+# Numbering, without ghost nodes! ---
 off    = [  NV.x*NC.y,                          # vx
             NV.x*NC.y + NC.x*NV.y,              # vy
             NV.x*NC.y + NC.x*NV.y + NC.x*NC.y]  # Pt
@@ -367,22 +375,24 @@ for it = 1:nt
     D.vx    .=  0.0
     D.vy    .=  0.0
     D.Pt    .=  0.0
-    Residuals2D!(D,VBC,ε,τ,divV,Δ,D.ηc,D.ηv,g,Fm,FPt)
-    F[Num.Vx]   =   Fm.x[:]
-    F[Num.Vy]   =   Fm.y[:]
-    F[Num.Pt]   =   FPt[:]
-    # Assemble Coefficients ========================================= #
-    K       =   Assembly(NC, NV, Δ, D.ηc, D.ηv, VBC, Num)
-    # --------------------------------------------------------------- #
-    # Solution of the linear system ================================= #
-    δx      =   - K \ F
-    # --------------------------------------------------------------- #
-    # Update Unknown Variables ====================================== #
-    D.vx[:,2:end-1]     .+=  δx[Num.Vx]
-    D.vy[2:end-1,:]     .+=  δx[Num.Vy]
-    D.Pt                .+=  δx[Num.Pt]
-    # Final Residual ================================================ #
-    Residuals2D!(D,VBC,ε,τ,divV,Δ,D.ηc,D.ηv,g,Fm,FPt)
+    for iter = 1:niter
+        Residuals2D!(D,VBC,ε,τ,divV,Δ,D.ηc,D.ηv,g,Fm,FPt)
+        F[Num.Vx]   =   Fm.x[:]
+        F[Num.Vy]   =   Fm.y[:]
+        F[Num.Pt]   =   FPt[:]
+        @printf(&quot;||R|| = %1.4e\n&quot;, norm(F)/length(F))
+        norm(F)/length(F) &lt; ϵ ? break : nothing
+        # Assemble Coefficients ===================================== #
+        K       =   Assembly(NC, NV, Δ, D.ηc, D.ηv, VBC, Num)
+        # ----------------------------------------------------------- #
+        # Solution of the linear system ============================= #
+        δx      =   - K \ F
+        # ----------------------------------------------------------- #
+        # Update Unknown Variables ================================== #
+        D.vx[:,2:end-1]     .+=  δx[Num.Vx]
+        D.vy[2:end-1,:]     .+=  δx[Num.Vy]
+        D.Pt                .+=  δx[Num.Pt]
+    end
     # --------------------------------------------------------------- #</code></pre><p>For visualization purposes, the centroid velocities are calculated. </p><pre><code class="language-Julia hljs">    # --------------------------------------------------------------- #
     # Get the velocity on the centroids ---
     for i = 1:NC.x
@@ -452,16 +462,16 @@ for it = 1:nt
     AdvectTracer2D(Ma,nmark,D,x,y,T.Δ[1],Δ,NC,rkw,rkv,1)
     CountMPC(Ma,nmark,MPC,M,x,y,Δ,NC,NV,it)
     # Interpolate phase from tracers to grid ---
-    Markers2Cells(Ma,nmark,MPC.PG_th,D.ρ,MPC.wt_th,D.wt,x,y,Δ,Aparam,ρ)
-    Markers2Cells(Ma,nmark,MPC.PG_th,D.p,MPC.wt_th,D.wt,x,y,Δ,Aparam,phase)
-    Markers2Vertices(Ma,nmark,MPC.PV_th,D.ηv,MPC.wtv_th,D.wtv,x,y,Δ,Aparam,η)
-    @. D.ηc     =   0.25 * (D.ηv[1:end-1,1:end-1] + 
-                        D.ηv[2:end-0,1:end-1] + 
-                        D.ηv[1:end-1,2:end-0] + 
-                        D.ηv[2:end-0,2:end-0])
+    Markers2Cells(Ma,nmark,MAVG.PC_th,D.ρ_ex,MAVG.wte_th,D.wte,x,y,Δ,Aparam,ρ)
+    D.ρ     .=   D.ρ_ex[2:end-1,2:end-1]  
+    Markers2Cells(Ma,nmark,MAVG.PC_th,D.p_ex,MAVG.wte_th,D.wte,x,y,Δ,Aparam,phase)
+    D.p     .=  D.p_ex[2:end-1,2:end-1]
+    Markers2Cells(Ma,nmark,MAVG.PC_th,D.η_ex,MAVG.wte_th,D.wte,x,y,Δ,Aparam,η)
+    D.ηc    .=   D.η_ex[2:end-1,2:end-1]
+    Markers2Vertices(Ma,nmark,MAVG.PV_th,D.ηv,MAVG.wtv_th,D.wtv,x,y,Δ,Aparam,η)
 end # End Time Loop</code></pre><p>The animation is saved in the corresponding gif file. </p><pre><code class="language-Julia hljs"># Save Animation ---
 if save_fig == 1
     # Write the frames to a GIF file
     Plots.gif(anim, string( path, filename, &quot;.gif&quot; ), fps = 15)
     foreach(rm, filter(startswith(string(path,&quot;00&quot;)), readdir(path,join=true)))
-end</code></pre><p><img src="../../../assets/Falling_block_ηr_6.0_tracers_DC.gif" alt="FBvarytd"/></p><p><strong>Figure 2. Time-dependent solution of the falling block problem assuming a viscosity contrast of 6 orders of magnitude</strong></p></article><nav class="docs-footer"><a class="docs-footer-prevpage" href="../FallingBlockBenchmark/">« Falling Block Benchmark</a><a class="docs-footer-nextpage" href="../RTI/">Rayleigh Taylor Instability (RTI) »</a><div class="flexbox-break"></div><p class="footer-message">Powered by <a href="https://github.com/JuliaDocs/Documenter.jl">Documenter.jl</a> and the <a href="https://julialang.org/">Julia Programming Language</a>.</p></nav></div><div class="modal" id="documenter-settings"><div class="modal-background"></div><div class="modal-card"><header class="modal-card-head"><p class="modal-card-title">Settings</p><button class="delete"></button></header><section class="modal-card-body"><p><label class="label">Theme</label><div class="select"><select id="documenter-themepicker"><option value="auto">Automatic (OS)</option><option value="documenter-light">documenter-light</option><option value="documenter-dark">documenter-dark</option><option value="catppuccin-latte">catppuccin-latte</option><option value="catppuccin-frappe">catppuccin-frappe</option><option value="catppuccin-macchiato">catppuccin-macchiato</option><option value="catppuccin-mocha">catppuccin-mocha</option></select></div></p><hr/><p>This document was generated with <a href="https://github.com/JuliaDocs/Documenter.jl">Documenter.jl</a> version 1.14.1 on <span class="colophon-date" title="Thursday 9 October 2025 13:12">Thursday 9 October 2025</span>. Using Julia version 1.12.0.</p></section><footer class="modal-card-foot"></footer></div></div></div></body></html>
+end</code></pre><p><img src="../../../assets/Falling_block_ηr_6.0_tracers_DC.gif" alt="FBvarytd"/></p><p><strong>Figure 2. Time-dependent solution of the falling block problem assuming a viscosity contrast of 6 orders of magnitude</strong></p></article><nav class="docs-footer"><a class="docs-footer-prevpage" href="../FallingBlockBenchmark/">« Falling Block Benchmark</a><a class="docs-footer-nextpage" href="../RTI/">Rayleigh Taylor Instability (RTI) »</a><div class="flexbox-break"></div><p class="footer-message">Powered by <a href="https://github.com/JuliaDocs/Documenter.jl">Documenter.jl</a> and the <a href="https://julialang.org/">Julia Programming Language</a>.</p></nav></div><div class="modal" id="documenter-settings"><div class="modal-background"></div><div class="modal-card"><header class="modal-card-head"><p class="modal-card-title">Settings</p><button class="delete"></button></header><section class="modal-card-body"><p><label class="label">Theme</label><div class="select"><select id="documenter-themepicker"><option value="auto">Automatic (OS)</option><option value="documenter-light">documenter-light</option><option value="documenter-dark">documenter-dark</option><option value="catppuccin-latte">catppuccin-latte</option><option value="catppuccin-frappe">catppuccin-frappe</option><option value="catppuccin-macchiato">catppuccin-macchiato</option><option value="catppuccin-mocha">catppuccin-mocha</option></select></div></p><hr/><p>This document was generated with <a href="https://github.com/JuliaDocs/Documenter.jl">Documenter.jl</a> version 1.14.1 on <span class="colophon-date" title="Monday 20 October 2025 10:21">Monday 20 October 2025</span>. Using Julia version 1.12.1.</p></section><footer class="modal-card-foot"></footer></div></div></div></body></html>

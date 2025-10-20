@@ -103,6 +103,7 @@ Pl  =   (
             vyc     =   zeros(Float64,(NC.x,NC.y)),
             vc      =   zeros(Float64,(NC.x,NC.y)),
             wt      =   zeros(Float64,(NC.x,NC.y)),
+            wte     =   zeros(Float64,(NC.x+2,NC.y+2)),
             wtv     =   zeros(Float64,(NV...)),
             Tmax    =   [0.0],
             Tmin    =   [0.0],
@@ -146,13 +147,13 @@ Pl  =   (
                 th      =   zeros(Float64,(nthreads(),NC.x,NC.y)),
                 thv     =   zeros(Float64,(nthreads(),NV.x,NV.y)),
             )
-            MPC1        = (
-                PG_th   =   [similar(D.T) for _ = 1:nthreads()],    # per thread
+            MAVG        = (
+                PC_th   =   [similar(D.wte) for _ = 1:nthreads()],  # per thread
                 PV_th   =   [similar(D.wtv) for _ = 1:nthreads()],   # per thread
-                wt_th   =   [similar(D.wt) for _ = 1:nthreads()],   # per thread
+                wte_th  =   [similar(D.wte) for _ = 1:nthreads()],  # per thread
                 wtv_th  =   [similar(D.wtv) for _ = 1:nthreads()],  # per thread
             )
-            MPC     =   merge(MPC,MPC1)
+            # MPC     =   merge(MPC,MPC1)
             Ma      =   IniTracer2D(Aparam,nmx,nmy,Δ,M,NC,noise,0,0)
             # RK4 weights ---
             rkw     =   1.0/6.0*[1.0 2.0 2.0 1.0]   # for averaging
@@ -213,8 +214,8 @@ Pl  =   (
                 CountMPC(Ma,nmark,MPC,M,x,y,Δ,NC,NV,i)
                 
                 # Interpolate temperature from tracers to grid ---
-                Markers2Cells(Ma,nmark,MPC.PG_th,D.T,MPC.wt_th,D.wt,x,y,Δ,Aparam,0)           
-                D.T_ex[2:end-1,2:end-1]     .= D.T
+                Markers2Cells(Ma,nmark,MAVG.PC_th,D.T_ex,MAVG.wte_th,D.wte,x,y,Δ,Aparam,0)           
+                D.T     .=  D.T_ex[2:end-1,2:end-1]
             end
             
             display(string(&quot;ΔT = &quot;,((maximum(filter(!isnan,D.T))-D.Tmax[1])/D.Tmax[1])*100))
@@ -304,4 +305,4 @@ if save_fig == 1 || save_fig == -1
                         &quot;Results/2D_advection_&quot;,Ini.T,&quot;_&quot;,
                         Ini.V,&quot;_ResTest.png&quot;))
 end
-# --------------------------------------------------------------------- #</code></pre><p><img src="../../../assets/2D_advection_circle_RigidBody_ResTest.png" alt="AdvResFinal"/></p><p><strong>Figure 2. Advection Resolution Test.</strong>   Deviation, maximum, and mean temperature for each advection scheme across increasing grid resolutions. </p></article><nav class="docs-footer"><a class="docs-footer-prevpage" href="../Advection2D/">« Advection (2D)</a><a class="docs-footer-nextpage" href="../ChannelFlow1D/">Channel Flow (1D) »</a><div class="flexbox-break"></div><p class="footer-message">Powered by <a href="https://github.com/JuliaDocs/Documenter.jl">Documenter.jl</a> and the <a href="https://julialang.org/">Julia Programming Language</a>.</p></nav></div><div class="modal" id="documenter-settings"><div class="modal-background"></div><div class="modal-card"><header class="modal-card-head"><p class="modal-card-title">Settings</p><button class="delete"></button></header><section class="modal-card-body"><p><label class="label">Theme</label><div class="select"><select id="documenter-themepicker"><option value="auto">Automatic (OS)</option><option value="documenter-light">documenter-light</option><option value="documenter-dark">documenter-dark</option><option value="catppuccin-latte">catppuccin-latte</option><option value="catppuccin-frappe">catppuccin-frappe</option><option value="catppuccin-macchiato">catppuccin-macchiato</option><option value="catppuccin-mocha">catppuccin-mocha</option></select></div></p><hr/><p>This document was generated with <a href="https://github.com/JuliaDocs/Documenter.jl">Documenter.jl</a> version 1.14.1 on <span class="colophon-date" title="Thursday 9 October 2025 13:12">Thursday 9 October 2025</span>. Using Julia version 1.12.0.</p></section><footer class="modal-card-foot"></footer></div></div></div></body></html>
+# --------------------------------------------------------------------- #</code></pre><p><img src="../../../assets/2D_advection_circle_RigidBody_ResTest.png" alt="AdvResFinal"/></p><p><strong>Figure 2. Advection Resolution Test.</strong>   Deviation, maximum, and mean temperature for each advection scheme across increasing grid resolutions. </p></article><nav class="docs-footer"><a class="docs-footer-prevpage" href="../Advection2D/">« Advection (2D)</a><a class="docs-footer-nextpage" href="../ChannelFlow1D/">Channel Flow (1D) »</a><div class="flexbox-break"></div><p class="footer-message">Powered by <a href="https://github.com/JuliaDocs/Documenter.jl">Documenter.jl</a> and the <a href="https://julialang.org/">Julia Programming Language</a>.</p></nav></div><div class="modal" id="documenter-settings"><div class="modal-background"></div><div class="modal-card"><header class="modal-card-head"><p class="modal-card-title">Settings</p><button class="delete"></button></header><section class="modal-card-body"><p><label class="label">Theme</label><div class="select"><select id="documenter-themepicker"><option value="auto">Automatic (OS)</option><option value="documenter-light">documenter-light</option><option value="documenter-dark">documenter-dark</option><option value="catppuccin-latte">catppuccin-latte</option><option value="catppuccin-frappe">catppuccin-frappe</option><option value="catppuccin-macchiato">catppuccin-macchiato</option><option value="catppuccin-mocha">catppuccin-mocha</option></select></div></p><hr/><p>This document was generated with <a href="https://github.com/JuliaDocs/Documenter.jl">Documenter.jl</a> version 1.14.1 on <span class="colophon-date" title="Monday 20 October 2025 10:21">Monday 20 October 2025</span>. Using Julia version 1.12.1.</p></section><footer class="modal-card-foot"></footer></div></div></div></body></html>
