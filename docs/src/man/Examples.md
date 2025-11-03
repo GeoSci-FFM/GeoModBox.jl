@@ -34,9 +34,12 @@ By clicking on the title of each document page, you will be directed to the corr
 In the following, the runtime for each of the provided examples is listed as a reference. 
 
 | Example                           | Total Runtime                                         |
-| --------------------------------- | ----------------------------------------------------- |
+| :-------------------------------- | :---------------------------------------------------- |
 | **Advection ===**                                                                         |
-| 2D_Advection.jl                   | 1) Upwind: 5.88 s <br> 2) SLF: 6.11 s 3) Semi-lag: 15.7 s <br> 4) Tracers: 172 s |
+| 2D_Advection.jl                   | 1) Upwind: 5.88 s                                     |
+|                                   | 2) SLF: 6.11 s                                        |
+|                                   | 3) Semi-lag: 15.7 s                                   |
+|                                   | 4) Tracers: 172 s                                     |
 | 2D_Advection_ResolutionTest.jl    | 335 s                                                 |
 | **Heat Diffusion ===**                                                                    |
 | *1D* ---                                                                                  |
@@ -57,7 +60,12 @@ In the following, the runtime for each of the provided examples is listed as a r
 | *1D* ---                                                                                  |
 | ChannelFlow_1D.jl                 | 3.61 s                                                |
 | *2D* ---                                                                                  |
-| FallingBlockBenchmark.jl          | 1) Steady State: 8 s <br> 2) Time-Dependent <br> a) Upwind: 74.4 s <br> b) SLF: 170 s <br> c) Semi-lag: 175 s <br> d) Tracers: 233 s                           |
+| FallingBlockBenchmark.jl          | 1) Steady State: 8 s                                  |
+|                                   | 2) Time-Dependent                                     |
+|                                   |     a) Upwind: 74.4 s                                 |
+|                                   |     b) SLF: 170 s                                     |
+|                                   |     c) Semi-lag: 175 s                                |
+|                                   |     d) Tracers: 233 s                                 |
 | FallingBlockConstEta_DC.jl        | 332 ms                                                | 
 | FallingBlockVarEta_DC.jl          | 25.8 s                                                |
 | RTI.jl                            | 154 s                                                 |
