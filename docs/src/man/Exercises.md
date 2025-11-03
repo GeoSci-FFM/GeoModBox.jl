@@ -25,7 +25,53 @@ All exercises were performed on a single CPU: *AMD Ryzen 7 7735U with Radeon Gra
 - The **first runtime** corresponds to the initial execution, including compilation and memory allocation.  
 - The **runtime in parentheses** corresponds to a second execution, where compilation and allocation overhead are avoided.  
 
-| Exercise Number | Type                               | Total Runtime [s] |
+Test Table I: 
+
+<table>
+<tr>
+  <th>#</th>
+  <th>Type</th>
+  <th>Runtime [s]</th>
+</tr>
+<tr>
+  <td>1</td>
+  <td>Euler Advection</td>
+  <td>5.741</td>
+</tr>
+<tr>
+  <td>2</td>
+  <td>1-D Heat Diffusion (explicit)</td>
+  <td>
+    1) 9.342 (1.14)<br>
+    2) 9.975 (1.087)<br>
+    3) 9.616 (1.017)
+  </td>
+</tr>
+<tr>
+  <td>3</td>
+  <td>1-D Heat Diffusion (implicit)</td>
+  <td>
+    1) 12.641 (1.749)<br>
+    2) 13.537 (1.720)<br>
+    3) 12.157 (1.731)
+  </td>
+</tr>
+</table>
+
+Test Table II: 
+
+| # | Type                     | Total Runtime [s]  |
+|---|--------------------------|-----------------|
+| 1 | Euler Advection          | 5.741           |
+| 2 | 1-D Heat Diffusion (explicit) | 1) 9.342 (1.14) |
+|   |                          | 2) 9.975 (1.087) |
+|   |                          | 3) 9.616 (1.017) |
+| 3 | 1-D Heat Diffusion (implicit) | 1) 12.641 (1.749) |
+|   |                          | 2) 13.537 (1.720) |
+|   |                          | 3) 12.157 (1.731) |
+
+
+<!-- | Exercise Number | Type                               | Total Runtime [s] |
 | --------------- | ---------------------------------- | ----------------- |
 | 1               | Euler Advection                    | 5.741             |
 | 2               | 1-D Heat Diffusion <br> (explicit) | 1) 9.342 (1.14) \ 2) 9.975 (1.087) \newline 3) 9.616 (1.017) |
@@ -44,6 +90,6 @@ All exercises were performed on a single CPU: *AMD Ryzen 7 7735U with Radeon Gra
 
 ---
 
-<sup>1</sup>: For the thermal convection, only the runtime where compilation and allocation overhead is avoided are shown, for the sake of simplicity. The number of iterations is shown in the parentheses. For the higher $Ra$ number models only the fastest and most accurate (see [here](../man/examples/GaussianDiffusion2D.md)) combinations of solvers from the low $Ra$ case haven been run. 
+<sup>1</sup>: For the thermal convection, only the runtime where compilation and allocation overhead is avoided are shown, for the sake of simplicity. The number of iterations is shown in the parentheses. For the higher $Ra$ number models only the fastest and most accurate (see [here](../man/examples/GaussianDiffusion2D.md)) combinations of solvers from the low $Ra$ case haven been run.  -->
 
 
