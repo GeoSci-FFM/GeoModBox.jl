@@ -28,34 +28,34 @@ All exercises were performed on a single CPU: *AMD Ryzen 7 7735U with Radeon Gra
 Test Table I: 
 
 <table>
-<tr>
-  <th>#</th>
-  <th>Type</th>
-  <th>Runtime [s]</th>
-</tr>
-<tr>
-  <td>1</td>
-  <td>Euler Advection</td>
-  <td>5.741</td>
-</tr>
-<tr>
-  <td>2</td>
-  <td>1-D Heat Diffusion (explicit)</td>
-  <td>
-    1) 9.342 (1.14)<br>
-    2) 9.975 (1.087)<br>
-    3) 9.616 (1.017)
-  </td>
-</tr>
-<tr>
-  <td>3</td>
-  <td>1-D Heat Diffusion (implicit)</td>
-  <td>
-    1) 12.641 (1.749)<br>
-    2) 13.537 (1.720)<br>
-    3) 12.157 (1.731)
-  </td>
-</tr>
+  <tr>
+    <th>#</th>
+    <th>Type</th>
+    <th>Runtime [s]</th>
+  </tr>
+  <tr>
+    <td>1</td>
+    <td>Euler Advection</td>
+    <td>5.741</td>
+  </tr>
+  <tr>
+    <td>2</td>
+    <td>1-D Heat Diffusion (explicit)</td>
+    <td>
+      1) 9.342 (1.14)<br>
+      2) 9.975 (1.087)<br>
+      3) 9.616 (1.017)
+    </td>
+  </tr>
+  <tr>
+    <td>3</td>
+    <td>1-D Heat Diffusion (implicit)</td>
+    <td>
+      1) 12.641 (1.749)<br>
+      2) 13.537 (1.720)<br>
+      3) 12.157 (1.731)
+    </td>
+  </tr>
 </table>
 
 Test Table II: 
