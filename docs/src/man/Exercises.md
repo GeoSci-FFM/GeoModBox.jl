@@ -60,18 +60,97 @@ Test Table I:
 
 Test Table II: 
 
-| # | Type                     | Total Runtime [s]  |
-|---|--------------------------|-----------------|
-| 1 | Euler Advection          | 5.741           |
+| Exercise | Type | Total Runtime [s] |
+|:----------|:------|:----------------|
+| 1 | Euler Advection | 5.741 |
 | 2 | 1-D Heat Diffusion (explicit) | 1) 9.342 (1.14) |
-|   |                          | 2) 9.975 (1.087) |
-|   |                          | 3) 9.616 (1.017) |
+|   |   | 2) 9.975 (1.087) |
+|   |   | 3) 9.616 (1.017) |
 | 3 | 1-D Heat Diffusion (implicit) | 1) 12.641 (1.749) |
-|   |                          | 2) 13.537 (1.720) |
-|   |                          | 3) 12.157 (1.731) |
+|   |   | 2) 13.537 (1.720) |
+|   |   | 3) 12.157 (1.731) |
+| 4 | 2-D Steady State Heat Equation | 13.471 (2.069) |
+| 5a | 2-D Time-dep. Heat Equation (Plume) | 1) Explicit: 18.632 (4.799) |
+|    |   | 2) Implicit: 78.201 (60.828) |
+| 5b | 2-D Time-dep. Heat Equation (Sill) | 1) Explicit: 17.856 (4.566) |
+|    |   | 2) Implicit: 39.626 (22.679) |
+| 6 | 1-D Advection Scheme | 1) FTCS: 11.644 (4.019) |
+|   |   | 2) Upwind: 11.03 (4.042) |
+|   |   | 3) Downwind: 11.465 (3.343) |
+|   |   | 4) LAX: 11.272 (3.405) |
+|   |   | 5) SLF: 11.312 (3.48) |
+|   |   | 6) Semilag: 14.318 (3.604) |
+|   |   | 7) Tracers: 15.662 (4.944) |
+| 7 | 2-D Energy Equation | 1) Upwind+explicit: 17.468 (2.979) |
+|   |   | 2) Upwind+implicit: 31.441 (10.842) |
+|   |   | 3) Upwind+CNA: 32.065 (12.222) |
+|   |   | 4) Upwind+ADI: 121.665 (99.807) |
+|   |   | 5) Upwind+dc: 30.45 (11.401) |
+|   |   | 6) SLF+explicit: 22.002 (2.872) |
+|   |   | 7) SLF+implicit: 28.751 (8.911) |
+|   |   | 8) SLF+CNA: 29.876 (9.28) |
+|   |   | 9) SLF+ADI: 120.018 (98.74) |
+|   |   | 10) SLF+dc: 28.179 (9.379) |
+|   |   | 11) SL+explicit: 22.969 (6.334) |
+|   |   | 12) SL+implicit: 30.634 (9.682) |
+|   |   | 13) SL+CNA: 32.415 (11.566) |
+|   |   | 14) SL+ADI: 133.871 (110.704) |
+|   |   | 15) SL+dc: 35.364 (12.301) |
+|   |   | 16) Tracers+explicit: 89.499 (65.913) |
+|   |   | 17) Tracers+implicit: 108.464 (84.209) |
+|   |   | 18) Tracers+CNA: 112.171 (89.219) |
+|   |   | 19) Tracers+ADI: 186.71 (161.611) |
+|   |   | 20) Tracers+dc: 115.737 (89.089) |
+| 8 | 1-D Stokes Equation | 8.489 (0.212) |
+| 9 | 2-D Falling Block (steady state) | 20.764 (0.891) |
+| 10 | 2-D Falling Block (time-dep.) | 1) Upwind: 33.295 (3.68) |
+|    |   | 2) SLF: 32.333 (3.629) |
+|    |   | 3) SL: 37.537 (3.755) |
+|    |   | 4) Tracers: 36.291 (6.12) |
+| 11¹ | Thermal Convection (dim), **Resolution: 150×50** | **Ra = 1e4** (Diff+Adv+Momentum) |
+|     |   | 1) Explicit+upwind+direct: 262.912 (1703) |
+|     |   | 2) Implicit+upwind+direct: 283.031 (1709) |
+|     |   | 3) CNA+upwind+direct: 284.944 (1708) |
+|     |   | 4) ADI+upwind+direct: 645.181 (1708) |
+|     |   | 5) DC+upwind+direct: 294.1 (1710) |
+|     |   | 6) Explicit+SLF+direct: 354.35 (2341) |
+|     |   | ... |
+|     |   | **Ra = 1e5** (Diff+Adv+Momentum) |
+|     |   | 1) Explicit+semilag+dc: 489.869 (2433) |
+|     |   | 2) CNA+semilag+dc: 515.539 (2448) |
+|     |   | 3) CNA+upwind+dc: 1327.856 (8000) |
+|     |   | **Ra = 1e6** (Diff+Adv+Momentum)** |
+|     |   | 4) Explicit+semilag+dc: 1280.077 (8000) |
+|     |   | 5) CNA+semilag+dc: 1324.29 (8000) |
+|     |   | 6) CNA+upwind+dc: 1272.997 (8000) |
+| 12 | Thermal Convection (scaled), **Resolution: 150×50** | **Ra = 1e4** (Diff+Adv+Momentum) |
+|    |   | 1) Explicit+upwind+direct: 310.208 (1950) |
+|    |   | 2) Implicit+upwind+direct: 333.82 (1957) |
+|    |   | ... |
+|    |   | **Ra = 1e5** (Diff+Adv+Momentum)** |
+|    |   | 31) Explicit+semilag+dc: 3502.72 (8000) |
+|    |   | 32) CNA+semilag+dc: 3175.01 (8000) |
+|    |   | 33) CNA+upwind+dc: 3330.177 (8000) |
+|    |   | **Ra = 1e6** (Diff+Adv+Momentum)** |
+|    |   | 34) Explicit+semilag+dc: 3327.062 (8000) |
+|    |   | 35) CNA+semilag+dc: 3387.836 (8000) |
+|    |   | 36) CNA+upwind+dc: 3277.684 (8000) |
+| 13 | Blankenbach Benchmark | **Resolution: 50×50** |
+|    |   | Ra = 1e4: 176.532 s (2108) |
+|    |   | Ra = 1e5: 213.955 s (2406) |
+|    |   | Ra = 1e6: 1003.409 s (8000) |
+|    |   | **Resolution: 100×100** |
+|    |   | Ra = 1e4: 3309.393 s (8000) |
+|    |   | Ra = 1e5: 3232.410 s (5045) |
+|    |   | Ra = 1e6: 5008.271 s (8000) |
+|    |   | **Resolution Tests:** |
+|    |   | Ra = 1e4: 5217.55 s |
+|    |   | Ra = 1e5: 20459.1 s |
+|    |   | Ra = 1e6: 554874 s |
 
 
-<!-- | Exercise Number | Type                               | Total Runtime [s] |
+
+| Exercise Number | Type                               | Total Runtime [s] |
 | --------------- | ---------------------------------- | ----------------- |
 | 1               | Euler Advection                    | 5.741             |
 | 2               | 1-D Heat Diffusion <br> (explicit) | 1) 9.342 (1.14) \ 2) 9.975 (1.087) \newline 3) 9.616 (1.017) |
@@ -90,6 +169,6 @@ Test Table II:
 
 ---
 
-<sup>1</sup>: For the thermal convection, only the runtime where compilation and allocation overhead is avoided are shown, for the sake of simplicity. The number of iterations is shown in the parentheses. For the higher $Ra$ number models only the fastest and most accurate (see [here](../man/examples/GaussianDiffusion2D.md)) combinations of solvers from the low $Ra$ case haven been run.  -->
+¹: For the thermal convection, only the runtime where compilation and allocation overhead is avoided are shown, for the sake of simplicity. The number of iterations is shown in the parentheses. For the higher $Ra$ number models only the fastest and most accurate (see [here](../man/examples/GaussianDiffusion2D.md)) combinations of solvers from the low $Ra$ case haven been run. 
 
 
