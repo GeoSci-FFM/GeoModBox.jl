@@ -114,7 +114,30 @@ Test Table II:
 |     |   | 4) ADI+upwind+direct: 645.181 (1708) |
 |     |   | 5) DC+upwind+direct: 294.1 (1710) |
 |     |   | 6) Explicit+SLF+direct: 354.35 (2341) |
-|     |   | ... |
+|     |   | 7) Implicit+SLF+direct: 382.307 (2345) | 
+|     |   | 8) CNA+SLF+direct: 386.764 (2344) |
+|     |   | 9) ADI+SLF+direct: 892.411 (2344) | 
+|     |   | 10) DC+SLF+direct: 492.168 (2346) | 
+|     |   | 11) Explicit+semilag+direct: 334.941 (1743) | 
+|     |   | 12) Implicit+semilag+direct: 367.501 (1746) | 
+|     |   | 13) CNA+semilag+direct: 371.289 (1744) |
+|     |   | 14) ADI+semilag+direct: 704.852 (1744) | 
+|     |   | 15) DC+semilag+direct: 390.767 (1749) | 
+|     |   | 16) Explicit+upwind+DC: 371.091 (1703) |
+|     |   | 17) Implicit+upwind+DC: 358.323 (1709) |
+|     |   | 18) CNA+upwind+DC: 338.862 (1708) |
+|     |   | 19) ADI+upwind+DC: 654.069 (1708) |
+|     |   | 20) DC+upwind+DC: 316.456 (1710) |
+|     |   | 21) Explicit+SLF+DC: 394.471 (2341) |
+|     |   | 22) Implicit+SLF+DC: 417.712 (2345) |
+|     |   | 23) CNA+SLF+DC: 412.717 (2344) |
+|     |   | 24) ADI+slf+DC: 890.714 (2344) |
+|     |   | 25) DC+SLF+DC: 403.217 (2346) |
+|     |   | 26) Explicit+semilag+DC: 286.046 (1743) |
+|     |   | 27) Implicit+semilag+DC: 295.961 (1746) |
+|     |   | 28) CNA+semilag+DC: 288.067 (1744) |
+|     |   | 29) ADI+semilag+DC: 671.159 (1744) |
+|     |   | 30) DC+semilag+DC: 357.894 (1749) |
 |     |   | **Ra = 1e5** (Diff+Adv+Momentum) |
 |     |   | 1) Explicit+semilag+dc: 489.869 (2433) |
 |     |   | 2) CNA+semilag+dc: 515.539 (2448) |
@@ -126,7 +149,34 @@ Test Table II:
 | 12 | Thermal Convection (scaled), **Resolution: 150×50** | **Ra = 1e4** (Diff+Adv+Momentum) |
 |    |   | 1) Explicit+upwind+direct: 310.208 (1950) |
 |    |   | 2) Implicit+upwind+direct: 333.82 (1957) |
-|    |   | ... |
+|    |   | 3) CNA+upwind+direct: 331.791 (1955) |
+|    |   | 4) ADI+upwind+direct: 739.821 (1955) |
+|    |   | 5) DC+upwind+direct: 352.163 (1953) |
+|    |   | 6) Explicit+SLF+direct: 437.435 (2704) |
+|    |   | 7) Implicit+SLF+direct: 468.642 (2708) |
+|    |   | 8) CNA+SLF+direct: 464.97 (2707) |
+|    |   | 9) ADI+SLF+direct: 1013.196 (2707) |
+|    |   | 10) DC+SLF+direct: 476.063 (2706) |
+|    |   | 11) Explicit+semilag+direct: 358.84 (1999) |
+|    |   | 12) Implicit+semilag+direct: 341.811 (2002) |
+|    |   | 13) CNA+semilag+direct: 384.29 (2000) |
+|    |   | 14) ADI+semilag+direct: 754.453 (2000) |
+|    |   | 15) DC+semilag+direct: 359.703 (2001) |
+|    |   | 16) Explicit+upwind+DC: 683.465 (1950) |
+|    |   | 17) Implicit+upwind+DC: 614.899 (1957) |
+|    |   | 18) CNA+upwind+DC:  649.386 (1955) |
+|    |   | 19) ADI+upwind+DC: 1048.092 (1955) |
+|    |   | 20) DC+upwind+DC:  640.199 (1953) |
+|    |   | 21) Explicit+SLF+DC:  835.568 (2704) |
+|    |   | 22) Implicit+SLF+DC:  862.991 (2708) |
+|    |   | 23) CNA+SLF+DC:  868.07 (2707) |
+|    |   | 24) ADI+slf+DC:  1402.997 (2707) |
+|    |   | 25) DC+SLF+DC: 876.505 (2706) |
+|    |   | 26) Explicit+semilag+DC: 613.413 (1999) |
+|    |   | 27) Implicit+semilag+DC: 652.126 (2002) |
+|    |   | 28) CNA+semilag+DC: 638.264 (2000) |
+|    |   | 29) ADI+semilag+DC:  1027.153 (2000) |
+|    |   | 30) DC+semilag+DC: 620. 945 (2001) <br/> <br/> |
 |    |   | **Ra = 1e5** (Diff+Adv+Momentum)** |
 |    |   | 31) Explicit+semilag+dc: 3502.72 (8000) |
 |    |   | 32) CNA+semilag+dc: 3175.01 (8000) |
