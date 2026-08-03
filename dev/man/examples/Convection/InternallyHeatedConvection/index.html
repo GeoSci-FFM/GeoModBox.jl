@@ -1,0 +1,627 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/><title>Internally Heated · GeoModBox.jl</title><meta name="title" content="Internally Heated · GeoModBox.jl"/><meta property="og:title" content="Internally Heated · GeoModBox.jl"/><meta property="twitter:title" content="Internally Heated · GeoModBox.jl"/><meta name="description" content="Documentation for GeoModBox.jl."/><meta property="og:description" content="Documentation for GeoModBox.jl."/><meta property="twitter:description" content="Documentation for GeoModBox.jl."/><script data-outdated-warner src="../../../../assets/warner.js"></script><link href="https://cdnjs.cloudflare.com/ajax/libs/lato-font/3.0.0/css/lato-font.min.css" rel="stylesheet" type="text/css"/><link href="https://cdnjs.cloudflare.com/ajax/libs/juliamono/0.050/juliamono.min.css" rel="stylesheet" type="text/css"/><link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/fontawesome.min.css" rel="stylesheet" type="text/css"/><link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/solid.min.css" rel="stylesheet" type="text/css"/><link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/brands.min.css" rel="stylesheet" type="text/css"/><link href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.8/katex.min.css" rel="stylesheet" type="text/css"/><script>documenterBaseURL="../../../.."</script><script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js" data-main="../../../../assets/documenter.js"></script><script src="../../../../search_index.js"></script><script src="../../../../siteinfo.js"></script><script src="../../../../../versions.js"></script><link class="docs-theme-link" rel="stylesheet" type="text/css" href="../../../../assets/themes/catppuccin-mocha.css" data-theme-name="catppuccin-mocha"/><link class="docs-theme-link" rel="stylesheet" type="text/css" href="../../../../assets/themes/catppuccin-macchiato.css" data-theme-name="catppuccin-macchiato"/><link class="docs-theme-link" rel="stylesheet" type="text/css" href="../../../../assets/themes/catppuccin-frappe.css" data-theme-name="catppuccin-frappe"/><link class="docs-theme-link" rel="stylesheet" type="text/css" href="../../../../assets/themes/catppuccin-latte.css" data-theme-name="catppuccin-latte"/><link class="docs-theme-link" rel="stylesheet" type="text/css" href="../../../../assets/themes/documenter-dark.css" data-theme-name="documenter-dark" data-theme-primary-dark/><link class="docs-theme-link" rel="stylesheet" type="text/css" href="../../../../assets/themes/documenter-light.css" data-theme-name="documenter-light" data-theme-primary/><script src="../../../../assets/themeswap.js"></script></head><body><div id="documenter"><nav class="docs-sidebar"><div class="docs-package-name"><span class="docs-autofit"><a href="../../../../">GeoModBox.jl</a></span></div><button class="docs-search-query input is-rounded is-small is-clickable my-2 mx-auto py-1 px-2" id="documenter-search-query">Search docs (Ctrl + /)</button><ul class="docs-menu"><li><a class="tocitem" href="../../../../">Home</a></li><li><span class="tocitem">Governing Equation</span><ul><li><input class="collapse-toggle" id="menuitem-2-1" type="checkbox"/><label class="tocitem" for="menuitem-2-1"><span class="docs-label">Solution</span><i class="docs-chevron"></i></label><ul class="collapsed"><li><a class="tocitem" href="../../../theory/GESolution/">General</a></li><li><a class="tocitem" href="../../../Ini/">Specifications</a></li></ul></li><li><input class="collapse-toggle" id="menuitem-2-2" type="checkbox"/><label class="tocitem" for="menuitem-2-2"><span class="docs-label">Heat Diffusion Equation</span><i class="docs-chevron"></i></label><ul class="collapsed"><li><a class="tocitem" href="../../../theory/DiffMain/">General</a></li><li><a class="tocitem" href="../../../theory/DiffOneD/">1D</a></li><li><a class="tocitem" href="../../../theory/DiffTwoD/">2D</a></li></ul></li><li><input class="collapse-toggle" id="menuitem-2-3" type="checkbox"/><label class="tocitem" for="menuitem-2-3"><span class="docs-label">Advection Equation</span><i class="docs-chevron"></i></label><ul class="collapsed"><li><a class="tocitem" href="../../../theory/AdvectMain/">General</a></li><li><a class="tocitem" href="../../../theory/AdvOneD/">1D</a></li><li><a class="tocitem" href="../../../theory/AdvTwoD/">2D</a></li></ul></li><li><input class="collapse-toggle" id="menuitem-2-4" type="checkbox"/><label class="tocitem" for="menuitem-2-4"><span class="docs-label">Momentum Equation</span><i class="docs-chevron"></i></label><ul class="collapsed"><li><a class="tocitem" href="../../../theory/MomentumMain/">General</a></li><li><a class="tocitem" href="../../../theory/MomentumOneD/">1D</a></li><li><a class="tocitem" href="../../../theory/MomentumTwoD/">2D</a></li></ul></li></ul></li><li><span class="tocitem">Exercises</span><ul><li><a class="tocitem" href="../../../exercises/Exercises/">General</a></li><li><a class="tocitem" href="../../../exercises/01_Euler_Advection/">01 - Euler Advection</a></li><li><a class="tocitem" href="../../../exercises/02_1D_Heat_explicit/">02 - 1D Heat Diffusion (explicit)</a></li><li><a class="tocitem" href="../../../exercises/03_1D_Heat_implicit/">03 - 1D Heat Diffusion (implicit)</a></li><li><a class="tocitem" href="../../../exercises/04_2D_Diffusion_Stationary/">04 - 2D Heat Diffusion (stationary)</a></li><li><a class="tocitem" href="../../../exercises/05_2D_Diffusion_TD_Plume/">05a - 2D Heat Diffusion (Plume)</a></li><li><a class="tocitem" href="../../../exercises/05_2D_Diffusion_TD_Sill/">05b - 2D Heat Diffusion (Sill)</a></li><li><a class="tocitem" href="../../../exercises/06_1D_Advection/">06 - 1D Advection</a></li><li><a class="tocitem" href="../../../exercises/07_2D_Energy_Equation/">07 - 2D Energy Conservation</a></li><li><a class="tocitem" href="../../../exercises/08_1D_Stokes/">08 - 1D Stokes</a></li><li><a class="tocitem" href="../../../exercises/09_2D_Falling_Block/">09 - 2D Falling Block (steady state)</a></li><li><a class="tocitem" href="../../../exercises/10_2D_Falling_Block_td/">10 - 2D Falling Block (time-dep)</a></li><li><a class="tocitem" href="../../../exercises/11_2D_Thermal_Convection/">11 - 2D Thermal Convection</a></li><li><a class="tocitem" href="../../../exercises/12_2D_Thermal_Convection_scaled/">12 - 2D Thermal Convection (scaled)</a></li><li><a class="tocitem" href="../../../exercises/13_Blankenbach_Benchmark/">13 - Blankenbach Benchmark</a></li></ul></li><li><span class="tocitem">Examples</span><ul><li><a class="tocitem" href="../../Examples/">General</a></li><li><input class="collapse-toggle" id="menuitem-4-2" type="checkbox"/><label class="tocitem" for="menuitem-4-2"><span class="docs-label">Diffusion Equation</span><i class="docs-chevron"></i></label><ul class="collapsed"><li><a class="tocitem" href="../../Diffusion/OceanicGeotherm/">Oceanic Geotherm (1D)</a></li><li><a class="tocitem" href="../../Diffusion/ContinentalGeotherm/">Continental Geotherm (1D)</a></li><li><a class="tocitem" href="../../Diffusion/GaussianDiffusion1D/">Gaussian Diffusion (1D)</a></li><li><a class="tocitem" href="../../Diffusion/BackwardEuler_DC/">Backward Euler (2D)</a></li><li><a class="tocitem" href="../../Diffusion/ForwardEuler_DC/">Forward Euler (2D)</a></li><li><a class="tocitem" href="../../Diffusion/GaussianDiffusion2D/">Gaussian Diffusion (2D)</a></li><li><a class="tocitem" href="../../Diffusion/PoissonRestest/">Poisson Problem (2D)</a></li><li><a class="tocitem" href="../../Diffusion/PoissonVariablek/">Poisson Problem; variable k (2D)</a></li></ul></li><li><input class="collapse-toggle" id="menuitem-4-3" type="checkbox"/><label class="tocitem" for="menuitem-4-3"><span class="docs-label">Advection Equtaion</span><i class="docs-chevron"></i></label><ul class="collapsed"><li><a class="tocitem" href="../../Advection/Advection2D/">Advection (2D)</a></li><li><a class="tocitem" href="../../Advection/AdvectionRestest2D/">Advection Resolution Test (2D)</a></li></ul></li><li><input class="collapse-toggle" id="menuitem-4-4" type="checkbox"/><label class="tocitem" for="menuitem-4-4"><span class="docs-label">Stokes Equation</span><i class="docs-chevron"></i></label><ul class="collapsed"><li><a class="tocitem" href="../../Stokes/ChannelFlow1D/">Channel Flow (1D)</a></li><li><a class="tocitem" href="../../Stokes/FallingBlockBenchmark/">Falling Block Benchmark</a></li><li><a class="tocitem" href="../../Stokes/FallingBlockDC/">Falling Block</a></li><li><a class="tocitem" href="../../Stokes/RTI/">Rayleigh Taylor Instability (RTI)</a></li><li><a class="tocitem" href="../../Stokes/RTI_growth_rate/">RTI - Growth Rate</a></li><li><a class="tocitem" href="../../Stokes/ViscousInclusion/">RTI (Van Keken et al., 1997)</a></li><li><a class="tocitem" href="../../Stokes/ViscousInclusion/">Viscous Inclusion</a></li></ul></li><li><input class="collapse-toggle" id="menuitem-4-5" type="checkbox" checked/><label class="tocitem" for="menuitem-4-5"><span class="docs-label">Mixed Thermal Convection</span><i class="docs-chevron"></i></label><ul class="collapsed"><li><a class="tocitem" href="../Overview_Convection/">Overview</a></li><li><a class="tocitem" href="../BottomHeatedConvection/">Bottom Heated</a></li><li class="is-active"><a class="tocitem" href>Internally Heated</a></li><li><a class="tocitem" href="../MixedHeatedConvection/">Mixed Heated</a></li><li><a class="tocitem" href="../BottomHeatedConvection_VE/">Bottom Heated - Variable Visc</a></li><li><a class="tocitem" href="../Blankenbach_Var_Eta/">Blankenbach et al. (1989) - Variable Visc</a></li></ul></li><li><input class="collapse-toggle" id="menuitem-4-6" type="checkbox"/><label class="tocitem" for="menuitem-4-6"><span class="docs-label">Thermo-Mechanical Shear Localization</span><i class="docs-chevron"></i></label><ul class="collapsed"><li><a class="tocitem" href="../../StrainLocalization/ShearBands/">Viscous shear localization (shear heating)</a></li></ul></li></ul></li><li><a class="tocitem" href="../../../listoffunctions/">List of functions</a></li><li><a class="tocitem" href="../../../license/">License</a></li></ul><div class="docs-version-selector field has-addons"><div class="control"><span class="docs-label button is-static is-size-7">Version</span></div><div class="docs-selector control is-expanded"><div class="select is-fullwidth is-size-7"><select id="documenter-version-selector"></select></div></div></div></nav><div class="docs-main"><header class="docs-navbar"><a class="docs-sidebar-button docs-navbar-link fa-solid fa-bars is-hidden-desktop" id="documenter-sidebar-button" href="#"></a><nav class="breadcrumb"><ul class="is-hidden-mobile"><li><a class="is-disabled">Examples</a></li><li><a class="is-disabled">Mixed Thermal Convection</a></li><li class="is-active"><a href>Internally Heated</a></li></ul><ul class="is-hidden-tablet"><li class="is-active"><a href>Internally Heated</a></li></ul></nav><div class="docs-right"><a class="docs-navbar-link" href="https://github.com/GeoSci-FFM/GeoModBox.jl" title="View the repository on GitHub"><span class="docs-icon fa-brands"></span><span class="docs-label is-hidden-touch">GitHub</span></a><a class="docs-navbar-link" href="https://github.com/GeoSci-FFM/GeoModBox.jl/blob/main/docs/src/man/examples/Convection/InternallyHeatedConvection.md" title="Edit source on GitHub"><span class="docs-icon fa-solid"></span></a><a class="docs-settings-button docs-navbar-link fa-solid fa-gear" id="documenter-settings-button" href="#" title="Settings"></a><a class="docs-article-toggle-button fa-solid fa-chevron-up" id="documenter-article-toggle-button" href="javascript:;" title="Collapse all docstrings"></a></div></header><article class="content" id="documenter-page"><h1 id="[Internally-Heated-Convection](https://github.com/GeoSci-FFM/GeoModBox.jl/blob/main/examples/ThermalConvection/InternallyHeated.jl)"><a class="docs-heading-anchor" href="#[Internally-Heated-Convection](https://github.com/GeoSci-FFM/GeoModBox.jl/blob/main/examples/ThermalConvection/InternallyHeated.jl)"><a href="https://github.com/GeoSci-FFM/GeoModBox.jl/blob/main/examples/ThermalConvection/InternallyHeated.jl">Internally Heated Convection</a></a><a id="[Internally-Heated-Convection](https://github.com/GeoSci-FFM/GeoModBox.jl/blob/main/examples/ThermalConvection/InternallyHeated.jl)-1"></a><a class="docs-heading-anchor-permalink" href="#[Internally-Heated-Convection](https://github.com/GeoSci-FFM/GeoModBox.jl/blob/main/examples/ThermalConvection/InternallyHeated.jl)" title="Permalink"></a></h1><p>This example demonstrates two-dimensional thermal convection driven by internal radiogenic heating using the finite-difference solvers provided by <code>GeoModBox.jl</code>. In contrast to the bottom-heated convection example, thermal energy is generated uniformly throughout the domain, producing buoyancy forces that drive mantle convection.</p><p>The example builds directly upon the bottom-heated convection model and demonstrates how different physical source terms can be incorporated into the same numerical framework. The coupled Stokes and heat equations are solved using adaptive time stepping, semi-Lagrangian advection, and a Crank-Nicolson discretization of the heat equation solved with the general defect-correction framework. Throughout the simulation, diagnostic quantities such as the Nusselt number, the root-mean-square velocity, and the horizontally averaged temperature profile are monitored to characterize the evolution of the convective system.</p><p>This example considers internally heated convection with an internal-heating Rayleigh number of </p><p>$</p><p>Ra_Q \approx 1.5 \cdot 10^7. $</p><hr/><p>The example uses the momentum, advection, and heat-equation solvers of <code>GeoModBox.jl</code> together with standard Julia packages for sparse linear algebra, visualization, and performance measurements.</p><pre><code class="language-Julia hljs">using Plots, ExtendableSparse
+using GeoModBox
+using GeoModBox.InitialCondition, GeoModBox.MomentumEquation.TwoD
+using GeoModBox.AdvectionEquation.TwoD, GeoModBox.HeatEquation.TwoD
+using GeoModBox.Scaling
+using Statistics, LinearAlgebra
+using Printf, TimerOutputs, LaTeXStrings, Measures</code></pre><p>The following section specifies the initial temperature distribution together with several visualization parameters used to generate animations and diagnostic figures during the simulation.</p><pre><code class="language-Julia hljs">to      =   TimerOutput()
+# Define Initial Condition ========================================== #
+# Temperature - 
+#   1) circle, 2) gaussian, 3) block, 4) linear, 5) lineara
+# !!! Gaussian is not working!!! 
+Ini         =   (T=:lineara,)
+# ------------------------------------------------------------------- #
+# Plot Einstellungen ================================================ #
+Pl  =   (
+    qinc        =   10,
+    qsc         =   1.0e-4
+)
+# Animationssettings ================================================ #
+path        =   string(&quot;./examples/ThermalConvection/Results/&quot;)
+anim        =   Plots.Animation(path, String[] )
+save_fig    =   1
+# ------------------------------------------------------------------- #</code></pre><p>The computational domain and material properties are defined below. In addition to the parameters introduced for the bottom-heated model, a uniform internal heat-production rate is specified. This volumetric heat source represents radiogenic heating within the mantle and acts as an additional source term in the energy equation. </p><pre><code class="language-Julia hljs">@timeit to &quot;Ini&quot; begin
+# Modellgeometrie Konstanten ======================================== #
+M   =   Geometry(
+    xmin    =   0.0,                #   [ m ] 
+    xmax    =   11600e3,            #   [ m ]
+    ymin    =   -2900e3,            #   [ m ]
+    ymax    =   0.0,                #   [ m ]
+)
+# ------------------------------------------------------------------- #
+# Referenzparameter ================================================= #
+P   =   Physics(
+    g       =   9.81,               #   Schwerebeschleunigung [m/s^2]
+    ρ₀      =   3300.0,             #   Hintergunddichte [kg/m^3]
+    k       =   4.125,              #   Thermische Leitfaehigkeit [ W/m/K ]
+    cp      =   1250.0,             #   Heat capacity [ J/kg/K ]
+    α       =   2.0e-5,             #   Thermischer Expnasionskoef. [ K^-1 ]
+    Q₀      =   1.84e-08,           #   Waermeproduktionsrate pro Volumen [W/m^3]
+    η₀      =   3.947725485e23,     #   Viskositaet [ Pa*s ] [1.778087025e21]
+    ΔT      =   2500.0,             #   Temperaturdifferenz
+    # Falls Ra &lt; 0 gesetzt ist, dann wird Ra aus den obigen Parametern
+    # berechnet. Falls Ra gegeben ist, dann wird die Referenzviskositaet so
+    # angepasst, dass die Skalierungsparameter die gegebene Rayleigh-Zahl
+    # ergeben.
+    Ra      =   1.0e6,              #   Rayleigh number
+    Ttop    =   273.15,             #   Temperatur an der Oberfläche [ K ]
+)
+# ------------------------------------------------------------------- #</code></pre><p>The governing equations are solved in non-dimensional form. Therefore, characteristic scaling parameters are computed from the physical model and subsequently used to non-dimensionalize all variables.</p><pre><code class="language-Julia hljs"># Definiere Skalierungskonstanten =================================== # 
+S   =   ScalingConstants!(M,P)
+# ------------------------------------------------------------------- #</code></pre><p>The computational grid consists of a staggered finite-difference mesh with pressure and temperature stored at cell centers and velocity components located on the corresponding cell faces.</p><pre><code class="language-Julia hljs"># Gittereinstellungen =============================================== #
+NC  =   (
+    x   =   400,
+    y   =   100,
+)
+NV      =   (
+    x   =   NC.x + 1,
+    y   =   NC.y + 1,
+)
+Δ       =   GridSpacing(
+    x   =   (M.xmax - M.xmin)/NC.x,
+    y   =   (M.ymax - M.ymin)/NC.y,
+)
+# ------------------------------------------------------------------- #</code></pre><p>All numerical fields required during the simulation are allocated. In addition to the solution variables and auxiliary work arrays, the volumetric heat-production field is initialized and assigned a uniform value throughout the computational domain.</p><pre><code class="language-Julia hljs"># Initialisierung der Datenfelder =================================== #
+D       =   DataFields(
+    Q       =   zeros(Float64,(NC...)),
+    T       =   zeros(Float64,(NC...)),
+    T0      =   zeros(Float64,(NC...)),
+    T_ex    =   zeros(Float64,(NC.x+2,NC.y+2)),
+    T_ex0   =   zeros(Float64,(NC.x+2,NC.y+2)),
+    Told_ex =   zeros(Float64,(NC.x+2,NC.y+2)),
+    ρ       =   ones(Float64,(NC...)),
+    vx      =   zeros(Float64,(NV.x,NV.y+1)),
+    vy      =   zeros(Float64,(NV.x+1,NV.y)),    
+    Pt      =   zeros(Float64,(NC...)),
+    vxc     =   zeros(Float64,(NC...)),
+    vyc     =   zeros(Float64,(NC...)),
+    vxco    =   zeros(Float64,(NC...)),
+    vyco    =   zeros(Float64,(NC...)),
+    vc      =   zeros(Float64,(NC...)),
+    ΔTtop   =   zeros(Float64,NC.x),
+    ΔTbot   =   zeros(Float64,NC.x),
+)
+# Wärmeproduktionsrate ------
+@. D.Q      =   P.Q₀
+# ------------------------------------------------------------------- #
+# Needed for the defect correction solution ---
+divV        =   zeros(Float64,NC...)
+ε           =   (
+    xx      =   zeros(Float64,NC...), 
+    yy      =   zeros(Float64,NC...), 
+    xy      =   zeros(Float64,NV...),
+)
+τ           =   (
+    xx      =   zeros(Float64,NC...), 
+    yy      =   zeros(Float64,NC...), 
+    xy      =   zeros(Float64,NV...),
+)
+# Residuals ---
+Fm     =    (
+    x       =   zeros(Float64,NV.x, NC.y), 
+    y       =   zeros(Float64,NC.x, NV.y)
+)
+FPt         =   zeros(Float64,NC...)
+# Heat Flux calculations ---
+Tv1         =   zeros(NV.x,1)
+Tv2         =   zeros(NV.x,1)
+dTdy        =   zeros(NV.x,1)
+# ------------------------------------------------------------------- #</code></pre><p>The simulation time, stability factors for the Courant and diffusion criteria, and arrays used to store diagnostic quantities are initialized. During the simulation, the time step is adjusted automatically according to the most restrictive stability criterion.</p><pre><code class="language-Julia hljs"># Zeitparameter ===================================================== #
+T   =   TimeParameter(
+    tmax    =   1000000.0,          #   [ Ma ]
+    Δfacc   =   0.9,                #   Courant time factor
+    Δfacd   =   0.9,                #   Diffusion time factor
+    itmax   =   10000,              #   Maximum iterations
+)
+T.tmax      =   T.tmax*1e6*T.year    #   [ s ]
+T.Δc        =   T.Δfacc * minimum((Δ.x,Δ.y)) / 
+                    (sqrt(maximum(abs.(D.vx))^2 + maximum(abs.(D.vy))^2))
+T.Δd        =   T.Δfacd * (1.0 / (2.0 * P.κ *(1.0/Δ.x^2 + 1/Δ.y^2)))
+
+T.Δ         =   minimum([T.Δd,T.Δc])
+# Statistics -------------------------------------------------------- #
+Time            =   zeros(T.itmax)
+Nus             =   zeros(T.itmax)
+meanV           =   zeros(T.itmax)
+meanT           =   zeros(T.itmax,NC.y+2)
+epsV_history    =   fill(NaN, T.itmax)
+find            =   0
+count           =   0
+epsV0           =   0
+final_step      =   0 
+# ------------------------------------------------------------------- #</code></pre><p>Once the scaling constants have been determined, all dimensional model parameters are converted into their corresponding non-dimensional values used by the numerical solvers.</p><pre><code class="language-Julia hljs"># Skalierungsgesetze ================================================ #
+ScaleParameters!(S,M,Δ,T,P,D)
+# ------------------------------------------------------------------- #</code></pre><p>Finally, one- and two-dimensional coordinate arrays are generated for the staggered grid. These coordinates are used throughout the simulation for interpolation, visualization, and evaluation of the finite-difference operators.</p><pre><code class="language-Julia hljs"># Koordinaten ======================================================= #
+x       =   (
+    c   =   LinRange(M.xmin+Δ.x/2,M.xmax-Δ.x/2,NC.x),
+    ce  =   LinRange(M.xmin - Δ.x/2.0, M.xmax + Δ.x/2.0, NC.x+2),
+    v   =   LinRange(M.xmin,M.xmax,NV.x),
+)
+y       =   (
+    c   =   LinRange(M.ymin+Δ.y/2,M.ymax-Δ.y/2,NC.y),
+    ce  =   LinRange(M.ymin - Δ.y/2.0, M.ymax + Δ.y/2.0, NC.y+2),
+    v   =   LinRange(M.ymin,M.ymax,NV.y),
+)
+x1      =   (
+    c2d     =   x.c .+ 0*y.c&#39;,
+    v2d     =   x.v .+ 0*y.v&#39;, 
+    vx2d    =   x.v .+ 0*y.ce&#39;,
+    vy2d    =   x.ce .+ 0*y.v&#39;,
+)
+x   =   merge(x,x1)
+y1      =   (
+    c2d     =   0*x.c .+ y.c&#39;,
+    v2d     =   0*x.v .+ y.v&#39;,
+    vx2d    =   0*x.v .+ y.ce&#39;,
+    vy2d    =   0*x.ce .+ y.v&#39;,
+)
+y   =   merge(y,y1)
+# ------------------------------------------------------------------- #
+end</code></pre><p>The initial temperature field is generated using one of the predefined initial conditions. Unlike the bottom-heated example, the lower boundary is not prescribed by a fixed temperature but instead serves as an insulating boundary, allowing the thermal structure to evolve primarily through internal heating.</p><pre><code class="language-Julia hljs"># Anfangsbedingungen ================================================ #
+@timeit to &quot;IniCondition&quot; begin
+IniTemperature!(Ini.T,M,NC,D,x,y;Tb=0.5,Ta=P.Ttop)
+end
+# ------------------------------------------------------------------- #</code></pre><p>A fixed temperature is prescribed at the upper boundary to represent efficient surface cooling, while the remaining boundaries are thermally insulating using homogeneous Neumann conditions. Free-slip velocity boundary conditions are imposed on all four sides of the computational domain.</p><pre><code class="language-Julia hljs"># Randbedingungen =================================================== #
+@timeit to &quot;BoundaryCondition&quot; begin
+# Temperatur ------
+TBC     = (
+    type    = (W=:Neumann, E=:Neumann,N=:Dirichlet,S=:Neumann),
+    val     = (W=zeros(NC.y),E=zeros(NC.y),
+                    N=P.Ttop.*ones(NC.x),S=zeros(NC.x)))
+# Geschwindigkeit ------
+VBC     =   (
+    type    =   (E=:freeslip,W=:freeslip,S=:freeslip,N=:freeslip),
+    val     =   (E=zeros(NV.y),W=zeros(NV.y),S=zeros(NV.x),N=zeros(NV.x),
+                    vyS=0.0,vyN=0.0,vxW=0.0,vxE=0.0),
+)
+end
+# ------------------------------------------------------------------- # </code></pre><p>The specified basal Rayleigh number is enforced by adjusting the reference viscosity whenever necessary. For reference, the corresponding internally heated Rayleigh number is also computed.</p><pre><code class="language-Julia hljs"># Rayleigh Zahl Bedingungen ========================================= #
+if P.Ra &lt; 0
+    # Falls die Rayleigh Zahl nicht explizit angegeben wird, dann 
+    # wird sie hier berechnet
+    P.Ra     =   P.ρ₀*P.g*P.α*P.ΔT*S.hsc^3/P.η₀/P.κ
+else
+    # Falls die Rayleigh Zahl explizit angegeben ist, dann wird hier 
+    # die Referenzviskositaet η₀ angepasst. 
+    P.η₀     =   P.ρ₀*P.g*P.α*P.ΔT*S.hsc^3/P.Ra/P.κ
+end
+filename    =   string(&quot;Internally_Heated_&quot;,P.Ra[1],
+                        &quot;_&quot;,NC.x,&quot;_&quot;,NC.y,
+                        &quot;_&quot;,Ini.T)
+Ra_Q    =   (P.ρ₀*P.g*P.α*P.Q₀*((M.ymax-M.ymin)*S.hsc)^5) / (P.k*P.κ*P.η₀) 
+@printf(&quot;    Ra_Q: %04e\n &quot;,Ra_Q)
+# =================================================================== #</code></pre><p>Before entering the time loop, the matrices and work arrays required by the momentum and energy solvers are allocated. Since the viscosity is constant in this example, the momentum matrix only needs to be assembled and factorized once, significantly reducing the computational cost.</p><pre><code class="language-Julia hljs"># Lineares Gleichungssystem ========================================= #
+@timeit to &quot;EquationSetup&quot; begin
+# Momentum Conservation Equation (MCE) ------
+niterM     =   50
+atolM      =   1e-8        #   Absolute tolerance
+rtolM      =   1e-5        #   # Relative convergence tolerance (RM/R0)
+RM         =   0.0         #   Initialize absolute residual    
+RMrel      =   0.0         #   Initialize relative residual 
+# Numbering, without ghost nodes! ---
+off     = [ NV.x*NC.y,                          # vx
+            NV.x*NC.y + NC.x*NV.y,              # vy
+            NV.x*NC.y + NC.x*NV.y + NC.x*NC.y ] # Pt
+
+Num    =    (
+    Vx  =   reshape(1:NV.x*NC.y, NV.x, NC.y), 
+    Vy  =   reshape(off[1]+1:off[1]+NC.x*NV.y, NC.x, NV.y), 
+    Pt  =   reshape(off[2]+1:off[2]+NC.x*NC.y,NC...),
+    T   =   reshape(1:NC.x*NC.y, NC.x, NC.y),
+)
+ndofM   =   maximum(Num.Pt)     
+KM      =   ExtendableSparseMatrix(ndofM,ndofM)      
+δx      =   zeros(maximum(Num.Pt))
+F       =   zeros(maximum(Num.Pt))   
+# Assemble Matrix for momentum equation ---
+# Optimization outside time loop since viscosity is constant ---
+KM      =   Assemblyc(NC, NV, Δ, 1.0, VBC, Num)
+KMfac   =   lu(KM.cscmatrix)
+# Energieerhaltung (EEG) ------
+niterT  =   10
+ϵT      =   1e-12
+RE      =   0.0
+ndofT   =   maximum(Num.T)     
+KT      =   ExtendableSparseMatrix(ndofT,ndofT)
+δT      =   zeros(maximum(Num.T))
+RT      =   zeros(Float64,NC...)
+∂2T     =   (∂x2=zeros(NC.x, NC.y), ∂y2=zeros(NC.x, NC.y),
+                ∂x20=zeros(NC.x, NC.y), ∂y20=zeros(NC.x, NC.y))
+end
+# ------------------------------------------------------------------- #</code></pre><p>The coupled Stokes and heat equations are solved iteratively. At every time step, buoyancy forces generated by the evolving temperature field drive the incompressible flow. The resulting velocity field is subsequently used to advect temperature before heat diffusion and internal heat production are evaluated.</p><pre><code class="language-Julia hljs"># Zeitschleife ====================================================== #
+@timeit to &quot;Time Loop&quot; begin
+for it = 1:T.itmax
+    find = it
+    R0      =   0.0
+    verbose_step    =   mod(it, 400) == 0 || it == 1 || final_step == 1
+    if it&gt;1
+        Time[it]  =   Time[it-1] + T.Δ
+    end
+    verbose_step &amp;&amp; @printf(&quot;Time step: #%04d, Time [non-dim]: %04e\n &quot;,it,
+                    Time[it])</code></pre><p>The incompressible Stokes equations are solved using a defect-correction iteration. Since the system matrix remains constant for isoviscous convection, only the residual vector changes between iterations.</p><pre><code class="language-Julia hljs">    verbose_step &amp;&amp; @printf(&quot;---Momentum Calculation ---\n&quot;)
+    # ------ MCE ------
+    if it == 1
+        D.vx[2:end-1,:]    .=  0.0
+        D.vy[:,1:end-1]    .=  0.0
+        D.Pt               .=  0.0
+    end
+    # Residual Calculation ------
+    @. D.ρ  =   -P.Ra*D.T
+    @timeit to &quot;Residual Iteration&quot; begin
+    for iter = 1:niterM
+        @timeit to &quot;Residual&quot; begin
+        Residuals2Dc!(D,VBC,ε,τ,divV,Δ,1.0,1.0,Fm,FPt)
+        F[Num.Vx]    .=   Fm.x
+        F[Num.Vy]    .=   Fm.y
+        F[Num.Pt]    .=   FPt
+        RM          =   norm(F)/length(F)
+        if iter == 1
+            R0 = max(RM, eps())
+        end
+        RMrel       =   RM/R0
+        if verbose_step
+            @printf(&quot;   MCE %2d: ||R|| = %1.4e, ||R||/||R₀|| = %1.4e\n&quot;,iter,RM,RMrel)
+        end
+        (RM &lt; atolM || RM/R0 &lt; rtolM) &amp;&amp; break
+        end
+        # Lösen des lineare Gleichungssystems ------
+        @timeit to &quot;Solution&quot; begin
+        δx      .=   -(KMfac \ F)
+        end
+        # Update unbekante Variablen ------
+        @timeit to &quot;Update Solution&quot; begin
+        D.vx[:,2:end-1]     .+=  δx[Num.Vx]
+        D.vy[2:end-1,:]     .+=  δx[Num.Vy]
+        D.Pt                .+=  δx[Num.Pt]
+        end
+    end
+    end
+    # ======
+    # Berechnung der Geschwindikeit auf den Centroids ------
+    for i = 1:NC.x
+        for j = 1:NC.y
+            D.vxc[i,j]  = (D.vx[i,j+1] + D.vx[i+1,j+1])/2
+            D.vyc[i,j]  = (D.vy[i+1,j] + D.vy[i+1,j+1])/2
+        end
+    end
+    @. D.vc        = sqrt(D.vxc^2 + D.vyc^2)</code></pre><p>After the velocity solution has converged, the face-centered velocities are interpolated to the cell centers and several diagnostic quantities are evaluated. These include the Nusselt number, the root-mean-square velocity, and the horizontally averaged temperature profile.</p><pre><code class="language-Julia hljs">    # Wärmefluss an der Oberfläche ================================== #
+    # Get temperature at the vertices         
+    @. Tv1  =   (D.T_ex[1:end-1,end] + D.T_ex[2:end,end] + 
+                    D.T_ex[1:end-1,end-1] + D.T_ex[2:end,end-1])/4
+    @. Tv2  =   (D.T_ex[1:end-1,end-1] + D.T_ex[2:end,end-1] + 
+                    D.T_ex[1:end-1,end-2] + D.T_ex[2:end,end-2])/4
+    # Calculate temperature gradient --- 
+    @. dTdy =   -(Tv1 - Tv2)/Δ.y
+    # Calculate Nusselt number ---
+    Nus[it]     =   0.0
+    # Trapezoidal integration -
+    for i = 1:NV.x
+        if i == 1 || i == NV.x
+            afac = 1
+        else
+            afac = 2
+        end
+        Nus[it]     += afac * dTdy[i]
+    end
+    Nus[it]     *=   Δ.x/2
+    meanT[it,:] =   mean(D.T_ex,dims=1)
+    meanV[it] = sqrt(mean(D.vxc.^2 .+ D.vyc.^2))
+    # --------------------------------------------------------------- #</code></pre><p>The current state of the simulation is visualized periodically. The resulting figure combines the temperature field, velocity vectors, and the horizontally averaged temperature profile, providing a concise overview of the evolving convection pattern.</p><pre><code class="language-Julia hljs">    # Plot ========================================================== #
+    if verbose_step
+        p = PlotFieldProfile(Pl, M, D, x, y, @view(meanT[it, :]))
+
+        if save_fig == 1
+            Plots.frame(anim,p)
+        elseif save_fig == 0
+            p !== nothing &amp;&amp; display(p)
+        end
+    end
+    if final_step == 1
+        @printf(&quot; Maximum Time reached!\n&quot;)
+        break
+    end
+    # --------------------------------------------------------------- #</code></pre><p>An adaptive time step is computed from both the Courant stability criterion and the thermal diffusion criterion. If the next step would exceed the prescribed maximum simulation time, the time step is reduced accordingly so that the simulation terminates exactly at the requested final time.</p><pre><code class="language-Julia hljs">    # Berechnung der Zeitschrittlänge =============================== #
+    T.Δc        =   T.Δfacc * minimum((Δ.x,Δ.y)) / 
+            (sqrt(maximum(abs.(D.vx))^2 + maximum(abs.(D.vy))^2))
+    T.Δd        =   T.Δfacd * (1.0 / (2.0 *(1.0/Δ.x^2 + 1/Δ.y^2)))
+    T.Δ         =   minimum([T.Δd,T.Δc])
+    if Time[it] + T.Δ &gt;= T.tmax
+        T.Δ        = T.tmax - Time[it]
+        final_step = 1
+    end
+    # --------------------------------------------------------------- #</code></pre><p>The temperature field is transported using the semi-Lagrangian advection scheme. The velocity field from the current Stokes solution is used to trace the departure points of the fluid parcels.</p><pre><code class="language-Julia hljs">    # Advektion ===================================================== #
+    if it == 1
+        @. D.vxco   =   D.vxc
+        @. D.vyco   =   D.vyc
+    end
+    @timeit to &quot;Advection&quot; begin
+    semilagc2D!(D.T,D.T_ex,D.vxc,D.vyc,D.vxco,D.vyco,x,y,T.Δ)
+    end
+    @. D.vxco  =   D.vxc
+    @. D.vyco  =   D.vyc
+    # --------------------------------------------------------------- #</code></pre><p>Following advection, the heat equation is solved using a Crank-Nicolson time discretization. The resulting linear system is solved iteratively using the general defect-correction framework introduced in the previous examples. In contrast to the bottom-heated model, the energy equation additionally includes a uniform volumetric heat-production term that continuously generates thermal energy throughout the computational domain.</p><pre><code class="language-Julia hljs">    # Diffusion ===================================================== #
+    @timeit to &quot;Diffusion&quot; begin
+    verbose_step &amp;&amp; @printf(&quot;---Energy Calculation---\n&quot;)
+    # Update temperature field --- 
+    @. D.T0     =   D.T
+    # Assemble linear system
+    KT      =   AssembleMatrix2Dc(1.0, TBC, Num, NC, Δ, T.Δ[1];C=0.5)
+    # Solve for temperature correction: Cholesky factorisation
+    KTc     =   cholesky(KT.cscmatrix)
+    for iter = 1:niterT
+        # Evaluate residual
+        ComputeResiduals2Dc!( RT, D.T, D.T_ex, D.T0, D.T_ex0, ∂2T, 
+                1.0, TBC, Δ, T.Δ[1]; C = 0.5, Q = D.Q, ρ = 1.0, cp = 1.0  )
+        RE      =   norm(RT)/length(RT)
+        if verbose_step
+            @printf(&quot;   ECE %2d: ||RE|| = %1.4e\n&quot;, iter, RE)
+        end
+        RE &lt; ϵT ? break : nothing
+        # Solve for temperature correction: Back substitutions
+        δT .= -(KTc\RT[:])
+        # Update temperature
+        @. D.T += δT[Num.T]
+    end
+    # Update extended field for advection scheme --- 
+    D.T_ex[2:end-1,2:end-1]     .=  D.T
+    end
+    # --------------------------------------------------------------- #</code></pre><p>After each time step, the simulation is checked for termination. The computation stops either when the prescribed maximum simulation time has been reached or when the temporal variations of the root-mean-square velocity indicate that a statistically steady convective state has been achieved.</p><pre><code class="language-Julia hljs">    # Check break =================================================== #
+    # If the maximum time is reached or if the models reaches steady 
+    # state the time loop is stoped! 
+    if Time[it] &gt; 0.0038
+        epsC    =   0.001
+            ind = searchsortedfirst(@view(Time[1:it]), Time[it] - 0.05)
+            epsV    =   std(@view meanV[ind:it])
+            if count == 0
+                epsV0   = max(epsV, eps(Float64))
+                count   += 1
+            end
+            epsV        /= epsV0
+            epsV_history[it] = epsV
+        find    =   it
+        verbose_step &amp;&amp; @printf(&quot;ε_Vr = %g, ε_Cr = %g \n&quot;,epsV,epsC)
+        if Time[it] &gt;= T.tmax
+            @printf(&quot;Maximum time reached!\n&quot;)
+            find    =   it
+            break
+        elseif (epsV &lt;= epsC)
+            @printf(&quot;Convection reaches steady state at %i!\n&quot;,it)
+            find    =   it
+            break
+        end
+    end
+    # --------------------------------------------------------------- #
+    verbose_step &amp;&amp; @printf(&quot;\n&quot;)
+end
+end</code></pre><p>After the simulation has finished, the generated animation and several diagnostic figures are written to disk. These include the convergence history, the final convection pattern, the temporal evolution of the Nusselt number and RMS velocity, and the mean temperature profile.</p><pre><code class="language-Julia hljs">if save_fig == 1
+    # Write the frames to a GIF file
+    Plots.gif(anim, string( path, filename, &quot;.gif&quot; ), fps = 10)
+    foreach(rm, filter(startswith(string(path,&quot;00&quot;)), readdir(path,join=true)))
+end
+valid   =   findall(isfinite, epsV_history)
+k   = plot(
+        valid,
+        log10.(epsV_history[valid]),
+        xlabel = &quot;it&quot;,
+        ylabel = &quot;log₁₀(εᵥ/εᵥ₀)&quot;,
+        label = &quot;&quot;,
+        markershape = :circle,
+        markercolor = :black,
+)
+# Save final figure ===================================================== #
+p2 = PlotFieldProfile(Pl, M, D, x, y, @view(meanT[find, :]))
+if save_fig == 1
+    savefig(k,string(&quot;./examples/ThermalConvection/Results/Internally_Heated_Iterations&quot;,P.Ra,
+            &quot;_&quot;,NC.x,&quot;_&quot;,NC.y,
+            &quot;_&quot;,Ini.T,&quot;.png&quot;))
+    savefig(p2,string(&quot;./examples/ThermalConvection/Results/Internally_Heated_Final_Stage&quot;,P.Ra,
+            &quot;_&quot;,NC.x,&quot;_&quot;,NC.y,&quot;_it_&quot;,find,&quot;_&quot;,
+            Ini.T,&quot;_&quot;,&quot;.png&quot;))
+elseif save_fig == 0
+    display(p2)
+    display(k)
+end
+# ----------------------------------------------------------------------- #
+# Plot time serieses ==================================================== #
+q2  =   plot(layout=(2,1),size=(1200,900),dpi = 300)
+q2  =   plot(Time[1:find],Nus[1:find],
+            xlabel= &quot;&quot;, ylabel= L&quot;Nus&quot;,label=&quot;&quot;,
+            xformatter = _ -&gt; &quot;&quot;,
+            xlims=(0,Time[find]),
+            guidefontsize = 12, tickfontsize = 12,
+            titlefontsize = 12, grid = false,
+            layout=(2,1),subplot=1)
+plot!(q2,Time[1:find],meanV[1:find],
+            xlabel= L&quot;Time\ [\ non-dim\ ]&quot;, ylabel= L&quot;V_{RMS}&quot;,label=&quot;&quot;,
+            xformatter =:auto,
+            guidefontsize = 12, tickfontsize = 12,
+            titlefontsize = 12,grid = false,
+            xlims=(0,Time[find]),
+            layout=(2,1),subplot=2)
+if save_fig == 1
+    savefig(q2,string(&quot;./examples/ThermalConvection/Results/Internally_Heated_TimeSeries&quot;,P.Ra,
+                        &quot;_&quot;,NC.x,&quot;_&quot;,NC.y,&quot;_&quot;,Ini.T,&quot;_&quot;,&quot;.png&quot;))
+elseif save_fig == 0
+    display(q2)
+end
+# ======================================================================= #
+# Plot Mean temperature profile over time =============================== #
+q3  =   plot(mean(meanT[1:find,:],dims=1)&#39;,y.ce,
+        xlabel=L&quot;⟨T⟩&quot;,ylabel=L&quot;y&quot;,title=L&quot;Mean Temperature&quot;,
+        xlims=(0,1),ylims=(-1,0),
+        label=&quot;&quot;,aspect_ratio=1)
+if save_fig == 1
+    savefig(q3,string(&quot;./examples/ThermalConvection/Results/Internally_Heated_TProfile&quot;,P.Ra,
+                        &quot;_&quot;,NC.x,&quot;_&quot;,NC.y,&quot;_&quot;,Ini.T,&quot;_&quot;,&quot;.png&quot;))
+elseif save_fig == 0
+    display(q3)
+end
+display(to)
+# ======================================================================= #</code></pre><p>&lt;img src=&quot;../../../assets/examples/Convection/Internally<em>Heated</em>1.0e6<em>400</em>100_lineara.gif&quot; width=&quot;700&quot;&gt;</p><p><strong>Figure 1.</strong> Evolution of internally heated thermal convection. Heat generated uniformly throughout the domain is transported toward the cold surface by convection, producing broad upwellings and narrow downwellings. The figure shows the temperature field, velocity vectors, and the horizontally averaged temperature profile during the simulation.</p><p>&lt;img src=&quot;../../../assets/examples/Convection/Internally<em>Heated</em>TimeSeries1.0e6<em>400</em>100<em>lineara</em>.png&quot; width=&quot;700&quot;&gt;</p><p><strong>Figure 2.</strong> Evolution of the Nusselt number and root-mean-square velocity. These diagnostic quantities illustrate the transition from the initial conductive state toward vigorous convection and the subsequent approach to a statistically steady convective regime.</p><hr/><p>The following helper function generates the main visualization used throughout the example. It combines the temperature field, velocity vectors, and the horizontally averaged temperature profile into a single figure.</p><pre><code class="language-Julia hljs"># ======================================================================= #
+# Helper function ======================================================= #
+# ======================================================================= #
+function PlotFieldProfile(Pl,M,D,x,y,Tmean)
+    # ---------------------------------------------------------------------------
+    # Combined temperature field and mean-temperature profile
+    # ---------------------------------------------------------------------------
+    p = nothing
+
+    # Width of the physical model domain
+    Lx  =   M.xmax - M.xmin
+
+    # Geometry of the profile strip
+    profile_gap     =   0.08Lx       # Gap between field and profile
+    profile_width   =   0.22Lx       # Width assigned to the profile
+
+    xprofile_min    =   M.xmax + profile_gap
+    xprofile_max    =   xprofile_min + profile_width
+
+    # # Mean-temperature profile at the current time step
+    # Tmean           =   meanT[it, :]
+
+    # Map &lt;T&gt; = 0...1 onto the profile strip
+    xprofile        =   xprofile_min .+ profile_width .* Tmean
+
+    # Full horizontal extent of the combined figure
+    xmax_plot       =   xprofile_max + 0.04Lx
+
+    p = plot(
+        size            = (1900, 500),
+        dpi             = 300,
+        guidefontsize   = 28,
+        tickfontsize    = 18,
+        titlefontsize   = 28,
+        legend          = false,
+        framestyle      = :box,
+        left_margin     = 20mm,
+        right_margin    = 10mm,
+        bottom_margin   = 15mm,
+        top_margin      = 8mm,
+    )
+
+    # ---------------------------------------------------------------------------
+    # Temperature field
+    # ---------------------------------------------------------------------------
+
+    heatmap!(
+        p,
+        x.c,
+        y.c,
+        D.T&#39;,
+        xlabel       = L&quot;x&quot;,
+        ylabel       = L&quot;y&quot;,
+        title        = L&quot;Temperature&quot;,
+        color        = cgrad(:lajolla),
+        colorbar     = true,
+        aspect_ratio = :equal,
+        clims        = (0,1),
+        xlims        = (M.xmin, xmax_plot),
+        ylims        = (M.ymin, M.ymax),
+    )
+
+    contour!(
+        p,
+        x.c,
+        y.c,
+        D.T&#39;,
+        linewidth = 1,
+        color     = &quot;white&quot;,
+        alpha     = 0.5,
+    )
+
+    quiver!(
+        p,
+        x.c2d[1:Pl.qinc:end, 1:Pl.qinc:end],
+        y.c2d[1:Pl.qinc:end, 1:Pl.qinc:end],
+        quiver = (
+            D.vxc[1:Pl.qinc:end, 1:Pl.qinc:end] .* Pl.qsc,
+            D.vyc[1:Pl.qinc:end, 1:Pl.qinc:end] .* Pl.qsc,
+        ),
+        linewidth = 1,
+        linealpha = 0.5,
+        color     = &quot;black&quot;,
+    )
+
+    # ---------------------------------------------------------------------------
+    # Mean-temperature profile
+    # ---------------------------------------------------------------------------
+
+    # White background for the profile strip
+    plot!(
+        p,
+        Shape(
+            [xprofile_min, xprofile_max, xprofile_max, xprofile_min],
+            [M.ymin, M.ymin, M.ymax, M.ymax],
+        ),
+        fillcolor   = :white,
+        fillalpha   = 1.0,
+        linecolor   = :black,
+        linewidth   = 1.5,
+    )
+
+    # Optional horizontal reference lines
+    for ytick in range(M.ymin, M.ymax, length=6)
+        plot!(
+            p,
+            [xprofile_min, xprofile_max],
+            [ytick, ytick],
+            color     = :gray,
+            alpha     = 0.25,
+            linewidth = 0.8,
+        )
+    end
+
+    # Mean-temperature profile
+    plot!(
+        p,
+        xprofile,
+        y.ce,
+        color     = :black,
+        linewidth = 4,
+    )
+
+    # Separator between field and profile
+    vline!(
+        p,
+        [xprofile_min],
+        color     = :black,
+        linewidth = 1.5,
+    )
+
+    # Profile title
+    annotate!(
+        p,
+        (
+            0.5 * (xprofile_min + xprofile_max),
+            M.ymax + 0.055 * (M.ymax - M.ymin),
+            text(L&quot;\langle T\rangle&quot;, 24, :center),
+        ),
+    )
+
+    # Profile-axis labels: 0, 0.5, 1
+    for (Ttick, label) in zip((0.0, 0.5, 1.0), (&quot;0&quot;, &quot;0.5&quot;, &quot;1&quot;))
+        xtick = xprofile_min + profile_width * Ttick
+
+        # Small tick mark
+        plot!(
+            p,
+            [xtick, xtick],
+            [M.ymin, M.ymin + 0.018 * (M.ymax - M.ymin)],
+            color     = :black,
+            linewidth = 1.2,
+        )
+
+        # Tick label
+        annotate!(
+            p,
+            (
+                xtick,
+                M.ymin - 0.055 * (M.ymax - M.ymin),
+                text(label, 16, :center),
+            ),
+        )
+    end
+    return p
+end
+# ======================================================================= #</code></pre></article><nav class="docs-footer"><a class="docs-footer-prevpage" href="../BottomHeatedConvection/">« Bottom Heated</a><a class="docs-footer-nextpage" href="../MixedHeatedConvection/">Mixed Heated »</a><div class="flexbox-break"></div><p class="footer-message">Powered by <a href="https://github.com/JuliaDocs/Documenter.jl">Documenter.jl</a> and the <a href="https://julialang.org/">Julia Programming Language</a>.</p></nav></div><div class="modal" id="documenter-settings"><div class="modal-background"></div><div class="modal-card"><header class="modal-card-head"><p class="modal-card-title">Settings</p><button class="delete"></button></header><section class="modal-card-body"><p><label class="label">Theme</label><div class="select"><select id="documenter-themepicker"><option value="auto">Automatic (OS)</option><option value="documenter-light">documenter-light</option><option value="documenter-dark">documenter-dark</option><option value="catppuccin-latte">catppuccin-latte</option><option value="catppuccin-frappe">catppuccin-frappe</option><option value="catppuccin-macchiato">catppuccin-macchiato</option><option value="catppuccin-mocha">catppuccin-mocha</option></select></div></p><hr/><p>This document was generated with <a href="https://github.com/JuliaDocs/Documenter.jl">Documenter.jl</a> version 1.17.0 on <span class="colophon-date" title="Monday 3 August 2026 22:43">Monday 3 August 2026</span>. Using Julia version 1.12.6.</p></section><footer class="modal-card-foot"></footer></div></div></div></body></html>
