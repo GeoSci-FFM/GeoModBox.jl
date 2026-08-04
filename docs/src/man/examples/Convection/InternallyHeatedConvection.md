@@ -603,14 +603,12 @@ display(to)
 # ======================================================================= #
 ```
 
-```@raw html
-<img src="../../../assets/examples/Convection/Internally_Heated_1.0e6_400_100_lineara.gif" width="700">
-```
+![IHC_1](../../../assets/examples/Convection/Internally_Heated_1.0e6_400_100_lineara.gif)
+
 **Figure 1.** Evolution of internally heated thermal convection. Heat generated uniformly throughout the domain is transported toward the cold surface by convection, producing broad upwellings and narrow downwellings. The figure shows the temperature field, velocity vectors, and the horizontally averaged temperature profile during the simulation.
 
-```@raw html
-<img src="../../../assets/examples/Convection/Internally_Heated_TimeSeries1.0e6_400_100_lineara_.png" width="700">
-```
+![IHC_2](../../../assets/examples/Convection/Internally_Heated_TimeSeries1.0e6_400_100_lineara_.png)
+
 **Figure 2.** Evolution of the Nusselt number and root-mean-square velocity. These diagnostic quantities illustrate the transition from the initial conductive state toward vigorous convection and the subsequent approach to a statistically steady convective regime.
 
 ---

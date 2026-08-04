@@ -597,14 +597,12 @@ display(to)
 # ======================================================================= #
 ```
 
-```@raw html
-<img src="../../../assets/examples/Convection/Bottom_Heated_1.0e6_400_100_lineara.gif" width="700">
-```
+![BHC_1](../../../assets/examples/Convection/Bottom_Heated_1.0e6_400_100_lineara.gif)
+
 **Figure 1.** Evolution of bottom-heated thermal convection at a Rayleigh number of $Ra_b = 10^6$. The animation illustrates the transition from the initial conductive temperature field to a convective state driven by basal heating. Each frame shows the temperature field, velocity vectors, and the horizontally averaged temperature profile. Hot material rises from the lower boundary, while cold material sinks from the surface, resulting in a characteristic convection-cell pattern.
 
-```@raw html
-<img src="../../../assets/examples/Convection/Bottom_Heated_TimeSeries1.0e6_400_100_lineara_.png" width="700">
-```
+![BHC_2](../../../assets/examples/Convection/Bottom_Heated_TimeSeries1.0e6_400_100_lineara_.png)
+
 **Figure 2.** Temporal evolution of the Nusselt number ($Nu$) and the root-mean-square velocity ($V_\mathrm{RMS}$). The Nusselt number quantifies the efficiency of convective heat transport relative to pure conduction, whereas the RMS velocity measures the overall vigor of the convective flow. Both quantities evolve from the initial conductive state toward statistically steady convection.
 
 ---

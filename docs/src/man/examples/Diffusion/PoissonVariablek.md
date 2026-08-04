@@ -150,12 +150,10 @@ savefig(q,"./examples/DiffusionEquation/2D/Results/Poisson_variable_k_02.png")
 # ----------------------------------------------------------------------- #
 ```
 
-```@raw html
-<img src="../../../assets/examples/Diffusion/Poisson_vari_1.svg" width="700">
-```
+![Pvark_1](../../../assets/examples/Diffusion/Poisson_vari_1.svg)
+
 **Figure 1. Temperature distribution for variable thermal parameters.**
 
-```@raw html
-<img src="../../../assets/examples/Diffusion/Poisson_vari_2.svg" width="700">
-```
+![Pvark_1](../../../assets/examples/Diffusion/Poisson_vari_2.svg)
+
 **Figure 2. Thermal conductivity distribution.**

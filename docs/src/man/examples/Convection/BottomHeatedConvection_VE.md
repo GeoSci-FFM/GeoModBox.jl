@@ -634,14 +634,12 @@ display(to)
 # ======================================================================= #
 ```
 
-```@raw html
-<img src="../../../assets/examples/Convection/Bottom_Heated_VE_1.0e6_400_100_lineara.gif" width="700">
-```
+![BHVE_1](../../../assets/examples/Convection/Bottom_Heated_VE_1.0e6_400_100_lineara.gif)
+
 **Figure 1.** Evolution of two-dimensional bottom-heated thermal convection with temperature-dependent viscosity ($Ra_b = 10^6$). The upper row shows the temperature field together with the horizontally averaged temperature profile, while the lower row shows the logarithm of the normalized viscosity, $\log_{10}(\eta/\eta_0)$, and its corresponding horizontal mean profile. Velocity vectors are superimposed on the temperature field. The viscosity evolves according to an Arrhenius-like law, producing a strong, cold upper boundary layer and a comparatively weak, hot lower mantle, which results in a dynamically evolving viscosity contrast throughout the simulation.
 
-```@raw html
-<img src="../../../assets/examples/Convection/Bottom_Heated_VE_TimeSeries1.0e6_400_100_lineara_.png" width="700">
-```
+![BHVE_2](../../../assets/examples/Convection/Bottom_Heated_VE_TimeSeries1.0e6_400_100_lineara_.png)
+
 **Figure 2.** Temporal evolution of the Nusselt number (top) and the root-mean-square velocity, $V_{\mathrm{RMS}}$ (bottom), for the bottom-heated convection model with temperature-dependent viscosity. The Nusselt number quantifies the efficiency of convective heat transport relative to pure conduction, while $V_{\mathrm{RMS}}$ measures the overall vigor of the convective flow. Both quantities approach nearly constant values as the model evolves toward a statistically steady convective state.
 
 ---

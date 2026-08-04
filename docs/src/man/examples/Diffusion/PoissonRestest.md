@@ -189,6 +189,4 @@ savefig("./examples/DiffusionEquation/2D/Results/Poisson_ResTest.png")
 # ----------------------------------------------------------------------- #
 ```
 
-```@raw html
-<img src="../../../assets/examples/Diffusion/Poisson_ResTest.png" width="700">
-```
+![PRes2D_1](../../../assets/examples/Diffusion/Poisson_ResTest.png)

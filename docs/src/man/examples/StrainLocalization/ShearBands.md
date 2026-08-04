@@ -814,14 +814,12 @@ display(to)
 
 The helper functions following the figures perform operations specific to this example, including invariant calculation, adaptive time stepping, stress evaluation, non-linear viscosity updates, and quantitative shear-band analysis.
 
-```@raw html
-<img src="../../../assets/examples/ShearHeating/ShearHeatingBands_2D.gif" width="700">
-```
+![VSL_1](../../../assets/examples/ShearHeating/ShearHeatingBands_2D.gif)
+
 **Figure 1.** Evolution of thermo-mechanical shear localization in the pure-shear benchmark using shear heating. The model employs the general defect-correction energy solver with a Crank–Nicolson discretization ($\theta = 0.5$), tracer-based temperature advection, and a grid resolution of $200 \times 100$ cells. Temperature-dependent, non-linear dislocation-creep viscosities are combined using arithmetic averaging for the phase mixing, centroid-to-vertex interpolation, and marker-to-grid interpolation. The animation shows the evolution of the second invariant of the strain-rate field (background colors), the weak inclusion (black contour), the evolving shear band (white contour), and the fixed diagnostic profile (red line) used to quantify strain-rate amplification, shear-band thickness, and shear-heating-induced temperature increase.
 
-```@raw html
-<img src="../../../assets/examples/ShearHeating/FinalBenchmarkFigure_fixed_arithmetic_arithmetic.png" width="700">
-```
+![VSL_2](../../../assets/examples/ShearHeating/FinalBenchmarkFigure_fixed_arithmetic_arithmetic.png)
+
 **Figure 2.** Evolution and quantitative characterization of thermo-mechanical shear localization for the fixed-profile diagnostic with arithmetic phase and vertex viscosity averaging. Panels (a)–(c) show the second invariant of the strain-rate field at approximately 5%, 15%, and 25% bulk shortening, including the weak inclusion and the profile used to evaluate localization. Panels (d)–(f) show the the strain-rate amplification, temperature increase, shear-band orientation, and shear-band thickness as functions of bulk shortening. Line color distinguishes the upwind, semi-Lagrangian, and tracer advection methods, while line style distinguishes backward Euler (θ = 0), Crank–Nicolson (θ = 0.5), and forward Euler (θ = 1) within the general defect-correction formulation.
 
 ---

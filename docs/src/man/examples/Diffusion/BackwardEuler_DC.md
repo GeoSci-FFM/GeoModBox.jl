@@ -152,7 +152,6 @@ Finally, the analytical and numerical solution and its error are plotted for eac
 end
 ```
 
-```@raw html
-<img src="../../../assets/examples/Diffusion/BackwardEuler_2D_Diff.svg" width="700">
-```
+![BE_1](../../../assets/examples/Diffusion/BackwardEuler_2D_Diff.svg)
+
 **Figure 1.** Final plot for the backward Euler solution using the defect correction method. 

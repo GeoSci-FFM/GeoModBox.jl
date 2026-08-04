@@ -132,9 +132,9 @@ p = plot(T.T,yc./1e3,
 display(p)
 # ------------------------------------------------------------------- #
 ```
-```@raw html
-<img src="../../../assets/examples/Diffusion/CG1D_iniT.svg" width="700">
-```
+
+![CG1D_1](../../../assets/examples/Diffusion/CG1D_iniT.svg)
+
 **Figure 1. Initial temperature profile.**
 
 Define the fields for the thermal properties and assign the corresponding values of each lithospheric layer (upper and lower crust, and lithospheric mantle) to them.Additionally, the maximum thermal diffusivity κ and the vertical heat-flux field q are initialized. The maximum thermal diffusivity is computed conservatively using the largest thermal conductivity and the smallest density and heat capacity. This value is used solely to determine a stable explicit time step. 
@@ -220,9 +220,8 @@ end
 # ------------------------------------------------------------------- #
 ```
 
-```@raw html
-<img src="../../../assets/examples/Diffusion/CG1D_evolve.svg" width="700">
-```
+![CG1D_2](../../../assets/examples/Diffusion/CG1D_evolve.svg)
+
 **Figure 2. Evolution of the temperature profile with depth in 100 Ma steps.**
 
 Since the heat flux is defined at the grid vertices, the ghost-node temperatures are first updated to satisfy the prescribed boundary conditions. The vertical heat flux is then computed using Fourier's law.
@@ -282,7 +281,6 @@ savefig(p,"./examples/DiffusionEquation/1D/Results/ContinentalGeotherm_1D_evolve
 # ======================================================================= #
 ```
 
-```@raw html
-<img src="../../../assets/examples/Diffusion/CG1D_final.svg" width="700">
-```
+![CG1D_3](../../../assets/examples/Diffusion/CG1D_final.svg)
+
 **Figure 3. Final temperature, heat flux, and thermal parameter depth profiles.**

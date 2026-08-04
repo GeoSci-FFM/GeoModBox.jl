@@ -26,9 +26,7 @@ In this 1D formulation, the horizontal pressure gradient is prescribed and acts 
 
 # Discretization
 
-```@raw html
-    <img src="../../assets/theory/Stokes_1D_Grid.png" width="700">
-```
+![Mom1D_1](../../assets/theory/Stokes_1D_Grid.png)
 
 **Figure 1. Channel flow setup and finite difference grid.**  
 *Left:* Sketch of uniaxial channel flow driven by either a constant velocity at the top ($v_x$) and/or a horizontal pressure gradient $\left(\frac{\Delta P}{\Delta x} = P_1 - P_0\right)$, representing Couette, Poiseuille, or Couette-Poiseuille flow.  

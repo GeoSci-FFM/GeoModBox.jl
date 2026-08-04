@@ -21,20 +21,14 @@ The main objectives are:
 
 The results illustrate how increasing the Rayleigh number strengthens convection, changes the scale of plumes and slabs, and increases the overall vigor of the flow.  
 
-```@raw html
-    <img src="../../assets/exercises/11_ThermalConvection_1.0e6_150_50_lineara_semilag_CNA_dc.gif" width="700">
-```
+![11a](../../assets/exercises/11_ThermalConvection_1.0e6_150_50_lineara_semilag_CNA_dc.gif)
 
 **Figure 1.** Isoviscous, bottom-heated thermal convection for $Ra = 10^6$ with a resolution of 150x50. The initial condition is a linearly increasing temperature profile with an elliptical anomaly on top. Thermal boundary conditions are fixed temperature at the top and bottom and zero heat flux at the sides. All velocity boundary conditions are free slip. Heat diffusion is solved using the Crank–Nicolson method, the Stokes equation using the defect correction method, and temperature advection with the semi-Lagrangian method. Models run until a steady state is reached or up to a maximum of 8000 iterations.  
 
-```@raw html
-    <img src="../../assets/exercises/11_ThermalConvectionTimeSeries1.0e6_150_50_lineara_semilag_CNA_dc.png" width="700">
-```
+![11b](../../assets/exercises/11_ThermalConvectionTimeSeries1.0e6_150_50_lineara_semilag_CNA_dc.png)
 
 **Figure 2.** Time series of the surface Nusselt number and the root mean square velocity. For details on how these diagnostics are calculated, see the [exercise](https://github.com/GeoSci-FFM/GeoModBox.jl/blob/main/exercises/11_2D_Thermal_Convection_en.ipynb).  
 
-```@raw html
-    <img src="../../assets/exercises/11_ThermalConvection_iterations_1.0e6_150_50_lineara_semilag_CNA_dc.png" width="700">
-```
+![11c](../../assets/exercises/11_ThermalConvection_iterations_1.0e6_150_50_lineara_semilag_CNA_dc.png)
 
 **Figure 3.** Variation in the root mean square velocity with numerical iterations. Empirically, a tolerance of $10^{-15}$ was chosen to define steady state. Low-$Ra$ cases typically reach steady state in fewer than 3000 iterations.  

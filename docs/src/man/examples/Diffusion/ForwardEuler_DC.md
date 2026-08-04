@@ -197,7 +197,6 @@ For more details on the finite-difference discretization of the diffusion equati
 end
 ```
 
-```@raw html
-<img src="../../../assets/examples/Diffusion/ForwardEuler_2D_Diff.svg" width="700">
-```
+![FE_1](../../../assets/examples/Diffusion/ForwardEuler_2D_Diff.svg)
+
 **Figure 1.** Comparison between the analytical solution, the numerical solution obtained using the Forward Euler method, and the corresponding absolute error.

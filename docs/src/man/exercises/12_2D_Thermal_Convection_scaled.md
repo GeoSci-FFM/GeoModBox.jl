@@ -24,17 +24,14 @@ Therefore, the **grid resolution** must be adjusted accordingly to ensure **nume
 The resolution provided here is sufficient for the Rayleigh numbers listed.  
 That said, some numerical methods already show **initial inaccuracies**, so in practice a **higher resolution** is often advisable.
 
-```@raw html
-    <img src="../../assets/exercises/12_ThermalConvection_1.0e6_150_50_lineara_semilag_CNA_dc.gif" width="700">
-```
+![12a](../../assets/exercises/12_ThermalConvection_1.0e6_150_50_lineara_semilag_CNA_dc.gif)
+
 **Figure 1.** Isoviscous, bottom-heated thermal convection for $Ra = 10^6$ with a resolution of 150x50. The initial condition is a linearly increasing temperature profile with an elliptical anomaly at the top. Thermal boundary conditions are fixed temperature at the top and bottom and zero heat flux at the sides. All velocity boundary conditions are free slip. Heat diffusion is solved using the Crank–Nicolson method, the Stokes equation using the defect correction method, and temperature advection with the semi-Lagrangian method. Models run until a steady state is reached or up to a maximum of 8000 iterations.  
 
-```@raw html
-    <img src="../../assets/exercises/12_ThermalConvectionTimeSeries_1.0e6_150_50_lineara_semilag_CNA_dc.png" width="700">
-```
+![12b](../../assets/exercises/12_ThermalConvectionTimeSeries_1.0e6_150_50_lineara_semilag_CNA_dc.png)
+
 **Figure 2.** Time series of the surface Nusselt number and the root mean square velocity. For details on how these diagnostics are calculated, see the [exercise](https://github.com/GeoSci-FFM/GeoModBox.jl/blob/main/exercises/12_2D_Thermal_Convection_en.ipynb).  
 
-```@raw html
-    <img src="../../assets/exercises/12_ThermalConvection_iterations_1.0e6_150_50_lineara_semilag_CNA_dc.png" width="700">
-```
+![12c](../../assets/exercises/12_ThermalConvection_iterations_1.0e6_150_50_lineara_semilag_CNA_dc.png)
+
 **Figure 3.** Variation in the root mean square velocity with numerical iterations. Empirically, a tolerance of $3.8^{-3}$ was chosen to define steady state. Low-$Ra$ cases typically reach steady state in fewer than 3000 iterations.  

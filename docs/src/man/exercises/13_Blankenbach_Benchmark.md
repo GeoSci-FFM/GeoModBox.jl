@@ -14,39 +14,32 @@ The main objectives are:
 
 This benchmark demonstrates how increasing the Rayleigh number strengthens convection, leading to thinner thermal boundary layers and more localized upwellings and downwellings. It also highlights the importance of numerical resolution and stability in high–Rayleigh-number simulations.
 
-```@raw html
-<img src="../../assets/exercises/13a.gif" width="700">
-```
+![13a](../../assets/exercises/13a.gif)
+
 **Figure 1.** Isoviscous, bottom-heated thermal convection for $Ra_b = 10^6$ with a resolution of 100×100.  
 The initial condition is a sinusoidally perturbed conductive temperature field.  
 The background color shows the non-dimensional temperature, overlaid by temperature isolines (every 0.05) and centroid velocity vectors. Heat diffusion is solved using the defect correction with a **Crank–Nicolson** discretization, the Stokes equation using the **defect correction** method, and temperature advection with the **semi-Lagrangian** method. Models run until a steady state is reached or up to a maximum of 8000 iterations.
 
-```@raw html
-<img src="../../assets/exercises/13b.png" width="700">
-```
+![13b](../../assets/exercises/13b.png)
+
 **Figure 2.** Time series of the surface Nusselt number and root-mean-square (RMS) velocity. The steady-state benchmark values are shown as red dashed lines. For details on how these diagnostics are calculated, see the [exercise](https://github.com/GeoSci-FFM/GeoModBox.jl/blob/main/exercises/13_Blankenbach_Benchmark_en.ipynb).
 
-```@raw html
-<img src="../../assets/exercises/13c.png" width="700">
-```
+![13c](../../assets/exercises/13c.png)
+
 **Figure 3.** Vertical temperature profile at the center of the model domain. Benchmark values for the local maximum and minimum temperatures are shown as black squares.
 
-```@raw html
-<img src="../../assets/exercises/13d.png" width="700">
-```
+![13d](../../assets/exercises/13d.png)
+
 **Figure 4.** Variation in the relative root-mean-square velocity with numerical iterations. Empirically, a tolerance of $1.0^{-3}$ was chosen to define steady state.
 
-```@raw html
-<img src="../../assets/exercises/13e.png" width="700">
-```
+![13e](../../assets/exercises/13e.png)
+
 **Figure 5.** Summary of the resolution study for a basal Rayleigh number of $Ra = 10^4$. (a) Final dimensionless temperature field with superimposed velocity vectors and temperature contours for the third model. (b) Vertical temperature profile through the center of the model. The black squares denote the published locations of the minimum and maximum temperatures reported by Blankenbach et al. (1989). (c) Evolution of the Nusselt number ($Nu$) and root-mean-square velocity ($V_{\mathrm{RMS}}$) toward steady state. The dashed red lines indicate the benchmark values. (d) Grid convergence of the Nusselt number, root-mean-square velocity, and mean temperature as a function of the inverse number of grid cells, $1/(n_x n_y)$. The dashed red lines correspond to the benchmark values.
 
-```@raw html
-<img src="../../assets/exercises/13f.png" width="700">
-```
+![13f](../../assets/exercises/13f.png)
+
 **Figure 6.** Summary of the resolution study for a basal Rayleigh number of $Ra = 10^5$. The panels are the same as above. 
 
-```@raw html
-<img src="../../assets/exercises/13g.png" width="700">
-```
+![13g](../../assets/exercises/13g.png)
+
 **Figure 7.** Summary of the resolution study for a basal Rayleigh number of $Ra = 10^6$. The panels are the same as above.

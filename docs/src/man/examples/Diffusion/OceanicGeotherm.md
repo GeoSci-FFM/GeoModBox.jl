@@ -117,9 +117,9 @@ q = plot(Tini,yc./1e3,
 display(q)
 # ------------------------------------------------------------------- #
 ```
-```@raw html
-<img src="../../../assets/examples/Diffusion/OG1D_iniT.svg" width="700">
-```
+
+![OG1D_1](../../../assets/examples/Diffusion/OG1D_iniT.svg)
+
 **Figure 1. Initial temperature profile.**
 
 Although this example assumes constant material properties, the variable-property solver expects density, heat capacity, thermal conductivity, and radiogenic heat production to be defined as spatial fields. Therefore, the scalar material properties are expanded to vectors with the appropriate dimensions. The maximum thermal diffusivity is computed conservatively from the largest thermal conductivity and the smallest density and heat capacity. This value is used only for determining a stable explicit time step.
@@ -188,9 +188,8 @@ end
 # ------------------------------------------------------------------- #
 ```
 
-```@raw html
-<img src="../../../assets/examples/Diffusion/OG1D_evolve.svg" width="700">
-```
+![OG1D_2](../../../assets/examples/Diffusion/OG1D_evolve.svg)
+
 **Figure 2. Evolution of the temperature profile with depth in 5 Ma steps.**
 
 Since the heat flux is defined at the grid vertices, the ghost-node temperatures are first updated according to the prescribed boundary conditions before Fourier's law is evaluated. 
@@ -242,7 +241,6 @@ savefig(q,"./examples/DiffusionEquation/1D/Results/OceanicGeotherm_1D_evolve.png
 # ======================================================================= #
 ```
 
-```@raw html
-<img src="../../../assets/examples/Diffusion/OG1D_final.svg" width="700">
-```
+![OG1D_3](../../../assets/examples/Diffusion/OG1D_final.svg)
+
 **Figure 3.** Comparison between the numerical and analytical half-space cooling solutions together with the corresponding vertical heat-flux profile.

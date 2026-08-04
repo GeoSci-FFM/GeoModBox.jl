@@ -18,12 +18,10 @@ The main objectives are:
 
 An example animation of the evolving profile using the upwind scheme and the semi-lagrangian scheme is shown in Figure 1 and Figure 2, respectively.
 
-```@raw html
-<img src="../../assets/exercises/06a.gif" width="700">
-```
+![06a](../../assets/exercises/06a.gif)
+
 **Figure 1.** Advection of Gaussian temperature anomaly using the upwind scheme.
 
-```@raw html
-<img src="../../assets/exercises/06b.gif" width="700">
-```
+![06b](../../assets/exercises/06b.gif)
+
 **Figure 2.** Advection of Gaussian temperature anomaly using the semi-lagrangian scheme.

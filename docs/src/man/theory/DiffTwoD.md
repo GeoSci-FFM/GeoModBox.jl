@@ -34,9 +34,7 @@ $\kappa = k / \rho_0 / c_p$ is the thermal diffusivity [m²/s] and $\rho_0$ is a
 
 To numerically solve Equation (3), the spatial domain must be discretized and the relevant thermal properties assigned to the appropriate computational nodes.
 
-```@raw html
-    <img src="../../assets/theory/2D_Diffusion_Grid.png" width="700">
-```
+![Diff2D_1](../../assets/theory/2D_Diffusion_Grid.png)
 
 **Figure 1. 2D Discretization.** *Staggered finite difference grid* for solving the 2D heat diffusion equation. Temperature values are defined at the *centroids* (red circles), while heat fluxes are computed at the points between the *vertices* (black circles; horizontal flux: blue crosses; vertical flux: green squares). *Ghost nodes* (grey circles) are used to implement *Dirichlet* and *Neumann* boundary conditions.
 

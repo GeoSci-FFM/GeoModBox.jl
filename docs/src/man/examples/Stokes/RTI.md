@@ -531,7 +531,6 @@ end
 display(to)
 ```
 
-```@raw html
-<img src="../../../assets/examples/Stokes/RTI_ηr_-6.0_tracers_DC_MarkerInterpolation_arith.gif" width="700">
-```
+![RTI](../../../assets/examples/Stokes/RTI_ηr_-6.0_tracers_DC_MarkerInterpolation_arith.gif)
+
 **Figure 1. Rayleigh–Taylor Instability.** Transient evolution of a two-layer system with a density contrast of 100 kg/m³ and a viscosity contrast spanning six orders of magnitude. Density is reconstructed from the phase ratio for the PhaseRatio approach. Panels show: density (top left), tracer distribution (top right), centroid viscosity (bottom left), and absolute centroid velocity (bottom right). 

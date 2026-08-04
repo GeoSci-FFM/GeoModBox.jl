@@ -26,9 +26,8 @@ The shear-cell velocity field is primarily intended for testing advection scheme
 
 In this example, rigid body rotation is the preferred initial velocity condition. Rigid body rotation provides a useful benchmark for testing advection scheme accuracy, as it applies pure rotation, displacing the anomaly without deformation. After one complete revolution, the shape and amplitude of the anomaly should ideally match the initial condition. Any deviation from the initial condition indicates either numerical diffusion (as in the upwind method) or interpolation error, particularly for sharp gradients. 
 
-```@raw html
-<img src="../../../assets/examples/Advection/Advection_SetUp.png" width="700">
-```
+![Adv1D_1](../../../assets/examples/Advection/Advection_SetUp.png)
+
 **Figure 1. Rigid Body Rotation.** Initial configuration for rigid-body rotation with either a circular anomaly (dashed outline) or a rectangular anomaly (solid outline). The velocity field, indicated by the gray arrows, is set to zero outside the inner circular region shown in gray to minimize boundary effects.
 
 **Initial Velocity Condition**
@@ -308,9 +307,8 @@ end
 # -------------------------------------------------------------------- #
 ```
 
-```@raw html
-<img src="../../../assets/examples/Advection/AdvIniSetup.svg" width="700">
-```
+![Adv1D_2](../../../assets/examples/Advection/AdvIniSetup.svg)
+
 **Figure 2. Initial condition.** Initial rigid-body rotation setup with a circular temperature anomaly. The temperature is normalized by its initial maximum value, such that the maximum anomaly temperature equals one. 
 
 Now, one can start the time loop and the advection. 
@@ -411,12 +409,10 @@ end
 # -------------------------------------------------------------------- #
 ```
 
-```@raw html
-<img src="../../../assets/examples/Advection/2D_advection_circle_RigidBody_upwind_100_100_nth_1.gif" width="700">
-```
+![Adv1D_3](../../../assets/examples/Advection/2D_advection_circle_RigidBody_upwind_100_100_nth_1.gif)
+
 **Figure 3. Rigid Body Rotation using the Upwind Scheme.**
 
-```@raw html
-<img src="../../../assets/examples/Advection/2D_advection_circle_RigidBody_markers_100_100_nth_1.gif" width="700">
-```
+![Adv1D_4](../../../assets/examples/Advection/2D_advection_circle_RigidBody_markers_100_100_nth_1.gif)
+
 **Figure 4. Rigid Body Rotation using Tracers.** Left: Temperature field interpolated from tracers onto the centroids. Right: Tracer density per cell. The simulation was performed using a single CPU thread. 

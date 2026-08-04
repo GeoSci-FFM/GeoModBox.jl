@@ -284,9 +284,8 @@ savefig(p,string("./examples/StokesEquation/2D/Results/FallingBlockConstEta_inst
 display(to)
 ```
 
-```@raw html
-<img src="../../../assets/examples/Stokes/FallingBlockConstEta_instantaneous_DC.png" width="700">
-```
+![FB_DC_1](../../../assets/examples/Stokes/FallingBlockConstEta_instantaneous_DC.png)
+
 **Figure 1. Instantaneous solution of an isoviscous falling block problem.** 
 
 ---
@@ -704,9 +703,8 @@ end
 display(to)
 ```
 
-```@raw html
-<img src="../../../assets/examples/Stokes/Falling_block_ηr_0.0_tracers_DC.gif" width="700">
-```
+![FB_DC_2](../../../assets/examples/Stokes/Falling_block_ηr_0.0_tracers_DC.gif)
+
 **Figure 2. Time-dependent evolution of the falling block with a viscosity contrast of six orders of magnitude.**
 
 These two examples illustrate the general defect-correction workflow implemented in GeoModBox.jl. The instantaneous isoviscous problem introduces the iterative solution strategy in its simplest form, while the time-dependent variable-viscosity example demonstrates how the same algorithm can be combined with tracer-based material advection. Together, they provide the foundation for solving more complex nonlinear Stokes-flow problems using the same modular solver infrastructure.
