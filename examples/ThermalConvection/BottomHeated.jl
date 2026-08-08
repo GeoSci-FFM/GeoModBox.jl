@@ -54,6 +54,17 @@ P   =   Physics(
     Ttop    =   273.15,             #   Temperatur an der Oberfläche [ K ]
 )
 # ------------------------------------------------------------------- #
+# Rayleigh Zahl Bedingungen ========================================= #
+if P.Ra < 0
+    # Falls die Rayleigh Zahl nicht explizit angegeben wird, dann 
+    # wird sie hier berechnet
+    P.Ra     =   P.ρ₀*P.g*P.α*P.ΔT*(M.ymax-M.ymin)^3/P.η₀/P.κ
+else
+    # Falls die Rayleigh Zahl explizit angegeben ist, dann wird hier 
+    # die Referenzviskositaet η₀ angepasst. 
+    P.η₀     =   P.ρ₀*P.g*P.α*P.ΔT*(M.ymax-M.ymin)^3/P.Ra/P.κ
+end
+# =================================================================== #
 # Definiere Skalierungskonstanten =================================== # 
 S   =   ScalingConstants!(M,P)
 # ------------------------------------------------------------------- #
@@ -70,6 +81,9 @@ NV      =   (
     x   =   (M.xmax - M.xmin)/NC.x,
     y   =   (M.ymax - M.ymin)/NC.y,
 )
+filename    =   string("Bottom_Heated_",P.Ra,
+                        "_",NC.x,"_",NC.y,
+                        "_",Ini.T)
 # ------------------------------------------------------------------- #
 # Initialisierung der Datenfelder =================================== #
 D       =   DataFields(
@@ -189,20 +203,6 @@ VBC     =   (
 )
 end
 # ------------------------------------------------------------------- # 
-# Rayleigh Zahl Bedingungen ========================================= #
-if P.Ra < 0
-    # Falls die Rayleigh Zahl nicht explizit angegeben wird, dann 
-    # wird sie hier berechnet
-    P.Ra     =   P.ρ₀*P.g*P.α*P.ΔT*S.hsc^3/P.η₀/P.κ
-else
-    # Falls die Rayleigh Zahl explizit angegeben ist, dann wird hier 
-    # die Referenzviskositaet η₀ angepasst. 
-    P.η₀     =   P.ρ₀*P.g*P.α*P.ΔT*S.hsc^3/P.Ra/P.κ
-end
-filename    =   string("Bottom_Heated_",P.Ra[1],
-                        "_",NC.x,"_",NC.y,
-                        "_",Ini.T)
-# =================================================================== #
 # Lineares Gleichungssystem ========================================= #
 @timeit to "EquationSetup" begin
 # Momentum Conservation Equation (MCE) ------
@@ -320,6 +320,7 @@ for it = 1:T.itmax
         Nus[it]     += afac * dTdy[i]
     end
     Nus[it]     *=   Δ.x/2
+    Nus[it] /= (M.xmax - M.xmin)
     meanT[it,:] =   mean(D.T_ex,dims=1)
     meanV[it] = sqrt(mean(D.vxc.^2 .+ D.vyc.^2))
     # --------------------------------------------------------------- #

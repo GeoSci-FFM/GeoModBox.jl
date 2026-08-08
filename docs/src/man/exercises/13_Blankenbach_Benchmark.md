@@ -18,19 +18,19 @@ This benchmark demonstrates how increasing the Rayleigh number strengthens conve
 
 **Figure 1.** Isoviscous, bottom-heated thermal convection for $Ra_b = 10^6$ with a resolution of 100×100.  
 The initial condition is a sinusoidally perturbed conductive temperature field.  
-The background color shows the non-dimensional temperature, overlaid by temperature isolines (every 0.05) and centroid velocity vectors. Heat diffusion is solved using the defect correction with a **Crank–Nicolson** discretization, the Stokes equation using the **defect correction** method, and temperature advection with the **semi-Lagrangian** method. Models run until a steady state is reached or up to a maximum of 8000 iterations.
+The background color shows the non-dimensional temperature, overlaid by temperature isolines (every 0.05) and centroid velocity vectors. Heat diffusion is solved using the general solver with a **Crank–Nicolson** discretization, the Stokes equation using the **defect correction** method, and temperature advection with the **semi-Lagrangian** method. Models run until a statistical steady state is reached or up to a maximum of 8000 iterations.
 
 ![13b](../../assets/exercises/13b.png)
 
-**Figure 2.** Time series of the surface Nusselt number and root-mean-square (RMS) velocity. The steady-state benchmark values are shown as red dashed lines. For details on how these diagnostics are calculated, see the [exercise](https://github.com/GeoSci-FFM/GeoModBox.jl/blob/main/exercises/13_Blankenbach_Benchmark_en.ipynb).
+**Figure 2.** Time series for the same model of the surface Nusselt number and root-mean-square (RMS) velocity. The steady-state benchmark values are shown as red dashed lines. For details on how these diagnostics are calculated, see the [exercise](https://github.com/GeoSci-FFM/GeoModBox.jl/blob/main/exercises/13_Blankenbach_Benchmark_en.ipynb).
 
 ![13c](../../assets/exercises/13c.png)
 
-**Figure 3.** Vertical temperature profile at the center of the model domain. Benchmark values for the local maximum and minimum temperatures are shown as black squares.
+**Figure 3.** Vertical temperature profile at the center of the model domain for the same model. Benchmark values for the local maximum and minimum temperatures are shown as black squares.
 
 ![13d](../../assets/exercises/13d.png)
 
-**Figure 4.** Variation in the relative root-mean-square velocity with numerical iterations. Empirically, a tolerance of $1.0^{-3}$ was chosen to define steady state.
+**Figure 4.** Variation in the relative root-mean-square velocity with numerical iterations for the same model. Empirically, a tolerance of $10^{-3}$ was chosen to define steady state.
 
 ![13e](../../assets/exercises/13e.png)
 

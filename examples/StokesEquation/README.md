@@ -1,6 +1,6 @@
 # Momentum Conservation Equation
 
-This directory contains examples for solving the *Stokes equation* in one and two dimensions. The examples focus on pure Stokes flow and include:
+This directory contains examples for solving the *Stokes equation* in one and two dimensions. The examples focus on pure Stokes flow and include, beyond others:
 
 - [One-dimensional channel flow with constant and depth-dependent viscosity](./1D/ChannelFlow_1D.jl)
 - [Two-dimensional falling block benchmark](./2D/FallingBlockBenchmark.jl)

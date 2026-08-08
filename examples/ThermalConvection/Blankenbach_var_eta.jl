@@ -109,6 +109,13 @@ P   =   Physics(
     Ra      =   -9999,              #   Rayleigh number
 )
 # ----------------------------------------------------------------------- #
+# Rayleigh Number ======================================================= #
+if P.Ra < 0
+    P.Ra     =   P.ρ₀*P.g*P.α*P.ΔT*(M.ymax-M.ymin)^3/P.η₀/P.κ
+else
+    P.η₀     =   P.ρ₀*P.g*P.α*P.ΔT*(M.ymax-M.ymin)^3/P.Ra/P.κ
+end
+# ----------------------------------------------------------------------- #
 # Define Scaling Constants ============================================== # 
 S   =   ScalingConstants!(M,P)
 # ----------------------------------------------------------------------- #
@@ -125,6 +132,9 @@ NV      =   (
     x   =   (M.xmax - M.xmin)/NC.x,
     y   =   (M.ymax - M.ymin)/NC.y,
 )
+filename    =   string("Blankenbach_VarEta_",@sprintf("%.2e",P.Ra),
+                        "_",NC.x,"_",NC.y,
+                        "_",Ini.T)
 # ----------------------------------------------------------------------- #
 # Data Arrays =========================================================== #
 D       =   DataFields(
@@ -244,16 +254,6 @@ VBC     =   (
     val     =   (E=zeros(NV.y),W=zeros(NV.y),S=zeros(NV.x),N=zeros(NV.x),
                     vyS=0.0,vyN=0.0,vxW=0.0,vxE=0.0),
 )
-# ----------------------------------------------------------------------- #
-# Rayleigh Number ======================================================= #
-if P.Ra < 0
-    P.Ra     =   P.ρ₀*P.g*P.α*P.ΔT*S.hsc^3/P.η₀/P.κ
-else
-    P.η₀     =   P.ρ₀*P.g*P.α*P.ΔT*S.hsc^3/P.Ra/P.κ
-end
-filename    =   string("Blankenbach_VarEta_",@sprintf("%.2e",P.Ra),
-                        "_",NC.x,"_",NC.y,
-                        "_",Ini.T)
 # ----------------------------------------------------------------------- #
 # Linear System of Equations ============================================ #
 # Momentum Conservation Equation (MCE) ------

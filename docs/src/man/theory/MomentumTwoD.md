@@ -704,7 +704,7 @@ where the index of the vector $\delta$ corresponds to the global index for the v
 
 ### Boundary Conditions
 
-The boundary conditions are implemented using the velocity values at the ghost nodes (see Equations (21)-(31)). To maintain symmetry in the coefficient matrix, the coefficients must be modified for nodes adjacent to the boundaries. For the sake of simplicity, we focus in the following on the most common boundary conditions, *no-slip* and *free-slip*. The constant-velocity and pure-shear boundary conditions are implemented using the same ghost-node substitutions as the no-slip and free-slip conditions, respectively, and therefore lead to analogous modifications of the discretized equations. The equations for the centroids adjacent to the boundary are then given by:
+The boundary conditions are implemented using the velocity values at the ghost nodes (see Equations (21)-(31)). Substituting the ghost-node values into the discretized equations modifies the coefficients of the equations adjacent to the domain boundaries while preserving the stencil structure. For simplicity, we focus here on the two most common boundary conditions, no-slip and free-slip. The constant-velocity and pure-shear boundary conditions are implemented using the same ghost-node substitutions as the no-slip and free-slip conditions, respectively, and therefore lead to analogous modifications of the discretized equations. The resulting equations for the control volumes adjacent to the boundaries are given by:
 
 #### Constant Viscosity 
 

@@ -13,6 +13,7 @@ makedocs(
     modules = [GeoModBox],
     pages = [
         "Home" => "index.md", 
+        "Installation" => "man/Installation.md",
         "Governing Equation" => Any[
             "Solution" => Any[
                 "General" => "man/theory/GESolution.md", 
@@ -69,12 +70,12 @@ makedocs(
             ],
             "Stokes Equation" => Any[
                 "Channel Flow (1D)" => "man/examples/Stokes/ChannelFlow1D.md", 
-                "Falling Block Benchmark" => "man/examples/Stokes/FallingBlockBenchmark.md", 
+                "Falling Block Benchmark (Gerya, 2019)" => "man/examples/Stokes/FallingBlockBenchmark.md", 
                 "Falling Block" => "man/examples/Stokes/FallingBlockDC.md", 
                 "Rayleigh Taylor Instability (RTI)" => "man/examples/Stokes/RTI.md", 
-                "RTI - Growth Rate" => "man/examples/Stokes/RTI_growth_rate.md", 
+                "RTI - Growth Rate (Ramberg, 1968)" => "man/examples/Stokes/RTI_growth_rate.md", 
                 "RTI (Van Keken et al., 1997)" => "man/examples/Stokes/VanKekenBenchmark.md",
-                "Viscous Inclusion" => "man/examples/Stokes/ViscousInclusion.md",
+                "Viscous Inclusion (Schmid, 2002)" => "man/examples/Stokes/ViscousInclusion.md",
             ],
             "Mixed Thermal Convection" => Any[
                 "Overview" => "man/examples/Convection/Overview_Convection.md",
@@ -85,7 +86,7 @@ makedocs(
                 "Blankenbach et al. (1989) - Variable Visc" => "man/examples/Convection/Blankenbach_Var_Eta.md",
             ],
             "Thermo-Mechanical Shear Localization" => Any[
-                "Viscous shear localization (shear heating)" => "man/examples/StrainLocalization/ShearBands.md",
+                "Viscous shear localization (Duretz et al., 2014)" => "man/examples/StrainLocalization/ShearBands.md",
             ]
         ],
         "List of functions" => "man/listoffunctions.md",

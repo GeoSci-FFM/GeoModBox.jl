@@ -113,7 +113,7 @@ IniTemperature!(:circle,M,NC,D,x,y;Tb = 1200.0,Ta = 0.0,)
         Ttop    =   Ta
         Tbot    =   Tb
         Tgrad   =   (Tbot-Ttop)/(M.ymax-M.ymin)         # [ K/m ]
-        @show Tgrad
+        # @show Tgrad
         @threads for i = 1:NC.x+2
             for j = 1:NC.y+2
                 D.T_ex[i,j] = -Tgrad*(y.ce[j]) + Ttop
@@ -121,12 +121,12 @@ IniTemperature!(:circle,M,NC,D,x,y;Tb = 1200.0,Ta = 0.0,)
         end
     elseif type==:lineara
         # Bereich der Anomalie ---       
-        ri          =   .3
-        xc          =   (M.ymax-M.ymin)/4
-        yc          =   (M.ymax-M.ymin)/2
+        ri          =   .1
+        xc          =   (M.xmax-M.xmin)/4
+        yc          =   -(M.ymax-M.ymin)/2
         α           =   0.0
-        a_ell       =   .6*(M.ymax-M.ymin)
-        b_ell       =   .2*(M.ymax-M.ymin)
+        a_ell       =   3.0*ri*(M.ymax-M.ymin)
+        b_ell       =   ri*(M.ymax-M.ymin)
         # --- 
         Ttop    =   Ta
         Tbot    =   Tb
@@ -135,7 +135,7 @@ IniTemperature!(:circle,M,NC,D,x,y;Tb = 1200.0,Ta = 0.0,)
             for j = 1:NC.y+2
                 x_ell   =  (x.ce[i]-xc)*cosd(α) + (y.ce[j]-yc)*sind(α)
                 y_ell   =  -(x.ce[i]-xc)*sind(α) + (y.ce[j]-yc)*cosd(α)
-                Elli    =   ((x_ell - xc)/ a_ell)^2 + ((y_ell-yc)/ b_ell)^2
+                Elli    =   ((x_ell)/ a_ell)^2 + ((y_ell)/ b_ell)^2
                 D.T_ex[i,j] = -Tgrad*(y.ce[j]) + Ttop
                 if Elli <= 1.0
                     D.T_ex[i,j]    +=   0.2*D.T_ex[i,j]

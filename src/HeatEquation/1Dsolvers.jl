@@ -60,8 +60,8 @@ function ForwardEuler1Dc!( explicit, κ, Δx, Δt, nc, BC;
     for i = 1:nc
         # Calculate temperature at point i for the new time ---        
         explicit.T[i] =   explicit.T_ex[i+1] + κ * Δt * 
-                (explicit.T_ex[i + 2] - 2.0 * explicit.T_ex[i+1] + explicit.T_ex[i]) / Δx^2 
-                + Q[i] * Δt / ρ / cp
+                (explicit.T_ex[i + 2] - 2.0 * explicit.T_ex[i+1] + explicit.T_ex[i]) / Δx^2 +
+                Q[i] * Δt / ρ / cp
     end
     explicit.T_ex[2:end-1]  .=  explicit.T
 end

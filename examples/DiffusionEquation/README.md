@@ -1,6 +1,6 @@
 # Energy Conservation Equation
 
-This directory contains examples for solving the *diffusive component* of the *temperature equation* in one and two dimensions. The included examples are:
+This directory contains examples for solving the *diffusive component* of the *temperature conservation equation* in one and two dimensions. The included examples are, beyond others:
 
 - Determination of one-dimensional geotherm profiles for [oceanic](./1D/OceanicGeotherm_1D.jl) and [continental](./1D/ContinentalGeotherm_1D.jl) settings.
 - [Comparison of different finite difference (**FD**) schemes applied to a one-dimensional Gaussian temperature anomaly](./1D/Heat_1D_discretization.jl).

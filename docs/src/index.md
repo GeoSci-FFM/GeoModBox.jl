@@ -10,6 +10,14 @@ The **Geod**ynamic **Mod**elling Tool**Box** is a Julia package primarily intend
 
 The solvers for each governing equation can be used separately or in combination for dimensional or non-dimensional problems, with only minimal modifications when calling the functions. For more informations on how to use the individual functions please see the [list of functions](./man/listoffunctions.md) or individual [exmples](./man/examples/Examples.md). Some typical initial conditions, such as a linearly increasing temperature, are predefined and can be called using [specific functions](./man/Ini.md). In the following a brief explenation is given regarding the governing equations and the numerical method to solve them within the `GeoModBox.jl` framework. For more detailed information see the individual documentations. 
 
+## Installation
+
+`GeoModBox.jl` can be installed directly through the Julia package manager or cloned from GitHub to access the complete repository, including the examples, exercises, and documentation.
+
+> **Important:** `GeoModBox.jl` uses separate Julia environments for the core package, examples, exercises, and documentation. When running examples or exercises, the corresponding `examples` or `exercises` environment must be activated first.
+
+For detailed instructions on installing Julia and `GeoModBox.jl`, setting up the required environments, and using the package as a user, student, or developer, see the [Installation](./man/Installation.md) guide.
+
 ## Staggered Finite Difference
 
 To properly solve the governing equations, a staggered finite difference scheme is chosen for the *energy* and *momentum* equations. A staggered grid enables a correct and straightforward implementation of boundary conditions and ensures conservation of stress between nodes in cases of variable viscosity. This requires certain parameters to be defined on different grids. For more information regarding the physical and numerical background, please refer to [general solution documentation](./man/theory/GESolution.md).

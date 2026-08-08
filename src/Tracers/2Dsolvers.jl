@@ -321,7 +321,9 @@ CountMPC(
     for ith=1:nthreads()
         nmark_out += nmark_out_th[ith]
     end
-    verbose && @printf("%d markers out\n", nmark_out[1])
+    if verbose 
+        @printf("%d markers out\n", nmark_out)
+    end
 
     # Initialize marker per cell per thread array ---
     @threads for j = 1:NC.y
@@ -842,7 +844,7 @@ Markers2Cells(
 D.ρ .= D.ρ_ex[2:end-1, 2:end-1]
 ```
 """
-@views function Markers2Cells(Ma,nmark,PC_th,PC,weight_th,weight,x,y,Δ,param,param2;avgm=:arith)
+@views function Markers2Cells(Ma,nmark,PC_th,PC,weight_th,weight,x,y,Δ,param,param2;avgm=:arith, verbose=false)
     PC0     =   copy(PC)
     PC      .*=     0.0
     weight  .*=     0.0
@@ -935,7 +937,9 @@ D.ρ .= D.ρ_ex[2:end-1, 2:end-1]
     end
 
     if sum(isnan.(PC))>0
-        @printf("%i number(s) of cells without markers\n", sum(isnan.(PC)))
+        if verbose 
+            @printf("%i number(s) of cells without markers\n", sum(isnan.(PC)))
+        end
         PC[isnan.(PC)]     .=  PC0[isnan.(PC)]
     end
 
@@ -1031,7 +1035,7 @@ Markers2Vertices(
 )
 ```
 """
-@views function Markers2Vertices(Ma,nmark,PG_th,PG,weight_th,weight,x,y,Δ,param,param2;avgm=:arith)
+@views function Markers2Vertices(Ma,nmark,PG_th,PG,weight_th,weight,x,y,Δ,param,param2;avgm=:arith, verbose=false)
     PG0     =   copy(PG)
     PG      .*=     0.0
     weight  .*=     0.0
@@ -1124,7 +1128,9 @@ Markers2Vertices(
     end
 
     if sum(isnan.(PG))>0
-        @printf("%i number(s) of vertices without markers\n",sum(isnan.(PG)))
+        if verbose 
+            @printf("%i number(s) of vertices without markers\n",sum(isnan.(PG)))
+        end
         PG[isnan.(PG)]     .=  PG0[isnan.(PG)]
     end
 

@@ -1,6 +1,6 @@
 # [Falling Block Benchmark](https://github.com/GeoSci-FFM/GeoModBox.jl/blob/main/examples/StokesEquation/2D/FallingBlockBenchmark_direct.jl)
 
-The falling block benchmark is a well-established test for assessing the accuracy of the momentum solver and the efficiency of the advection scheme, particularly under strong viscosity and density contrasts. The model setup (Figure 1) is defined by a rectangular block with a certain viscosity and density within a matrix of a different viscosity and density. Due to the density contrast, the block sinks. Depending on the viscosity contrast, the block either deforms strongly during its descent or behaves nearly as a rigid body. Consequently, the benchmark simultaneously tests the treatment of large viscosity contrasts and the accuracy of material advection. 
+The falling block benchmark is a well-established test for assessing the accuracy of the momentum solver and the efficiency of the advection scheme, particularly under strong viscosity and density contrasts (Gerya, 2019). The model setup (Figure 1) is defined by a rectangular block with a certain viscosity and density within a matrix of a different viscosity and density. Due to the density contrast, the block sinks. Depending on the viscosity contrast, the block either deforms strongly during its descent or behaves nearly as a rigid body. Consequently, the benchmark simultaneously tests the treatment of large viscosity contrasts and the accuracy of material advection. 
 
 ![FBB_1](../../../assets/examples/Stokes/FallingBlock_Setup.png)
 

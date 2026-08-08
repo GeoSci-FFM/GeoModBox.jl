@@ -72,8 +72,8 @@ S   =   ScalingConstants!(M,P)
 # ----------------------------------------------------------------------- #
 # Numerical Grid ======================================================== #
 NC  =   (
-    x   =   100,
-    y   =   100,
+    x   =   50,
+    y   =   50,
 )
 NV      =   (
     x   =   NC.x + 1,
@@ -143,7 +143,7 @@ T.Δd        =   T.Δfacd * (1.0 / (2.0 * P.κ *(1.0/Δ.x^2 + 1/Δ.y^2)))
 T.Δ         =   minimum([T.Δd,T.Δc])
 # Statistics ------------------------------------------------------------ #
 Time            =   zeros(T.itmax)
-Nus             =   zeros(T.itmax)
+Nu              =   zeros(T.itmax)
 meanV           =   zeros(T.itmax)
 meanT           =   zeros(T.itmax)
 epsV_history    =   fill(NaN, T.itmax)
@@ -242,7 +242,7 @@ RT      =   zeros(Float64,NC...)
 # ----------------------------------------------------------------------- #
 # Time Loop ============================================================= #
 for it = 1:T.itmax
-        R0      =   0.0
+    R0      =   0.0
     # Reduce screen output ---
     verbose_step    =   mod(it, 400) == 0 || it == 1 || final_step == 1
     if it>1
@@ -255,9 +255,9 @@ for it = 1:T.itmax
     # ------ MCE ------
     verbose_step && @printf("---Momentum Calculation ---\n")
     if it == 1
-        D.vx[2:end-1,:]    .=  0.0
-        D.vy[:,1:end-1]    .=  0.0
-        D.Pt               .=  0.0
+        D.vx[:,2:end-1]     .=  0.0
+        D.vy[2:end-1,:]     .=  0.0
+        D.Pt                .=  0.0
     end
     # Residual Calculation ------
     @. D.ρ  =   -P.Ra*D.T
@@ -266,7 +266,7 @@ for it = 1:T.itmax
         F[Num.Vx]   .=  Fm.x
         F[Num.Vy]   .=  Fm.y
         F[Num.Pt]   .=  FPt
-        RM          =   norm(F)/length(F)
+        RM          =   norm(F)/sqrt(length(F))
         if iter == 1
             R0 = max(RM, eps())
         end
@@ -315,7 +315,7 @@ for it = 1:T.itmax
     # Calculate temperature gradient --- 
     @. dTdy =   -(Tv1 - Tv2)/Δ.y
     # Calculate Nusselt number ---
-    Nus[it]     =   0.0
+    Nu[it]      =   0.0
     # Trapezoidal integration -
     for i = 1:NV.x
         if i == 1 || i == NV.x
@@ -323,9 +323,11 @@ for it = 1:T.itmax
         else
             afac = 2
         end
-        Nus[it]     += afac * dTdy[i]
+        Nu[it]     += afac * dTdy[i]
     end
-    Nus[it]     *=   Δ.x/2
+    Nu[it]     *=   Δ.x/2
+    # @show Nu[it]
+    Nu[it]      /=  M.xmax - M.xmin
     # Mean Temperature ---
     meanT[it]   =   mean(D.T)
     # Root Mean Square Velocity ---
@@ -380,14 +382,14 @@ for it = 1:T.itmax
     # Update temperature field --- 
     @. D.T0 =   D.T
     # Assemble linear system ---
-    KT      =   AssembleMatrix2Dc(1.0, TBC, Num, NC, Δ, T.Δ[1];C=0.5)
+    KT      =   AssembleMatrix2Dc(1.0, TBC, Num, NC, Δ, T.Δ;C=0.5)
     # Solve for temperature correction: Cholesky factorisation
     KTc      =   cholesky(KT.cscmatrix)
     for iter = 1:niterT
         # Evaluate residual
         ComputeResiduals2Dc!( RT, D.T, D.T_ex, D.T0, D.T_ex0, ∂2T, 
-                1.0, TBC, Δ, T.Δ[1]; C = 0.5 )
-        RE      =   norm(RT)/length(RT)
+                1.0, TBC, Δ, T.Δ; C = 0.5 )
+        RE      =   norm(RT)/sqrt(length(RT))
         if verbose_step
                 @printf("   ECE %2d: ||RE|| = %1.4e\n", iter, RE)
         end
@@ -475,8 +477,8 @@ end
 # ----------------------------------------------------------------------- #
 # Plot time serieses ==================================================== #
 q2  =   plot(layout=(2,1),size=(1200,900),dpi = 300)
-q2  =   plot(Time[1:find],Nus[1:find],
-            xlabel= "", ylabel= L"Nus",label="",
+plot!(q2,Time[1:find],Nu[1:find],
+            xlabel= "", ylabel= L"Nu",label="",
             xformatter = _ -> "",
             ylims=(0,25),xlims=(0,Time[find]),
             guidefontsize = 14, tickfontsize = 14,

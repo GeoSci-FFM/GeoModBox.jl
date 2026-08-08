@@ -69,7 +69,7 @@ t_{\\mathrm{sc}} = \\frac{H^2}{\\kappa},
 
 v_{\\mathrm{sc}} = \\frac{\\kappa}{H},
 
-\tau_{\\mathrm{sc}} = \\frac{\\eta_0 \\kappa}{H},
+\tau_{\\mathrm{sc}} = \\frac{\\eta_0 \\kappa}{H^2},
 
 T_{\\mathrm{sc}} = \\Delta T,
 
@@ -91,7 +91,7 @@ where
 
 # Returns
 
-Returns a Constants structure containing the characteristic scalingconstants in SI units.
+Returns a Constants structure containing the characteristic scaling constants in SI units.
 
 # Example
 
@@ -103,9 +103,9 @@ S.vsc
 
 # Notes
 
-The returned scaling constants can be used to convert dimensional modelparameters 
-to their non-dimensional counterparts, or to convertnon-dimensional simulation 
-results back to SI units for analysis andvisualization. 
+The returned scaling constants can be used to convert dimensional model parameters 
+to their non-dimensional counterparts, or to convert non-dimensional simulation 
+results back to SI units for analysis and visualization. 
 """ 
 function ScalingConstants!(M,P)
 
@@ -114,7 +114,7 @@ function ScalingConstants!(M,P)
     S.hsc   =   (M.ymax-M.ymin)                         #   Length scale [ m ]
     S.tsc   =   (M.ymax-M.ymin)^2 / P.κ                 #   Time scale [ s ]
     S.vsc   =   P.κ / (M.ymax-M.ymin)                   #   Velocity scale [ m/s ]
-    S.τsc   =   (P.η₀ * P.κ)/(M.ymax-M.ymin)            #   Stress scale [ Pa ]
+    S.τsc   =   (P.η₀ * P.κ)/(M.ymax-M.ymin)^2          #   Stress scale [ Pa ]
     S.Tsc   =   P.ΔT                                    #   Temperature scale [ K ]
     S.Qsc   =   (P.ΔT*P.κ*P.ρ₀*P.cp)/(M.ymax-M.ymin)^2  #   Heat source scale [ w/m³ ]
 

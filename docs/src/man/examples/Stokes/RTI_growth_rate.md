@@ -1,6 +1,6 @@
 # [RTI - Growth Rate Benchmark](https://github.com/GeoSci-FFM/GeoModBox.jl/blob/main/examples/StokesEquation/2D/RTI_GrowthRate.jl)
 
-This script benchmarks the **growth rate of a Rayleigh-Taylor instability**, following *Gerya (2009)*.  
+This script benchmarks the **growth rate of a Rayleigh-Taylor instability**, following *Gerya (2019)*.  
 The benchmark is based on the analytical solution by *Ramberg (1968)* and is used to evaluate the accuracy of the velocity field in a purely gravity-driven flow.  
 
 The script calculates the **diapiric growth rate** at the tip of the perturbation for different **perturbation amplitudes** ($\delta A$), **wavelengths** ($\lambda$), and **viscosity ratios** ($\eta_r$).  
