@@ -1,4 +1,5 @@
 [![Dev](https://img.shields.io/badge/docs-dev-blue.svg)](https://geosci-ffm.github.io/GeoModBox.jl/)
+[![Unit Tests](https://github.com/GeoSci-FFM/GeoModBox.jl/actions/workflows/UnitTests.yml/badge.svg)](https://github.com/GeoSci-FFM/GeoModBox.jl/actions/workflows/UnitTests.yml)
 
 # GeoModBox.jl
 
@@ -6,11 +7,11 @@ The **Geod**ynamic **Mod**elling Tool**Box** is a Julia package primarily intend
 
 1) [**Energy**](https://geosci-ffm.github.io/GeoModBox.jl/dev/man/theory/DiffMain/), 
 2) [**Momentum**](https://geosci-ffm.github.io/GeoModBox.jl/dev/man/theory/MomentumMain/), 
-3) [**Mass** and **Compositon**](https://geosci-ffm.github.io/GeoModBox.jl/dev/man/theory/AdvectMain/). 
+3) [**Mass** and **Composition**](https://geosci-ffm.github.io/GeoModBox.jl/dev/man/theory/AdvectMain/). 
 
 `GeoModBox.jl` includes a series of [exercises](./exercises/) and [examples](./examples/) of geodynamically well-defined problems. The exercises are provided as Jupyter notebooks for students to complete. The theoretical background is documented here.
 
-The solvers for each governing equation can be used separately or in combination for dimensional or non-dimensional problems, with only minimal modifications when calling the functions. For more informations on how to use the individual functions please see the [list of functions](https://geosci-ffm.github.io/GeoModBox.jl/dev/man/listoffunctions/) or individual [exmples](https://geosci-ffm.github.io/GeoModBox.jl/dev/man/examples/Examples/). Some typical initial conditions, such as a linearly increasing temperature, are predefined and can be called using [specific functions](https://geosci-ffm.github.io/GeoModBox.jl/dev/man/Ini/). In the following a brief explenation is given regarding the governing equations and the numerical method to solve them within the `GeoModBox.jl`. For more detailed information see the individual documentations. 
+The solvers for each governing equation can be used separately or in combination for dimensional or non-dimensional problems, with only minimal modifications when calling the functions. For more information on how to use the individual functions please see the [list of functions](https://geosci-ffm.github.io/GeoModBox.jl/dev/man/listoffunctions/) or individual [examples](https://geosci-ffm.github.io/GeoModBox.jl/dev/man/examples/Examples/). Some typical initial conditions, such as a linearly increasing temperature, are predefined and can be called using [specific functions](https://geosci-ffm.github.io/GeoModBox.jl/dev/man/Ini/). In the following a brief explanation is given regarding the governing equations and the numerical method to solve them within the `GeoModBox.jl`. For more detailed information see the individual documentations. 
 
 ## Installation
 
@@ -34,7 +35,7 @@ In geodynamics, the energy is described by the temperature and needs to be conse
 
 ### [Heat Diffusion Equation](https://geosci-ffm.github.io/GeoModBox.jl/dev/man/theory/DiffMain/)
 
-`GeoModBox.jl` provides several finite difference schemes for solving the *diffusive part* of the time-dependent or steady-state temperature equation, including radioactive heating, in both [1-D](https://geosci-ffm.github.io/GeoModBox.jl/dev/man/theory/DiffOneD/) and [2-D](https://geosci-ffm.github.io/GeoModBox.jl/dev/man/theory/DiffTwoD/). The solvers are located in [src/HeatEquation](./src/HeatEquation/). Currently, only *Dirichlet* and *Neumann* thermal boundary conditions are supported. Most functions assume constant thermal parameters (with the exception of the 1-D solvers and the 2-D, iterative implicit solver, called **iterative defection correction method**).
+`GeoModBox.jl` provides several finite difference schemes for solving the *diffusive part* of the time-dependent or steady-state temperature equation, including radioactive heating, in both [1-D](https://geosci-ffm.github.io/GeoModBox.jl/dev/man/theory/DiffOneD/) and [2-D](https://geosci-ffm.github.io/GeoModBox.jl/dev/man/theory/DiffTwoD/). The solvers are located in [src/HeatEquation](./src/HeatEquation/). Currently, only *Dirichlet* and *Neumann* thermal boundary conditions are supported. Most functions assume constant thermal parameters (with the exception of the 1-D solvers and the 2-D, iterative implicit solver, called **iterative defect correction method**).
 
 ### [Heat Advection Equation](https://geosci-ffm.github.io/GeoModBox.jl/dev/man/theory/AdvectMain/)
 
@@ -42,7 +43,7 @@ In geodynamics, the energy is described by the temperature and needs to be conse
 
 ## [Momentum Conservation Equation](https://geosci-ffm.github.io/GeoModBox.jl/dev/man/theory/MomentumMain/)
 
-On geological timescales, Earth's mantle and lithosphere deform slowly due to their high viscosity, allowing us to neglect inertial forces. This simplifies the Navier-Stokes equation into the **Stokes equation**. `GeoModBox.jl` provides two main methods to solve the Stokes equation in [1-D](https://geosci-ffm.github.io/GeoModBox.jl/dev/man/theory/MomentumOneD/) and [2-D](https://geosci-ffm.github.io/GeoModBox.jl/dev/man/theory/MomentumTwoD/): the direct method and the defection correction method, applicable for both constant and variable viscosity fields. Velocity and pressure are defined on a staggered grid, and ghost nodes are included to ensure proper implementation of free-slip and no-slip boundary conditions.
+On geological timescales, Earth's mantle and lithosphere deform slowly due to their high viscosity, allowing us to neglect inertial forces. This simplifies the Navier-Stokes equation into the **Stokes equation**. `GeoModBox.jl` provides two main methods to solve the Stokes equation in [1-D](https://geosci-ffm.github.io/GeoModBox.jl/dev/man/theory/MomentumOneD/) and [2-D](https://geosci-ffm.github.io/GeoModBox.jl/dev/man/theory/MomentumTwoD/): the direct method and the defect correction method, applicable for both constant and variable viscosity fields. Velocity and pressure are defined on a staggered grid, and ghost nodes are included to ensure proper implementation of free-slip and no-slip boundary conditions.
 
 ## [Benchmarks and Examples](https://geosci-ffm.github.io/GeoModBox.jl/dev/man/examples/Examples/)
 

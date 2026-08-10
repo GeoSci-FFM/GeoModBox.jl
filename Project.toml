@@ -20,6 +20,9 @@ ExactFieldSolutions = "0.2"
 ExtendableSparse = "2"
 Interpolations = "0.16"
 StaticArrays = "1"
+LinearAlgebra = "1.11"
+Printf = "1.11"
+Statistics = "1.11"
 
 [extras]
 Test = "8dfed614-e22c-5e08-85e1-65c5234f0b40"

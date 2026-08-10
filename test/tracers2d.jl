@@ -396,7 +396,7 @@ using GeoModBox.Tracers.TwoD
         xm0 = vec(repeat(collect(xc), 1, NC.y))
         ym0 = vec(repeat(collect(yc)', NC.x, 1))
 
-        nt = Base.Threads.nthreads()
+        nt = Base.Threads.maxthreadid()
 
         xm = repeat(xm0, nt)
         ym = repeat(ym0, nt)

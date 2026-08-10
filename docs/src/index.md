@@ -4,11 +4,11 @@ The **Geod**ynamic **Mod**elling Tool**Box** is a Julia package primarily intend
 
 1) [**Energy**](./man/theory/DiffMain.md), 
 2) [**Momentum**](./man/theory/MomentumMain.md), 
-3) [**Mass** and **Compositon**](./man/theory/AdvectMain.md). 
+3) [**Mass** and **Composition**](./man/theory/AdvectMain.md). 
 
 `GeoModBox.jl` includes a series of [exercises](./man/exercises/Exercises.md) and [examples](./man/examples/Examples.md) of geodynamically well-defined problems. The exercises are provided as Jupyter notebooks for students to complete. The theoretical background is documented here.
 
-The solvers for each governing equation can be used separately or in combination for dimensional or non-dimensional problems, with only minimal modifications when calling the functions. For more informations on how to use the individual functions please see the [list of functions](./man/listoffunctions.md) or individual [exmples](./man/examples/Examples.md). Some typical initial conditions, such as a linearly increasing temperature, are predefined and can be called using [specific functions](./man/Ini.md). In the following a brief explenation is given regarding the governing equations and the numerical method to solve them within the `GeoModBox.jl` framework. For more detailed information see the individual documentations. 
+The solvers for each governing equation can be used separately or in combination for dimensional or non-dimensional problems, with only minimal modifications when calling the functions. For more information on how to use the individual functions please see the [list of functions](./man/listoffunctions.md) or individual [examples](./man/examples/Examples.md). Some typical initial conditions, such as a linearly increasing temperature, are predefined and can be called using [specific functions](./man/Ini.md). In the following a brief explanation is given regarding the governing equations and the numerical method to solve them within the `GeoModBox.jl` framework. For more detailed information see the individual documentations. 
 
 ## Installation
 
