@@ -1,0 +1,589 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/><title>Blankenbach et al. (1989) - Variable Visc · GeoModBox.jl</title><meta name="title" content="Blankenbach et al. (1989) - Variable Visc · GeoModBox.jl"/><meta property="og:title" content="Blankenbach et al. (1989) - Variable Visc · GeoModBox.jl"/><meta property="twitter:title" content="Blankenbach et al. (1989) - Variable Visc · GeoModBox.jl"/><meta name="description" content="Documentation for GeoModBox.jl."/><meta property="og:description" content="Documentation for GeoModBox.jl."/><meta property="twitter:description" content="Documentation for GeoModBox.jl."/><script data-outdated-warner src="../../../../assets/warner.js"></script><link href="https://cdnjs.cloudflare.com/ajax/libs/lato-font/3.0.0/css/lato-font.min.css" rel="stylesheet" type="text/css"/><link href="https://cdnjs.cloudflare.com/ajax/libs/juliamono/0.050/juliamono.min.css" rel="stylesheet" type="text/css"/><link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/fontawesome.min.css" rel="stylesheet" type="text/css"/><link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/solid.min.css" rel="stylesheet" type="text/css"/><link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/brands.min.css" rel="stylesheet" type="text/css"/><link href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.8/katex.min.css" rel="stylesheet" type="text/css"/><script>documenterBaseURL="../../../.."</script><script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js" data-main="../../../../assets/documenter.js"></script><script src="../../../../search_index.js"></script><script src="../../../../siteinfo.js"></script><script src="../../../../../versions.js"></script><link class="docs-theme-link" rel="stylesheet" type="text/css" href="../../../../assets/themes/catppuccin-mocha.css" data-theme-name="catppuccin-mocha"/><link class="docs-theme-link" rel="stylesheet" type="text/css" href="../../../../assets/themes/catppuccin-macchiato.css" data-theme-name="catppuccin-macchiato"/><link class="docs-theme-link" rel="stylesheet" type="text/css" href="../../../../assets/themes/catppuccin-frappe.css" data-theme-name="catppuccin-frappe"/><link class="docs-theme-link" rel="stylesheet" type="text/css" href="../../../../assets/themes/catppuccin-latte.css" data-theme-name="catppuccin-latte"/><link class="docs-theme-link" rel="stylesheet" type="text/css" href="../../../../assets/themes/documenter-dark.css" data-theme-name="documenter-dark" data-theme-primary-dark/><link class="docs-theme-link" rel="stylesheet" type="text/css" href="../../../../assets/themes/documenter-light.css" data-theme-name="documenter-light" data-theme-primary/><script src="../../../../assets/themeswap.js"></script></head><body><div id="documenter"><nav class="docs-sidebar"><div class="docs-package-name"><span class="docs-autofit"><a href="../../../../">GeoModBox.jl</a></span></div><button class="docs-search-query input is-rounded is-small is-clickable my-2 mx-auto py-1 px-2" id="documenter-search-query">Search docs (Ctrl + /)</button><ul class="docs-menu"><li><a class="tocitem" href="../../../../">Home</a></li><li><a class="tocitem" href="../../../Installation/">Installation</a></li><li><span class="tocitem">Governing Equation</span><ul><li><input class="collapse-toggle" id="menuitem-3-1" type="checkbox"/><label class="tocitem" for="menuitem-3-1"><span class="docs-label">Solution</span><i class="docs-chevron"></i></label><ul class="collapsed"><li><a class="tocitem" href="../../../theory/GESolution/">General</a></li><li><a class="tocitem" href="../../../Ini/">Specifications</a></li></ul></li><li><input class="collapse-toggle" id="menuitem-3-2" type="checkbox"/><label class="tocitem" for="menuitem-3-2"><span class="docs-label">Heat Diffusion Equation</span><i class="docs-chevron"></i></label><ul class="collapsed"><li><a class="tocitem" href="../../../theory/DiffMain/">General</a></li><li><a class="tocitem" href="../../../theory/DiffOneD/">1D</a></li><li><a class="tocitem" href="../../../theory/DiffTwoD/">2D</a></li></ul></li><li><input class="collapse-toggle" id="menuitem-3-3" type="checkbox"/><label class="tocitem" for="menuitem-3-3"><span class="docs-label">Advection Equation</span><i class="docs-chevron"></i></label><ul class="collapsed"><li><a class="tocitem" href="../../../theory/AdvectMain/">General</a></li><li><a class="tocitem" href="../../../theory/AdvOneD/">1D</a></li><li><a class="tocitem" href="../../../theory/AdvTwoD/">2D</a></li></ul></li><li><input class="collapse-toggle" id="menuitem-3-4" type="checkbox"/><label class="tocitem" for="menuitem-3-4"><span class="docs-label">Momentum Equation</span><i class="docs-chevron"></i></label><ul class="collapsed"><li><a class="tocitem" href="../../../theory/MomentumMain/">General</a></li><li><a class="tocitem" href="../../../theory/MomentumOneD/">1D</a></li><li><a class="tocitem" href="../../../theory/MomentumTwoD/">2D</a></li></ul></li></ul></li><li><span class="tocitem">Exercises</span><ul><li><a class="tocitem" href="../../../exercises/Exercises/">General</a></li><li><a class="tocitem" href="../../../exercises/01_Euler_Advection/">01 - Euler Advection</a></li><li><a class="tocitem" href="../../../exercises/02_1D_Heat_explicit/">02 - 1D Heat Diffusion (explicit)</a></li><li><a class="tocitem" href="../../../exercises/03_1D_Heat_implicit/">03 - 1D Heat Diffusion (implicit)</a></li><li><a class="tocitem" href="../../../exercises/04_2D_Diffusion_Stationary/">04 - 2D Heat Diffusion (stationary)</a></li><li><a class="tocitem" href="../../../exercises/05_2D_Diffusion_TD_Plume/">05a - 2D Heat Diffusion (Plume)</a></li><li><a class="tocitem" href="../../../exercises/05_2D_Diffusion_TD_Sill/">05b - 2D Heat Diffusion (Sill)</a></li><li><a class="tocitem" href="../../../exercises/06_1D_Advection/">06 - 1D Advection</a></li><li><a class="tocitem" href="../../../exercises/07_2D_Energy_Equation/">07 - 2D Energy Conservation</a></li><li><a class="tocitem" href="../../../exercises/08_1D_Stokes/">08 - 1D Stokes</a></li><li><a class="tocitem" href="../../../exercises/09_2D_Falling_Block/">09 - 2D Falling Block (steady state)</a></li><li><a class="tocitem" href="../../../exercises/10_2D_Falling_Block_td/">10 - 2D Falling Block (time-dep)</a></li><li><a class="tocitem" href="../../../exercises/11_2D_Thermal_Convection/">11 - 2D Thermal Convection</a></li><li><a class="tocitem" href="../../../exercises/12_2D_Thermal_Convection_scaled/">12 - 2D Thermal Convection (scaled)</a></li><li><a class="tocitem" href="../../../exercises/13_Blankenbach_Benchmark/">13 - Blankenbach Benchmark</a></li></ul></li><li><span class="tocitem">Examples</span><ul><li><a class="tocitem" href="../../Examples/">General</a></li><li><input class="collapse-toggle" id="menuitem-5-2" type="checkbox"/><label class="tocitem" for="menuitem-5-2"><span class="docs-label">Diffusion Equation</span><i class="docs-chevron"></i></label><ul class="collapsed"><li><a class="tocitem" href="../../Diffusion/OceanicGeotherm/">Oceanic Geotherm (1D)</a></li><li><a class="tocitem" href="../../Diffusion/ContinentalGeotherm/">Continental Geotherm (1D)</a></li><li><a class="tocitem" href="../../Diffusion/GaussianDiffusion1D/">Gaussian Diffusion (1D)</a></li><li><a class="tocitem" href="../../Diffusion/BackwardEuler_DC/">Backward Euler (2D)</a></li><li><a class="tocitem" href="../../Diffusion/ForwardEuler_DC/">Forward Euler (2D)</a></li><li><a class="tocitem" href="../../Diffusion/GaussianDiffusion2D/">Gaussian Diffusion (2D)</a></li><li><a class="tocitem" href="../../Diffusion/PoissonRestest/">Poisson Problem (2D)</a></li><li><a class="tocitem" href="../../Diffusion/PoissonVariablek/">Poisson Problem; variable k (2D)</a></li></ul></li><li><input class="collapse-toggle" id="menuitem-5-3" type="checkbox"/><label class="tocitem" for="menuitem-5-3"><span class="docs-label">Advection Equtaion</span><i class="docs-chevron"></i></label><ul class="collapsed"><li><a class="tocitem" href="../../Advection/Advection2D/">Advection (2D)</a></li><li><a class="tocitem" href="../../Advection/AdvectionRestest2D/">Advection Resolution Test (2D)</a></li></ul></li><li><input class="collapse-toggle" id="menuitem-5-4" type="checkbox"/><label class="tocitem" for="menuitem-5-4"><span class="docs-label">Stokes Equation</span><i class="docs-chevron"></i></label><ul class="collapsed"><li><a class="tocitem" href="../../Stokes/ChannelFlow1D/">Channel Flow (1D)</a></li><li><a class="tocitem" href="../../Stokes/FallingBlockBenchmark/">Falling Block Benchmark (Gerya, 2019)</a></li><li><a class="tocitem" href="../../Stokes/FallingBlockDC/">Falling Block</a></li><li><a class="tocitem" href="../../Stokes/RTI/">Rayleigh Taylor Instability (RTI)</a></li><li><a class="tocitem" href="../../Stokes/RTI_growth_rate/">RTI - Growth Rate (Ramberg, 1968)</a></li><li><a class="tocitem" href="../../Stokes/VanKekenBenchmark/">RTI (Van Keken et al., 1997)</a></li><li><a class="tocitem" href="../../Stokes/ViscousInclusion/">Viscous Inclusion (Schmid, 2002)</a></li></ul></li><li><input class="collapse-toggle" id="menuitem-5-5" type="checkbox" checked/><label class="tocitem" for="menuitem-5-5"><span class="docs-label">Mixed Thermal Convection</span><i class="docs-chevron"></i></label><ul class="collapsed"><li><a class="tocitem" href="../Overview_Convection/">Overview</a></li><li><a class="tocitem" href="../BottomHeatedConvection/">Bottom Heated</a></li><li><a class="tocitem" href="../InternallyHeatedConvection/">Internally Heated</a></li><li><a class="tocitem" href="../MixedHeatedConvection/">Mixed Heated</a></li><li><a class="tocitem" href="../BottomHeatedConvection_VE/">Bottom Heated - Variable Visc</a></li><li class="is-active"><a class="tocitem" href>Blankenbach et al. (1989) - Variable Visc</a></li></ul></li><li><input class="collapse-toggle" id="menuitem-5-6" type="checkbox"/><label class="tocitem" for="menuitem-5-6"><span class="docs-label">Thermo-Mechanical Shear Localization</span><i class="docs-chevron"></i></label><ul class="collapsed"><li><a class="tocitem" href="../../StrainLocalization/ShearBands/">Viscous shear localization (Duretz et al., 2014)</a></li></ul></li></ul></li><li><a class="tocitem" href="../../../listoffunctions/">List of functions</a></li><li><a class="tocitem" href="../../../license/">License</a></li></ul><div class="docs-version-selector field has-addons"><div class="control"><span class="docs-label button is-static is-size-7">Version</span></div><div class="docs-selector control is-expanded"><div class="select is-fullwidth is-size-7"><select id="documenter-version-selector"></select></div></div></div></nav><div class="docs-main"><header class="docs-navbar"><a class="docs-sidebar-button docs-navbar-link fa-solid fa-bars is-hidden-desktop" id="documenter-sidebar-button" href="#"></a><nav class="breadcrumb"><ul class="is-hidden-mobile"><li><a class="is-disabled">Examples</a></li><li><a class="is-disabled">Mixed Thermal Convection</a></li><li class="is-active"><a href>Blankenbach et al. (1989) - Variable Visc</a></li></ul><ul class="is-hidden-tablet"><li class="is-active"><a href>Blankenbach et al. (1989) - Variable Visc</a></li></ul></nav><div class="docs-right"><a class="docs-navbar-link" href="https://github.com/GeoSci-FFM/GeoModBox.jl" title="View the repository on GitHub"><span class="docs-icon fa-brands"></span><span class="docs-label is-hidden-touch">GitHub</span></a><a class="docs-navbar-link" href="https://github.com/GeoSci-FFM/GeoModBox.jl/blob/main/docs/src/man/examples/Convection/Blankenbach_Var_Eta.md" title="Edit source on GitHub"><span class="docs-icon fa-solid"></span></a><a class="docs-settings-button docs-navbar-link fa-solid fa-gear" id="documenter-settings-button" href="#" title="Settings"></a><a class="docs-article-toggle-button fa-solid fa-chevron-up" id="documenter-article-toggle-button" href="javascript:;" title="Collapse all docstrings"></a></div></header><article class="content" id="documenter-page"><h1 id="[Blankenbach-Benchmark-with-Variable-Viscosity](https://github.com/GeoSci-FFM/GeoModBox.jl/blob/main/examples/ThermalConvection/Blankenbach_var_eta.jl)"><a class="docs-heading-anchor" href="#[Blankenbach-Benchmark-with-Variable-Viscosity](https://github.com/GeoSci-FFM/GeoModBox.jl/blob/main/examples/ThermalConvection/Blankenbach_var_eta.jl)"><a href="https://github.com/GeoSci-FFM/GeoModBox.jl/blob/main/examples/ThermalConvection/Blankenbach_var_eta.jl">Blankenbach Benchmark with Variable Viscosity</a></a><a id="[Blankenbach-Benchmark-with-Variable-Viscosity](https://github.com/GeoSci-FFM/GeoModBox.jl/blob/main/examples/ThermalConvection/Blankenbach_var_eta.jl)-1"></a><a class="docs-heading-anchor-permalink" href="#[Blankenbach-Benchmark-with-Variable-Viscosity](https://github.com/GeoSci-FFM/GeoModBox.jl/blob/main/examples/ThermalConvection/Blankenbach_var_eta.jl)" title="Permalink"></a></h1><p>This example reproduces the <strong>Blankenbach et al. (1989) thermal convection benchmark</strong> including a strongly temperature-dependent viscosity. In contrast to the corresponding isoviscous benchmark exercise, the viscosity varies by more than four orders of magnitude across the imposed temperature range, resulting in a substantially more realistic and challenging thermo-mechanical problem.</p><p>The viscosity is described by</p><p class="math-container">\[\begin{equation}
+\eta = \eta_0 \exp\left(
+-b\frac{T-T_{\textrm{top}}}
+{T_{\textrm{bottom}}-T_{\textrm{top}}}
++
+c\frac{y}{H}
+\right),
+\end{equation}\]</p><p>where <span>$\eta_0$</span> is the reference viscosity, while the coefficients <span>$b$</span> and <span>$c$</span> control the temperature and depth dependence of viscosity, respectively. For this example, the benchmark parameters are</p><p class="math-container">\[\begin{equation}
+b=\ln(16384), \qquad c=0,
+\end{equation}\]</p><p>such that viscosity depends exclusively on temperature.</p><p>The introduction of temperature-dependent viscosity creates a nonlinear coupling between the momentum and energy equations. At each time step, the current temperature field determines the viscosity distribution, which is then treated as fixed during the solution of the Stokes equations. The resulting velocity field is subsequently used to advect and diffuse the temperature, modifying the viscosity distribution for the next time step. Although each individual Stokes solve is therefore linear, the complete thermo-mechanical evolution is nonlinear because temperature, viscosity, and velocity continuously influence one another.</p><p>The accuracy of the numerical solution is evaluated using the steady-state diagnostics reported by Blankenbach et al. (1989), including the <strong>Nusselt number</strong>, the <strong>root mean square velocity</strong>, the temperature gradients at the model corners, and the extrema of the vertical temperature profile through the centre of the model.</p><p>Compared with the isoviscous benchmark, this example develops a markedly asymmetric convection pattern. Cold material near the upper boundary becomes highly viscous and forms a stiff thermal boundary layer, whereas the warmer interior remains comparatively weak and deforms more readily. This results in localized downwellings, broader upwellings, and a significantly more heterogeneous flow field than in the isoviscous case.</p><p>The example therefore serves both as a verification of the variable-viscosity Stokes solver and as a demonstration of nonlinear thermo-mechanical coupling in mantle convection.</p><p>The example makes use of the general momentum, heat diffusion, and semi-Lagrangian advection solvers provided by <code>GeoModBox.jl</code>. In addition, a helper function is introduced at the end of the script to compute a temperature-dependent viscosity field and interpolate it from cell centers to the grid vertices required by the variable-viscosity Stokes solver.</p><pre><code class="language-Julia hljs">using Plots, ExtendableSparse
+using GeoModBox
+using GeoModBox.InitialCondition, GeoModBox.MomentumEquation.TwoD
+using GeoModBox.AdvectionEquation.TwoD, GeoModBox.HeatEquation.TwoD
+using GeoModBox.Scaling
+using Statistics, LinearAlgebra
+using Printf, LaTeXStrings, Measures</code></pre><p>The initial temperature field is selected together with the plotting parameters, animation directory, and output options. Because the viscosity varies strongly with temperature, this example is computationally more expensive than the isoviscous model, particularly because the momentum matrix must be reassembled and factorized whenever the viscosity field changes.</p><pre><code class="language-Julia hljs"># Define Initial Condition ============================================== #
+# Temperature - 
+#   1) circle, 2) gaussian, 3) block, 4) linear, 5) lineara, 
+Ini         =   (T=:blankenbach,)
+# ----------------------------------------------------------------------- #
+# Plot Settings ========================================================= #
+Pl  =   (
+    qinc        =   10,
+    qsc         =   2.0e-4
+)
+# Animation Settings ==================================================== #
+path        =   string(&quot;./examples/ThermalConvection/Results/&quot;)
+anim        =   Plots.Animation(path, String[] )
+save_fig    =   1
+# ----------------------------------------------------------------------- #</code></pre><p>The benchmark values reported by Blankenbach et al. (1989) are stored for later comparison. During the simulation, the Nusselt number and the root-mean-square velocity are evaluated continuously and compared with these published reference values to verify the numerical implementation.</p><pre><code class="language-Julia hljs"># Benchmark Values ====================================================== # 
+# Taken from Gerya (2019), Introduction to numerical geodynamic modelling
+B       =   (
+    Nr      =   4,
+    # Nusselt Number at the top
+    Nu      =   [4.8844,10.534,21.972,10.066,6.9229],   
+    # Root Mean Square Velocity-scaled
+    Vrms    =   [42.865,193.21,833.99,480.43,171.76],   
+    # Non-dimensional temperature gradients in the model corner
+    q1      =   [8.0593,19.079,45.964,17.531,18.484],
+    q2      =   [0.5888,0.7228,0.8772,1.0085,0.1774],
+    q3      =   [8.0593,19.079,45.964,26.809,14.168], 
+    q4      =   [0.5888,0.7228,0.8772,0.4974,0.6177],
+    # Local minimum along the central vertical temperature profile 
+    Tmin    =   [0.4222,0.4284,0.4322,0.7405,0.3970],
+    ymin    =   [0.2249,0.1118,0.0577,0.0623,0.1906],
+    # Local maximum algon the central vertical temperature profile
+    Tmax    =   [0.5778,0.5716,0.5678,0.8323,0.5758],
+    ymax    =   [0.7751,0.8882,0.9423,0.8243,0.7837],
+    b       =   [0,0,0,log(1e3),log(16384)],
+    c       =   [0,0,0,0,log(64)],
+)
+# ----------------------------------------------------------------------- #</code></pre><p>The physical model consists of a unit-aspect-ratio box heated from below and cooled from above. </p><pre><code class="language-Julia hljs"># Geometry ============================================================== #
+M   =   Geometry(
+    xmin    =   0.0,                #   [ m ] 
+    xmax    =   1000e3,             #   [ m ]
+    ymin    =   -1000e3,            #   [ m ]
+    ymax    =   0.0,                #   [ m ]
+)
+# ----------------------------------------------------------------------- #
+# Referenzparameter ===================================================== #
+P   =   Physics(
+    g       =   10.0,               #   Graviational Acceleration [m/s^2]
+    ρ₀      =   4000.0,             #   Reference Density [kg/m^3]
+    k       =   5.0,                #   Thermal Conductivity [ W/m/K ]
+    cp      =   1250.0,             #   Heat capacity [ J/kg/K ]
+    α       =   2.5e-5,             #   THermal Expansion [ K^-1 ]
+    η₀      =   1e23,               #   Reference Viscosity [ Pa*s ]
+    ΔT      =   1000.0,             #   Temperature Difference
+    # If Ra &lt; 0, Ra will be calculated from the reference parameters.
+    # If Ra is defined, the reference viscosity will be adjusted such that
+    # the scaling parameters result in the given Ra.
+    Ra      =   -9999,              #   Rayleigh number
+)
+# ----------------------------------------------------------------------- #</code></pre><p>The scaling constants are derived from the dimensional geometry and physical parameters. They define the characteristic length, temperature, time, velocity, and viscosity scales used to transform the governing equations and model variables into nondimensional form.</p><pre><code class="language-Julia hljs"># Define Scaling Constants ============================================== # 
+S   =   ScalingConstants!(M,P)
+# ----------------------------------------------------------------------- #</code></pre><p>Next, the staggered finite-difference grid and all required field variables are allocated. In addition to the temperature, velocity, pressure, and density fields, separate viscosity arrays are defined at cell centers and grid vertices, reflecting the variable placement required by the staggered Stokes discretization.</p><pre><code class="language-Julia hljs"># Numerical Grid ======================================================== #
+NC  =   (
+    x   =   50,
+    y   =   50,
+)
+NV      =   (
+    x   =   NC.x + 1,
+    y   =   NC.y + 1,
+)
+Δ       =   GridSpacing(
+    x   =   (M.xmax - M.xmin)/NC.x,
+    y   =   (M.ymax - M.ymin)/NC.y,
+)
+# ----------------------------------------------------------------------- #
+# Data Arrays =========================================================== #
+D       =   DataFields(
+    Q       =   zeros(Float64,(NC...)),
+    T       =   zeros(Float64,(NC...)),
+    T0      =   zeros(Float64,(NC...)),
+    T_ex    =   zeros(Float64,(NC.x+2,NC.y+2)),
+    T_ex0   =   zeros(Float64,(NC.x+2,NC.y+2)),
+    Told_ex =   zeros(Float64,(NC.x+2,NC.y+2)),
+    ρ       =   ones(Float64,(NC...)),
+    vx      =   zeros(Float64,(NV.x,NV.y+1)),
+    vy      =   zeros(Float64,(NV.x+1,NV.y)),    
+    Pt      =   zeros(Float64,(NC...)),
+    vxc     =   zeros(Float64,(NC...)),
+    vyc     =   zeros(Float64,(NC...)),
+    vxco    =   zeros(Float64,(NC...)),
+    vyco    =   zeros(Float64,(NC...)),
+    vc      =   zeros(Float64,(NC...)),
+    ηc      =   zeros(Float64,NC...),
+    η_ex    =   zeros(Float64,(NC.x+2,NC.y+2)),
+    ηv      =   zeros(Float64,NV...),
+    ΔTtop   =   zeros(Float64,NC.x),
+    ΔTbot   =   zeros(Float64,NC.x),
+)
+# ----------------------------------------------------------------------- #
+# Needed for the defect correction solution ---
+divV        =   zeros(Float64,NC...)
+ε           =   (
+    xx      =   zeros(Float64,NC...), 
+    yy      =   zeros(Float64,NC...), 
+    xy      =   zeros(Float64,NV...),
+)
+τ           =   (
+    xx      =   zeros(Float64,NC...), 
+    yy      =   zeros(Float64,NC...), 
+    xy      =   zeros(Float64,NV...),
+)
+# Residuals ---
+Fm     =    (
+    x       =   zeros(Float64,NV.x, NC.y), 
+    y       =   zeros(Float64,NC.x, NV.y)
+)
+FPt         =   zeros(Float64,NC...)
+# Heat Flux calculations ---
+Tv1         =   zeros(NV.x,1)
+Tv2         =   zeros(NV.x,1)
+dTdy        =   zeros(NV.x,1)
+# ----------------------------------------------------------------------- #</code></pre><p>The time-stepping parameters are initialized together with arrays used to monitor the evolution of the benchmark. These diagnostics include the dimensionless time, Nusselt number, root-mean-square velocity, mean temperature, and the change in temperature between successive iterations, which is later used to detect steady state.</p><pre><code class="language-Julia hljs"># Time parameters ======================================================= #
+T   =   TimeParameter(
+    tmax    =   1000000.0,          #   [ Ma ]
+    Δfacc   =   0.9,                #   Courant time factor
+    Δfacd   =   0.9,                #   Diffusion time factor
+    itmax   =   30000,              #   Maximum iterations
+)
+T.tmax      =   T.tmax*1e6*T.year   #   [ s ]
+T.Δc        =   T.Δfacc * minimum((Δ.x,Δ.y)) / 
+                    (sqrt(maximum(abs.(D.vx))^2 + maximum(abs.(D.vy))^2))
+T.Δd        =   T.Δfacd * (1.0 / (2.0 * P.κ *(1.0/Δ.x^2 + 1/Δ.y^2)))
+
+T.Δ         =   minimum([T.Δd,T.Δc])
+# Statistics ------------------------------------------------------------ #
+Time            =   zeros(T.itmax)
+Nus             =   zeros(T.itmax)
+meanV           =   zeros(T.itmax)
+meanT           =   zeros(T.itmax)
+ΔTsteady        =   fill(NaN, T.itmax)
+find            =   0
+final_step      =   0 
+nsteady         =   0
+nsteady_required =  100
+# ----------------------------------------------------------------------- #</code></pre><p>All dimensional model quantities are converted to their nondimensional equivalents. After this step, the numerical solver operates entirely with scaled coordinates, material properties, fields, and time increments.</p><pre><code class="language-Julia hljs"># Scaling laws ========================================================== #
+ScaleParameters!(S,M,Δ,T,P,D)
+# ----------------------------------------------------------------------- #</code></pre><p>The computational coordinates are then generated for all staggered variable locations. Separate coordinate arrays are defined for centroids, vertices, and velocity nodes to simplify field interpolation, visualization, and finite-difference operations.</p><pre><code class="language-Julia hljs"># Coordinates =========================================================== #
+x       =   (
+    c   =   LinRange(M.xmin+Δ.x/2,M.xmax-Δ.x/2,NC.x),
+    ce  =   LinRange(M.xmin - Δ.x/2.0, M.xmax + Δ.x/2.0, NC.x+2),
+    v   =   LinRange(M.xmin,M.xmax,NV.x),
+)
+y       =   (
+    c   =   LinRange(M.ymin+Δ.y/2,M.ymax-Δ.y/2,NC.y),
+    ce  =   LinRange(M.ymin - Δ.y/2.0, M.ymax + Δ.y/2.0, NC.y+2),
+    v   =   LinRange(M.ymin,M.ymax,NV.y),
+)
+x1      =   (
+    c2d     =   x.c .+ 0*y.c&#39;,
+    v2d     =   x.v .+ 0*y.v&#39;, 
+    vx2d    =   x.v .+ 0*y.ce&#39;,
+    vy2d    =   x.ce .+ 0*y.v&#39;,
+)
+x   =   merge(x,x1)
+y1      =   (
+    c2d     =   0*x.c .+ y.c&#39;,
+    v2d     =   0*x.v .+ y.v&#39;,
+    vx2d    =   0*x.v .+ y.ce&#39;,
+    vy2d    =   0*x.ce .+ y.v&#39;,
+)
+y   =   merge(y,y1)
+# ----------------------------------------------------------------------- #</code></pre><p>The initial conductive temperature profile is initialized using the Blankenbach benchmark perturbation. From this temperature field, the initial temperature-dependent viscosity is computed according to the prescribed exponential viscosity law.</p><pre><code class="language-Julia hljs"># Initial Condition ===================================================== #
+# Temperature ------
+IniTemperature!(Ini.T,M,NC,D,x,y;Tb=P.Tbot,Ta=P.Ttop)
+# Initialize Viscosity ---
+TdepViscosity!(D,B.b[B.Nr],B.c[B.Nr],y)
+# ----------------------------------------------------------------------- #</code></pre><p>Boundary conditions are prescribed for both the temperature and velocity fields. The model employs fixed temperatures at the upper and lower boundaries, insulating sidewalls, and free-slip mechanical boundary conditions, matching the original benchmark specification.</p><pre><code class="language-Julia hljs"># Boundary Conditions =================================================== #
+# Temperature ------
+TBC     = (
+    type    = (W=:Neumann, E=:Neumann,N=:Dirichlet,S=:Dirichlet),
+    val     = (W=zeros(NC.y),E=zeros(NC.y),
+                    N=P.Ttop.*ones(NC.x),S=P.Tbot.*ones(NC.x)))
+# Velocity ------
+VBC     =   (
+    type    =   (E=:freeslip,W=:freeslip,S=:freeslip,N=:freeslip),
+    val     =   (E=zeros(NV.y),W=zeros(NV.y),S=zeros(NV.x),N=zeros(NV.x),
+                    vyS=0.0,vyN=0.0,vxW=0.0,vxE=0.0),
+)
+# ----------------------------------------------------------------------- #</code></pre><p>If the Rayleigh number is specified explicitly, the reference viscosity is automatically adjusted to reproduce the desired value.</p><pre><code class="language-Julia hljs"># Rayleigh Number ======================================================= #
+if P.Ra &lt; 0
+    P.Ra     =   P.ρ₀*P.g*P.α*P.ΔT*S.hsc^3/P.η₀/P.κ
+else
+    P.η₀     =   P.ρ₀*P.g*P.α*P.ΔT*S.hsc^3/P.Ra/P.κ
+end
+filename    =   string(&quot;Blankenbach_VarEta_&quot;,@sprintf(&quot;%.2e&quot;,P.Ra),
+                        &quot;_&quot;,NC.x,&quot;_&quot;,NC.y,
+                        &quot;_&quot;,Ini.T)
+# ----------------------------------------------------------------------- #</code></pre><p>The sparse linear systems required by the momentum and energy equations are assembled next. The Stokes equations are solved using the general defect-correction solver, whereas the transient heat equation is solved using a Crank-Nicolson discretization together with the same iterative defect-correction strategy.</p><pre><code class="language-Julia hljs"># Linear System of Equations ============================================ #
+# Momentum Conservation Equation (MCE) ------
+niterM      =   50
+atolM       =   1e-8        #   Absolute tolerance
+rtolM       =   1e-5        #   Relative tolerance; r = atolM0/atolM
+RM          =   0.0         #   Initialize absolute residual    
+RMrel       =   0.0         #   Initialize relative residual 
+off    = [  NV.x*NC.y,                          # vx
+            NV.x*NC.y + NC.x*NV.y,              # vy
+            NV.x*NC.y + NC.x*NV.y + NC.x*NC.y ] # Pt
+Num    =    (
+    Vx  =   reshape(1:NV.x*NC.y, NV.x, NC.y), 
+    Vy  =   reshape(off[1]+1:off[1]+NC.x*NV.y, NC.x, NV.y), 
+    Pt  =   reshape(off[2]+1:off[2]+NC.x*NC.y,NC...),
+    T   =   reshape(1:NC.x*NC.y, NC.x, NC.y),
+)
+ndofM   =   maximum(Num.Pt)     
+KM      =   ExtendableSparseMatrix(ndofM,ndofM)      
+δx      =   zeros(maximum(Num.Pt))
+F       =   zeros(maximum(Num.Pt))
+# Energy Conservation Equation (ECE) ------------------------------------ #
+niterT  =   10
+ϵT      =   1e-12
+RE      =   0.0
+ndofT   =   maximum(Num.T)     
+KT      =   ExtendableSparseMatrix(ndofT,ndofT)
+δT      =   zeros(maximum(Num.T))
+RT      =   zeros(Float64,NC...)
+∂2T     =   (∂x2=zeros(NC.x, NC.y), ∂y2=zeros(NC.x, NC.y),
+                ∂x20=zeros(NC.x, NC.y), ∂y20=zeros(NC.x, NC.y))
+# ----------------------------------------------------------------------- #</code></pre><p>The main time loop advances the coupled thermo-mechanical solution. At each step, the current model time is updated and detailed terminal output is restricted to selected intervals to reduce the cost of printing and plotting during the long variable-viscosity calculation.</p><pre><code class="language-Julia hljs"># Time Loop ============================================================= #
+for it = 1:T.itmax
+    R0      =   0.0
+    # Reduce screen output ---
+    verbose_step    =   mod(it, 500) == 0 || it == 1
+    if it&gt;1
+        Time[it]  =   Time[it-1] + T.Δ
+    end
+    verbose_step &amp;&amp; @printf(
+        &quot;Time step: #%04d, Time [non-dim]: %04e\n&quot;,
+        it, Time[it]
+    )</code></pre><p>Each iteration consists of four main steps. First, the temperature-dependent viscosity is updated and the Stokes equations are solved to obtain the velocity and pressure fields. The resulting velocity field is then used to evaluate the benchmark diagnostics before advancing the temperature through semi-Lagrangian advection and implicit Crank-Nicolson diffusion. Finally, the convergence criteria are evaluated to determine whether a steady state has been reached.</p><pre><code class="language-Julia hljs">    # ------ MCE ------
+    verbose_step &amp;&amp; @printf(&quot;---Momentum Calculation ---\n&quot;)
+    if it == 1
+        D.vx[2:end-1,:]    .=  0.0
+        D.vy[:,1:end-1]    .=  0.0
+        D.Pt               .=  0.0
+    end
+    # Residual Calculation ------
+    @. D.ρ  =   -P.Ra*D.T
+    # Viscosity Calculations --- 
+    TdepViscosity!(D,B.b[B.Nr],B.c[B.Nr],y)
+    KM      =   Assembly(NC, NV, Δ, D.ηc, D.ηv, VBC, Num)
+    KMfac   =   lu(KM.cscmatrix)
+    for iter = 1:niterM
+      # Residuals2Dc!(D,VBC,ε,τ,divV,Δ,1.0,1.0,Fm,FPt)
+        Residuals2D!(D,VBC,ε,τ,divV,Δ,D.ηc,D.ηv,1.0,Fm,FPt)
+        F[Num.Vx]   .=  Fm.x
+        F[Num.Vy]   .=  Fm.y
+        F[Num.Pt]   .=  FPt
+        RM          =   norm(F)/length(F)
+        if iter == 1
+            R0 = max(RM, eps())
+        end
+        RMrel       =   RM/R0
+        if verbose_step
+            @printf(&quot;   MCE %2d: ||R|| = %1.4e, ||R||/||R₀|| = %1.4e\n&quot;,iter,RM,RMrel)
+        end
+        (RM &lt; atolM || RM/R0 &lt; rtolM) &amp;&amp; break
+        # Solving Linear System of Equations ------
+        δx      .=   -(KMfac \ F)
+        # Update unknown variables ------
+        D.vx[:,2:end-1]     .+=  δx[Num.Vx]
+        D.vy[2:end-1,:]     .+=  δx[Num.Vy]
+        D.Pt                .+=  δx[Num.Pt]
+    end
+    # ======
+    # Calculate Velocity on the Centroids ------
+    for i = 1:NC.x
+        for j = 1:NC.y
+            D.vxc[i,j]  = (D.vx[i,j+1] + D.vx[i+1,j+1])/2
+            D.vyc[i,j]  = (D.vy[i+1,j] + D.vy[i+1,j+1])/2
+        end
+    end
+    @. D.vc        = sqrt(D.vxc^2 + D.vyc^2)</code></pre><p>Once the velocity field has converged, the benchmark diagnostics are evaluated. The Nusselt number is computed from the temperature gradient at the upper boundary, while the root-mean-square velocity and the mean temperature provide additional measures of the convective vigor and thermal evolution.</p><pre><code class="language-Julia hljs">    # Nusselt Number ==================================================== #
+    # Grid structure at the surface ---
+    #   o - Centroids
+    #   x - Vertices 
+    #   □ - Ghost Nodes
+    #
+    #   □          □           □            □
+    #   
+    #        x --------- x --------- x
+    #        |           |           |
+    #   □    |     o     |     o     |      □ 
+    #        |           |           |
+    #        x --------- x --------- x      
+    #        |           |           |
+    #   □    |     o     |     o     |      □
+    # --- 
+    # Get temperature at the vertices 
+    @. Tv1  =   (D.T_ex[1:end-1,end] + D.T_ex[2:end,end] + 
+                    D.T_ex[1:end-1,end-1] + D.T_ex[2:end,end-1])/4
+    @. Tv2  =   (D.T_ex[1:end-1,end-1] + D.T_ex[2:end,end-1] + 
+                    D.T_ex[1:end-1,end-2] + D.T_ex[2:end,end-2])/4
+    # Calculate temperature gradient --- 
+    @. dTdy =   -(Tv1 - Tv2)/Δ.y
+    # Calculate Nusselt number ---
+    Nus[it]     =   0.0
+    # Trapezoidal integration -
+    for i = 1:NV.x
+        if i == 1 || i == NV.x
+            afac = 1
+        else
+            afac = 2
+        end
+        Nus[it]     += afac * dTdy[i]
+    end
+    Nus[it]     *=   Δ.x/2
+    # Mean Temperature ---
+    meanT[it]   =   mean(D.T)
+    # Root Mean Square Velocity ---
+    meanV[it]   =   sqrt(mean(D.vxc.^2 .+ D.vyc.^2))
+    # ------------------------------------------------------------------- #</code></pre><p>The next stable time step is determined from both the Courant-Friedrichs-Lewy (CFL) criterion and the thermal diffusion stability criterion. If the remaining simulation time is smaller than the computed time step, the time step is reduced to terminate the simulation exactly at the prescribed final time.</p><pre><code class="language-Julia hljs">    # Calculate time stepping =========================================== #
+    T.Δc        =   T.Δfacc * minimum((Δ.x,Δ.y)) / 
+            (sqrt(maximum(abs.(D.vx))^2 + maximum(abs.(D.vy))^2))
+    T.Δd        =   T.Δfacd * (1.0 / (2.0 *(1.0/Δ.x^2 + 1/Δ.y^2)))
+    T.Δ         =   minimum([T.Δd,T.Δc])
+    if Time[it] + T.Δ &gt;= T.tmax
+        T.Δ        = T.tmax - Time[it]
+        final_step = 1
+    end</code></pre><p>The temperature, velocity, and viscosity are visualized at selected time steps. The left panel of the figure shows the temperature field and the right panel shows <span>$\log_{10}(\eta/\eta_0)$</span>. Frames are either stored for the final animation or displayed interactively.</p><pre><code class="language-Julia hljs">    # Plot ============================================================== #
+    if verbose_step
+        p = plot(layout=(1,2),size=(1900,800),dpi = 300,
+                guidefontsize = 28, tickfontsize = 18,
+                titlefontsize = 28)
+        heatmap!(p,x.c,y.c,D.T&#39;,
+                xlabel= L&quot;x&quot;,ylabel= L&quot;y&quot;,colorbar=true,
+                color=cgrad(:lajolla),
+                aspect_ratio=:equal,xlims=(M.xmin, M.xmax),
+                ylims=(M.ymin, M.ymax), title= L&quot;Temperature&quot;,
+                left_margin=20mm,
+                subplot=1)
+        contour!(p,x.c,y.c,D.T&#39;,lw=1,
+                color=&quot;white&quot;,
+                alpha=0.5,subplot=1)
+        quiver!(p,x.c2d[1:Pl.qinc:end,1:Pl.qinc:end],
+            y.c2d[1:Pl.qinc:end,1:Pl.qinc:end],
+            quiver=(D.vxc[1:Pl.qinc:end,1:Pl.qinc:end].*Pl.qsc,
+                    D.vyc[1:Pl.qinc:end,1:Pl.qinc:end].*Pl.qsc),
+                    la=0.5,color=&quot;black&quot;,
+                    alpha=0.5,subplot=1)
+        heatmap!(p,x.c,y.c,log10.(D.ηc&#39;),
+            xlabel=L&quot;x&quot;,colorbar=true,
+            yformatter= _ -&gt; &quot;&quot;,
+            title= L&quot;Viscosity&quot;,color=reverse(cgrad(:roma)),
+            aspect_ratio=:equal,xlims=(M.xmin, M.xmax),
+            ylims=(M.ymin, M.ymax),
+            subplot=2)
+        if save_fig == 1
+            Plots.frame(anim)
+        elseif save_fig == 0
+            display(p)
+        end
+    end
+    # ------------------------------------------------------------------- #</code></pre><p>The temperature field is then advected using the semi-Lagrangian method. The velocity field from the previous time step is retained to evaluate the characteristic trajectories required by the midpoint integration scheme.</p><pre><code class="language-Julia hljs">    # Advection ========================================================= #
+    if it == 1
+        @. D.vxco   =   D.vxc
+        @. D.vyco   =   D.vyc
+    end
+    semilagc2D!(D.T,D.T_ex,D.vxc,D.vyc,D.vxco,D.vyco,x,y,T.Δ)
+    @. D.vxco  =   D.vxc
+    @. D.vyco  =   D.vyc
+    # ------------------------------------------------------------------- #</code></pre><p>Following advection, thermal diffusion is solved using the Crank-Nicolson discretization. The defect-correction iterations continue until the temperature residual satisfies the prescribed convergence tolerance, completing one fully coupled thermo-mechanical time step.</p><pre><code class="language-Julia hljs">    # Diffusion ========================================================= #
+    verbose_step &amp;&amp; @printf(&quot;---Energy Calculation---\n&quot;)
+    @. D.T0 =   D.T
+    # Assemble linear system ---
+    KT      =   AssembleMatrix2Dc(1.0, TBC, Num, NC, Δ, T.Δ[1];C=0.5)
+    # Solve for temperature correction: Cholesky factorisation
+    KTc      =   cholesky(KT.cscmatrix)
+    for iter = 1:niterT
+        # Evaluate residual
+        ComputeResiduals2Dc!( RT, D.T, D.T_ex, D.T0, D.T_ex0, ∂2T, 
+                1.0, TBC, Δ, T.Δ[1]; C = 0.5 )
+        RE      =   norm(RT)/length(RT)
+        if verbose_step
+            @printf(&quot;   ECE %2d: ||RE|| = %1.4e\n&quot;, iter, RE)
+        end
+        RE &lt; ϵT ? break : nothing
+        # Solve for temperature correction: Back substitutions
+        δT .= -(KTc\RT[:])
+        # Update temperature
+        @. D.T += δT[Num.T]
+    end
+    # Update extended field for advection scheme --- 
+    D.T_ex[2:end-1,2:end-1]     .=  D.T
+    # ------------------------------------------------------------------- #</code></pre><p>Finally, the change in temperature between successive iterations is evaluated. Once this change remains below a prescribed tolerance for a sufficient number of consecutive time steps, the simulation is considered to have reached steady state and the time integration terminates.</p><pre><code class="language-Julia hljs">    # Check break ======================================================= #
+    # If the maximum time is reached or if the models reaches steady 
+    # state the time loop is stoped! 
+    ΔTsteady[it]    =   norm(D.T_ex.-D.Told_ex)./sqrt(length(D.T_ex))
+    if Time[it] &gt; 0.05
+        epsC    =   1e-8
+        if ΔTsteady[it] &lt;= epsC
+            nsteady += 1
+        else
+            nsteady = 0
+        end
+        find    =   it
+        verbose_step &amp;&amp; @printf(
+            &quot;ΔTᵣₘₛ = %1.4e, εT = %1.4e, consecutive steps = %i\n&quot;,
+            ΔTsteady[it], epsC, nsteady
+        )
+        if Time[it] &gt;= T.tmax
+            @printf(&quot;Maximum time reached!\n&quot;)
+            break
+        elseif nsteady &gt;= nsteady_required
+            @printf(
+                &quot;Convection reached steady state at iteration %i: ΔTᵣₘₛ = %1.4e\n&quot;,
+                it, ΔTsteady[it]
+            )
+            break
+        end
+    end
+    @. D.Told_ex       =    D.T_ex
+    # --------------------------------------------------------------- #
+    verbose_step &amp;&amp; @printf(&quot;\n&quot;)
+end</code></pre><p>After the simulation has finished, the final temperature and viscosity fields, together with the convergence history, are saved. Additional benchmark diagnostics are then generated to facilitate comparison with the published reference solution.</p><pre><code class="language-Julia hljs"># Save Animation ---
+if save_fig == 1
+    # Write the frames to a GIF file
+    Plots.gif(anim, string( path, filename, &quot;.gif&quot; ), fps = 10)
+    foreach(rm, filter(startswith(string(path,&quot;00&quot;)), readdir(path,join=true)))
+end
+valid   =   findall(isfinite, ΔTsteady)
+k   = plot(
+        valid,
+        log10.(ΔTsteady[valid]),
+        xlabel = &quot;it&quot;,
+        ylabel = L&quot;log_{10} ΔT_{rms}&quot;,
+        label = &quot;&quot;,
+        markershape = :circle,
+        markercolor = :black,
+)
+# Save final figure ================================================= #
+p2 = plot(layout=(1,2),size=(1900,800),dpi = 300,
+        guidefontsize = 28, tickfontsize = 18,
+        titlefontsize = 28)
+heatmap!(p2,x.c,y.c,D.T&#39;,
+        xlabel= L&quot;x&quot;,ylabel= L&quot;y&quot;,colorbar=true,
+        color=cgrad(:lajolla),
+            aspect_ratio=:equal,xlims=(M.xmin, M.xmax),
+        ylims=(M.ymin, M.ymax), title= L&quot;Temperature&quot;,
+        left_margin=20mm,
+        subplot=1)
+    contour!(p2,x.c,y.c,D.T&#39;,lw=1,
+        color=&quot;white&quot;,
+        alpha=0.5,subplot=1)
+    quiver!(p2,x.c2d[1:Pl.qinc:end,1:Pl.qinc:end],
+            y.c2d[1:Pl.qinc:end,1:Pl.qinc:end],
+            quiver=(D.vxc[1:Pl.qinc:end,1:Pl.qinc:end].*Pl.qsc,
+                    D.vyc[1:Pl.qinc:end,1:Pl.qinc:end].*Pl.qsc),
+            la=0.5,color=&quot;black&quot;,
+            alpha=0.5,subplot=1)
+heatmap!(p2,x.c,y.c,log10.(D.ηc&#39;),
+    xlabel=L&quot;x&quot;,colorbar=true,
+    yformatter= _ -&gt; &quot;&quot;,
+    title= L&quot;Viscosity&quot;,color=reverse(cgrad(:roma)),
+            aspect_ratio=:equal,xlims=(M.xmin, M.xmax),
+            ylims=(M.ymin, M.ymax),
+    subplot=2)
+if save_fig == 1
+    savefig(k,string(&quot;./examples/ThermalConvection/Results/Blankenbach_var_eta_iterations_&quot;,@sprintf(&quot;%.2e&quot;,P.Ra),
+            &quot;_&quot;,NC.x,&quot;_&quot;,NC.y,
+            &quot;_&quot;,Ini.T,&quot;.png&quot;))
+    savefig(p2,string(&quot;./examples/ThermalConvection/Results/Blankenbach_var_eta_Final_Stage_&quot;,@sprintf(&quot;%.2e&quot;,P.Ra),
+            &quot;_&quot;,NC.x,&quot;_&quot;,NC.y,&quot;_it_&quot;,find,&quot;_&quot;,
+            Ini.T,&quot;.png&quot;))
+elseif save_fig == 0
+    display(p2)
+    display(k)
+end
+# ----------------------------------------------------------------------- #
+# Plot time serieses ==================================================== #
+q2  =   plot(layout=(2,1),size=(1200,900),dpi = 300)
+@show size(Time), size(Nus)
+q2  =   plot(Time[1:find],Nus[1:find],
+            xlabel= &quot;&quot;, ylabel= L&quot;Nus&quot;,label=&quot;&quot;,
+            xformatter = _ -&gt; &quot;&quot;,
+            xlims=(0,Time[find]),
+            guidefontsize = 24, tickfontsize = 18,
+            titlefontsize = 24,grid = false,
+            layout=(2,1),subplot=1)
+plot!(q2,Time[1:find],B.Nu[B.Nr].*ones(find,1),
+            lw=0.5,color=&quot;red&quot;,linestyle=:dash,alpha=0.5,label=&quot;&quot;,
+            layout=(2,1),subplot=1)
+plot!(q2,Time[1:find],meanV[1:find],
+            xlabel= L&quot;Time\ [\ non-dim\ ]&quot;, ylabel= L&quot;V_{RMS}&quot;,label=&quot;&quot;,
+            xformatter =:auto,
+            guidefontsize = 24, tickfontsize = 18,
+            titlefontsize = 24,grid = false,
+            xlims=(0,Time[find]),
+            layout=(2,1),subplot=2)
+plot!(q2,Time[1:find],B.Vrms[B.Nr].*ones(find,1),
+            lw=0.5,color=&quot;red&quot;,linestyle=:dash,alpha=0.5,label=&quot;&quot;,
+            layout=(2,1),subplot=2)
+if save_fig == 1
+    savefig(q2,string(&quot;./examples/ThermalConvection/Results/Blankenbach_var_eta_TimeSeries_&quot;,@sprintf(&quot;%.2e&quot;,P.Ra),
+                        &quot;_&quot;,NC.x,&quot;_&quot;,NC.y,&quot;_&quot;,Ini.T,&quot;.png&quot;))
+elseif save_fig == 0
+    display(q2)
+end
+# ----------------------------------------------------------------------- #
+# Vertical temperature profiles ========================================= #
+ind1    =   Int64(floor((M.xmax-M.xmin)/2/Δ.x)+1)
+ind2    =   Int64(floor((M.xmax-M.xmin)/2/Δ.x))
+Tprof   =   (D.T[ind1,:]+D.T[ind2,:])/2
+q3  =   plot(Tprof,y.c,
+            xlabel= L&quot;T&quot;,ylabel= L&quot;y&quot;,label=false,
+            size=(1100,900),dpi=300,grid = false,
+            ylims=(M.ymin,M.ymax),xlims=(0.0,1.0),
+            guidefontsize = 28, tickfontsize = 18,
+            titlefontsize = 28,right_margin=5mm,
+            left_margin=5mm)
+scatter!(q3,(B.Tmin[B.Nr],-(1-B.ymin[B.Nr])),
+                markershape=:rect,markersize=6,
+            markercolor=:black,label=false)
+scatter!(q3,(B.Tmax[B.Nr],-(1-B.ymax[B.Nr])),
+                markershape=:rect,markersize=6,
+            markercolor=:black,label=false)
+if save_fig == 1
+    savefig(q3,string(&quot;./examples/ThermalConvection/Results/Blankenbach_var_eta_Profiles_&quot;,@sprintf(&quot;%.2e&quot;,P.Ra),
+                        &quot;_&quot;,NC.x,&quot;_&quot;,NC.y,&quot;_&quot;,Ini.T,&quot;.png&quot;))
+elseif save_fig == 0
+    display(q3)
+end
+# ----------------------------------------------------------------------- </code></pre><p><img src="../../../../assets/examples/Convection/Blankenbach_VarEta_1.00e+04_100_100_blankenbach.gif" alt="BVE_1"/></p><p><strong>Figure 1.</strong> Evolution of the two-dimensional Blankenbach benchmark with temperature-dependent viscosity for a resolution of <span>$100 \times 100$</span>. The left panel shows the dimensionless temperature field with superimposed velocity vectors, while the right panel displays the logarithm of the normalized viscosity, <span>$\log_{10}(\eta/\eta_0)$</span>. As the initially conductive state becomes unstable, cold, highly viscous material accumulates beneath the upper boundary, whereas the hot interior develops a pronounced low-viscosity region that promotes vigorous convection.</p><p><img src="../../../../assets/examples/Convection/Blankenbach_var_eta_TimeSeries_1.00e+04_100_100_blankenbach.png" alt="BVE_2"/></p><p><strong>Figure 2.</strong> Evolution of the dimensionless Nusselt number (<span>$Nu$</span>) and root-mean-square velocity (<span>$V_{\mathrm{RMS}}$</span>) for the temperature-dependent Blankenbach benchmark. The dashed horizontal lines indicate the published benchmark values, demonstrating the convergence of the numerical solution toward the reference solution after the initial transient adjustment.</p><hr/><p>The helper function below evaluates the exponential temperature-dependent viscosity law and interpolates the resulting cell-centered viscosities to the grid vertices. Several averaging schemes are available, although the geometric average is used throughout this benchmark because it provides the most accurate representation for strongly varying viscosities.</p><pre><code class="language-Julia hljs"># ======================================================================= #
+# Helper Function ======================================================= # 
+# ======================================================================= #
+function TdepViscosity!(D,b,c,y;avg_v=:geometric)
+    
+    # Non-dimensional - assuming η is scaled by P.η₀
+    @. D.ηc     =   exp(-b*D.T + c*(1.0 + y.c2d))
+
+    # --- Extended Centroids-
+    D.η_ex[2:end-1,2:end-1]     .=  D.ηc
+    D.η_ex[1,:]     .=  D.η_ex[2,:]
+    D.η_ex[end,:]   .=  D.η_ex[end-1,:]
+    D.η_ex[:,1]     .=  D.η_ex[:,2]
+    D.η_ex[:,end]   .=  D.η_ex[:,end-1]
+    # --- Vertices -
+    if avg_v == :arithmetic
+        @. D.ηv =
+            0.25*(
+                D.η_ex[1:end-1,1:end-1] + 
+                D.η_ex[2:end  ,1:end-1] + 
+                D.η_ex[1:end-1,2:end  ] + 
+                D.η_ex[2:end  ,2:end  ]
+            )
+    elseif avg_v == :harmonic
+        @. D.ηv =
+            4.0/(
+                1/D.η_ex[1:end-1,1:end-1] + 
+                1/D.η_ex[2:end  ,1:end-1] + 
+                1/D.η_ex[1:end-1,2:end  ] + 
+                1/D.η_ex[2:end  ,2:end  ]
+            )
+    elseif avg_v == :geometric
+        @. D.ηv =
+            exp(0.25*(
+                log(D.η_ex[1:end-1,1:end-1]) + 
+                log(D.η_ex[2:end  ,1:end-1]) + 
+                log(D.η_ex[1:end-1,2:end  ]) + 
+                log(D.η_ex[2:end  ,2:end  ])
+            ))
+    else
+        error(&quot;Unknown viscosity averaging: $(avg_v)&quot;)
+    end
+end</code></pre></article><nav class="docs-footer"><a class="docs-footer-prevpage" href="../BottomHeatedConvection_VE/">« Bottom Heated - Variable Visc</a><a class="docs-footer-nextpage" href="../../StrainLocalization/ShearBands/">Viscous shear localization (Duretz et al., 2014) »</a><div class="flexbox-break"></div><p class="footer-message">Powered by <a href="https://github.com/JuliaDocs/Documenter.jl">Documenter.jl</a> and the <a href="https://julialang.org/">Julia Programming Language</a>.</p></nav></div><div class="modal" id="documenter-settings"><div class="modal-background"></div><div class="modal-card"><header class="modal-card-head"><p class="modal-card-title">Settings</p><button class="delete"></button></header><section class="modal-card-body"><p><label class="label">Theme</label><div class="select"><select id="documenter-themepicker"><option value="auto">Automatic (OS)</option><option value="documenter-light">documenter-light</option><option value="documenter-dark">documenter-dark</option><option value="catppuccin-latte">catppuccin-latte</option><option value="catppuccin-frappe">catppuccin-frappe</option><option value="catppuccin-macchiato">catppuccin-macchiato</option><option value="catppuccin-mocha">catppuccin-mocha</option></select></div></p><hr/><p>This document was generated with <a href="https://github.com/JuliaDocs/Documenter.jl">Documenter.jl</a> version 1.17.0 on <span class="colophon-date" title="Tuesday 11 August 2026 23:54">Tuesday 11 August 2026</span>. Using Julia version 1.12.6.</p></section><footer class="modal-card-foot"></footer></div></div></div></body></html>
