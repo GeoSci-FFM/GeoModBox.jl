@@ -287,7 +287,7 @@ advection operations.
 
 The function modifies Ma.phase, MPC.c, MPC.v, MPC.th, and
 MPC.thv in place.
-```
+
 # Example
 
 CountMPC(
@@ -304,21 +304,27 @@ CountMPC(
 )
 """
 @views function CountMPC(Ma,nmark,MPC,M,x,y,Δ,NC,NV;verbose=false)
+
+    nth = nthreads(:default)
+    nti = nthreads(:interactive)
+
      # Disable markers outside of the domain
      @threads for k=1:nmark
         if (Ma.x[k]<M.xmin || Ma.x[k]>M.xmax || Ma.y[k]<M.ymin || Ma.y[k]>M.ymax) 
             @inbounds Ma.phase[k] = -1
         end
     end
+
     # How many are outside? save indices for reuse  
-    nmark_out_th    =   zeros(Int64, nthreads())  
-    @threads for k=1:nmark
+    nmark_out_th    =   zeros(Int64, nth)  
+    @threads :static for k=1:nmark
         if Ma.phase[k] == -1
-            nmark_out_th[threadid()] += 1
+            ith = threadid() - nti
+            nmark_out_th[ith] += 1
         end
     end
     nmark_out       =   0
-    for ith=1:nthreads()
+    for ith=1:nth
         nmark_out += nmark_out_th[ith]
     end
     if verbose 
@@ -328,14 +334,14 @@ CountMPC(
     # Initialize marker per cell per thread array ---
     @threads for j = 1:NC.y
         for i = 1:NC.x
-            for ith=1:nthreads()
+            for ith=1:nth
                 MPC.th[ith,i,j] = 0.0
             end
         end
     end
 
     # Count marker per cell per thread ---
-    @threads for k=1:nmark
+    @threads :static for k=1:nmark
         if (Ma.phase[k]>=0)
             # Get the column:
             dstx = Ma.x[k] - x.c[1]
@@ -344,13 +350,14 @@ CountMPC(
             dsty = Ma.y[k] - y.c[1]
             j    = Int64(round(ceil( (dsty/Δ.y) + 0.5)))
             # Increment cell count
-            MPC.th[threadid(),i,j] += 1.0
+            ith = threadid() - nti
+            MPC.th[ith,i,j] += 1.0
         end
     end
 
     @threads for j=1:NC.y
         for i=1:NC.x
-            for ith=1:nthreads()
+            for ith=1:nth
                 if ith == 1 
                     MPC.c[i,j] = 0.0
                 end
@@ -362,14 +369,14 @@ CountMPC(
     # Initialize marker per vertex per thread array ---
     @threads for j = 1:NV.y
         for i = 1:NV.x
-            for ith=1:nthreads()
+            for ith=1:nth
                 MPC.thv[ith,i,j] = 0.0
             end
         end
     end
 
     # Count marker per vertex per thread ---
-    @threads for k=1:nmark
+    @threads :static for k=1:nmark
         if (Ma.phase[k]>=0)
             # Get the column:
             dstx = Ma.x[k] - x.v[1]
@@ -378,13 +385,14 @@ CountMPC(
             dsty = Ma.y[k] - y.v[1]
             j    = Int64(round(ceil( (dsty/Δ.y) + 0.5)))
             # Increment cell count
-            MPC.thv[threadid(),i,j] += 1.0
+            ith = threadid() - nti
+            MPC.thv[ith,i,j] += 1.0
         end
     end
 
     @threads for j=1:NV.y
         for i=1:NV.x
-            for ith=1:nthreads()
+            for ith=1:nth
                 if ith == 1 
                     MPC.v[i,j] = 0.0
                 end
@@ -776,9 +784,9 @@ weighted bilinear interpolation.
 
 Each active marker contributes to the four surrounding cell centers
 according to its relative position within the corresponding grid cell.
-Thread-local property and weight arrays are used to accumulate the marker
-contributions in parallel. The thread-local arrays are subsequently summed
-and normalized to obtain the interpolated cell-centered field.
+Task-local property and weight arrays are used to accumulate the marker 
+contributions in parallel. The local arrays are subsequently summed and 
+normalized to obtain the interpolated cell-centered field.
 
 The function can interpolate either marker temperature directly or a
 phase-dependent material property specified through `param2`.
@@ -788,10 +796,10 @@ phase-dependent material property specified through `param2`.
 - `Ma`: Marker structure containing marker coordinates, phase IDs, and,
   where applicable, marker temperatures.
 - `nmark`: Total number of markers.
-- `PC_th`: Collection of thread-local property arrays defined on the
-  extended cell-centered grid.
+- `PC_th`: Collection of local property arrays used by the parallel 
+interpolation tasks defined on the extended cell-centered grid.
 - `PC`: Extended cell-centered array receiving the interpolated property.
-- `weight_th`: Collection of thread-local interpolation-weight arrays.
+- `weight_th`: Collection of local property interpolation-weight arrays.
 - `weight`: Extended cell-centered array receiving the accumulated weights.
 - `x`: Horizontal coordinates of the extended cell centers.
 - `y`: Vertical coordinates of the extended cell centers.
@@ -815,9 +823,7 @@ weighted arithmetic average.
 
 # Notes
 
-The arrays in `PC_th` and `weight_th` must have the same dimensions as
-`PC` and `weight`, respectively, and their number must be compatible with
-the available Julia threads.
+The number of arrays in `PC_th` and `weight_th` must be at least `nthreads(:default)`.
 
 Grid points receiving no marker contributions retain their previous values
 from `PC`. The function modifies `PC`, `weight`, `PC_th`, and `weight_th`
@@ -848,12 +854,12 @@ D.ρ .= D.ρ_ex[2:end-1, 2:end-1]
     PC0     =   copy(PC)
     PC      .*=     0.0
     weight  .*=     0.0
+    nth = nthreads(:default)
     if param==:thermal
         PM  =       copy(Ma.T)
-        chunks = Iterators.partition(1:nmark, nmark ÷ nthreads())
-        @sync for chunk in chunks
+        chunks = Iterators.partition(1:nmark, cld(nmark, nth))
+        @sync for (tid, chunk) in enumerate(chunks)
             @spawn begin
-                tid = threadid()
                 fill!(PC_th[tid], 0)
                 fill!(weight_th[tid], 0)
                 for k in chunk
@@ -882,10 +888,9 @@ D.ρ .= D.ρ_ex[2:end-1, 2:end-1]
         end
     elseif param==:phase
         PM  =       copy(Ma.phase)
-        chunks = Iterators.partition(1:nmark, nmark ÷ nthreads())
-        @sync for chunk in chunks
+        chunks = Iterators.partition(1:nmark, cld(nmark, nth))
+        @sync for (tid, chunk) in enumerate(chunks)
             @spawn begin
-                tid = threadid()
                 fill!(PC_th[tid], 0)
                 fill!(weight_th[tid], 0)
                 for k in chunk
@@ -966,10 +971,10 @@ Interpolate a marker property to the grid vertices using weighted bilinear
 interpolation.
 
 Each marker contributes to the four surrounding vertices according to its
-relative position within the corresponding grid cell. Thread-local property
-and weight arrays are used to accumulate the marker contributions in
-parallel. The thread-local arrays are subsequently summed and normalized to
-obtain the interpolated vertex field.
+relative position within the corresponding grid cell. Task-local property 
+and weight arrays are used to accumulate the marker contributions in parallel. 
+The local arrays are subsequently summed and normalized to obtain the 
+interpolated vertex field.
 
 The function can interpolate either marker temperature directly or a
 phase-dependent material property specified through `param2`.
@@ -979,10 +984,10 @@ phase-dependent material property specified through `param2`.
     - `Ma`: Marker structure containing marker coordinates, phase IDs, and,
     where applicable, marker temperatures.
     - `nmark`: Total number of markers.
-    - `PG_th`: Collection of thread-local property arrays defined at the grid
-    vertices.
+    - `PG_th`: Collection of local property arrays used by the parallel 
+    interpolation tasks defined at the grid vertices.
     - `PG`: Vertex-centered array receiving the interpolated property.
-    - `weight_th`: Collection of thread-local interpolation-weight arrays
+    - `weight_th`: Collection of local property interpolation-weight arrays
     defined at the vertices.
     - `weight`: Vertex-centered array receiving the accumulated interpolation
     weights.
@@ -1008,9 +1013,7 @@ weighted arithmetic average.
 
 # Notes
 
-The arrays in `PG_th` and `weight_th` must have the same dimensions as
-`PG` and `weight`, respectively, and their number must be compatible with
-the available Julia threads.
+The number of arrays in `PG_th` and `weight_th` must be at least `nthreads(:default)`.
 
 Vertices receiving no marker contributions retain their previous values
 from `PG`. The function modifies `PG`, `weight`, `PG_th`, and `weight_th`
@@ -1039,12 +1042,12 @@ Markers2Vertices(
     PG0     =   copy(PG)
     PG      .*=     0.0
     weight  .*=     0.0
+    nth = nthreads(:default)
     if param==:thermal
         PM  =       copy(Ma.T)
-        chunks = Iterators.partition(1:nmark, nmark ÷ nthreads())
-        @sync for chunk in chunks
+        chunks = Iterators.partition(1:nmark, cld(nmark, nth))
+        @sync for (tid, chunk) in enumerate(chunks)
             @spawn begin
-                tid = threadid()
                 fill!(PG_th[tid], 0)
                 fill!(weight_th[tid], 0)
                 for k in chunk
@@ -1073,10 +1076,9 @@ Markers2Vertices(
         end
     elseif param==:phase
         PM  =       copy(Ma.phase)
-        chunks = Iterators.partition(1:nmark, nmark ÷ nthreads())
-        @sync for chunk in chunks
+        chunks = Iterators.partition(1:nmark, cld(nmark, nth))
+        @sync for (tid, chunk) in enumerate(chunks)
             @spawn begin
-                tid = threadid()
                 fill!(PG_th[tid], 0)
                 fill!(weight_th[tid], 0)
                 for k in chunk
