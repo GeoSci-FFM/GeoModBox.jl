@@ -28,6 +28,9 @@ jobs:
         os:
           - ubuntu-latest
 
+    env:
+      JULIA_NUM_THREADS: 4
+
     steps:
       - uses: actions/checkout@v4
       - uses: julia-actions/setup-julia@v2

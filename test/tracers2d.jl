@@ -384,19 +384,16 @@ using GeoModBox.Tracers.TwoD
         # ================================================================ #
         # Marker positions
         #
-        # Place markers at every cell centroid. Repeat the complete marker
-        # distribution once per Julia thread. This guarantees that
-        #
-        #     nmark ÷ nthreads()
-        #
-        # is an integer and that Markers2Cells / Markers2Vertices create
-        # exactly one chunk per thread.
+        # Place markers at every cell centroid and repeat the complete marker
+        # distribution once per default Julia thread. This ensures that the
+        # marker-to-grid interpolation routines create one logical work chunk
+        # for each available default-thread buffer.
         # ================================================================ #
 
         xm0 = vec(repeat(collect(xc), 1, NC.y))
         ym0 = vec(repeat(collect(yc)', NC.x, 1))
 
-        nt = Base.Threads.maxthreadid()
+        nt = Base.Threads.nthreads(:default)
 
         xm = repeat(xm0, nt)
         ym = repeat(ym0, nt)
