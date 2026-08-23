@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/><title>Forward Euler (2D) · GeoModBox.jl</title><meta name="title" content="Forward Euler (2D) · GeoModBox.jl"/><meta property="og:title" content="Forward Euler (2D) · GeoModBox.jl"/><meta property="twitter:title" content="Forward Euler (2D) · GeoModBox.jl"/><meta name="description" content="Documentation for GeoModBox.jl."/><meta property="og:description" content="Documentation for GeoModBox.jl."/><meta property="twitter:description" content="Documentation for GeoModBox.jl."/><script data-outdated-warner src="../../../../assets/warner.js"></script><link href="https://cdnjs.cloudflare.com/ajax/libs/lato-font/3.0.0/css/lato-font.min.css" rel="stylesheet" type="text/css"/><link href="https://cdnjs.cloudflare.com/ajax/libs/juliamono/0.050/juliamono.min.css" rel="stylesheet" type="text/css"/><link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/fontawesome.min.css" rel="stylesheet" type="text/css"/><link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/solid.min.css" rel="stylesheet" type="text/css"/><link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/brands.min.css" rel="stylesheet" type="text/css"/><link href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.8/katex.min.css" rel="stylesheet" type="text/css"/><script>documenterBaseURL="../../../.."</script><script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js" data-main="../../../../assets/documenter.js"></script><script src="../../../../search_index.js"></script><script src="../../../../siteinfo.js"></script><script src="../../../../../versions.js"></script><link class="docs-theme-link" rel="stylesheet" type="text/css" href="../../../../assets/themes/catppuccin-mocha.css" data-theme-name="catppuccin-mocha"/><link class="docs-theme-link" rel="stylesheet" type="text/css" href="../../../../assets/themes/catppuccin-macchiato.css" data-theme-name="catppuccin-macchiato"/><link class="docs-theme-link" rel="stylesheet" type="text/css" href="../../../../assets/themes/catppuccin-frappe.css" data-theme-name="catppuccin-frappe"/><link class="docs-theme-link" rel="stylesheet" type="text/css" href="../../../../assets/themes/catppuccin-latte.css" data-theme-name="catppuccin-latte"/><link class="docs-theme-link" rel="stylesheet" type="text/css" href="../../../../assets/themes/documenter-dark.css" data-theme-name="documenter-dark" data-theme-primary-dark/><link class="docs-theme-link" rel="stylesheet" type="text/css" href="../../../../assets/themes/documenter-light.css" data-theme-name="documenter-light" data-theme-primary/><script src="../../../../assets/themeswap.js"></script></head><body><div id="documenter"><nav class="docs-sidebar"><div class="docs-package-name"><span class="docs-autofit"><a href="../../../../">GeoModBox.jl</a></span></div><button class="docs-search-query input is-rounded is-small is-clickable my-2 mx-auto py-1 px-2" id="documenter-search-query">Search docs (Ctrl + /)</button><ul class="docs-menu"><li><a class="tocitem" href="../../../../">Home</a></li><li><a class="tocitem" href="../../../Installation/">Installation</a></li><li><span class="tocitem">Governing Equation</span><ul><li><input class="collapse-toggle" id="menuitem-3-1" type="checkbox"/><label class="tocitem" for="menuitem-3-1"><span class="docs-label">Solution</span><i class="docs-chevron"></i></label><ul class="collapsed"><li><a class="tocitem" href="../../../theory/GESolution/">General</a></li><li><a class="tocitem" href="../../../Ini/">Specifications</a></li></ul></li><li><input class="collapse-toggle" id="menuitem-3-2" type="checkbox"/><label class="tocitem" for="menuitem-3-2"><span class="docs-label">Heat Diffusion Equation</span><i class="docs-chevron"></i></label><ul class="collapsed"><li><a class="tocitem" href="../../../theory/DiffMain/">General</a></li><li><a class="tocitem" href="../../../theory/DiffOneD/">1D</a></li><li><a class="tocitem" href="../../../theory/DiffTwoD/">2D</a></li></ul></li><li><input class="collapse-toggle" id="menuitem-3-3" type="checkbox"/><label class="tocitem" for="menuitem-3-3"><span class="docs-label">Advection Equation</span><i class="docs-chevron"></i></label><ul class="collapsed"><li><a class="tocitem" href="../../../theory/AdvectMain/">General</a></li><li><a class="tocitem" href="../../../theory/AdvOneD/">1D</a></li><li><a class="tocitem" href="../../../theory/AdvTwoD/">2D</a></li></ul></li><li><input class="collapse-toggle" id="menuitem-3-4" type="checkbox"/><label class="tocitem" for="menuitem-3-4"><span class="docs-label">Momentum Equation</span><i class="docs-chevron"></i></label><ul class="collapsed"><li><a class="tocitem" href="../../../theory/MomentumMain/">General</a></li><li><a class="tocitem" href="../../../theory/MomentumOneD/">1D</a></li><li><a class="tocitem" href="../../../theory/MomentumTwoD/">2D</a></li></ul></li></ul></li><li><span class="tocitem">Exercises</span><ul><li><a class="tocitem" href="../../../exercises/Exercises/">General</a></li><li><a class="tocitem" href="../../../exercises/01_Euler_Advection/">01 - Euler Advection</a></li><li><a class="tocitem" href="../../../exercises/02_1D_Heat_explicit/">02 - 1D Heat Diffusion (explicit)</a></li><li><a class="tocitem" href="../../../exercises/03_1D_Heat_implicit/">03 - 1D Heat Diffusion (implicit)</a></li><li><a class="tocitem" href="../../../exercises/04_2D_Diffusion_Stationary/">04 - 2D Heat Diffusion (stationary)</a></li><li><a class="tocitem" href="../../../exercises/05_2D_Diffusion_TD_Plume/">05a - 2D Heat Diffusion (Plume)</a></li><li><a class="tocitem" href="../../../exercises/05_2D_Diffusion_TD_Sill/">05b - 2D Heat Diffusion (Sill)</a></li><li><a class="tocitem" href="../../../exercises/06_1D_Advection/">06 - 1D Advection</a></li><li><a class="tocitem" href="../../../exercises/07_2D_Energy_Equation/">07 - 2D Energy Conservation</a></li><li><a class="tocitem" href="../../../exercises/08_1D_Stokes/">08 - 1D Stokes</a></li><li><a class="tocitem" href="../../../exercises/09_2D_Falling_Block/">09 - 2D Falling Block (steady state)</a></li><li><a class="tocitem" href="../../../exercises/10_2D_Falling_Block_td/">10 - 2D Falling Block (time-dep)</a></li><li><a class="tocitem" href="../../../exercises/11_2D_Thermal_Convection/">11 - 2D Thermal Convection</a></li><li><a class="tocitem" href="../../../exercises/12_2D_Thermal_Convection_scaled/">12 - 2D Thermal Convection (scaled)</a></li><li><a class="tocitem" href="../../../exercises/13_Blankenbach_Benchmark/">13 - Blankenbach Benchmark</a></li></ul></li><li><span class="tocitem">Examples</span><ul><li><a class="tocitem" href="../../Examples/">General</a></li><li><input class="collapse-toggle" id="menuitem-5-2" type="checkbox" checked/><label class="tocitem" for="menuitem-5-2"><span class="docs-label">Diffusion Equation</span><i class="docs-chevron"></i></label><ul class="collapsed"><li><a class="tocitem" href="../OceanicGeotherm/">Oceanic Geotherm (1D)</a></li><li><a class="tocitem" href="../ContinentalGeotherm/">Continental Geotherm (1D)</a></li><li><a class="tocitem" href="../GaussianDiffusion1D/">Gaussian Diffusion (1D)</a></li><li><a class="tocitem" href="../BackwardEuler_DC/">Backward Euler (2D)</a></li><li class="is-active"><a class="tocitem" href>Forward Euler (2D)</a></li><li><a class="tocitem" href="../GaussianDiffusion2D/">Gaussian Diffusion (2D)</a></li><li><a class="tocitem" href="../PoissonRestest/">Poisson Problem (2D)</a></li><li><a class="tocitem" href="../PoissonVariablek/">Poisson Problem; variable k (2D)</a></li></ul></li><li><input class="collapse-toggle" id="menuitem-5-3" type="checkbox"/><label class="tocitem" for="menuitem-5-3"><span class="docs-label">Advection Equtaion</span><i class="docs-chevron"></i></label><ul class="collapsed"><li><a class="tocitem" href="../../Advection/Advection2D/">Advection (2D)</a></li><li><a class="tocitem" href="../../Advection/AdvectionRestest2D/">Advection Resolution Test (2D)</a></li></ul></li><li><input class="collapse-toggle" id="menuitem-5-4" type="checkbox"/><label class="tocitem" for="menuitem-5-4"><span class="docs-label">Stokes Equation</span><i class="docs-chevron"></i></label><ul class="collapsed"><li><a class="tocitem" href="../../Stokes/ChannelFlow1D/">Channel Flow (1D)</a></li><li><a class="tocitem" href="../../Stokes/FallingBlockBenchmark/">Falling Block Benchmark (Gerya, 2019)</a></li><li><a class="tocitem" href="../../Stokes/FallingBlockDC/">Falling Block</a></li><li><a class="tocitem" href="../../Stokes/RTI/">Rayleigh Taylor Instability (RTI)</a></li><li><a class="tocitem" href="../../Stokes/RTI_growth_rate/">RTI - Growth Rate (Ramberg, 1968)</a></li><li><a class="tocitem" href="../../Stokes/VanKekenBenchmark/">RTI (Van Keken et al., 1997)</a></li><li><a class="tocitem" href="../../Stokes/ViscousInclusion/">Viscous Inclusion (Schmid, 2002)</a></li></ul></li><li><input class="collapse-toggle" id="menuitem-5-5" type="checkbox"/><label class="tocitem" for="menuitem-5-5"><span class="docs-label">Mixed Thermal Convection</span><i class="docs-chevron"></i></label><ul class="collapsed"><li><a class="tocitem" href="../../Convection/Overview_Convection/">Overview</a></li><li><a class="tocitem" href="../../Convection/BottomHeatedConvection/">Bottom Heated</a></li><li><a class="tocitem" href="../../Convection/InternallyHeatedConvection/">Internally Heated</a></li><li><a class="tocitem" href="../../Convection/MixedHeatedConvection/">Mixed Heated</a></li><li><a class="tocitem" href="../../Convection/BottomHeatedConvection_VE/">Bottom Heated - Variable Visc</a></li><li><a class="tocitem" href="../../Convection/Blankenbach_Var_Eta/">Blankenbach et al. (1989) - Variable Visc</a></li></ul></li><li><input class="collapse-toggle" id="menuitem-5-6" type="checkbox"/><label class="tocitem" for="menuitem-5-6"><span class="docs-label">Thermo-Mechanical Shear Localization</span><i class="docs-chevron"></i></label><ul class="collapsed"><li><a class="tocitem" href="../../StrainLocalization/ShearBands/">Viscous shear localization (Duretz et al., 2014)</a></li></ul></li></ul></li><li><a class="tocitem" href="../../../listoffunctions/">List of functions</a></li><li><a class="tocitem" href="../../../license/">License</a></li></ul><div class="docs-version-selector field has-addons"><div class="control"><span class="docs-label button is-static is-size-7">Version</span></div><div class="docs-selector control is-expanded"><div class="select is-fullwidth is-size-7"><select id="documenter-version-selector"></select></div></div></div></nav><div class="docs-main"><header class="docs-navbar"><a class="docs-sidebar-button docs-navbar-link fa-solid fa-bars is-hidden-desktop" id="documenter-sidebar-button" href="#"></a><nav class="breadcrumb"><ul class="is-hidden-mobile"><li><a class="is-disabled">Examples</a></li><li><a class="is-disabled">Diffusion Equation</a></li><li class="is-active"><a href>Forward Euler (2D)</a></li></ul><ul class="is-hidden-tablet"><li class="is-active"><a href>Forward Euler (2D)</a></li></ul></nav><div class="docs-right"><a class="docs-navbar-link" href="https://github.com/GeoSci-FFM/GeoModBox.jl" title="View the repository on GitHub"><span class="docs-icon fa-brands"></span><span class="docs-label is-hidden-touch">GitHub</span></a><a class="docs-navbar-link" href="https://github.com/GeoSci-FFM/GeoModBox.jl/blob/main/docs/src/man/examples/Diffusion/ForwardEuler_DC.md" title="Edit source on GitHub"><span class="docs-icon fa-solid"></span></a><a class="docs-settings-button docs-navbar-link fa-solid fa-gear" id="documenter-settings-button" href="#" title="Settings"></a><a class="docs-article-toggle-button fa-solid fa-chevron-up" id="documenter-article-toggle-button" href="javascript:;" title="Collapse all docstrings"></a></div></header><article class="content" id="documenter-page"><h1 id="[Diffusion-Equation-(Forward-Euler)](https://github.com/GeoSci-FFM/GeoModBox.jl/blob/main/examples/DiffusionEquation/2D/ForwardEuler.jl)"><a class="docs-heading-anchor" href="#[Diffusion-Equation-(Forward-Euler)](https://github.com/GeoSci-FFM/GeoModBox.jl/blob/main/examples/DiffusionEquation/2D/ForwardEuler.jl)"><a href="https://github.com/GeoSci-FFM/GeoModBox.jl/blob/main/examples/DiffusionEquation/2D/ForwardEuler.jl">Diffusion Equation (Forward Euler)</a></a><a id="[Diffusion-Equation-(Forward-Euler)](https://github.com/GeoSci-FFM/GeoModBox.jl/blob/main/examples/DiffusionEquation/2D/ForwardEuler.jl)-1"></a><a class="docs-heading-anchor-permalink" href="#[Diffusion-Equation-(Forward-Euler)](https://github.com/GeoSci-FFM/GeoModBox.jl/blob/main/examples/DiffusionEquation/2D/ForwardEuler.jl)" title="Permalink"></a></h1><p>This example demonstrates the numerical solution of the conductive part of the two-dimensional temperature conservation equation using the explicit <strong>Forward Euler</strong> method. The example introduces</p><ul><li>the application of the expanded temperature field and boundary conditions,</li><li>the implementation of the analytical solution provided by <code>ExactFieldSolutions.jl</code>, and</li><li>the application of the Forward Euler method.</li></ul><p>The example calculates the transient diffusion of an initially Gaussian two-dimensional temperature distribution. The peak temperature <span>$T_0$</span> of the Gaussian anomaly is located at the center of the model domain and is characterized by a width <span>$\sigma$</span>.</p><p>The transient diffusion of the temperature anomaly is governed by the thermal diffusivity <span>$K$</span>. In the numerical model, the thermal conductivity is prescribed at the cell faces. Since the density and heat capacity are both set to unity, the thermal conductivity and thermal diffusivity have identical numerical values in this example.</p><p>The numerical solution is compared with the corresponding analytical solution. The analytical solution, the numerical solution, and the corresponding absolute error are visualized every <code>nout</code> time steps.</p><hr/><p>First, load the required packages:</p><pre><code class="language-julia hljs">using GeoModBox.HeatEquation.TwoD
+using Plots
+using ExactFieldSolutions</code></pre><p>Next, define the computational domain and its spatial discretization.</p><pre><code class="language-julia hljs"># Spatial domain
+xlim = (min=-1/2, max=1/2)
+ylim = (min=-1/2, max=1/2)
+nc   = (x=100, y=100)
+nv   = (x=nc.x+1, y=nc.y+1)
+Δ    = (x=(xlim.max-xlim.min)/nc.x, y=(ylim.max-ylim.min)/nc.y)
+
+x = (
+    c = LinRange(xlim.min + Δ.x/2, xlim.max - Δ.x/2, nc.x),
+    v = LinRange(xlim.min, xlim.max, nv.x)
+)
+
+y = (
+    c = LinRange(ylim.min + Δ.y/2, ylim.max - Δ.y/2, nc.y),
+    v = LinRange(ylim.min, ylim.max, nv.y)
+)</code></pre><p>Now define the time-stepping parameters.</p><pre><code class="language-julia hljs"># Time domain
+nt   = 400
+t    = 0.0
+nout = 10</code></pre><p>The following arrays store the temperature field, the expanded temperature field including ghost nodes, the analytical reference solution, the temperature gradients, the conductive heat fluxes, and the material properties.</p><pre><code class="language-julia hljs"># Primitive variables
+T_ex = zeros(nc.x+2, nc.y+2)
+T    = zeros(nc...)
+Te   = zeros(nc...)
+
+# Derived fields
+∂T = (
+    ∂x = zeros(nv.x, nc.y),
+    ∂y = zeros(nc.x, nv.y)
+)
+
+q = (
+    x = zeros(nv.x, nc.y),
+    y = zeros(nc.x, nv.y)
+)
+
+# Material parameters
+ρ  = zeros(nc...)
+Cp = zeros(nc...)
+
+k = (
+    x = zeros(nv.x, nc.y),
+    y = zeros(nc.x, nv.y)
+)</code></pre><p>The boundary conditions are stored in the named tuple <code>BC</code>, which contains the boundary-condition type (<em>Dirichlet</em> or <em>Neumann</em>) together with the prescribed value for each side of the computational domain.</p><pre><code class="language-julia hljs"># Boundary conditions
+BC = (
+    type = (
+        W = :Dirichlet,
+        E = :Dirichlet,
+        S = :Dirichlet,
+        N = :Dirichlet
+    ),
+    val = (
+        W = zeros(nc.y),
+        E = zeros(nc.y),
+        S = zeros(nc.x),
+        N = zeros(nc.x)
+    )
+)</code></pre><p>The initial temperature field is initialized from the analytical solution at <span>$t=0$</span>. For simplicity, the density and heat capacity are both set to unity, such that the thermal conductivity and thermal diffusivity have identical numerical values.</p><p>The time step is selected according to the explicit stability criterion for the two-dimensional Forward Euler method.</p><pre><code class="language-julia hljs"># Initial conditions
+AnalyticalSolution2D!(T, x.c, y.c, t, (T0=1.0, K=1e-6, σ=0.1))
+
+@. k.x = 1e-6
+@. k.y = 1e-6
+@. ρ   = 1.0
+@. Cp  = 1.0
+
+κmax = max(maximum(k.x), maximum(k.y)) /
+       (minimum(ρ) * minimum(Cp))
+
+Δt = 1 / (2.05 * κmax * (1/Δ.x^2 + 1/Δ.y^2))</code></pre><p>The simulation proceeds by advancing the temperature field in time. At the beginning of each time step, the Dirichlet boundary values are updated from the analytical solution at the current time level. The centroid temperatures are then copied into the expanded temperature field, after which the ghost-node temperatures are updated according to the prescribed boundary conditions.</p><p>Once the expanded temperature field has been constructed, temperature gradients are evaluated at the cell faces using central finite differences. Fourier&#39;s law is then used to compute the conductive heat fluxes, whose divergence is evaluated at the cell centroids. Finally, the temperature field is advanced explicitly using the Forward Euler method.</p><p>The expanded temperature field contains one layer of ghost nodes surrounding the physical domain. These ghost nodes allow the same finite-difference operators to be applied throughout the computational domain, including cells adjacent to the model boundaries.</p><p>For more details on the finite-difference discretization of the diffusion equation, please refer to the <a href="../../../theory/DiffMain/">theory section</a>.</p><pre><code class="language-julia hljs"># Time integration
+@views for it = 1:nt
+
+    # Exact solution on the model boundaries
+    BoundaryConditions2D!(BC, x.c, y.c, t, (T0=1.0, K=1e-6, σ=0.1))
+
+    # Copy centroid temperatures to expanded grid
+    @. T_ex[2:end-1,2:end-1] = T
+
+    # Update ghost nodes
+    @. T_ex[1,2:end-1] =
+        (BC.type.W == :Dirichlet) *
+        (2*BC.val.W - T_ex[2,2:end-1])
+
+    @. T_ex[end,2:end-1] =
+        (BC.type.E == :Dirichlet) *
+        (2*BC.val.E - T_ex[end-1,2:end-1])
+
+    @. T_ex[2:end-1,1] =
+        (BC.type.S == :Dirichlet) *
+        (2*BC.val.S - T_ex[2:end-1,2])
+
+    @. T_ex[2:end-1,end] =
+        (BC.type.N == :Dirichlet) *
+        (2*BC.val.N - T_ex[2:end-1,end-1])
+
+    # Temperature gradients
+    @. ∂T.∂x =
+        (T_ex[2:end,2:end-1] -
+         T_ex[1:end-1,2:end-1]) / Δ.x
+
+    @. ∂T.∂y =
+        (T_ex[2:end-1,2:end] -
+         T_ex[2:end-1,1:end-1]) / Δ.y
+
+    # Conductive heat fluxes
+    @. q.x = -k.x * ∂T.∂x
+    @. q.y = -k.y * ∂T.∂y
+
+    # Forward Euler update
+    @. T -= Δt / (ρ * Cp) * (
+        (q.x[2:end,:] - q.x[1:end-1,:]) / Δ.x +
+        (q.y[:,2:end] - q.y[:,1:end-1]) / Δ.y
+    )
+
+    # Advance time
+    t += Δt
+
+    # Analytical solution on the cell centroids
+    AnalyticalSolution2D!(Te, x.c, y.c, t, (T0=1.0, K=1e-6, σ=0.1))
+
+    # Visualisation
+    if mod(it, nout) == 0
+        p1 = plot(aspect_ratio=1, xlims=(xlim...,), ylims=(ylim...,))
+        p1 = heatmap!(x.c, y.c, Te&#39;, title=&quot;Analytical&quot;)
+
+        p2 = plot(aspect_ratio=1, xlims=(xlim...,), ylims=(ylim...,))
+        p2 = heatmap!(x.c, y.c, T&#39;, title=&quot;Numerics&quot;)
+
+        p3 = plot(aspect_ratio=1, xlims=(xlim...,), ylims=(ylim...,))
+        p3 = heatmap!(x.c, y.c, abs.(T .- Te)&#39;, title=&quot;Error&quot;)
+
+        display(plot(p1, p2, p3, layout=(2,2)))
+    end
+
+end</code></pre><p><img src="../../../../assets/examples/Diffusion/ForwardEuler_2D_Diff.svg" alt="FE_1"/></p><p><strong>Figure 1.</strong> Comparison between the analytical solution, the numerical solution obtained using the Forward Euler method, and the corresponding absolute error.</p></article><nav class="docs-footer"><a class="docs-footer-prevpage" href="../BackwardEuler_DC/">« Backward Euler (2D)</a><a class="docs-footer-nextpage" href="../GaussianDiffusion2D/">Gaussian Diffusion (2D) »</a><div class="flexbox-break"></div><p class="footer-message">Powered by <a href="https://github.com/JuliaDocs/Documenter.jl">Documenter.jl</a> and the <a href="https://julialang.org/">Julia Programming Language</a>.</p></nav></div><div class="modal" id="documenter-settings"><div class="modal-background"></div><div class="modal-card"><header class="modal-card-head"><p class="modal-card-title">Settings</p><button class="delete"></button></header><section class="modal-card-body"><p><label class="label">Theme</label><div class="select"><select id="documenter-themepicker"><option value="auto">Automatic (OS)</option><option value="documenter-light">documenter-light</option><option value="documenter-dark">documenter-dark</option><option value="catppuccin-latte">catppuccin-latte</option><option value="catppuccin-frappe">catppuccin-frappe</option><option value="catppuccin-macchiato">catppuccin-macchiato</option><option value="catppuccin-mocha">catppuccin-mocha</option></select></div></p><hr/><p>This document was generated with <a href="https://github.com/JuliaDocs/Documenter.jl">Documenter.jl</a> version 1.17.0 on <span class="colophon-date" title="Sunday 23 August 2026 16:09">Sunday 23 August 2026</span>. Using Julia version 1.12.7.</p></section><footer class="modal-card-foot"></footer></div></div></div></body></html>
