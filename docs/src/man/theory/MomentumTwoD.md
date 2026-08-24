@@ -329,9 +329,10 @@ Along the North and South boundaries, the velocity nodes fall directly on the bo
 
 ### Constant velocity
 
-Constant-velocity boundary conditions prescribe the velocity component located directly on the boundary while enforcing a zero normal gradient for the complementary velocity component through the ghost-node formulation. The implementation is identical to the no-slip condition, except that the prescribed boundary velocity may take any constant value.
+Constant-velocity boundary conditions prescribe both velocity components at the boundary. On a staggered grid, the velocity component located directly on the boundary is prescribed explicitly, whereas the complementary velocity component is imposed through a ghost-node formulation such that its linearly interpolated value at the boundary equals the prescribed velocity. The implementation is therefore identical to the no-slip condition, except that the prescribed boundary velocity may take any constant value.
 
-For example, on the West boundary the horizontal velocity is prescribed directly at the boundary node,
+For example, on the West boundary the horizontal velocity is prescribed directly at the boundary node and the vertical velocity is prescribed through the ghost node, 
+
 
 $\begin{equation}
 v_{x,(1,:)} = V_{BC}^W,
@@ -341,14 +342,14 @@ $\begin{equation}
 v_{y,G^W} = 2V_{BC}^W - v_{y,(1,:)},
 \end{equation}$
 
-and on the South boundary the vertical velocity
+analogously, on the South boundary
 
 $\begin{equation}
 v_{x,G^S} = 2V_{BC}^S - v_{x,(:,1)},
 \end{equation}$
 
 $\begin{equation}
-v_{y,(1,:)} = V_{BC}^S.
+v_{y,(:,1)} = V_{BC}^S.
 \end{equation}$
 
 The same formulation applies to the East and North boundaries.
@@ -367,7 +368,7 @@ $\begin{equation}
 v_{y,(:,1)} = V_{BC}^S.
 \end{equation}$
 
-This boundary condition is particularly useful for extension and shortening experiments in deformable domains.
+The same formulation applies to the remaining boundaries. This boundary condition is particularly useful for extension and shortening experiments in deformable domains.
 
 ## Constant Viscosity
 
