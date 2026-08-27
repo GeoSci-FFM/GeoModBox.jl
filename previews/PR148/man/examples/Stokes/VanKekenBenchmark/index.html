@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/><title>RTI (Van Keken et al., 1997) · GeoModBox.jl</title><meta name="title" content="RTI (Van Keken et al., 1997) · GeoModBox.jl"/><meta property="og:title" content="RTI (Van Keken et al., 1997) · GeoModBox.jl"/><meta property="twitter:title" content="RTI (Van Keken et al., 1997) · GeoModBox.jl"/><meta name="description" content="Documentation for GeoModBox.jl."/><meta property="og:description" content="Documentation for GeoModBox.jl."/><meta property="twitter:description" content="Documentation for GeoModBox.jl."/><script data-outdated-warner src="../../../../assets/warner.js"></script><link href="https://cdnjs.cloudflare.com/ajax/libs/lato-font/3.0.0/css/lato-font.min.css" rel="stylesheet" type="text/css"/><link href="https://cdnjs.cloudflare.com/ajax/libs/juliamono/0.050/juliamono.min.css" rel="stylesheet" type="text/css"/><link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/fontawesome.min.css" rel="stylesheet" type="text/css"/><link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/solid.min.css" rel="stylesheet" type="text/css"/><link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/brands.min.css" rel="stylesheet" type="text/css"/><link href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.8/katex.min.css" rel="stylesheet" type="text/css"/><script>documenterBaseURL="../../../.."</script><script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js" data-main="../../../../assets/documenter.js"></script><script src="../../../../search_index.js"></script><script src="../../../../siteinfo.js"></script><script src="../../../../../versions.js"></script><link class="docs-theme-link" rel="stylesheet" type="text/css" href="../../../../assets/themes/catppuccin-mocha.css" data-theme-name="catppuccin-mocha"/><link class="docs-theme-link" rel="stylesheet" type="text/css" href="../../../../assets/themes/catppuccin-macchiato.css" data-theme-name="catppuccin-macchiato"/><link class="docs-theme-link" rel="stylesheet" type="text/css" href="../../../../assets/themes/catppuccin-frappe.css" data-theme-name="catppuccin-frappe"/><link class="docs-theme-link" rel="stylesheet" type="text/css" href="../../../../assets/themes/catppuccin-latte.css" data-theme-name="catppuccin-latte"/><link class="docs-theme-link" rel="stylesheet" type="text/css" href="../../../../assets/themes/documenter-dark.css" data-theme-name="documenter-dark" data-theme-primary-dark/><link class="docs-theme-link" rel="stylesheet" type="text/css" href="../../../../assets/themes/documenter-light.css" data-theme-name="documenter-light" data-theme-primary/><script src="../../../../assets/themeswap.js"></script></head><body><div id="documenter"><nav class="docs-sidebar"><div class="docs-package-name"><span class="docs-autofit"><a href="../../../../">GeoModBox.jl</a></span></div><button class="docs-search-query input is-rounded is-small is-clickable my-2 mx-auto py-1 px-2" id="documenter-search-query">Search docs (Ctrl + /)</button><ul class="docs-menu"><li><a class="tocitem" href="../../../../">Home</a></li><li><a class="tocitem" href="../../../Installation/">Installation</a></li><li><span class="tocitem">Governing Equation</span><ul><li><input class="collapse-toggle" id="menuitem-3-1" type="checkbox"/><label class="tocitem" for="menuitem-3-1"><span class="docs-label">Solution</span><i class="docs-chevron"></i></label><ul class="collapsed"><li><a class="tocitem" href="../../../theory/GESolution/">General</a></li><li><a class="tocitem" href="../../../Ini/">Specifications</a></li></ul></li><li><input class="collapse-toggle" id="menuitem-3-2" type="checkbox"/><label class="tocitem" for="menuitem-3-2"><span class="docs-label">Heat Diffusion Equation</span><i class="docs-chevron"></i></label><ul class="collapsed"><li><a class="tocitem" href="../../../theory/DiffMain/">General</a></li><li><a class="tocitem" href="../../../theory/DiffOneD/">1D</a></li><li><a class="tocitem" href="../../../theory/DiffTwoD/">2D</a></li></ul></li><li><input class="collapse-toggle" id="menuitem-3-3" type="checkbox"/><label class="tocitem" for="menuitem-3-3"><span class="docs-label">Advection Equation</span><i class="docs-chevron"></i></label><ul class="collapsed"><li><a class="tocitem" href="../../../theory/AdvectMain/">General</a></li><li><a class="tocitem" href="../../../theory/AdvOneD/">1D</a></li><li><a class="tocitem" href="../../../theory/AdvTwoD/">2D</a></li></ul></li><li><input class="collapse-toggle" id="menuitem-3-4" type="checkbox"/><label class="tocitem" for="menuitem-3-4"><span class="docs-label">Momentum Equation</span><i class="docs-chevron"></i></label><ul class="collapsed"><li><a class="tocitem" href="../../../theory/MomentumMain/">General</a></li><li><a class="tocitem" href="../../../theory/MomentumOneD/">1D</a></li><li><a class="tocitem" href="../../../theory/MomentumTwoD/">2D</a></li></ul></li></ul></li><li><span class="tocitem">Exercises</span><ul><li><a class="tocitem" href="../../../exercises/Exercises/">General</a></li><li><a class="tocitem" href="../../../exercises/01_Euler_Advection/">01 - Euler Advection</a></li><li><a class="tocitem" href="../../../exercises/02_1D_Heat_explicit/">02 - 1D Heat Diffusion (explicit)</a></li><li><a class="tocitem" href="../../../exercises/03_1D_Heat_implicit/">03 - 1D Heat Diffusion (implicit)</a></li><li><a class="tocitem" href="../../../exercises/04_2D_Diffusion_Stationary/">04 - 2D Heat Diffusion (stationary)</a></li><li><a class="tocitem" href="../../../exercises/05_2D_Diffusion_TD_Plume/">05a - 2D Heat Diffusion (Plume)</a></li><li><a class="tocitem" href="../../../exercises/05_2D_Diffusion_TD_Sill/">05b - 2D Heat Diffusion (Sill)</a></li><li><a class="tocitem" href="../../../exercises/06_1D_Advection/">06 - 1D Advection</a></li><li><a class="tocitem" href="../../../exercises/07_2D_Energy_Equation/">07 - 2D Energy Conservation</a></li><li><a class="tocitem" href="../../../exercises/08_1D_Stokes/">08 - 1D Stokes</a></li><li><a class="tocitem" href="../../../exercises/09_2D_Falling_Block/">09 - 2D Falling Block (steady state)</a></li><li><a class="tocitem" href="../../../exercises/10_2D_Falling_Block_td/">10 - 2D Falling Block (time-dep)</a></li><li><a class="tocitem" href="../../../exercises/11_2D_Thermal_Convection/">11 - 2D Thermal Convection</a></li><li><a class="tocitem" href="../../../exercises/12_2D_Thermal_Convection_scaled/">12 - 2D Thermal Convection (scaled)</a></li><li><a class="tocitem" href="../../../exercises/13_Blankenbach_Benchmark/">13 - Blankenbach Benchmark</a></li></ul></li><li><span class="tocitem">Examples</span><ul><li><a class="tocitem" href="../../Examples/">General</a></li><li><input class="collapse-toggle" id="menuitem-5-2" type="checkbox"/><label class="tocitem" for="menuitem-5-2"><span class="docs-label">Diffusion Equation</span><i class="docs-chevron"></i></label><ul class="collapsed"><li><a class="tocitem" href="../../Diffusion/OceanicGeotherm/">Oceanic Geotherm (1D)</a></li><li><a class="tocitem" href="../../Diffusion/ContinentalGeotherm/">Continental Geotherm (1D)</a></li><li><a class="tocitem" href="../../Diffusion/GaussianDiffusion1D/">Gaussian Diffusion (1D)</a></li><li><a class="tocitem" href="../../Diffusion/BackwardEuler_DC/">Backward Euler (2D)</a></li><li><a class="tocitem" href="../../Diffusion/ForwardEuler_DC/">Forward Euler (2D)</a></li><li><a class="tocitem" href="../../Diffusion/GaussianDiffusion2D/">Gaussian Diffusion (2D)</a></li><li><a class="tocitem" href="../../Diffusion/PoissonRestest/">Poisson Problem (2D)</a></li><li><a class="tocitem" href="../../Diffusion/PoissonVariablek/">Poisson Problem; variable k (2D)</a></li></ul></li><li><input class="collapse-toggle" id="menuitem-5-3" type="checkbox"/><label class="tocitem" for="menuitem-5-3"><span class="docs-label">Advection Equtaion</span><i class="docs-chevron"></i></label><ul class="collapsed"><li><a class="tocitem" href="../../Advection/Advection2D/">Advection (2D)</a></li><li><a class="tocitem" href="../../Advection/AdvectionRestest2D/">Advection Resolution Test (2D)</a></li></ul></li><li><input class="collapse-toggle" id="menuitem-5-4" type="checkbox" checked/><label class="tocitem" for="menuitem-5-4"><span class="docs-label">Stokes Equation</span><i class="docs-chevron"></i></label><ul class="collapsed"><li><a class="tocitem" href="../ChannelFlow1D/">Channel Flow (1D)</a></li><li><a class="tocitem" href="../FallingBlockBenchmark/">Falling Block Benchmark (Gerya, 2019)</a></li><li><a class="tocitem" href="../FallingBlockDC/">Falling Block</a></li><li><a class="tocitem" href="../RTI/">Rayleigh Taylor Instability (RTI)</a></li><li><a class="tocitem" href="../RTI_growth_rate/">RTI - Growth Rate (Ramberg, 1968)</a></li><li class="is-active"><a class="tocitem" href>RTI (Van Keken et al., 1997)</a></li><li><a class="tocitem" href="../ViscousInclusion/">Viscous Inclusion (Schmid, 2002)</a></li></ul></li><li><input class="collapse-toggle" id="menuitem-5-5" type="checkbox"/><label class="tocitem" for="menuitem-5-5"><span class="docs-label">Mixed Thermal Convection</span><i class="docs-chevron"></i></label><ul class="collapsed"><li><a class="tocitem" href="../../Convection/Overview_Convection/">Overview</a></li><li><a class="tocitem" href="../../Convection/BottomHeatedConvection/">Bottom Heated</a></li><li><a class="tocitem" href="../../Convection/InternallyHeatedConvection/">Internally Heated</a></li><li><a class="tocitem" href="../../Convection/MixedHeatedConvection/">Mixed Heated</a></li><li><a class="tocitem" href="../../Convection/BottomHeatedConvection_VE/">Bottom Heated - Variable Visc</a></li><li><a class="tocitem" href="../../Convection/Blankenbach_Var_Eta/">Blankenbach et al. (1989) - Variable Visc</a></li></ul></li><li><input class="collapse-toggle" id="menuitem-5-6" type="checkbox"/><label class="tocitem" for="menuitem-5-6"><span class="docs-label">Thermo-Mechanical Shear Localization</span><i class="docs-chevron"></i></label><ul class="collapsed"><li><a class="tocitem" href="../../StrainLocalization/ShearBands/">Viscous shear localization (Duretz et al., 2014)</a></li></ul></li></ul></li><li><a class="tocitem" href="../../../listoffunctions/">List of functions</a></li><li><a class="tocitem" href="../../../license/">License</a></li></ul><div class="docs-version-selector field has-addons"><div class="control"><span class="docs-label button is-static is-size-7">Version</span></div><div class="docs-selector control is-expanded"><div class="select is-fullwidth is-size-7"><select id="documenter-version-selector"></select></div></div></div></nav><div class="docs-main"><header class="docs-navbar"><a class="docs-sidebar-button docs-navbar-link fa-solid fa-bars is-hidden-desktop" id="documenter-sidebar-button" href="#"></a><nav class="breadcrumb"><ul class="is-hidden-mobile"><li><a class="is-disabled">Examples</a></li><li><a class="is-disabled">Stokes Equation</a></li><li class="is-active"><a href>RTI (Van Keken et al., 1997)</a></li></ul><ul class="is-hidden-tablet"><li class="is-active"><a href>RTI (Van Keken et al., 1997)</a></li></ul></nav><div class="docs-right"><a class="docs-navbar-link" href="https://github.com/GeoSci-FFM/GeoModBox.jl" title="View the repository on GitHub"><span class="docs-icon fa-brands"></span><span class="docs-label is-hidden-touch">GitHub</span></a><a class="docs-navbar-link" href="https://github.com/GeoSci-FFM/GeoModBox.jl/blob/main/docs/src/man/examples/Stokes/VanKekenBenchmark.md" title="Edit source on GitHub"><span class="docs-icon fa-solid"></span></a><a class="docs-settings-button docs-navbar-link fa-solid fa-gear" id="documenter-settings-button" href="#" title="Settings"></a><a class="docs-article-toggle-button fa-solid fa-chevron-up" id="documenter-article-toggle-button" href="javascript:;" title="Collapse all docstrings"></a></div></header><article class="content" id="documenter-page"><h1 id="[VanKeken-Benchmark](https://github.com/GeoSci-FFM/GeoModBox.jl/blob/main/examples/StokesEquation/2D/VanKekenBenchmark.jl)"><a class="docs-heading-anchor" href="#[VanKeken-Benchmark](https://github.com/GeoSci-FFM/GeoModBox.jl/blob/main/examples/StokesEquation/2D/VanKekenBenchmark.jl)"><a href="https://github.com/GeoSci-FFM/GeoModBox.jl/blob/main/examples/StokesEquation/2D/VanKekenBenchmark.jl">VanKeken Benchmark</a></a><a id="[VanKeken-Benchmark](https://github.com/GeoSci-FFM/GeoModBox.jl/blob/main/examples/StokesEquation/2D/VanKekenBenchmark.jl)-1"></a><a class="docs-heading-anchor-permalink" href="#[VanKeken-Benchmark](https://github.com/GeoSci-FFM/GeoModBox.jl/blob/main/examples/StokesEquation/2D/VanKekenBenchmark.jl)" title="Permalink"></a></h1><p>The Van Keken et al. (1997) benchmark is a classical Rayleigh-Taylor instability problem that evaluates the accuracy and robustness of Stokes flow solvers coupled with marker advection. An initially horizontal interface separates two layers of identical viscosity but slightly different density. A small sinusoidal perturbation triggers the instability, causing the denser material to sink while the lighter material rises. The benchmark therefore provides a convenient validation case for testing buoyancy-driven flow, tracer advection, interpolation schemes, and iterative Stokes solvers.</p><p>In this example, the benchmark is implemented in dimensional formulation. Material properties are specified in SI units, including viscosity, density, gravitational acceleration, and thermal diffusivity. The density contrast is chosen such that the buoyancy number is</p><p class="math-container">\[\begin{equation}
+R_b=\frac{\Delta \rho\,g\,H^3}{\eta\,\kappa}=1,
+\end{equation}\]</p><p>where <span>$H$</span> is the model height, <span>$\eta$</span> is the reference viscosity, and <span>$\kappa$</span> is the thermal diffusivity.</p><p>The example demonstrates the use of the defect-correction Stokes solver together with marker-based material advection. Material properties are interpolated from tracers to the Eulerian grid using the available averaging operators, while the interface evolution is represented by Lagrangian tracers. The resulting flow field reproduces the characteristic Rayleigh-Taylor instability and serves as a benchmark for both the momentum solver and the tracer advection routines.</p><p>In addition to the dimensional implementation presented here, <em>GeoModBox.jl</em> also provides a fully nondimensional version of the benchmark. The nondimensional implementation solves the same physical problem using appropriately scaled variables, where the reference viscosity, characteristic length, pressure, velocity, and density anomaly are normalized. Both formulations produce identical numerical solutions after appropriate rescaling. The nondimensional version therefore serves as an additional verification of the scaling framework implemented in <em>GeoModBox.jl</em>.</p><hr/><p>Let&#39;s first load the required modules. </p><pre><code class="language-Julia hljs">using Plots
+using ExtendableSparse
+using GeoModBox
+using GeoModBox.InitialCondition, GeoModBox.MomentumEquation.TwoD
+using GeoModBox.AdvectionEquation.TwoD
+using GeoModBox.Tracers.TwoD
+using Base.Threads
+using Printf, LinearAlgebra
+using TimerOutputs
+using Statistics</code></pre><p>We begin by defining several general settings controlling the simulation, visualization, and output. These include the initial condition, interpolation method for material properties, and plotting parameters used throughout the benchmark.</p><pre><code class="language-Julia hljs">to          =   TimerOutput()
+@timeit to &quot;Ini&quot; begin
+save_fig    =   1
+# Define Initial Condition ========================================== #
+Ini         =   (p=:RTI,) 
+avg         =   :arith
+# ------------------------------------------------------------------- #
+# Plot Settings ===================================================== #
+Pl  =   (
+    qinc    =   10,
+    mainc   =   5,
+    qsc     =   100*(60*60*24*365.25)*3
+)
+# ------------------------------------------------------------------- #</code></pre><p>Next, we define the computational domain and discretize it using a staggered finite-difference grid. The model domain has a height of 4 km and an aspect ratio corresponding to the original Van Keken benchmark. The initial sinusoidal interface perturbation is defined by its wavelength and amplitude, while the staggered grid coordinates are constructed for cell centers, vertices, and ghost nodes.</p><pre><code class="language-Julia hljs"># Geometry ========================================================== #
+M       =   Geometry(
+    ymin    =   -4.0e3,     # [ m ]
+    ymax    =   0.0,
+    xmin    =   0.0,
+)
+λ           =   2*0.9142*(M.ymax-M.ymin)        #   Perturbation wavelength[ m ]
+δA          =   -0.02*(M.ymax-M.ymin)            #   Amplitude [ m ]
+ar          =   (λ / (M.ymax-M.ymin))/2       #   aspect ratio
+M.xmax      =   (M.ymax-M.ymin)*ar
+# -------------------------------------------------------------------- #
+# Grid =============================================================== # 
+NC  =   (
+    x   =   100,
+    y   =   100,
+)
+NV  =   (
+    x   =   NC.x + 1,
+    y   =   NC.y + 1,
+)
+Δ       =   GridSpacing(
+    x   =   (M.xmax - M.xmin)/NC.x,
+    y   =   (M.ymax - M.ymin)/NC.y,
+)
+x       =   (
+    c   =   LinRange(M.xmin+Δ.x/2,M.xmax-Δ.x/2,NC.x),
+    ce  =   LinRange(M.xmin - Δ.x/2.0, M.xmax + Δ.x/2.0, NC.x+2),
+    v   =   LinRange(M.xmin,M.xmax,NV.x),
+)
+y       =   (
+    c   =   LinRange(M.ymin+Δ.y/2,M.ymax-Δ.y/2,NC.y),
+    ce  =   LinRange(M.ymin - Δ.y/2.0, M.ymax + Δ.y/2.0, NC.y+2),
+    v   =   LinRange(M.ymin,M.ymax,NV.y),
+)
+x1      =   (
+    c2d     =   x.c .+ 0*y.c&#39;,
+    v2d     =   x.v .+ 0*y.v&#39;, 
+    vx2d    =   x.v .+ 0*y.ce&#39;,
+    vy2d    =   x.ce .+ 0*y.v&#39;,
+)
+x   =   merge(x,x1)
+y1      =   (
+    c2d     =   0*x.c .+ y.c&#39;,
+    v2d     =   0*x.v .+ y.v&#39;,
+    vx2d    =   0*x.v .+ y.ce&#39;,
+    vy2d    =   0*x.ce .+ y.v&#39;,
+)
+y   =   merge(y,y1)
+# -------------------------------------------------------------------- #</code></pre><p>The material properties are then specified. Both layers are assigned identical viscosities, while a small density contrast is introduced to produce a buoyancy number of <span>$R_b=1$</span>. The interface separating the two materials is initially located at 80% of the model height.</p><pre><code class="language-Julia hljs"># Physics ============================================================ #
+g       =   10.0                        #   Gravitational acceleration [ m/s^2 ]
+# 0 - upper layer; 1 - lower layer
+η₀      =   1e20                        #   Viscosity composition 0 [ Pa s ]
+η₁      =   1e20                        #   Viscosity composition 1 [ Pa s]
+ηᵣ      =   log10(η₁/η₀)
+η       =   [η₀,η₁]                     #   Viscosity for phases 
+
+hc      =   0.8
+h₀      =   hc * (M.ymax-M.ymin)        # Thickness upper layer
+h₁      =   (1-hc) * (M.ymax-M.ymin)    # Thickness lower layer
+yc      =   abs(M.ymin + h₁)            # Layer interface depth
+
+κ       =   1e-6
+Rb      =   1
+Δρ      =   Rb * κ * η₀ / (g * (M.ymax-M.ymin)^3)
+
+ρ₀      =   3000.0              #   Density composition 0 [ kg/m^3 ]
+ρ₁      =   ρ₀ - Δρ             #   Density composition 1 [ kg/m^3 ]
+ρ       =   [ρ₀,ρ₁]             #   Density for phases
+
+phase   =   [0,1]
+# -------------------------------------------------------------------- #
+# Animation and Plot Settings ======================================= #
+path        =   string(&quot;./examples/StokesEquation/2D/Results/&quot;)
+anim        =   Plots.Animation(path, String[] )
+filename    =   string(&quot;VanKeKen_Benchmark_ηr_&quot;,round(ηᵣ),
+                        &quot;_tracers_DC_&quot;,avg)
+# ------------------------------------------------------------------- #</code></pre><p>Before solving the governing equations, memory is allocated for all primary variables, including velocity, pressure, density, viscosity, and auxiliary arrays required by the defect-correction Stokes solver.</p><pre><code class="language-Julia hljs"># Allocation ======================================================== #
+D       =   (
+    p       =   zeros(Float64,(NC...)),
+    pe      =   zeros(Float64,(NC.x+2,NC.y+2)),
+    ρ       =   zeros(Float64,(NC...)),  
+    ρe      =   zeros(Float64,(NC.x+2,NC.y+2)),      
+    cp      =   zeros(Float64,(NC...)),
+    vx      =   zeros(Float64,(NV.x,NV.y+1)),
+    vy      =   zeros(Float64,(NV.x+1,NV.y)),    
+    Pt      =   zeros(Float64,(NC...)),
+    vxc     =   zeros(Float64,(NC...)),
+    vyc     =   zeros(Float64,(NC...)),
+    vc      =   zeros(Float64,(NC...)),
+    wt      =   zeros(Float64,(NC.x,NC.y)),
+    wte     =   zeros(Float64,(NC.x+2,NC.y+2)),
+    wtv     =   zeros(Float64,(NV.x,NV.y)),
+    ηc      =   zeros(Float64,NC...),
+    ηce     =   zeros(Float64,(NC.x+2,NC.y+2)),
+    ηv      =   zeros(Float64,NV...),
+)
+# ------------------------------------------------------------------- #
+# Needed for the defect correction solution ---
+divV        =   zeros(Float64,NC...)
+ε           =   (
+    xx      =   zeros(Float64,NC...), 
+    yy      =   zeros(Float64,NC...), 
+    xy      =   zeros(Float64,NV...),
+)
+τ           =   (
+    xx      =   zeros(Float64,NC...), 
+    yy      =   zeros(Float64,NC...), 
+    xy      =   zeros(Float64,NV...),
+)
+# ------------------------------------------------------------------- #</code></pre><p>We also need to define the velocity boundary conditions, which are <em>free slip</em> at the lateral and <em>no slip</em> at the top and bottom boundary. </p><pre><code class="language-Julia hljs"># Boundary Conditions =============================================== #
+VBC     =   (
+    type    =   (E=:freeslip,W=:freeslip,S=:noslip,N=:noslip),
+    val     =   (E=zeros(NV.y),W=zeros(NV.y),S=zeros(NV.x),N=zeros(NV.x),
+                    vyS=0.0,vyN=0.0,vxW=0.0,vxE=0.0),
+)
+# ------------------------------------------------------------------- #</code></pre><p>In the following the time parameters are defined, including the maximum time, the courant time factor and the maximum number of iterations. </p><pre><code class="language-Julia hljs"># Time ============================================================== #
+T   =   TimeParameter(
+    tmax    =   5000.0,         #   [ Ma ]
+    Δfacc   =   1.0,            #   Courant time factor
+    itmax   =   500,            #   Maximum iterations; 50
+)
+T.tmax      =   T.tmax*1e6*T.year    #   [ s ]
+T.Δ         =   T.Δfacc * minimum((Δ.x,Δ.y)) / 
+                    (sqrt(maximum(abs.(D.vx))^2 + maximum(abs.(D.vy))^2))
+
+Time        =   zeros(T.itmax)
+V_RMS       =   zeros(T.itmax)
+final_step  =   0
+# ------------------------------------------------------------------- #</code></pre><p>The material interface is represented by Lagrangian tracers. After initializing the tracer distribution, the material properties are interpolated onto the Eulerian finite-difference grid, providing the density and viscosity fields required by the Stokes solver.</p><pre><code class="language-Julia hljs"># Tracer Advection ================================================== #
+@timeit to &quot;Tracer Ini&quot; begin
+nmx,nmy     =   5,5
+noise       =   1
+nmark       =   nmx*nmy*NC.x*NC.y
+Aparam      =   :phase
+MPC         =   (
+        c       =   zeros(Float64,(NC.x,NC.y)),
+        v       =   zeros(Float64,(NV.x,NV.y)),
+        th      =   zeros(Float64,(nthreads(),NC.x,NC.y)),
+        thv     =   zeros(Float64,(nthreads(),NV.x,NV.y)),
+)
+MAVG        = (
+        PC_th   =   [similar(D.wte) for _ = 1:nthreads()],  # per thread
+        PV_th   =   [similar(D.ηv) for _ = 1:nthreads()],   # per thread
+        wte_th  =   [similar(D.wte) for _ = 1:nthreads()],  # per thread
+        wtv_th  =   [similar(D.wtv) for _ = 1:nthreads()],  # per thread
+)
+Ma      =   IniTracer2D(Aparam,nmx,nmy,Δ,M,NC,noise,Ini.p,phase;
+                        xc=0.0,yc=yc,λ,δA)
+# RK4 weights ---
+rkw     =   1.0/6.0*[1.0 2.0 2.0 1.0]   # for averaging
+rkv     =   1.0/2.0*[1.0 1.0 2.0 2.0]   # for time stepping
+# Count marker per cell ---
+CountMPC(Ma,nmark,MPC,M,x,y,Δ,NC,NV)
+# Interpolate from markers to cell ---
+Markers2Cells(Ma,nmark,MAVG.PC_th,D.ρe,MAVG.wte_th,D.wte,x,y,Δ,Aparam,ρ)
+D.ρ     .=   D.ρe[2:end-1,2:end-1]  
+Markers2Cells(Ma,nmark,MAVG.PC_th,D.ηce,MAVG.wte_th,D.wte,x,y,Δ,Aparam,η;avgm=avg)
+D.ηc    .=   D.ηce[2:end-1,2:end-1]
+Markers2Vertices(Ma,nmark,MAVG.PV_th,D.ηv,MAVG.wtv_th,D.wtv,x,y,Δ,Aparam,η;avgm=avg)
+end
+# ------------------------------------------------------------------- #</code></pre><p>The coefficient numbering and work arrays required by the defect-correction algorithm are constructed once before entering the time integration loop. These data structures are reused throughout the simulation.</p><pre><code class="language-Julia hljs"># System of Equations =============================================== #
+# Iterations
+niter       =   50
+atol        =   1e-8        #   Absolute tolerance
+rtol        =   1e-5        #   Relative tolerance; r = atolM0/atolM
+RM          =   0.0         #   Initialize absolute residual    
+RMrel       =   0.0         #   Initialize relative residual 
+# Numbering, without ghost nodes! ---
+off    = [  NV.x*NC.y,                          # vx
+            NV.x*NC.y + NC.x*NV.y,              # vy
+            NV.x*NC.y + NC.x*NV.y + NC.x*NC.y]  # Pt
+
+Num    =    (
+    Vx  =   reshape(1:NV.x*NC.y, NV.x, NC.y), 
+    Vy  =   reshape(off[1]+1:off[1]+NC.x*NV.y, NC.x, NV.y), 
+    Pt  =   reshape(off[2]+1:off[2]+NC.x*NC.y,NC...),
+)
+δx      =   zeros(maximum(Num.Pt))
+F       =   zeros(maximum(Num.Pt))
+# Residuals ---
+Fm     =    (
+    x       =   zeros(Float64,NV.x, NC.y), 
+    y       =   zeros(Float64,NC.x, NV.y)
+)
+FPt     =   zeros(Float64,NC...)      
+# ------------------------------------------------------------------- #
+end</code></pre><p>The simulation proceeds by repeatedly solving the incompressible Stokes equations, computing a stable Courant time step, advecting the Lagrangian tracers, and updating the material properties on the Eulerian grid. This process is repeated until the prescribed simulation time or maximum iteration is reached.</p><pre><code class="language-Julia hljs"># Time Loop ========================================================= #
+@timeit to &quot;Time Loop&quot; begin
+for it = 1:T.itmax
+    R0      =   0.0
+    # Update Time ---
+    if it &gt; 1
+        Time[it]   =   Time[it-1] + T.Δ 
+    end
+    @printf(&quot;Time step: #%04d, Time [Myr]: %04e\n &quot;,it,
+                Time[it]/(60*60*24*365.25)/1.0e6)
+    # Initial Residual ---------------------------------------------- #
+    D.vx    .=  0.0
+    D.vy    .=  0.0
+    D.Pt    .=  1.0
+    @timeit to &quot;Solution Iteration&quot; begin
+    # Assemble Coefficients ========================================= #
+    @timeit to &quot;Assembly&quot; begin
+    K       =   Assembly(NC, NV, Δ, D.ηc, D.ηv, VBC, Num)
+    Kfac    =   lu(K.cscmatrix)
+    end
+    for iter=1:niter
+        @timeit to &quot;Residual&quot; begin
+        Residuals2D!(D,VBC,ε,τ,divV,Δ,D.ηc,D.ηv,g,Fm,FPt)
+        F[Num.Vx]   .=   Fm.x
+        F[Num.Vy]   .=   Fm.y
+        F[Num.Pt]   .=   FPt
+        RM          =   norm(F)/length(F)
+        if iter == 1
+            R0 = RM
+        end
+        RMrel       =   RM/R0
+        @printf(&quot;   MCE %2d: ||R|| = %1.4e, ||R||/||R₀|| = %1.4e\n&quot;,iter,RM,RMrel)
+        (RM &lt; atol || RM/R0 &lt; rtol) &amp;&amp; break
+        end
+        # --------------------------------------------------------------- #
+        # Solution of the linear system ================================= #
+        @timeit to &quot;Solution&quot; begin
+        δx      =   - (Kfac \ F)
+        end
+        # --------------------------------------------------------------- #
+        # Update Unknown Variables ====================================== #
+        D.vx[:,2:end-1]     .+=  δx[Num.Vx]
+        D.vy[2:end-1,:]     .+=  δx[Num.Vy]
+        D.Pt                .+=  δx[Num.Pt]
+    end
+    end
+    # --------------------------------------------------------------- #
+    # Get the velocity on the centroids ---
+    for i = 1:NC.x
+        for j = 1:NC.y
+            D.vxc[i,j]  = (D.vx[i,j+1] + D.vx[i+1,j+1])/2
+            D.vyc[i,j]  = (D.vy[i+1,j] + D.vy[i+1,j+1])/2
+        end
+    end
+    @. D.vc        = sqrt(D.vxc^2 + D.vyc^2)
+    # ---</code></pre><p>At regular intervals, the current solution is visualized by displaying the density field, tracer distribution, viscosity, and velocity magnitude together with the velocity vectors. These snapshots are collected to generate the final animation.</p><pre><code class="language-Julia hljs">    if mod(it,4) == 0 || final_step == 1 || it == 1
+        p = heatmap(x.c./1e3,y.c./1e3,D.ρ&#39;,color=:inferno,
+                    xlabel=&quot;x[km]&quot;,ylabel=&quot;y[km]&quot;,colorbar=true,
+                    title=&quot;ρ&quot;,
+                    aspect_ratio=:equal,xlims=(M.xmin/1e3, M.xmax/1e3),                             
+                    ylims=(M.ymin/1e3, M.ymax/1e3),
+                    layout=(2,2),subplot=1)
+        scatter!(p,Ma.x[1:Pl.mainc:end]./1e3,Ma.y[1:Pl.mainc:end]./1e3,
+                    ms=1,ma=0.5,mc=Ma.phase[1:Pl.mainc:end],markerstrokewidth=0.0,
+                    xlabel=&quot;x[km]&quot;,ylabel=&quot;y[km]&quot;,colorbar=true,
+                    title=&quot;tracers&quot;,label=&quot;&quot;,
+                    aspect_ratio=:equal,xlims=(M.xmin/1e3, M.xmax/1e3), 
+                    ylims=(M.ymin/1e3, M.ymax/1e3),
+                    layout=(2,2),subplot=2)
+        heatmap!(p,x.c./1e3,y.c./1e3,D.vc&#39;,
+                    xlabel=&quot;x[km]&quot;,ylabel=&quot;y[km]&quot;,colorbar=true,
+                    title=&quot;V_c&quot;,color=cgrad(:batlow),
+                    aspect_ratio=:equal,xlims=(M.xmin/1e3, M.xmax/1e3),
+                    ylims=(M.ymin/1e3, M.ymax/1e3),
+                    layout=(2,2),subplot=4)
+        quiver!(p,x.c2d[1:Pl.qinc:end,1:Pl.qinc:end]./1e3,
+                    y.c2d[1:Pl.qinc:end,1:Pl.qinc:end]./1e3,
+                    quiver=(D.vxc[1:Pl.qinc:end,1:Pl.qinc:end].*Pl.qsc,
+                            D.vyc[1:Pl.qinc:end,1:Pl.qinc:end].*Pl.qsc),        
+                    la=0.5,color=&quot;white&quot;,layout=(2,2),subplot=4)
+        heatmap!(p,x.c./1e3,y.c./1e3,log10.(D.ηc&#39;),color=reverse(cgrad(:roma)),
+                    xlabel=&quot;x[km]&quot;,ylabel=&quot;y[km]&quot;,title=&quot;η_c&quot;,
+                    clims=(15,27),
+                    aspect_ratio=:equal,xlims=(M.xmin/1e3, M.xmax/1e3), 
+                    ylims=(M.ymin/1e3, M.ymax/1e3),colorbar=true,
+                    layout=(2,2),subplot=3)
+        if save_fig == 1
+            Plots.frame(anim)
+        elseif save_fig == 0
+            display(p)
+        end
+    end
+    if final_step == 1
+        @printf(&quot; Maximum Time reached!\n&quot;)
+        break
+    end</code></pre><p>After each Stokes solve, a new stable time step is computed from the Courant criterion using the maximum velocity magnitude in the domain. The tracers are then advected before the material properties are updated on the computational grid.</p><pre><code class="language-Julia hljs">    # Calculate Time Stepping ---
+    T.Δ        =   T.Δfacc * minimum((Δ.x,Δ.y)) / 
+            (sqrt(maximum(abs.(D.vx))^2 + maximum(abs.(D.vy))^2))
+    if Time[it] &gt;= T.tmax
+        T.Δ         =   T.tmax - Time[it-1]
+        Time[it]    =   Time[it-1] + T.Δ
+        final_step  =   1
+    end
+    # Advection ===
+    @timeit to &quot;Tracer Advection&quot; begin
+    # Advect tracers ---
+    @printf(&quot;Running on %d thread(s)\n&quot;, nthreads())  
+    AdvectTracer2D(Ma,nmark,D,x,y,T.Δ,Δ,NC,rkw,rkv;style=1)
+    CountMPC(Ma,nmark,MPC,M,x,y,Δ,NC,NV)
+    # Interpolate phase from tracers to grid ---
+    Markers2Cells(Ma,nmark,MAVG.PC_th,D.pe,MAVG.wte_th,D.wte,x,y,Δ,Aparam,phase)
+    D.p     .=  D.pe[2:end-1,2:end-1]
+    Markers2Cells(Ma,nmark,MAVG.PC_th,D.ρe,MAVG.wte_th,D.wte,x,y,Δ,Aparam,ρ)
+    D.ρ     .=   D.ρe[2:end-1,2:end-1]  
+    Markers2Cells(Ma,nmark,MAVG.PC_th,D.ηce,MAVG.wte_th,D.wte,x,y,Δ,Aparam,η;avgm=avg)
+    D.ηc    .=   D.ηce[2:end-1,2:end-1]
+    Markers2Vertices(Ma,nmark,MAVG.PV_th,D.ηv,MAVG.wtv_th,D.wtv,x,y,Δ,Aparam,η;avgm=avg)
+    end
+    V_RMS[it]   =   sqrt(mean(D.vxc.^2 .+ D.vyc.^2))
+end # End Time Loop
+end</code></pre><p>After the simulation has finished, the recorded animation is written to disk together with a time series showing the evolution of the root-mean-square velocity. These diagnostics provide a convenient measure of the temporal development of the Rayleigh-Taylor instability.</p><pre><code class="language-Julia hljs"># Save Animation ---
+if save_fig == 1
+    # Write the frames to a GIF file
+    Plots.gif(anim, string( path, filename, &quot;.gif&quot; ), fps = 15)
+    foreach(rm, filter(startswith(string(path,&quot;00&quot;)), readdir(path,join=true)))
+end
+# Plot time serieses ==================================================== #
+p2  =   plot(Time./T.year./1e6,V_RMS,
+            xlabel=&quot;Time [ Myrs ]&quot;, ylabel=&quot;V_RMS [ m/s ]&quot;,label=&quot;&quot;)
+if save_fig == 1
+    savefig(p2,string(&quot;./examples/StokesEquation/2D/Results/VanKekenBenchmark_TimeSeries_&quot;,
+                        NC.x,&quot;_&quot;,NC.y,&quot;_&quot;,avg,&quot;.png&quot;))
+elseif save_fig == 0
+    display(p2)
+end
+display(to)</code></pre><hr/><p><img src="../../../../assets/examples/Stokes/VanKeKen_Benchmark_ηr_0.0_tracers_DC_arith.gif" alt="VKB_1"/></p><p><strong>Figure 1.</strong> Evolution of the dimensional Van Keken benchmark. The panels show the density field, tracer distribution, viscosity, and velocity magnitude together with the velocity vectors. The initially perturbed interface evolves into the characteristic Rayleigh-Taylor instability as the denser lower material sinks beneath the lighter upper layer.</p><p><img src="../../../../assets/examples/Stokes/VanKekenBenchmark_TimeSeries_100_100_arith.png" alt="VKB_2"/></p><p><strong>Figure 2.</strong> Evolution of the root-mean-square (RMS) velocity for the dimensional benchmark. The rapid increase in RMS velocity reflects the growth of the Rayleigh-Taylor instability before gradually approaching a quasi-steady state.</p><hr/><p>As discussed above, GeoModBox.jl also provides a fully nondimensional implementation of the Van Keken benchmark. The governing equations, material properties, and boundary conditions are appropriately scaled, while the numerical algorithm remains unchanged. After converting the results back to physical units, both implementations produce identical solutions, demonstrating that the Stokes solver is independent of the choice of physical units.</p><p><img src="../../../../assets/examples/Stokes/VanKeKen_Benchmark_ηr_0.0_tracers_DC_scaled_arith.gif" alt="VKB_3"/></p><p><strong>Figure 3.</strong> Evolution of the nondimensional Van Keken benchmark. Although all variables are solved in nondimensional form, the predicted interface evolution, flow pattern, and velocity field are identical to those obtained using the dimensional formulation.</p><p><img src="../../../../assets/examples/Stokes/VanKekenBenchmark_TimeSeries_Scaled_100_100_arith.png" alt="VKB_4"/></p><p><strong>Figure 4.</strong> Root-mean-square (RMS) velocity obtained from the nondimensional benchmark. After appropriate scaling, the temporal evolution is identical to that of the dimensional implementation, confirming the consistency of the nondimensional scaling framework.</p></article><nav class="docs-footer"><a class="docs-footer-prevpage" href="../RTI_growth_rate/">« RTI - Growth Rate (Ramberg, 1968)</a><a class="docs-footer-nextpage" href="../ViscousInclusion/">Viscous Inclusion (Schmid, 2002) »</a><div class="flexbox-break"></div><p class="footer-message">Powered by <a href="https://github.com/JuliaDocs/Documenter.jl">Documenter.jl</a> and the <a href="https://julialang.org/">Julia Programming Language</a>.</p></nav></div><div class="modal" id="documenter-settings"><div class="modal-background"></div><div class="modal-card"><header class="modal-card-head"><p class="modal-card-title">Settings</p><button class="delete"></button></header><section class="modal-card-body"><p><label class="label">Theme</label><div class="select"><select id="documenter-themepicker"><option value="auto">Automatic (OS)</option><option value="documenter-light">documenter-light</option><option value="documenter-dark">documenter-dark</option><option value="catppuccin-latte">catppuccin-latte</option><option value="catppuccin-frappe">catppuccin-frappe</option><option value="catppuccin-macchiato">catppuccin-macchiato</option><option value="catppuccin-mocha">catppuccin-mocha</option></select></div></p><hr/><p>This document was generated with <a href="https://github.com/JuliaDocs/Documenter.jl">Documenter.jl</a> version 1.17.0 on <span class="colophon-date" title="Thursday 27 August 2026 08:35">Thursday 27 August 2026</span>. Using Julia version 1.12.7.</p></section><footer class="modal-card-foot"></footer></div></div></div></body></html>

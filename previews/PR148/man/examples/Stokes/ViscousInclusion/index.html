@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/><title>Viscous Inclusion (Schmid, 2002) · GeoModBox.jl</title><meta name="title" content="Viscous Inclusion (Schmid, 2002) · GeoModBox.jl"/><meta property="og:title" content="Viscous Inclusion (Schmid, 2002) · GeoModBox.jl"/><meta property="twitter:title" content="Viscous Inclusion (Schmid, 2002) · GeoModBox.jl"/><meta name="description" content="Documentation for GeoModBox.jl."/><meta property="og:description" content="Documentation for GeoModBox.jl."/><meta property="twitter:description" content="Documentation for GeoModBox.jl."/><script data-outdated-warner src="../../../../assets/warner.js"></script><link href="https://cdnjs.cloudflare.com/ajax/libs/lato-font/3.0.0/css/lato-font.min.css" rel="stylesheet" type="text/css"/><link href="https://cdnjs.cloudflare.com/ajax/libs/juliamono/0.050/juliamono.min.css" rel="stylesheet" type="text/css"/><link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/fontawesome.min.css" rel="stylesheet" type="text/css"/><link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/solid.min.css" rel="stylesheet" type="text/css"/><link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/brands.min.css" rel="stylesheet" type="text/css"/><link href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.8/katex.min.css" rel="stylesheet" type="text/css"/><script>documenterBaseURL="../../../.."</script><script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js" data-main="../../../../assets/documenter.js"></script><script src="../../../../search_index.js"></script><script src="../../../../siteinfo.js"></script><script src="../../../../../versions.js"></script><link class="docs-theme-link" rel="stylesheet" type="text/css" href="../../../../assets/themes/catppuccin-mocha.css" data-theme-name="catppuccin-mocha"/><link class="docs-theme-link" rel="stylesheet" type="text/css" href="../../../../assets/themes/catppuccin-macchiato.css" data-theme-name="catppuccin-macchiato"/><link class="docs-theme-link" rel="stylesheet" type="text/css" href="../../../../assets/themes/catppuccin-frappe.css" data-theme-name="catppuccin-frappe"/><link class="docs-theme-link" rel="stylesheet" type="text/css" href="../../../../assets/themes/catppuccin-latte.css" data-theme-name="catppuccin-latte"/><link class="docs-theme-link" rel="stylesheet" type="text/css" href="../../../../assets/themes/documenter-dark.css" data-theme-name="documenter-dark" data-theme-primary-dark/><link class="docs-theme-link" rel="stylesheet" type="text/css" href="../../../../assets/themes/documenter-light.css" data-theme-name="documenter-light" data-theme-primary/><script src="../../../../assets/themeswap.js"></script></head><body><div id="documenter"><nav class="docs-sidebar"><div class="docs-package-name"><span class="docs-autofit"><a href="../../../../">GeoModBox.jl</a></span></div><button class="docs-search-query input is-rounded is-small is-clickable my-2 mx-auto py-1 px-2" id="documenter-search-query">Search docs (Ctrl + /)</button><ul class="docs-menu"><li><a class="tocitem" href="../../../../">Home</a></li><li><a class="tocitem" href="../../../Installation/">Installation</a></li><li><span class="tocitem">Governing Equation</span><ul><li><input class="collapse-toggle" id="menuitem-3-1" type="checkbox"/><label class="tocitem" for="menuitem-3-1"><span class="docs-label">Solution</span><i class="docs-chevron"></i></label><ul class="collapsed"><li><a class="tocitem" href="../../../theory/GESolution/">General</a></li><li><a class="tocitem" href="../../../Ini/">Specifications</a></li></ul></li><li><input class="collapse-toggle" id="menuitem-3-2" type="checkbox"/><label class="tocitem" for="menuitem-3-2"><span class="docs-label">Heat Diffusion Equation</span><i class="docs-chevron"></i></label><ul class="collapsed"><li><a class="tocitem" href="../../../theory/DiffMain/">General</a></li><li><a class="tocitem" href="../../../theory/DiffOneD/">1D</a></li><li><a class="tocitem" href="../../../theory/DiffTwoD/">2D</a></li></ul></li><li><input class="collapse-toggle" id="menuitem-3-3" type="checkbox"/><label class="tocitem" for="menuitem-3-3"><span class="docs-label">Advection Equation</span><i class="docs-chevron"></i></label><ul class="collapsed"><li><a class="tocitem" href="../../../theory/AdvectMain/">General</a></li><li><a class="tocitem" href="../../../theory/AdvOneD/">1D</a></li><li><a class="tocitem" href="../../../theory/AdvTwoD/">2D</a></li></ul></li><li><input class="collapse-toggle" id="menuitem-3-4" type="checkbox"/><label class="tocitem" for="menuitem-3-4"><span class="docs-label">Momentum Equation</span><i class="docs-chevron"></i></label><ul class="collapsed"><li><a class="tocitem" href="../../../theory/MomentumMain/">General</a></li><li><a class="tocitem" href="../../../theory/MomentumOneD/">1D</a></li><li><a class="tocitem" href="../../../theory/MomentumTwoD/">2D</a></li></ul></li></ul></li><li><span class="tocitem">Exercises</span><ul><li><a class="tocitem" href="../../../exercises/Exercises/">General</a></li><li><a class="tocitem" href="../../../exercises/01_Euler_Advection/">01 - Euler Advection</a></li><li><a class="tocitem" href="../../../exercises/02_1D_Heat_explicit/">02 - 1D Heat Diffusion (explicit)</a></li><li><a class="tocitem" href="../../../exercises/03_1D_Heat_implicit/">03 - 1D Heat Diffusion (implicit)</a></li><li><a class="tocitem" href="../../../exercises/04_2D_Diffusion_Stationary/">04 - 2D Heat Diffusion (stationary)</a></li><li><a class="tocitem" href="../../../exercises/05_2D_Diffusion_TD_Plume/">05a - 2D Heat Diffusion (Plume)</a></li><li><a class="tocitem" href="../../../exercises/05_2D_Diffusion_TD_Sill/">05b - 2D Heat Diffusion (Sill)</a></li><li><a class="tocitem" href="../../../exercises/06_1D_Advection/">06 - 1D Advection</a></li><li><a class="tocitem" href="../../../exercises/07_2D_Energy_Equation/">07 - 2D Energy Conservation</a></li><li><a class="tocitem" href="../../../exercises/08_1D_Stokes/">08 - 1D Stokes</a></li><li><a class="tocitem" href="../../../exercises/09_2D_Falling_Block/">09 - 2D Falling Block (steady state)</a></li><li><a class="tocitem" href="../../../exercises/10_2D_Falling_Block_td/">10 - 2D Falling Block (time-dep)</a></li><li><a class="tocitem" href="../../../exercises/11_2D_Thermal_Convection/">11 - 2D Thermal Convection</a></li><li><a class="tocitem" href="../../../exercises/12_2D_Thermal_Convection_scaled/">12 - 2D Thermal Convection (scaled)</a></li><li><a class="tocitem" href="../../../exercises/13_Blankenbach_Benchmark/">13 - Blankenbach Benchmark</a></li></ul></li><li><span class="tocitem">Examples</span><ul><li><a class="tocitem" href="../../Examples/">General</a></li><li><input class="collapse-toggle" id="menuitem-5-2" type="checkbox"/><label class="tocitem" for="menuitem-5-2"><span class="docs-label">Diffusion Equation</span><i class="docs-chevron"></i></label><ul class="collapsed"><li><a class="tocitem" href="../../Diffusion/OceanicGeotherm/">Oceanic Geotherm (1D)</a></li><li><a class="tocitem" href="../../Diffusion/ContinentalGeotherm/">Continental Geotherm (1D)</a></li><li><a class="tocitem" href="../../Diffusion/GaussianDiffusion1D/">Gaussian Diffusion (1D)</a></li><li><a class="tocitem" href="../../Diffusion/BackwardEuler_DC/">Backward Euler (2D)</a></li><li><a class="tocitem" href="../../Diffusion/ForwardEuler_DC/">Forward Euler (2D)</a></li><li><a class="tocitem" href="../../Diffusion/GaussianDiffusion2D/">Gaussian Diffusion (2D)</a></li><li><a class="tocitem" href="../../Diffusion/PoissonRestest/">Poisson Problem (2D)</a></li><li><a class="tocitem" href="../../Diffusion/PoissonVariablek/">Poisson Problem; variable k (2D)</a></li></ul></li><li><input class="collapse-toggle" id="menuitem-5-3" type="checkbox"/><label class="tocitem" for="menuitem-5-3"><span class="docs-label">Advection Equtaion</span><i class="docs-chevron"></i></label><ul class="collapsed"><li><a class="tocitem" href="../../Advection/Advection2D/">Advection (2D)</a></li><li><a class="tocitem" href="../../Advection/AdvectionRestest2D/">Advection Resolution Test (2D)</a></li></ul></li><li><input class="collapse-toggle" id="menuitem-5-4" type="checkbox" checked/><label class="tocitem" for="menuitem-5-4"><span class="docs-label">Stokes Equation</span><i class="docs-chevron"></i></label><ul class="collapsed"><li><a class="tocitem" href="../ChannelFlow1D/">Channel Flow (1D)</a></li><li><a class="tocitem" href="../FallingBlockBenchmark/">Falling Block Benchmark (Gerya, 2019)</a></li><li><a class="tocitem" href="../FallingBlockDC/">Falling Block</a></li><li><a class="tocitem" href="../RTI/">Rayleigh Taylor Instability (RTI)</a></li><li><a class="tocitem" href="../RTI_growth_rate/">RTI - Growth Rate (Ramberg, 1968)</a></li><li><a class="tocitem" href="../VanKekenBenchmark/">RTI (Van Keken et al., 1997)</a></li><li class="is-active"><a class="tocitem" href>Viscous Inclusion (Schmid, 2002)</a></li></ul></li><li><input class="collapse-toggle" id="menuitem-5-5" type="checkbox"/><label class="tocitem" for="menuitem-5-5"><span class="docs-label">Mixed Thermal Convection</span><i class="docs-chevron"></i></label><ul class="collapsed"><li><a class="tocitem" href="../../Convection/Overview_Convection/">Overview</a></li><li><a class="tocitem" href="../../Convection/BottomHeatedConvection/">Bottom Heated</a></li><li><a class="tocitem" href="../../Convection/InternallyHeatedConvection/">Internally Heated</a></li><li><a class="tocitem" href="../../Convection/MixedHeatedConvection/">Mixed Heated</a></li><li><a class="tocitem" href="../../Convection/BottomHeatedConvection_VE/">Bottom Heated - Variable Visc</a></li><li><a class="tocitem" href="../../Convection/Blankenbach_Var_Eta/">Blankenbach et al. (1989) - Variable Visc</a></li></ul></li><li><input class="collapse-toggle" id="menuitem-5-6" type="checkbox"/><label class="tocitem" for="menuitem-5-6"><span class="docs-label">Thermo-Mechanical Shear Localization</span><i class="docs-chevron"></i></label><ul class="collapsed"><li><a class="tocitem" href="../../StrainLocalization/ShearBands/">Viscous shear localization (Duretz et al., 2014)</a></li></ul></li></ul></li><li><a class="tocitem" href="../../../listoffunctions/">List of functions</a></li><li><a class="tocitem" href="../../../license/">License</a></li></ul><div class="docs-version-selector field has-addons"><div class="control"><span class="docs-label button is-static is-size-7">Version</span></div><div class="docs-selector control is-expanded"><div class="select is-fullwidth is-size-7"><select id="documenter-version-selector"></select></div></div></div></nav><div class="docs-main"><header class="docs-navbar"><a class="docs-sidebar-button docs-navbar-link fa-solid fa-bars is-hidden-desktop" id="documenter-sidebar-button" href="#"></a><nav class="breadcrumb"><ul class="is-hidden-mobile"><li><a class="is-disabled">Examples</a></li><li><a class="is-disabled">Stokes Equation</a></li><li class="is-active"><a href>Viscous Inclusion (Schmid, 2002)</a></li></ul><ul class="is-hidden-tablet"><li class="is-active"><a href>Viscous Inclusion (Schmid, 2002)</a></li></ul></nav><div class="docs-right"><a class="docs-navbar-link" href="https://github.com/GeoSci-FFM/GeoModBox.jl" title="View the repository on GitHub"><span class="docs-icon fa-brands"></span><span class="docs-label is-hidden-touch">GitHub</span></a><a class="docs-navbar-link" href="https://github.com/GeoSci-FFM/GeoModBox.jl/blob/main/docs/src/man/examples/Stokes/ViscousInclusion.md" title="Edit source on GitHub"><span class="docs-icon fa-solid"></span></a><a class="docs-settings-button docs-navbar-link fa-solid fa-gear" id="documenter-settings-button" href="#" title="Settings"></a><a class="docs-article-toggle-button fa-solid fa-chevron-up" id="documenter-article-toggle-button" href="javascript:;" title="Collapse all docstrings"></a></div></header><article class="content" id="documenter-page"><h1 id="[Viscous-Inclusion](https://github.com/GeoSci-FFM/GeoModBox.jl/blob/main/examples/StokesEquation/2D/ViscousInclusion.jl)"><a class="docs-heading-anchor" href="#[Viscous-Inclusion](https://github.com/GeoSci-FFM/GeoModBox.jl/blob/main/examples/StokesEquation/2D/ViscousInclusion.jl)"><a href="https://github.com/GeoSci-FFM/GeoModBox.jl/blob/main/examples/StokesEquation/2D/ViscousInclusion.jl">Viscous Inclusion</a></a><a id="[Viscous-Inclusion](https://github.com/GeoSci-FFM/GeoModBox.jl/blob/main/examples/StokesEquation/2D/ViscousInclusion.jl)-1"></a><a class="docs-heading-anchor-permalink" href="#[Viscous-Inclusion](https://github.com/GeoSci-FFM/GeoModBox.jl/blob/main/examples/StokesEquation/2D/ViscousInclusion.jl)" title="Permalink"></a></h1><p>This example demonstrates the numerical solution of the incompressible Stokes equations for a circular viscous inclusion embedded in an infinite matrix undergoing pure shear deformation. Owing to its analytical solution (Schmid, 2002), the problem has become one of the classical benchmark tests for verifying Stokes solvers with strongly heterogeneous viscosity distributions.</p><p>The model consists of a circular inclusion with a viscosity four orders of magnitude larger than the surrounding matrix. Both materials have identical densities, such that no buoyancy forces are present and the deformation is driven exclusively by the prescribed pure-shear boundary conditions. The analytical solution provides the complete velocity and pressure fields, allowing a direct quantitative comparison with the numerical solution.</p><p>Unlike the Rayleigh-Taylor instability benchmark, this example focuses on solving the momentum equation for large viscosity contrasts rather than on material advection. The benchmark therefore provides an excellent verification test for the discretization of variable-viscosity Stokes flow, the implementation of velocity boundary conditions, and the pressure solution.</p><p>The analytical solution is evaluated on the same staggered numerical grid as the finite-difference solution. After solving the linear system using the defect correction method, the numerical and analytical velocity and pressure fields are compared. Relative L₂ and L∞ errors are computed, and spatial error maps are generated to assess the numerical accuracy.</p><hr/><p>Let&#39;s begin by loading the required modules.</p><pre><code class="language-Julia hljs">using GeoModBox, Printf, Plots
+using GeoModBox.InitialCondition, GeoModBox.Tracers.TwoD
+using GeoModBox.MomentumEquation.TwoD
+using Base.Threads, LinearAlgebra, Statistics</code></pre><p>The following parameters define the initial pure-shear deformation and the geometry of the circular inclusion. The inclusion is represented by passive markers, which are subsequently interpolated to the staggered finite-difference grid to obtain the viscosity distribution.</p><pre><code class="language-Julia hljs">Ini = (
+    V = :PureShear,
+    p = :Inclusion,
+    ε = 1e-12,
+)
+
+EllA = 2e-1
+EllB = 2e-1</code></pre><p>Next, the model geometry and the staggered finite-difference grid are defined. Since the benchmark compares the numerical solution with an analytical reference, a relatively modest grid resolution already provides an excellent assessment of the discretization accuracy.</p><pre><code class="language-Julia hljs"># ==================== Define model geometry constants ================== #
+M       =   Geometry(
+        ymin    =   -1.0,     #   Model depth [ m ]
+        ymax    =   0.0,        
+        xmin    =   0.0,
+        xmax    =   1.0,      #   Model length [ m ]
+)
+# ----------------------------------------------------------------------- #
+# ====================== Define the numerical grid ====================== #
+NC  =   ( 
+    x   =   50, 
+    y   =   50, 
+)
+NV  =   (
+    x   =   NC.x + 1,
+    y   =   NC.y + 1,
+)
+Δ       =   GridSpacing(
+    x   =   (M.xmax - M.xmin)/NC.x,
+    y   =   (M.ymax - M.ymin)/NC.y,
+)
+x       =   (
+    c   =   LinRange(M.xmin+Δ.x/2,M.xmax-Δ.x/2,NC.x),
+    ce  =   LinRange(M.xmin - Δ.x/2.0, M.xmax + Δ.x/2.0, NC.x+2),
+    v   =   LinRange(M.xmin,M.xmax,NV.x),
+)
+y       =   (
+    c   =   LinRange(M.ymin+Δ.y/2,M.ymax-Δ.y/2,NC.y),
+    ce  =   LinRange(M.ymin - Δ.y/2.0, M.ymax + Δ.y/2.0, NC.y+2),
+    v   =   LinRange(M.ymin,M.ymax,NV.y),
+)
+x1      =   (
+    c2d     =   x.c .+ 0*y.c&#39;,
+    v2d     =   x.v .+ 0*y.v&#39;, 
+    vx2d    =   x.v .+ 0*y.ce&#39;,
+    vy2d    =   x.ce .+ 0*y.v&#39;,
+)
+x   =   merge(x,x1)
+y1      =   (
+    c2d     =   0*x.c .+ y.c&#39;,
+    v2d     =   0*x.v .+ y.v&#39;,
+    vx2d    =   0*x.v .+ y.ce&#39;,
+    vy2d    =   0*x.ce .+ y.v&#39;,
+)
+y   =   merge(y,y1)
+# ----------------------------------------------------------------------- #</code></pre><p>The physical properties are then specified. Both materials have identical densities, eliminating buoyancy forces from the governing equations. The viscosity contrast between the inclusion and the matrix is four orders of magnitude, providing a demanding test for the variable-viscosity Stokes solver.</p><pre><code class="language-Julia hljs"># ====================== Define physical constants ====================== #
+g       =   0.0                 #   Gravitational acceleration [ m/s^2 ]
+# 0 - upper layer; 1 - lower layer
+η₀      =   1e19                #   Viscosity composition 0 [ Pa s ]
+η₁      =   1e23                #   Viscosity composition 1 - Inclusion [ Pa s]
+η       =   [η₀,η₁]             #   Viscosity for phases 
+
+ρ₀      =   3200.0              #   Density composition 0 [ kg/m^3 ]
+ρ₁      =   3200.0              #   Density composition 1 [ kg/m^3 ]
+ρ       =   [ρ₀,ρ₁]             #   Density for phases
+
+phase   =   [0,1]
+# ----------------------------------------------------------------------- #
+# Allocation ============================================================ #
+D       =   (
+    ρ       =   zeros(Float64,(NC...)),
+    ρ_ex    =   zeros(Float64,(NC.x+2,NC.y+2)),
+    p       =   zeros(Float64,(NC...)),
+    p_ex    =   zeros(Float64,(NC.x+2,NC.y+2)),
+    cp      =   zeros(Float64,(NC...)),
+    vx      =   zeros(Float64,(NV.x,NV.y+1)),
+    vy      =   zeros(Float64,(NV.x+1,NV.y)),    
+    Pt      =   zeros(Float64,(NC...)),
+    vxc     =   zeros(Float64,(NC...)),
+    vyc     =   zeros(Float64,(NC...)),
+    vc      =   zeros(Float64,(NC...)),
+    wt      =   zeros(Float64,(NC.x,NC.y)),
+    wte     =   zeros(Float64,(NC.x+2,NC.y+2)),
+    wtv     =   zeros(Float64,(NV.x,NV.y)),
+    ηc      =   zeros(Float64,NC...),
+    η_ex    =   zeros(Float64,(NC.x+2,NC.y+2)),
+    ηv      =   zeros(Float64,NV...),
+)
+# ----------------------------------------------------------------------- #
+# Needed for the defect correction solution ---
+divV        =   zeros(Float64,NC...)
+ε           =   (
+    xx      =   zeros(Float64,NC...), 
+    yy      =   zeros(Float64,NC...), 
+    xy      =   zeros(Float64,NV...),
+)
+τ           =   (
+    xx      =   zeros(Float64,NC...), 
+    yy      =   zeros(Float64,NC...), 
+    xy      =   zeros(Float64,NV...),
+)
+# ----------------------------------------------------------------------- #
+# Boundary Conditions =================================================== #
+VBC     =   (
+    type    =   (E=:const,W=:const,S=:const,N=:const),
+    val     =   (E=zeros(NV.y),W=zeros(NV.y),S=zeros(NV.x),N=zeros(NV.x),
+                vxE=zeros(NC.y),vxW=zeros(NC.y),vyS=zeros(NC.x),vyN=zeros(NC.x)),
+)
+# ----------------------------------------------------------------------- #</code></pre><p>The analytical solution is subsequently evaluated using the formulation of Dani et al. (1978). Because the analytical solution is non-dimensional, it is scaled using the prescribed background strain rate and the reference viscosity before being applied as Dirichlet boundary conditions on the numerical model.</p><pre><code class="language-Julia hljs"># Initial Condition ===================================================== #
+IniVelocity!(Ini.V,D,VBC,NV,Δ,M,x,y;Ini.ε)
+# Get analytical Solution
+AnaSol  =   (
+    Pa      =   zeros(Float64,NC...),
+    Vxa     =   zeros(Float64,NV.x,NC.y),
+    Vya     =   zeros(Float64,NC.x,NV.y),
+    Vx_N    =   zeros(Float64,NV.x,1),
+    Vx_S    =   zeros(Float64,NV.x,1),
+    Vx_W    =   zeros(Float64,NC.y,1),
+    Vx_E    =   zeros(Float64,NC.y,1),
+    Vy_N    =   zeros(Float64,NC.x,1),
+    Vy_S    =   zeros(Float64,NC.x,1),
+    Vy_W    =   zeros(Float64,NV.y,1),
+    Vy_E    =   zeros(Float64,NV.y,1),
+)
+
+Dani_Solution_vec!(Ini.V,AnaSol,M,x,y,EllA,η₁/η₀,NC,NV)
+
+# Dimensional scaling of the analytical solution
+# The analytical velocity is linear in the dimensional coordinates,
+# so only the background strain-rate scale is required.
+velocity_scale = Ini.ε
+velocity_scale = Ini.ε
+pressure_scale = η₀ * Ini.ε
+
+# Conforming velocity nodes
+AnaSol.Vxa .*= velocity_scale
+AnaSol.Vya .*= velocity_scale
+
+# Boundary velocities
+AnaSol.Vx_N .*= velocity_scale
+AnaSol.Vx_S .*= velocity_scale
+AnaSol.Vx_W .*= velocity_scale
+AnaSol.Vx_E .*= velocity_scale
+
+AnaSol.Vy_N .*= velocity_scale
+AnaSol.Vy_S .*= velocity_scale
+AnaSol.Vy_W .*= velocity_scale
+AnaSol.Vy_E .*= velocity_scale
+
+# Pressure
+AnaSol.Pa .*= pressure_scale
+
+# Boundary Conditions ---
+# Horizontal velocity 
+VBC.val.S    .=  AnaSol.Vx_S
+VBC.val.N    .=  AnaSol.Vx_N
+VBC.val.vxE  .=  AnaSol.Vx_E
+VBC.val.vxW  .=  AnaSol.Vx_W
+
+# Vertical velocity 
+VBC.val.E    .=  AnaSol.Vy_E
+VBC.val.W    .=  AnaSol.Vy_W
+VBC.val.vyS  .=  AnaSol.Vy_S
+VBC.val.vyN  .=  AnaSol.Vy_N
+
+# Initialize the unknown fields without erasing boundary values
+D.vx[:, 2:end-1] .= 0.0
+D.vy[2:end-1, :] .= 0.0
+D.Pt             .= 0.0</code></pre><p>The viscosity field is generated from passive markers using bilinear interpolation. Since the material distribution remains stationary in this benchmark, the marker interpolation is performed only once before assembling the Stokes system.</p><pre><code class="language-Julia hljs"># Tracer Advection ====================================================== #
+nmx,nmy     =   5,5
+noise       =   0
+nmark       =   nmx*nmy*NC.x*NC.y
+Aparam      =   :phase
+MAVG        = (
+        PC_th   =   [similar(D.wte) for _ = 1:nthreads()],  # per thread
+        PV_th   =   [similar(D.ηv) for _ = 1:nthreads()],   # per thread
+        wte_th  =   [similar(D.wte) for _ = 1:nthreads()],  # per thread
+        wtv_th  =   [similar(D.wtv) for _ = 1:nthreads()],  # per thread
+)
+Ma      =   IniTracer2D(Aparam,nmx,nmy,Δ,M,NC,noise,Ini.p,phase;
+                ellA=EllA,ellB=EllB,α=α)
+# Interpolate from markers to cell ---
+Markers2Cells(Ma,nmark,MAVG.PC_th,D.ρ_ex,MAVG.wte_th,D.wte,x,y,Δ,Aparam,ρ)
+D.ρ     .=  D.ρ_ex[2:end-1,2:end-1]  
+Markers2Cells(Ma,nmark,MAVG.PC_th,D.p_ex,MAVG.wte_th,D.wte,x,y,Δ,Aparam,phase)
+D.p     .=  D.p_ex[2:end-1,2:end-1]
+Markers2Cells(Ma,nmark,MAVG.PC_th,D.η_ex,MAVG.wte_th,D.wte,x,y,Δ,Aparam,η)
+D.ηc    .=  D.η_ex[2:end-1,2:end-1]
+Markers2Vertices(Ma,nmark,MAVG.PV_th,D.ηv,MAVG.wtv_th,D.wtv,x,y,Δ,Aparam,η)
+# ----------------------------------------------------------------------- #</code></pre><p>The momentum equation is solved using the defect correction method. Because the viscosity distribution remains constant throughout the benchmark, the coefficient matrix is assembled and factorized only once. During each defect correction iteration, only the residual vector and solution correction need to be updated, making the solver particularly efficient for stationary linear problems.</p><pre><code class="language-Julia hljs">niter      =   50
+atol       =   1e-10       #   Absolute tolerance
+rtol       =   1e-10       #   # Relative convergence tolerance (RM/R0)
+RM         =   0.0         #   Initialize absolute residual    
+RMrel      =   0.0         #   Initialize relative residual 
+# Numbering, without ghost nodes! ---
+off    = [  NV.x*NC.y,                          # vx
+            NV.x*NC.y + NC.x*NV.y,              # vy
+            NV.x*NC.y + NC.x*NV.y + NC.x*NC.y]  # Pt
+
+Num    =    (
+    Vx  =   reshape(1:NV.x*NC.y, NV.x, NC.y), 
+    Vy  =   reshape(off[1]+1:off[1]+NC.x*NV.y, NC.x, NV.y), 
+    Pt  =   reshape(off[2]+1:off[2]+NC.x*NC.y,NC...),
+            )
+ndof    =   maximum(Num.Pt)        
+K       =   ExtendableSparseMatrix(ndof,ndof)      
+δx      =   zeros(maximum(Num.Pt))
+F       =   zeros(maximum(Num.Pt))
+# Residuals ---
+Fm     =    (
+    x       =   zeros(Float64,NV.x, NC.y), 
+    y       =   zeros(Float64,NC.x, NV.y)
+)
+FPt     =   zeros(Float64,NC...)  
+R0      =   0.0
+# ----------------------------------------------------------------------- #
+# Solution ============================================================== #
+# Initial Residual ------------------------------------------------------ #
+# Assemble Coefficients ================================================= #
+K       =   Assembly(NC, NV, Δ, D.ηc, D.ηv, VBC, Num)
+Kfac    =   lu(K.cscmatrix)
+# ----------------------------------------------------------------------- #
+for iter=1:niter
+    Residuals2D!(D,VBC,ε,τ,divV,Δ,D.ηc,D.ηv,g,Fm,FPt)
+    F[Num.Vx]   .=   Fm.x
+    F[Num.Vy]   .=   Fm.y
+    F[Num.Pt]   .=   FPt
+    RM          =   norm(F)/length(F)
+    if iter == 1
+        R0 = max(RM, eps())
+    end
+    RMrel       =   RM/R0
+    @printf(&quot;   MCE %2d: ||R|| = %1.4e, ||R||/||R₀|| = %1.4e\n&quot;,iter,RM,RMrel)
+    (RM &lt; atol || RM/R0 &lt; rtol) &amp;&amp; break
+    # Solution of the linear system ===================================== #
+    δx      .=   - (Kfac \ F)
+    # ------------------------------------------------------------------- #
+    # Update Unknown Variables ========================================== #
+    D.vx[:,2:end-1]     .+=  δx[Num.Vx]
+    D.vy[2:end-1,:]     .+=  δx[Num.Vy]
+    D.Pt                .+=  δx[Num.Pt]
+end
+
+D.Pt            .-=  mean(D.Pt)
+AnaSol.Pa       .-=  mean(AnaSol.Pa)
+# ----------------------------------------------------------------------- #</code></pre><p>Finally, the numerical solution is compared with the analytical reference solution. Relative L₂ and L∞ errors are computed for the velocity and pressure fields, and the results are visualized using identical color scales for the numerical and analytical solutions together with spatial error maps.</p><pre><code class="language-Julia hljs">vx_num = D.vx[:, 2:end-1]
+vy_num = D.vy[2:end-1, :]
+
+L2_vx = norm(vx_num .- AnaSol.Vxa) / norm(AnaSol.Vxa) * 100.0
+L2_vy = norm(vy_num .- AnaSol.Vya) / norm(AnaSol.Vya) * 100.0
+L2_P  = norm(D.Pt .- AnaSol.Pa)    / norm(AnaSol.Pa)  * 100.0
+
+Linf_vx = maximum(abs.(vx_num .- AnaSol.Vxa)) /
+          maximum(abs, AnaSol.Vxa) * 100.0
+
+Linf_vy = maximum(abs.(vy_num .- AnaSol.Vya)) /
+          maximum(abs, AnaSol.Vya) * 100.0
+
+Linf_P = maximum(abs.(D.Pt .- AnaSol.Pa)) /
+         maximum(abs, AnaSol.Pa) * 100.0
+
+@printf(&quot;   Relative L2 error vx: %8.4f %%\n&quot;, L2_vx)
+@printf(&quot;   Relative L2 error vy: %8.4f %%\n&quot;, L2_vy)
+@printf(&quot;   Relative L2 error P : %8.4f %%\n&quot;, L2_P)
+
+@printf(&quot;   Relative L∞ error vx: %8.4f %%\n&quot;, Linf_vx)
+@printf(&quot;   Relative L∞ error vy: %8.4f %%\n&quot;, Linf_vy)
+@printf(&quot;   Relative L∞ error P : %8.4f %%\n&quot;, Linf_P)
+
+Pe = abs.(D.Pt .- AnaSol.Pa) ./ maximum(abs, AnaSol.Pa) .* 100.0
+
+Vxe = abs.(
+        D.vx[:, 2:end-1] .- AnaSol.Vxa
+    ) ./ maximum(abs, AnaSol.Vxa) .* 100.0
+
+Vye = abs.(
+        D.vy[2:end-1, :] .- AnaSol.Vya
+    ) ./ maximum(abs, AnaSol.Vya) .* 100.0
+
+# Visualization ========================================================= #
+
+# Reference scales
+Lref = M.xmax - M.xmin
+Vref = Ini.ε * Lref
+Pref = η₀ * Ini.ε
+
+# Dimensionless fields
+vx_num_plot = D.vx[:, 2:end-1] ./ Vref
+vy_num_plot = D.vy[2:end-1, :] ./ Vref
+P_num_plot  = D.Pt ./ Pref
+
+vx_ana_plot = AnaSol.Vxa ./ Vref
+vy_ana_plot = AnaSol.Vya ./ Vref
+P_ana_plot  = AnaSol.Pa ./ Pref
+
+# Common color limits
+vx_lim = max(
+    maximum(abs, vx_num_plot),
+    maximum(abs, vx_ana_plot),
+)
+
+vy_lim = max(
+    maximum(abs, vy_num_plot),
+    maximum(abs, vy_ana_plot),
+)
+
+P_lim = max(
+    maximum(abs, P_num_plot),
+    maximum(abs, P_ana_plot),
+)
+
+Verr_lim = max(maximum(Vxe), maximum(Vye))
+Perr_lim = maximum(Pe)
+
+# Analytical inclusion boundary
+θ    = range(0.0, 2π, length=301)
+xc   = (M.xmin + M.xmax) / 2
+yc   = (M.ymin + M.ymax) / 2
+xinc = xc .+ EllA .* cos.(θ)
+yinc = yc .+ EllB .* sin.(θ)
+
+# Initialize figure
+p = plot(
+    layout        = (3, 3),
+    size          = (1200, 1000),
+    left_margin   = 7Plots.mm,
+    right_margin  = 5Plots.mm,
+    bottom_margin = 6Plots.mm,
+    top_margin    = 4Plots.mm,
+)
+
+# Horizontal velocity =================================================== #
+
+heatmap!(
+    p,
+    x.v,
+    y.c,
+    vx_num_plot&#39;;
+    subplot      = 1,
+    color        = :berlin,
+    clims        = (-vx_lim, vx_lim),
+    title        = &quot;Numerical \$v_x/V_{ref}\$&quot;,
+    ylabel       = &quot;y [m]&quot;,
+    colorbar     = true,
+    aspect_ratio = :equal,
+    xlims        = (M.xmin, M.xmax),
+    ylims        = (M.ymin, M.ymax),
+    framestyle   = :box,
+)
+
+heatmap!(
+    p,
+    x.v,
+    y.c,
+    vx_ana_plot&#39;;
+    subplot      = 2,
+    color        = :berlin,
+    clims        = (-vx_lim, vx_lim),
+    title        = &quot;Analytical \$v_x/V_{ref}\$&quot;,
+    colorbar     = true,
+    aspect_ratio = :equal,
+    xlims        = (M.xmin, M.xmax),
+    ylims        = (M.ymin, M.ymax),
+    framestyle   = :box,
+)
+
+heatmap!(
+    p,
+    x.v,
+    y.c,
+    Vxe&#39;;
+    subplot      = 3,
+    color        = :thermal,
+    clims        = (0.0, Verr_lim),
+    title        = &quot;Error \$v_x\$ [%]&quot;,
+    colorbar     = true,
+    aspect_ratio = :equal,
+    xlims        = (M.xmin, M.xmax),
+    ylims        = (M.ymin, M.ymax),
+    framestyle   = :box,
+)
+
+# Vertical velocity ===================================================== #
+
+heatmap!(
+    p,
+    x.c,
+    y.v,
+    vy_num_plot&#39;;
+    subplot      = 4,
+    color        = :berlin,
+    clims        = (-vy_lim, vy_lim),
+    title        = &quot;Numerical \$v_y/V_{ref}\$&quot;,
+    ylabel       = &quot;y [m]&quot;,
+    colorbar     = true,
+    aspect_ratio = :equal,
+    xlims        = (M.xmin, M.xmax),
+    ylims        = (M.ymin, M.ymax),
+    framestyle   = :box,
+)
+
+heatmap!(
+    p,
+    x.c,
+    y.v,
+    vy_ana_plot&#39;;
+    subplot      = 5,
+    color        = :berlin,
+    clims        = (-vy_lim, vy_lim),
+    title        = &quot;Analytical \$v_y/V_{ref}\$&quot;,
+    colorbar     = true,
+    aspect_ratio = :equal,
+    xlims        = (M.xmin, M.xmax),
+    ylims        = (M.ymin, M.ymax),
+    framestyle   = :box,
+)
+
+heatmap!(
+    p,
+    x.c,
+    y.v,
+    Vye&#39;;
+    subplot      = 6,
+    color        = :thermal,
+    clims        = (0.0, Verr_lim),
+    title        = &quot;Error \$v_y\$ [%]&quot;,
+    colorbar     = true,
+    aspect_ratio = :equal,
+    xlims        = (M.xmin, M.xmax),
+    ylims        = (M.ymin, M.ymax),
+    framestyle   = :box,
+)
+
+# Pressure ============================================================== #
+
+heatmap!(
+    p,
+    x.c,
+    y.c,
+    P_num_plot&#39;;
+    subplot      = 7,
+    color        = :vik,
+    clims        = (-P_lim, P_lim),
+    title        = &quot;Numerical \$P/P_{ref}\$&quot;,
+    xlabel       = &quot;x [m]&quot;,
+    ylabel       = &quot;y [m]&quot;,
+    colorbar     = true,
+    aspect_ratio = :equal,
+    xlims        = (M.xmin, M.xmax),
+    ylims        = (M.ymin, M.ymax),
+    framestyle   = :box,
+)
+
+heatmap!(
+    p,
+    x.c,
+    y.c,
+    P_ana_plot&#39;;
+    subplot      = 8,
+    color        = :vik,
+    clims        = (-P_lim, P_lim),
+    title        = &quot;Analytical \$P/P_{ref}\$&quot;,
+    xlabel       = &quot;x [m]&quot;,
+    colorbar     = true,
+    aspect_ratio = :equal,
+    xlims        = (M.xmin, M.xmax),
+    ylims        = (M.ymin, M.ymax),
+    framestyle   = :box,
+)
+
+heatmap!(
+    p,
+    x.c,
+    y.c,
+    Pe&#39;;
+    subplot      = 9,
+    color        = :thermal,
+    clims        = (0.0, Perr_lim),
+    title        = &quot;Error \$P\$ [%]&quot;,
+    xlabel       = &quot;x [m]&quot;,
+    colorbar     = true,
+    aspect_ratio = :equal,
+    xlims        = (M.xmin, M.xmax),
+    ylims        = (M.ymin, M.ymax),
+    framestyle   = :box,
+)
+
+# Remove repeated labels and adjust fonts
+for sp in 1:6
+    plot!(p; subplot=sp, xlabel=&quot;&quot;)
+end
+
+for sp in (2, 3, 5, 6, 8, 9)
+    plot!(p; subplot=sp, ylabel=&quot;&quot;)
+end
+
+for sp in 1:9
+    plot!(
+        p,
+        xinc,
+        yinc;
+        subplot   = sp,
+        color     = :black,
+        linewidth = 1.0,
+        linestyle = :dash,
+        label     = &quot;&quot;,
+    )
+
+    plot!(
+        p;
+        subplot       = sp,
+        tickfontsize  = 8,
+        guidefontsize = 10,
+        titlefontsize = 11,
+    )
+end
+
+if save_fig == 1
+    savefig(p,string(&quot;./examples/StokesEquation/2D/Results/ViscousInclusion_Summary.png&quot;))
+else
+    display(p)
+end
+display(to)</code></pre><p>The resulting comparison demonstrates that the finite-difference discretization accurately reproduces the analytical solution. The largest errors are confined to the viscosity interface, where the material properties are discontinuous and the analytical solution exhibits discontinuities in the stress field. Away from the inclusion boundary, both the velocity and pressure fields agree closely with the analytical solution, confirming the accuracy of the staggered-grid implementation.</p><p><img src="../../../../assets/examples/Stokes/ViscousInclusion_Summary.png" alt="VIB"/></p><p><strong>Figure 1.</strong> Comparison between the numerical and analytical solutions for the horizontal velocity, vertical velocity, and pressure fields. The third column shows the corresponding relative error distributions. The largest errors are localized at the viscosity interface, where the material properties are discontinuous, while excellent agreement is obtained throughout the remainder of the domain.</p></article><nav class="docs-footer"><a class="docs-footer-prevpage" href="../VanKekenBenchmark/">« RTI (Van Keken et al., 1997)</a><a class="docs-footer-nextpage" href="../../Convection/Overview_Convection/">Overview »</a><div class="flexbox-break"></div><p class="footer-message">Powered by <a href="https://github.com/JuliaDocs/Documenter.jl">Documenter.jl</a> and the <a href="https://julialang.org/">Julia Programming Language</a>.</p></nav></div><div class="modal" id="documenter-settings"><div class="modal-background"></div><div class="modal-card"><header class="modal-card-head"><p class="modal-card-title">Settings</p><button class="delete"></button></header><section class="modal-card-body"><p><label class="label">Theme</label><div class="select"><select id="documenter-themepicker"><option value="auto">Automatic (OS)</option><option value="documenter-light">documenter-light</option><option value="documenter-dark">documenter-dark</option><option value="catppuccin-latte">catppuccin-latte</option><option value="catppuccin-frappe">catppuccin-frappe</option><option value="catppuccin-macchiato">catppuccin-macchiato</option><option value="catppuccin-mocha">catppuccin-mocha</option></select></div></p><hr/><p>This document was generated with <a href="https://github.com/JuliaDocs/Documenter.jl">Documenter.jl</a> version 1.17.0 on <span class="colophon-date" title="Thursday 27 August 2026 08:35">Thursday 27 August 2026</span>. Using Julia version 1.12.7.</p></section><footer class="modal-card-foot"></footer></div></div></div></body></html>
