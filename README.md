@@ -22,6 +22,22 @@ The solvers for each governing equation can be used separately or in combination
 
 For detailed instructions on installing Julia and `GeoModBox.jl`, setting up the required environments, and using the package as a user, student, or developer, see the [Installation](https://geosci-ffm.github.io/GeoModBox.jl/dev/man/Installation/) guide.
 
+## Try GeoModBox.jl online
+
+### Google Colab
+
+Selected `GeoModBox.jl` exercises and examples can be executed directly in Google Colab without a local Julia installation.
+
+- Exercise 02 – 1-D Heat Diffusion (Explicit)</br>
+    - Student exercise [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/GeoSci-FFM/GeoModBox.jl/blob/main/colab/exercises/master/02_1D_Heat_explicit_en.ipynb)
+    - Master solution [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/GeoSci-FFM/GeoModBox.jl/blob/main/colab/exercises/students/02_1D_Heat_explicit_en.ipynb)
+
+- Exercise 10 – 2-D Falling Block (time-dep.)</br>
+    - Student exercise [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/GeoSci-FFM/GeoModBox.jl/blob/main/colab/exercises/master/10_2D_Falling_Block_td_en.ipynb)
+    - Master solution [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/GeoSci-FFM/GeoModBox.jl/blob/main/colab/exercises/students/10_2D_Falling_Block_td_en.ipynb)
+
+- Bottom heated, isoviscous thermal Convection [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/GeoSci-FFM/GeoModBox.jl/blob/main/colab/examples/BottomHeated.ipynb)
+
 ## Staggered Finite Difference
 
 To properly solve the governing equations, a staggered finite difference scheme is chosen for the *energy* and *momentum* equations. A staggered grid enables a correct and straightforward implementation of boundary conditions and ensures conservation of stress between nodes in cases of variable viscosity. This requires certain parameters to be defined on different grids. For more information regarding the physical and numerical background, please refer to [this](https://geosci-ffm.github.io/GeoModBox.jl/dev/man/theory/GESolution/).
