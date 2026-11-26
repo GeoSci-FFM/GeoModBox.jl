@@ -6,6 +6,21 @@ GMB_root_dir = dirname(@__DIR__)
 license = read(joinpath(GMB_root_dir, "LICENSE"), String)
 write(joinpath(@__DIR__, "src", "man", "license.md"), license)
 
+# --- Documentation assets (GIFs/figures) live in a separate repo to keep the package small (#150)
+const ASSETS_REPO = "https://github.com/GeoSci-FFM/GeoModBox-assets.git"
+const ASSETS_REV  = "2317ccf2ee9f0f7a24eccae64145965870e29ffb"
+let assetdir = joinpath(@__DIR__, "src", "assets")
+    if !isdir(joinpath(assetdir, "examples")) || !isdir(joinpath(assetdir, "exercises"))
+        tmp = mktempdir()
+        run(`git clone --quiet $ASSETS_REPO $tmp`)
+        run(`git -C $tmp checkout --quiet $ASSETS_REV`)
+        for d in ("examples", "exercises")
+            dst = joinpath(assetdir, d)
+            isdir(dst) || cp(joinpath(tmp, d), dst)
+        end
+    end
+end
+
 makedocs(
     sitename = "GeoModBox.jl",
     format = Documenter.HTML(),
