@@ -1,6 +1,6 @@
 name = "GeoModBox"
 uuid = "e210ae48-618e-410f-9a4d-7c1c87986529"
-version = "0.1.0"
+version = "0.1.1"
 authors = ["Lukas Fuchs <fuchs@geophysik.uni-frankfurt.de>"]
 
 [deps]
