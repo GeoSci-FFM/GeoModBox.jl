@@ -31,3 +31,7 @@ Manifest*.toml
 
 # student work (files named *_stud_<initials>.*): never commit (public repo)
 *_stud_*
+
+# docs assets live in GeoSci-FFM/GeoModBox-assets (#150)
+docs/src/assets/examples/
+docs/src/assets/exercises/
